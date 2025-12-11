@@ -1,0 +1,177 @@
+import { useState } from 'react';
+import { useLocation } from 'wouter';
+import { Compass, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
+import { useUserSubscription } from '@/hooks/useUserSubscription';
+import { PREMIUM_EMAILS } from '@/types/subscription';
+
+/**
+ * Auth Page - Página de Autenticação
+ * 
+ * Design: Elegante e místico com foco em conversão
+ * - Formulário limpo e direto
+ * - Feedback visual claro
+ * - Integração com sistema de planos
+ */
+
+export default function Auth() {
+  const [, setLocation] = useLocation();
+  const { registerUser, isPremiumEmail } = useUserSubscription();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPricingHint, setShowPricingHint] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+
+    if (!email.trim()) {
+      setError('Por favor, insira seu e-mail');
+      setIsLoading(false);
+      return;
+    }
+
+    if (!email.includes('@')) {
+      setError('E-mail inválido');
+      setIsLoading(false);
+      return;
+    }
+
+    // Simular delay de autenticação
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    const isPremium = isPremiumEmail(email);
+    
+    if (isPremium) {
+      // Registrar com plano premium
+      registerUser(email, 'premium');
+      setShowPricingHint(false);
+    } else {
+      // Mostrar opção de planos
+      setShowPricingHint(true);
+      setIsLoading(false);
+      return;
+    }
+
+    // Redirecionar para home
+    setTimeout(() => {
+      setLocation('/');
+    }, 500);
+  };
+
+  const handleChoosePlan = () => {
+    setLocation('/pricing');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-4">
+      <div className="w-full max-w-md space-y-8">
+        {/* Logo */}
+        <div className="text-center space-y-4">
+          <div className="flex justify-center">
+            <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700">
+              <Compass size={32} className="text-white" />
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-slate-900">Bússola Numerológica</h1>
+          <p className="text-slate-600">Descubra os mistérios do seu destino</p>
+        </div>
+
+        {/* Login Form */}
+        <form onSubmit={handleLogin} className="card-mystical space-y-6">
+          <h2 className="text-2xl font-bold text-slate-900">Bem-vindo</h2>
+
+          {/* Email Input */}
+          <div className="space-y-2">
+            <label htmlFor="email" className="block text-sm font-semibold text-slate-900">
+              Seu E-mail
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setError('');
+                setShowPricingHint(false);
+              }}
+              placeholder="seu@email.com"
+              disabled={isLoading}
+              className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all disabled:opacity-50"
+            />
+            {email.toLowerCase() === 'eliane@artwebcreative.com.br' && (
+              <div className="flex items-center gap-2 text-green-600 text-sm">
+                <CheckCircle size={16} />
+                <span>E-mail Premium Detectado! 👑</span>
+              </div>
+            )}
+          </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 border border-red-200">
+              <AlertCircle size={16} className="text-red-600 flex-shrink-0" />
+              <p className="text-sm text-red-600">{error}</p>
+            </div>
+          )}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full btn-mystical flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isLoading ? (
+              <>
+                <div className="w-4 h-4 rounded-full border-2 border-white border-t-transparent animate-spin"></div>
+                <span>Autenticando...</span>
+              </>
+            ) : (
+              <>
+                <span>Continuar</span>
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
+          </button>
+
+          {/* Pricing Hint */}
+          {showPricingHint && (
+            <div className="space-y-4 pt-4 border-t border-slate-200">
+              <div className="bg-indigo-50 rounded-lg p-4 space-y-2">
+                <p className="text-sm font-semibold text-indigo-900">
+                  Escolha seu plano para continuar
+                </p>
+                <p className="text-xs text-indigo-700">
+                  Você precisa de um plano para gerar mapas numerológicos. Confira nossos planos flexíveis e acessíveis.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleChoosePlan}
+                className="w-full px-4 py-3 rounded-lg border-2 border-indigo-600 text-indigo-600 font-semibold hover:bg-indigo-50 transition-colors"
+              >
+                Ver Planos
+              </button>
+            </div>
+          )}
+
+          {/* Info Text */}
+          <p className="text-xs text-slate-500 text-center">
+            Seus dados são processados localmente e não são armazenados em nossos servidores.
+          </p>
+        </form>
+
+        {/* Footer Links */}
+        <div className="text-center space-y-2">
+          <button
+            onClick={() => setLocation('/')}
+            className="text-sm text-indigo-600 hover:text-indigo-700 font-semibold"
+          >
+            ← Voltar ao Início
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}

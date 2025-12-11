@@ -12,9 +12,10 @@ import { ArrowRight, AlertCircle } from 'lucide-react';
 
 interface CalculatorProps {
   onSubmit: (name: string, birthDate: string) => void;
+  disabled?: boolean;
 }
 
-export default function Calculator({ onSubmit }: CalculatorProps) {
+export default function Calculator({ onSubmit, disabled = false }: CalculatorProps) {
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [errors, setErrors] = useState<{ name?: string; birthDate?: string }>({});
@@ -67,8 +68,9 @@ export default function Calculator({ onSubmit }: CalculatorProps) {
             setName(e.target.value);
             if (errors.name) setErrors({ ...errors, name: undefined });
           }}
+          disabled={disabled}
           placeholder="Ex: João Silva Santos"
-          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans
+          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed
             ${errors.name
               ? 'border-red-500 bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500/50'
               : 'border-slate-200 bg-white hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500'
@@ -95,7 +97,8 @@ export default function Calculator({ onSubmit }: CalculatorProps) {
             setBirthDate(e.target.value);
             if (errors.birthDate) setErrors({ ...errors, birthDate: undefined });
           }}
-          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans
+          disabled={disabled}
+          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed
             ${errors.birthDate
               ? 'border-red-500 bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500/50'
               : 'border-slate-200 bg-white hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500'
@@ -112,9 +115,10 @@ export default function Calculator({ onSubmit }: CalculatorProps) {
       {/* Submit Button */}
       <button
         type="submit"
-        className="w-full btn-mystical flex items-center justify-center gap-2 group"
+        disabled={disabled}
+        className="w-full btn-mystical flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <span>Gerar Mapa Numerológico</span>
+        <span>{disabled ? 'Limite de Mapas Atingido' : 'Gerar Mapa Numerológico'}</span>
         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
       </button>
 
