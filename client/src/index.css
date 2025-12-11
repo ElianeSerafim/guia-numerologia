@@ -3,6 +3,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -40,77 +43,83 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* Custom Mystical Colors */
+  --color-indigo-mystical: #4C1D95;
+  --color-gold-mystical: #D4AF37;
+  --color-slate-dark: #1E293B;
+  --color-slate-light: #F1F5F9;
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --primary: #4C1D95;
+  --primary-foreground: #F1F5F9;
+  --sidebar-primary: #4C1D95;
+  --sidebar-primary-foreground: #F1F5F9;
+  --chart-1: #D4AF37;
+  --chart-2: #4C1D95;
+  --chart-3: #6B21A8;
+  --chart-4: #3F0F5C;
+  --chart-5: #2D0A47;
   --radius: 0.65rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.235 0.015 65);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.235 0.015 65);
+  --foreground: oklch(0.15 0.02 280);
+  --card: oklch(0.98 0.001 280);
+  --card-foreground: oklch(0.15 0.02 280);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --popover-foreground: oklch(0.15 0.02 280);
+  --secondary: oklch(0.95 0.01 280);
+  --secondary-foreground: oklch(0.3 0.02 280);
+  --muted: oklch(0.92 0.005 280);
+  --muted-foreground: oklch(0.5 0.01 280);
+  --accent: #D4AF37;
+  --accent-foreground: oklch(0.15 0.02 280);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --border: oklch(0.92 0.004 280);
+  --input: oklch(0.95 0.003 280);
+  --ring: #4C1D95;
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.15 0.02 280);
+  --sidebar-accent: #D4AF37;
+  --sidebar-accent-foreground: oklch(0.15 0.02 280);
+  --sidebar-border: oklch(0.92 0.004 280);
+  --sidebar-ring: #4C1D95;
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
+  --primary: #7C3AED;
+  --primary-foreground: #F1F5F9;
+  --sidebar-primary: #7C3AED;
+  --sidebar-primary-foreground: #F1F5F9;
+  --background: oklch(0.12 0.01 280);
+  --foreground: oklch(0.9 0.01 280);
+  --card: oklch(0.18 0.01 280);
+  --card-foreground: oklch(0.9 0.01 280);
+  --popover: oklch(0.18 0.01 280);
+  --popover-foreground: oklch(0.9 0.01 280);
+  --secondary: oklch(0.25 0.01 280);
+  --secondary-foreground: oklch(0.8 0.01 280);
+  --muted: oklch(0.3 0.01 280);
+  --muted-foreground: oklch(0.7 0.01 280);
+  --accent: #D4AF37;
+  --accent-foreground: oklch(0.12 0.01 280);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
+  --ring: #7C3AED;
+  --chart-1: #D4AF37;
+  --chart-2: #7C3AED;
+  --chart-3: #A78BFA;
+  --chart-4: #C4B5FD;
+  --chart-5: #DDD6FE;
+  --sidebar: oklch(0.18 0.01 280);
+  --sidebar-foreground: oklch(0.9 0.01 280);
+  --sidebar-accent: #D4AF37;
+  --sidebar-accent-foreground: oklch(0.12 0.01 280);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --sidebar-ring: #7C3AED;
 }
 
 @layer base {
@@ -118,7 +127,8 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', sans-serif;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -131,27 +141,45 @@
   input[type="radio"]:not(:disabled) {
     @apply cursor-pointer;
   }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+  }
+  
+  h1 {
+    @apply text-5xl leading-tight;
+  }
+  
+  h2 {
+    @apply text-4xl leading-snug;
+  }
+  
+  h3 {
+    @apply text-2xl leading-snug;
+  }
+  
+  /* Mystical Number Styling */
+  .number-mystical {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 2.5rem;
+  }
+  
+  /* Mystical Gradient */
+  .gradient-mystical {
+    background: linear-gradient(135deg, #4C1D95 0%, #6B21A8 50%, #4C1D95 100%);
+  }
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
@@ -162,16 +190,51 @@
 
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
 
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
+  }
+  
+  /* Mystical Card */
+  .card-mystical {
+    @apply bg-card text-card-foreground rounded-lg border border-border p-6 shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+  
+  /* Diagonal Divider */
+  .divider-diagonal {
+    position: relative;
+    margin: 3rem 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    transform: skewY(-1deg);
+  }
+  
+  /* Mystical Button */
+  .btn-mystical {
+    @apply bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg;
+  }
+  
+  /* Animated Number Counter */
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .number-counter {
+    animation: countUp 0.6s ease-out;
   }
 }
