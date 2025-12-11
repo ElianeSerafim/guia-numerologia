@@ -1,8 +1,8 @@
-import { useState } from 'react';
+
 import { NumerologyChart } from '@/types';
 import { ArrowLeft, Download, Printer } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
-import InterpretationSection from './InterpretationSection';
+import InterpretationDisplay from './InterpretationDisplay';
 
 /**
  * Report Component
@@ -19,22 +19,6 @@ interface ReportProps {
 }
 
 export default function Report({ chart, onReset }: ReportProps) {
-  const [isGeneratingInterpretation, setIsGeneratingInterpretation] = useState(false);
-  const [interpretation, setInterpretation] = useState<string | null>(null);
-
-  const handleGenerateInterpretation = async () => {
-    setIsGeneratingInterpretation(true);
-    try {
-      // Placeholder para integração com Gemini API
-      // Em produção, isso chamaria o serviço de IA
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setInterpretation('Interpretação com IA será disponibilizada após integração com Gemini API');
-    } catch (error) {
-      console.error('Erro ao gerar interpretação:', error);
-    } finally {
-      setIsGeneratingInterpretation(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
@@ -86,26 +70,11 @@ export default function Report({ chart, onReset }: ReportProps) {
             {/* Chart Display */}
             <ChartDisplay chart={chart} />
 
-            {/* Interpretation Section */}
-            {!interpretation && (
-              <div className="card-mystical text-center space-y-4">
-                <h3 className="text-xl font-bold text-slate-900">Interpretação Personalizada com IA</h3>
-                <p className="text-slate-600">
-                  Receba uma análise profunda e inspiradora de seu mapa numerológico gerada por inteligência artificial.
-                </p>
-                <button
-                  onClick={handleGenerateInterpretation}
-                  disabled={isGeneratingInterpretation}
-                  className="btn-mystical disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isGeneratingInterpretation ? 'Gerando interpretação...' : 'Gerar Interpretação com IA'}
-                </button>
-              </div>
-            )}
+            {/* Divider */}
+            <div className="divider-diagonal"></div>
 
-            {interpretation && (
-              <InterpretationSection interpretation={interpretation} />
-            )}
+            {/* Interpretations */}
+            <InterpretationDisplay chart={chart} />
           </div>
 
           {/* Sidebar - 1 column */}
