@@ -202,7 +202,7 @@ export default function Pricing() {
                   <td className="py-4 px-4 text-slate-700">Mapas Numerológicos</td>
                   <td className="text-center py-4 px-4 font-bold text-slate-900">2</td>
                   <td className="text-center py-4 px-4 font-bold text-indigo-600">6</td>
-                  <td className="text-center py-4 px-4 font-bold text-slate-900">10</td>
+                  <td className="text-center py-4 px-4 font-bold text-slate-900">∞ (Ilimitado)</td>
                 </tr>
                 <tr className="border-b border-slate-100">
                   <td className="py-4 px-4 text-slate-700">Cálculos Completos</td>

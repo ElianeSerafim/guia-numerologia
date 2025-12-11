@@ -72,6 +72,8 @@ export function useUserSubscription() {
   // Verificar se o usuário pode gerar mais mapas
   const canGenerateMap = (mapsLimit: number): boolean => {
     if (!user) return false;
+    // Email premium tem acesso ilimitado
+    if (user.isPremium && isPremiumEmail(user.email)) return true;
     return user.mapsGenerated < mapsLimit;
   };
 
@@ -81,6 +83,12 @@ export function useUserSubscription() {
     localStorage.removeItem(STORAGE_KEY);
   };
 
+  // Obter limite de mapas (ilimitado para premium)
+  const getMapsLimit = (mapsLimit: number): number => {
+    if (user && user.isPremium && isPremiumEmail(user.email)) return Infinity;
+    return mapsLimit;
+  };
+
   return {
     user,
     isLoading,
@@ -88,6 +96,7 @@ export function useUserSubscription() {
     updatePlan,
     incrementMapsGenerated,
     canGenerateMap,
+    getMapsLimit,
     logout,
     isPremiumEmail,
   };

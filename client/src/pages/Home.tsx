@@ -19,7 +19,7 @@ import Report from '@/components/Report';
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { user, isLoading: userLoading, logout, canGenerateMap, incrementMapsGenerated } = useUserSubscription();
+  const { user, isLoading: userLoading, logout, canGenerateMap, incrementMapsGenerated, getMapsLimit } = useUserSubscription();
   const [chart, setChart] = useState<NumerologyChart | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showLimitWarning, setShowLimitWarning] = useState(false);
@@ -47,8 +47,9 @@ export default function Home() {
   }
 
   const currentPlan = PLANS[user.plan];
-  const mapsRemaining = currentPlan.mapsLimit - user.mapsGenerated;
-  const canGenerate = canGenerateMap(currentPlan.mapsLimit);
+  const actualMapsLimit = getMapsLimit(currentPlan.mapsLimit);
+  const mapsRemaining = actualMapsLimit === Infinity ? Infinity : actualMapsLimit - user.mapsGenerated;
+  const canGenerate = canGenerateMap(actualMapsLimit);
 
   const handleCalculate = (name: string, birthDate: string) => {
     if (!canGenerate) {
@@ -111,7 +112,7 @@ export default function Home() {
         <div className="container py-4">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-semibold text-slate-900">
-              Mapas Gerados: {user.mapsGenerated} / {currentPlan.mapsLimit}
+              Mapas Gerados: {user.mapsGenerated} / {actualMapsLimit === Infinity ? '∞' : actualMapsLimit}
             </span>
             {!canGenerate && (
               <button
@@ -126,7 +127,7 @@ export default function Home() {
           <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
             <div
               className="bg-gradient-to-r from-indigo-600 to-purple-700 h-full transition-all duration-300"
-              style={{ width: `${(user.mapsGenerated / currentPlan.mapsLimit) * 100}%` }}
+              style={{ width: actualMapsLimit === Infinity ? '100%' : `${(user.mapsGenerated / actualMapsLimit) * 100}%` }}
             ></div>
           </div>
         </div>
@@ -203,7 +204,9 @@ export default function Home() {
             <h3 className="text-3xl font-bold text-slate-900 mb-2">Comece Agora</h3>
             <p className="text-slate-600">
               {canGenerate
-                ? `Você tem ${mapsRemaining} mapa${mapsRemaining !== 1 ? 's' : ''} disponível${mapsRemaining !== 1 ? 's' : ''}`
+                ? actualMapsLimit === Infinity
+                  ? 'Você tem acesso ILIMITADO a mapas numerológicos'
+                  : `Você tem ${mapsRemaining} mapa${mapsRemaining !== 1 ? 's' : ''} disponível${mapsRemaining !== 1 ? 's' : ''}`
                 : 'Você atingiu o limite de mapas do seu plano'}
             </p>
           </div>
