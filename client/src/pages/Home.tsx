@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { Compass, Loader2, ArrowRight, LogOut, Zap } from 'lucide-react';
+import { Compass, Loader2, ArrowRight, LogOut, Zap, BookOpen } from 'lucide-react';
+import { Link } from 'wouter';
 import { calculateChart } from '@/lib/numerologyUtils';
 import { NumerologyChart } from '@/types';
 import { PLANS } from '@/types/subscription';
@@ -89,6 +90,11 @@ export default function Home() {
             <h1 className="text-xl font-bold text-slate-900">Bússola Numerológica</h1>
           </div>
           <div className="flex items-center gap-4">
+            <Link href="/faq">
+              <a className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600" title="Aprenda">
+                <BookOpen size={20} />
+              </a>
+            </Link>
             <div className="text-right">
               <p className="text-sm text-slate-600">{user.email}</p>
               <p className="text-xs font-semibold text-indigo-600">{currentPlan.name}</p>

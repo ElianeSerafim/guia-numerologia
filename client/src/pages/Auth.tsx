@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useLocation, Link } from 'wouter';
 import { Compass, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
 import { PREMIUM_EMAILS } from '@/types/subscription';
@@ -157,9 +157,19 @@ export default function Auth() {
           )}
 
           {/* Info Text */}
-          <p className="text-xs text-slate-500 text-center">
-            Seus dados são processados localmente e não são armazenados em nossos servidores.
-          </p>
+          <div className="space-y-2">
+            <p className="text-xs text-slate-500 text-center">
+              Seus dados são processados localmente e não são armazenados em nossos servidores.
+            </p>
+            <div className="flex items-center justify-center gap-2 text-xs">
+              <span className="text-slate-600">Novo na numerologia?</span>
+              <Link href="/faq">
+                <a className="text-indigo-600 hover:text-indigo-700 font-semibold">
+                  Aprenda aqui
+                </a>
+              </Link>
+            </div>
+          </div>
         </form>
 
         {/* Footer Links */}
