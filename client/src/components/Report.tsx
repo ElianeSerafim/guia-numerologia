@@ -1,8 +1,11 @@
 
+import { useState } from 'react';
 import { NumerologyChart } from '@/types';
-import { ArrowLeft, Download, Printer } from 'lucide-react';
+import { ArrowLeft, Download, Printer, Loader2 } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
+import { exportMapToPDF } from '@/lib/pdfExport';
+import { useUserSubscription } from '@/hooks/useUserSubscription';
 
 /**
  * Report Component
@@ -19,6 +22,22 @@ interface ReportProps {
 }
 
 export default function Report({ chart, onReset }: ReportProps) {
+  const { user } = useUserSubscription();
+  const [isExporting, setIsExporting] = useState(false);
+
+  const handleExportPDF = async () => {
+    if (!user) return;
+    
+    setIsExporting(true);
+    try {
+      await exportMapToPDF(chart, user.email);
+    } catch (error) {
+      console.error('Erro ao exportar PDF:', error);
+      alert('Erro ao exportar PDF. Tente novamente.');
+    } finally {
+      setIsExporting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
@@ -42,10 +61,12 @@ export default function Report({ chart, onReset }: ReportProps) {
               <Printer size={20} />
             </button>
             <button
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
+              onClick={handleExportPDF}
+              disabled={isExporting}
+              className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed"
               title="Baixar PDF"
             >
-              <Download size={20} />
+              {isExporting ? <Loader2 size={20} className="animate-spin" /> : <Download size={20} />}
             </button>
           </div>
         </div>
