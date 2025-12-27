@@ -154,10 +154,10 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
           <div>
             <h4 className="font-bold text-slate-900 mb-2">Sobre as Interpretações</h4>
             <p className="text-slate-700 text-sm leading-relaxed">
-              Essas interpretações são baseadas nas Técnicas Avançadas de Numerologia Pitagórica
-              desenvolvidas por Elias Abrão Neto. Cada número representa uma vibração específica
-              que influencia diferentes aspectos da vida humana. A compreensão profunda dessas
-              vibrações permite orientar melhor as decisões e ações para maior evolução pessoal.
+              Essas interpretações são baseadas nas Técnicas Avançadas de Numerologia Pitagórica.
+              Cada número representa uma vibração específíca que influencia diferentes aspectos
+              da vida humana. A compreensão profunda dessas vibrações permite orientar melhor as
+              decisões e ações para maior evolução pessoal.
             </p>
           </div>
         </div>

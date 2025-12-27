@@ -1,6 +1,6 @@
 /**
  * Interpretações de Numerologia Pitagórica
- * Baseado em: Técnicas Avançadas de Numerologia Pitagórica - Elias Abrão Neto
+ * Baseado em: Técnicas Avançadas de Numerologia Pitagórica
  * 
  * Este arquivo contém as interpretações completas dos números 1-9
  * para o Mapa Numerológico Natal (MNN)
