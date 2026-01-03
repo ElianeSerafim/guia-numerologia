@@ -4,8 +4,10 @@ import { NumerologyChart } from '@/types';
 import { ArrowLeft, Download, Printer, Loader2 } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
+import AnnualPredictions from './AnnualPredictions';
 import { exportMapToPDF } from '@/lib/pdfExport';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
+import { getYearDescription } from '@/lib/annualPredictions';
 
 /**
  * Report Component
@@ -96,6 +98,12 @@ export default function Report({ chart, onReset }: ReportProps) {
 
             {/* Interpretations */}
             <InterpretationDisplay chart={chart} />
+
+            {/* Divider */}
+            <div className="divider-diagonal"></div>
+
+            {/* Annual Predictions */}
+            <AnnualPredictions chart={chart} year={2026} />
           </div>
 
           {/* Sidebar - 1 column */}
@@ -166,22 +174,4 @@ export default function Report({ chart, onReset }: ReportProps) {
       </div>
     </div>
   );
-}
-
-function getYearDescription(year: number): string {
-  const descriptions: Record<number, string> = {
-    1: 'Novos Inícios e Ação',
-    2: 'Parcerias e Paciência',
-    3: 'Criatividade e Expressão',
-    4: 'Trabalho e Estabilidade',
-    5: 'Mudanças e Liberdade',
-    6: 'Família e Afeto',
-    7: 'Análise e Autoconhecimento',
-    8: 'Colheita e Poder',
-    9: 'Conclusão e Limpeza',
-    11: 'Iluminação Espiritual',
-    22: 'Grandes Realizações',
-    33: 'Amor Universal'
-  };
-  return descriptions[year] || 'Transformação';
 }
