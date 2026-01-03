@@ -54,71 +54,163 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
   return reduceNumber(sum);
 };
 
+/**
+ * Calcula o Mapa Numerológico Natal (MNN) completo
+ * Baseado em: Técnicas Avançadas de Numerologia Pitagórica
+ * 
+ * Fórmulas:
+ * - Caminho de Destino (CD): dia + mês + ano (reduzido)
+ * - Motivação (MO): soma das vogais do nome
+ * - Expressão (EX): soma de todas as letras do nome
+ * - Eu Íntimo (EU): soma das consoantes do nome
+ * - Mérito: MO + CD
+ * - Ciclos de Vida: C1=mês, C2=dia, C3=ano
+ * - Realizações (Pináculos): R1=dia+mês, R2=dia+ano, R3=R1+R2, R4=mês+ano
+ * - Desafios: D1=|mês-dia|, D2=|mês-ano|, DM=|D1-D2|
+ * - Ano Pessoal: dia + mês + ano (reduzido)
+ * - Ciclos Trimestrais: CT1=AP+C_vida, CT2=AP+Realização, CT3=AP-DM, CT4=CT1+CT2+CT3
+ */
 export const calculateChart = (fullName: string, birthDate: string): any => {
   const parts = birthDate.split('-');
   const year = parseInt(parts[0]);
   const month = parseInt(parts[1]);
   const day = parseInt(parts[2]);
 
-  // 1. Core Numbers
+  // Reduzir componentes da data
   const dayR = reduceNumber(day);
   const monthR = reduceNumber(month);
   const yearR = reduceNumber(year);
+
+  // ========================================
+  // 1. NÚMEROS PRINCIPAIS DO MNN
+  // ========================================
+  
+  // Caminho de Destino (CD): dia + mês + ano
   const cd = reduceNumber(dayR + monthR + yearR);
 
+  // Motivação (MO): soma das vogais do nome
   const mo = calculateNameNumber(fullName, 'vowels');
+
+  // Eu Íntimo (EU): soma das consoantes do nome
   const eu = calculateNameNumber(fullName, 'consonants');
+
+  // Expressão (EX): soma de todas as letras do nome
   const ex = calculateNameNumber(fullName, 'all');
+
+  // Mérito (Força de Realização): MO + CD
   const merito = reduceNumber(mo + cd);
 
-  // 2. Ciclos de Vida
-  const c1 = monthR;
-  const c2 = dayR;
-  const c3 = yearR;
+  // ========================================
+  // 2. CICLOS DE VIDA
+  // ========================================
+  const c1 = monthR;  // Ciclo 1: Mês
+  const c2 = dayR;    // Ciclo 2: Dia
+  const c3 = yearR;   // Ciclo 3: Ano
 
-  // 3. Realizações (Pináculos)
-  const r1 = reduceNumber(dayR + monthR);
-  const r2 = reduceNumber(dayR + yearR);
-  const r3 = reduceNumber(r1 + r2);
-  const r4 = reduceNumber(monthR + yearR);
+  // ========================================
+  // 3. REALIZAÇÕES (PINÁCULOS)
+  // ========================================
+  const r1 = reduceNumber(dayR + monthR);        // Realização 1
+  const r2 = reduceNumber(dayR + yearR);        // Realização 2
+  const r3 = reduceNumber(r1 + r2);             // Realização 3
+  const r4 = reduceNumber(monthR + yearR);      // Realização 4
 
   // Idades das Realizações
-  const r1EndAge = 36 - (cd === 11 || cd === 22 || cd === 33 ? reduceNumber(cd, false) : cd);
+  const cdSimple = (cd === 11 || cd === 22 || cd === 33) ? reduceNumber(cd, false) : cd;
+  const r1EndAge = 36 - cdSimple;
   const r2EndAge = r1EndAge + 9;
   const r3EndAge = r2EndAge + 9;
 
-  // 4. Desafios
-  const d1 = reduceNumber(Math.abs(monthR - dayR));
-  const d2 = reduceNumber(Math.abs(monthR - yearR));
-  const dm = reduceNumber(Math.abs(d1 - d2));
+  // ========================================
+  // 4. DESAFIOS
+  // ========================================
+  const d1 = reduceNumber(Math.abs(monthR - dayR));    // Desafio Menor 1
+  const d2 = reduceNumber(Math.abs(yearR - monthR));   // Desafio Menor 2
+  const dm = reduceNumber(Math.abs(d1 - d2));          // Desafio Maior
 
-  // 5. Personal Year (Current & 2026)
+  // ========================================
+  // 5. ANOS PESSOAIS E CICLOS TRIMESTRAIS
+  // ========================================
+  
+  // Ano Pessoal Atual
   const today = new Date();
   const currentYear = today.getFullYear();
   const currentMonth = today.getMonth() + 1;
+  const currentDay = today.getDate();
 
-  const py = reduceNumber(dayR + monthR + reduceNumber(currentYear));
-  const py2026 = reduceNumber(dayR + monthR + 1);
-  const pm = reduceNumber(py + currentMonth);
+  // Verificar se já fez aniversário este ano
+  const hasHadBirthdayThisYear = 
+    currentMonth > month || 
+    (currentMonth === month && currentDay >= day);
 
-  // Age
+  const yearForAP = hasHadBirthdayThisYear ? currentYear : currentYear - 1;
+  const pyCurrentRaw = dayR + monthR + reduceNumber(yearForAP);
+  const pyCurrentReduced = reduceNumber(pyCurrentRaw);
+
+  // Ano Pessoal 2026
+  const py2026Raw = dayR + monthR + reduceNumber(2026);
+  const py2026 = reduceNumber(py2026Raw);
+
+  // Mês Pessoal Atual
+  const pm = reduceNumber(pyCurrentReduced + currentMonth);
+
+  // Ciclos Trimestrais para o Ano Pessoal Atual
+  // CT1 = AP + Ciclo de Vida Atual
+  const ct1 = reduceNumber(pyCurrentReduced + c1);
+  // CT2 = AP + Realização Atual de Vida
+  const ct2 = reduceNumber(pyCurrentReduced + r1);
+  // CT3 = AP - Desafio Menor (com tratamento para negativo)
+  const ct3Raw = pyCurrentReduced - dm;
+  const ct3 = ct3Raw <= 0 ? reduceNumber(ct3Raw + 9) : reduceNumber(ct3Raw);
+  // CT4 = soma dos 3 primeiros CTs
+  const ct4 = reduceNumber(ct1 + ct2 + ct3);
+
+  // Ciclos Trimestrais para 2026
+  const ct1_2026 = reduceNumber(py2026 + c1);
+  const ct2_2026 = reduceNumber(py2026 + r1);
+  const ct3_2026Raw = py2026 - dm;
+  const ct3_2026 = ct3_2026Raw <= 0 ? reduceNumber(ct3_2026Raw + 9) : reduceNumber(ct3_2026Raw);
+  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026);
+
+  // ========================================
+  // 6. IDADE
+  // ========================================
   const age = currentYear - year - (today < new Date(currentYear, month - 1, day) ? 1 : 0);
 
   return {
     fullName,
     birthDate,
+    
+    // Números principais
     cd,
     mo,
     eu,
     ex,
     merito,
-    personalYear: py,
+    
+    // Ciclos de vida
+    ciclos: { c1, c2, c3 },
+    
+    // Realizações (Pináculos)
+    realizacoes: { r1, r2, r3, r4 },
+    realizationAges: { r1End: r1EndAge, r2End: r2EndAge, r3End: r3EndAge },
+    
+    // Desafios
+    desafios: { d1, d2, dm },
+    
+    // Anos Pessoais
+    personalYear: pyCurrentReduced,
     personalYear2026: py2026,
     personalMonth: pm,
-    realizacoes: { r1, r2, r3, r4 },
-    ciclos: { c1, c2, c3 },
-    desafios: { d1, d2, dm },
-    realizationAges: { r1End: r1EndAge, r2End: r2EndAge, r3End: r3EndAge },
-    age
+    
+    // Ciclos Trimestrais
+    ciclosTrimestrais: {
+      atual: { ct1, ct2, ct3, ct4 },
+      ano2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 }
+    },
+    
+    // Informações adicionais
+    age,
+    hasHadBirthdayThisYear
   };
 };

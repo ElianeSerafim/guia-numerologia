@@ -25,12 +25,17 @@ export interface NumerologyChart {
   personalYear: number; // Ano atual
   personalYear2026: number; // Ano específico de 2026
   personalMonth: number;
+  ciclosTrimestrais?: {
+    atual: { ct1: number; ct2: number; ct3: number; ct4: number };
+    ano2026: { ct1: number; ct2: number; ct3: number; ct4: number };
+  };
   age: number;
   realizationAges: {
     r1End: number;
     r2End: number;
     r3End: number;
   };
+  hasHadBirthdayThisYear?: boolean;
 }
 
 export interface User {
