@@ -1,13 +1,15 @@
 
 import { useState } from 'react';
 import { NumerologyChart } from '@/types';
-import { ArrowLeft, Download, Printer, Loader2 } from 'lucide-react';
+import { ArrowLeft, Download, Printer, Loader2, Save, History } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
 import AnnualPredictions from './AnnualPredictions';
 import { exportMapToPDF } from '@/lib/pdfExport';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
+import { useMapHistory } from '@/hooks/useMapHistory';
 import { getYearDescription } from '@/lib/annualPredictions';
+import { useLocation } from 'wouter';
 
 /**
  * Report Component
@@ -25,7 +27,12 @@ interface ReportProps {
 
 export default function Report({ chart, onReset }: ReportProps) {
   const { user } = useUserSubscription();
+  const { addMap } = useMapHistory();
+  const [, setLocation] = useLocation();
   const [isExporting, setIsExporting] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const [notes, setNotes] = useState('');
 
   const handleExportPDF = async () => {
     if (!user) return;
@@ -38,6 +45,23 @@ export default function Report({ chart, onReset }: ReportProps) {
       alert('Erro ao exportar PDF. Tente novamente.');
     } finally {
       setIsExporting(false);
+    }
+  };
+
+  const handleSaveMap = async () => {
+    if (!user || !user.email) return;
+    
+    setIsSaving(true);
+    try {
+      addMap(chart, user.email, notes);
+      alert('Mapa salvo com sucesso!');
+      setShowSaveModal(false);
+      setNotes('');
+    } catch (error) {
+      console.error('Erro ao salvar mapa:', error);
+      alert('Erro ao salvar mapa. Tente novamente.');
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -55,6 +79,20 @@ export default function Report({ chart, onReset }: ReportProps) {
           </button>
           <h1 className="text-xl font-bold text-slate-900">Seu Mapa Numerológico</h1>
           <div className="flex gap-2">
+            <button
+              onClick={() => setLocation('/history')}
+              className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
+              title="Ver histórico"
+            >
+              <History size={20} />
+            </button>
+            <button
+              onClick={() => setShowSaveModal(true)}
+              className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
+              title="Salvar mapa"
+            >
+              <Save size={20} />
+            </button>
             <button
               onClick={() => window.print()}
               className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
@@ -172,6 +210,47 @@ export default function Report({ chart, onReset }: ReportProps) {
           </div>
         </div>
       </div>
+
+      {/* Save Modal */}
+      {showSaveModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4">
+            <h2 className="text-2xl font-bold text-slate-900">Salvar Mapa</h2>
+            <p className="text-slate-600">Adicione notas para lembrar detalhes sobre este mapa.</p>
+            <textarea
+              value={notes}
+              onChange={(e) => setNotes(e.target.value)}
+              placeholder="Digite suas notas aqui (opcional)..."
+              className="w-full p-3 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 resize-none h-24"
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowSaveModal(false)}
+                className="flex-1 px-4 py-2 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={handleSaveMap}
+                disabled={isSaving}
+                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isSaving ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    Salvando...
+                  </>
+                ) : (
+                  <>
+                    <Save size={16} />
+                    Salvar Mapa
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import Auth from "@/pages/Auth";
 import Pricing from "@/pages/Pricing";
 import FAQ from "@/pages/FAQ";
+import History from "@/pages/History";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -25,6 +26,7 @@ function Router() {
       <Route path="/auth" component={Auth} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/faq" component={FAQ} />
+      <Route path="/history" component={History} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
