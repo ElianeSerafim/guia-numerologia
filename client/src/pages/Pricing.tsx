@@ -3,6 +3,7 @@ import { Check, Zap, Crown, Star, ArrowRight, MessageCircle } from 'lucide-react
 import { PLANS } from '@/types/payment';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { useLocation } from 'wouter';
+import { sendPurchaseConfirmation } from '@/lib/emailService';
 
 /**
  * Pricing Page - Página de Vendas
@@ -53,9 +54,22 @@ export default function Pricing() {
     // Criar cliente com status pendente
     createCustomer(email, fullName, selectedPlan as any);
 
-    // Redirecionar para WhatsApp
+    // Enviar e-mail de confirmacao
     const planName = PLANS[selectedPlan as keyof typeof PLANS].name;
     const planPrice = PLANS[selectedPlan as keyof typeof PLANS].price;
+    const mapsLimit = PLANS[selectedPlan as keyof typeof PLANS].mapsLimit;
+    const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+    
+    sendPurchaseConfirmation(
+      email,
+      fullName,
+      planName,
+      planPrice,
+      mapsLimit,
+      transactionId
+    );
+
+    // Redirecionar para WhatsApp
     const message = `Olá! Gostaria de contratar o plano ${planName} (R$ ${planPrice.toFixed(2).replace('.', ',')}). Meu e-mail é: ${email}`;
     const whatsappUrl = `${config.whatsappLink}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');

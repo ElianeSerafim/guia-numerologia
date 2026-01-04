@@ -3,6 +3,7 @@ import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { Customer, PaymentStatus } from '@/types/payment';
 import { Check, X, Trash2, Download, Edit2, Lock, Unlock, Settings } from 'lucide-react';
 import { useLocation } from 'wouter';
+import { sendAccessApprovedEmail, sendAccessRejectedEmail } from '@/lib/emailService';
 
 /**
  * Admin Dashboard - Gerenciamento de Clientes e Pagamentos
@@ -65,14 +66,32 @@ export default function AdminDashboard() {
     );
   };
 
-  const handleApprove = (customerId: string) => {
-    approveCustomer(customerId, notes);
+  const handleApprove = async (customerId: string) => {
+    const customer = customers.find(c => c.id === customerId);
+    if (customer) {
+      approveCustomer(customerId, notes);
+      
+      const planName = customer.plan === 'navigator' ? 'Navegador' : 
+                       customer.plan === 'visionary' ? 'Visionario' :
+                       customer.plan === 'illuminated' ? 'Iluminado' : 'Premium';
+      
+      await sendAccessApprovedEmail(
+        customer.email,
+        customer.fullName,
+        planName,
+        customer.mapsLimit
+      );
+    }
     setSelectedCustomer(null);
     setNotes('');
   };
 
-  const handleReject = (customerId: string) => {
-    rejectCustomer(customerId, notes);
+  const handleReject = async (customerId: string) => {
+    const customer = customers.find(c => c.id === customerId);
+    if (customer) {
+      rejectCustomer(customerId, notes);
+      await sendAccessRejectedEmail(customer.email, customer.fullName, notes);
+    }
     setSelectedCustomer(null);
     setNotes('');
   };
