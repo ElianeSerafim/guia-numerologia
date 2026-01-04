@@ -12,6 +12,7 @@
 import { useLocation } from 'wouter';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import LifePathCalculator from '@/components/LifePathCalculator';
 import { Check, Zap, Gift, Clock, Shield, Star, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
@@ -173,6 +174,23 @@ export default function LandingPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Life Path Calculator Section */}
+      <section className="py-20 bg-white/50 backdrop-blur-sm">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">Teste Gratuitamente</h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+              Descubra seu Numero do Caminho de Vida com nossa calculadora gratuita. Uma amostra
+              do poder da numerologia pitagorica.
+            </p>
+          </div>
+
+          <div className="flex justify-center">
+            <LifePathCalculator />
           </div>
         </div>
       </section>
