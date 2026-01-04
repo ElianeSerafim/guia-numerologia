@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Check, Zap, Crown, Star, ArrowRight } from 'lucide-react';
-import { PLANS, SubscriptionPlan } from '@/types/subscription';
-import { useUserSubscription } from '@/hooks/useUserSubscription';
+import { Check, Zap, Crown, Star, ArrowRight, MessageCircle } from 'lucide-react';
+import { PLANS } from '@/types/payment';
+import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { useLocation } from 'wouter';
 
 /**
@@ -11,13 +11,15 @@ import { useLocation } from 'wouter';
  * - Cards com destaque para o plano mais popular
  * - Animações suaves e transições
  * - Chamadas à ação claras e persuasivas
+ * - Redirecionamento para WhatsApp para pagamento
  */
 
 export default function Pricing() {
   const [, setLocation] = useLocation();
-  const { registerUser } = useUserSubscription();
+  const { createCustomer, config } = usePaymentManagement();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [email, setEmail] = useState('');
+  const [fullName, setFullName] = useState('');
   const [showCheckout, setShowCheckout] = useState(false);
   const [error, setError] = useState('');
 
@@ -38,17 +40,32 @@ export default function Pricing() {
       return;
     }
 
+    if (!fullName.trim()) {
+      setError('Por favor, insira seu nome completo');
+      return;
+    }
+
     if (!selectedPlan) {
       setError('Selecione um plano');
       return;
     }
 
-    // Registrar usuário com o plano selecionado
-    registerUser(email, selectedPlan as any);
+    // Criar cliente com status pendente
+    createCustomer(email, fullName, selectedPlan as any);
 
-    // Redirecionar para a página inicial
+    // Redirecionar para WhatsApp
+    const planName = PLANS[selectedPlan as keyof typeof PLANS].name;
+    const planPrice = PLANS[selectedPlan as keyof typeof PLANS].price;
+    const message = `Olá! Gostaria de contratar o plano ${planName} (R$ ${planPrice.toFixed(2).replace('.', ',')}). Meu e-mail é: ${email}`;
+    const whatsappUrl = `${config.whatsappLink}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+
+    // Limpar formulário
     setTimeout(() => {
-      setLocation('/');
+      setShowCheckout(false);
+      setEmail('');
+      setFullName('');
+      setSelectedPlan(null);
     }, 500);
   };
 
@@ -80,241 +97,172 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* Pricing Cards */}
+      {/* Plans Grid */}
       <section className="container py-12">
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {/* Starter Plan */}
-          <PricingCard
-            plan={PLANS.starter}
-            isSelected={selectedPlan === 'starter'}
-            onSelect={() => handleSelectPlan('starter')}
-            icon={<Zap className="w-8 h-8" />}
-          />
+          {/* Navegador */}
+          <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow">
+            <div className="flex items-center gap-2">
+              <Zap className="text-amber-500" size={24} />
+              <h3 className="text-2xl font-bold text-slate-900">{PLANS.navigator.name}</h3>
+            </div>
+            <div className="space-y-2">
+              <p className="text-4xl font-bold text-indigo-600">
+                R$ {PLANS.navigator.price.toFixed(2).replace('.', ',')}
+              </p>
+              <p className="text-slate-600">{PLANS.navigator.description}</p>
+            </div>
+            <div className="space-y-3">
+              {PLANS.navigator.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-slate-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => handleSelectPlan('navigator')}
+              className="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold flex items-center justify-center gap-2"
+            >
+              <MessageCircle size={18} />
+              Contratar via WhatsApp
+            </button>
+          </div>
 
-          {/* Pro Plan - Highlighted */}
-          <PricingCard
-            plan={PLANS.pro}
-            isSelected={selectedPlan === 'pro'}
-            onSelect={() => handleSelectPlan('pro')}
-            icon={<Star className="w-8 h-8" />}
-            highlighted={true}
-          />
+          {/* Visionário - Destaque */}
+          <div className="card-mystical space-y-6 border-2 border-purple-500 shadow-lg scale-105 hover:shadow-2xl transition-shadow relative">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+              Mais Popular
+            </div>
+            <div className="flex items-center gap-2">
+              <Crown className="text-purple-600" size={24} />
+              <h3 className="text-2xl font-bold text-slate-900">{PLANS.visionary.name}</h3>
+            </div>
+            <div className="space-y-2">
+              <p className="text-4xl font-bold text-purple-600">
+                R$ {PLANS.visionary.price.toFixed(2).replace('.', ',')}
+              </p>
+              <p className="text-slate-600">{PLANS.visionary.description}</p>
+            </div>
+            <div className="space-y-3">
+              {PLANS.visionary.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-slate-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => handleSelectPlan('visionary')}
+              className="w-full py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold flex items-center justify-center gap-2"
+            >
+              <MessageCircle size={18} />
+              Contratar via WhatsApp
+            </button>
+          </div>
 
-          {/* Premium Plan */}
-          <PricingCard
-            plan={PLANS.premium}
-            isSelected={selectedPlan === 'premium'}
-            onSelect={() => handleSelectPlan('premium')}
-            icon={<Crown className="w-8 h-8" />}
-          />
+          {/* Iluminado */}
+          <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow">
+            <div className="flex items-center gap-2">
+              <Star className="text-yellow-500" size={24} />
+              <h3 className="text-2xl font-bold text-slate-900">{PLANS.illuminated.name}</h3>
+            </div>
+            <div className="space-y-2">
+              <p className="text-4xl font-bold text-amber-600">
+                R$ {PLANS.illuminated.price.toFixed(2).replace('.', ',')}
+              </p>
+              <p className="text-slate-600">{PLANS.illuminated.description}</p>
+            </div>
+            <div className="space-y-3">
+              {PLANS.illuminated.features.map((feature, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                  <span className="text-slate-700">{feature}</span>
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => handleSelectPlan('illuminated')}
+              className="w-full py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-semibold flex items-center justify-center gap-2"
+            >
+              <MessageCircle size={18} />
+              Contratar via WhatsApp
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Checkout Section */}
+      {/* Checkout Modal */}
       {showCheckout && (
-        <section className="container py-12">
-          <div className="max-w-md mx-auto card-mystical space-y-6">
-            <h3 className="text-2xl font-bold text-slate-900">
-              Finalize sua Compra
-            </h3>
-
-            <div className="space-y-2">
-              <p className="text-sm font-semibold text-slate-600">Plano Selecionado</p>
-              <p className="text-lg font-bold text-indigo-600">
-                {selectedPlan && PLANS[selectedPlan as SubscriptionPlan]?.name}
-              </p>
-              <p className="text-2xl font-bold text-slate-900">
-                R$ {selectedPlan && PLANS[selectedPlan as SubscriptionPlan]?.price.toFixed(2)}
-              </p>
-            </div>
-
-            <div className="divider-diagonal"></div>
-
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-8 space-y-6">
+            <h2 className="text-2xl font-bold text-slate-900">Confirmar Dados</h2>
+            
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">
-                  Seu E-mail
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Nome Completo
+                </label>
+                <input
+                  type="text"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  placeholder="Seu nome completo"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  E-mail
                 </label>
                 <input
                   type="email"
                   value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                    setError('');
-                  }}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu@email.com"
-                  className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
 
-              {error && (
-                <div className="p-3 rounded-lg bg-red-50 border border-red-200">
-                  <p className="text-sm text-red-600">{error}</p>
-                </div>
-              )}
+              <div className="bg-indigo-50 rounded-lg p-4">
+                <p className="text-sm text-slate-600 mb-2">Plano Selecionado:</p>
+                <p className="font-bold text-slate-900">
+                  {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].name}
+                </p>
+                <p className="text-lg font-bold text-indigo-600 mt-1">
+                  R$ {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].price.toFixed(2).replace('.', ',')}
+                </p>
+              </div>
+            </div>
 
-              <button
-                onClick={handleCheckout}
-                className="w-full btn-mystical flex items-center justify-center gap-2 group"
-              >
-                <span>Confirmar Compra</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </button>
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
+                {error}
+              </div>
+            )}
 
+            <div className="flex gap-3">
               <button
                 onClick={() => {
                   setShowCheckout(false);
-                  setSelectedPlan(null);
-                  setEmail('');
+                  setError('');
                 }}
-                className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 text-slate-900 font-semibold hover:bg-slate-50 transition-colors"
+                className="flex-1 px-4 py-2 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors font-semibold"
               >
                 Cancelar
               </button>
+              <button
+                onClick={handleCheckout}
+                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold flex items-center justify-center gap-2"
+              >
+                <MessageCircle size={18} />
+                Ir para WhatsApp
+              </button>
             </div>
-
-            <p className="text-xs text-slate-500 text-center">
-              💡 Se você usar o e-mail eliane@artwebcreative.com.br, terá acesso ao plano Iluminado gratuitamente!
-            </p>
           </div>
-        </section>
-      )}
-
-      {/* Features Comparison */}
-      <section className="container py-16">
-        <div className="divider-diagonal"></div>
-        <div className="max-w-4xl mx-auto">
-          <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">
-            Comparação de Planos
-          </h3>
-          <div className="card-mystical overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-slate-200">
-                  <th className="text-left py-4 px-4 font-bold text-slate-900">Recurso</th>
-                  <th className="text-center py-4 px-4 font-bold text-slate-900">Navegador</th>
-                  <th className="text-center py-4 px-4 font-bold text-indigo-600">Visionário</th>
-                  <th className="text-center py-4 px-4 font-bold text-slate-900">Iluminado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b border-slate-100">
-                  <td className="py-4 px-4 text-slate-700">Mapas Numerológicos</td>
-                  <td className="text-center py-4 px-4 font-bold text-slate-900">2</td>
-                  <td className="text-center py-4 px-4 font-bold text-indigo-600">6</td>
-                  <td className="text-center py-4 px-4 font-bold text-slate-900">∞ (Ilimitado)</td>
-                </tr>
-                <tr className="border-b border-slate-100">
-                  <td className="py-4 px-4 text-slate-700">Cálculos Completos</td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                </tr>
-                <tr className="border-b border-slate-100">
-                  <td className="py-4 px-4 text-slate-700">Relatórios em PDF</td>
-                  <td className="text-center py-4 px-4 text-slate-400">—</td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                </tr>
-                <tr className="border-b border-slate-100">
-                  <td className="py-4 px-4 text-slate-700">Suporte Prioritário</td>
-                  <td className="text-center py-4 px-4 text-slate-400">—</td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                </tr>
-                <tr>
-                  <td className="py-4 px-4 text-slate-700">Análises Comparativas</td>
-                  <td className="text-center py-4 px-4 text-slate-400">—</td>
-                  <td className="text-center py-4 px-4 text-slate-400">—</td>
-                  <td className="text-center py-4 px-4"><Check size={20} className="mx-auto text-green-600" /></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-200 bg-slate-50">
-        <div className="container py-8 text-center text-slate-600 text-sm">
-          <p>Bússola Numerológica 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
-        </div>
-      </footer>
-    </div>
-  );
-}
-
-interface PricingCardProps {
-  plan: any;
-  isSelected: boolean;
-  onSelect: () => void;
-  icon: React.ReactNode;
-  highlighted?: boolean;
-}
-
-function PricingCard({ plan, isSelected, onSelect, icon, highlighted }: PricingCardProps) {
-  return (
-    <div
-      className={`relative rounded-2xl transition-all duration-300 ${
-        highlighted
-          ? 'ring-2 ring-indigo-600 shadow-2xl scale-105'
-          : 'border-2 border-slate-200 hover:border-indigo-300'
-      } ${isSelected ? 'bg-indigo-50' : 'bg-white'}`}
-    >
-      {highlighted && (
-        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white px-4 py-1 rounded-full text-sm font-bold">
-          Mais Popular
         </div>
       )}
-
-      <div className="p-8 space-y-6">
-        {/* Icon */}
-        <div className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-          highlighted ? 'bg-indigo-600 text-white' : 'bg-indigo-100 text-indigo-600'
-        }`}>
-          {icon}
-        </div>
-
-        {/* Plan Name */}
-        <div>
-          <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
-          <p className="text-sm text-slate-600 mt-1">{plan.description}</p>
-        </div>
-
-        {/* Price */}
-        <div>
-          <div className="flex items-baseline gap-1">
-            <span className="text-4xl font-bold text-slate-900">
-              R$ {plan.price.toFixed(2)}
-            </span>
-            {plan.price > 0 && <span className="text-slate-600">uma vez</span>}
-          </div>
-          {plan.price === 0 && <p className="text-sm text-slate-600 mt-1">Teste gratuitamente</p>}
-        </div>
-
-        {/* Features */}
-        <ul className="space-y-3">
-          {plan.features.map((feature: string, idx: number) => (
-            <li key={idx} className="flex items-center gap-3 text-slate-700">
-              <Check size={18} className="text-green-600 flex-shrink-0" />
-              <span className="text-sm">{feature}</span>
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA Button */}
-        <button
-          onClick={onSelect}
-          className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
-            highlighted
-              ? 'bg-gradient-to-r from-indigo-600 to-purple-700 text-white hover:shadow-lg'
-              : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
-          } ${isSelected ? 'ring-2 ring-indigo-600' : ''}`}
-        >
-          <span>{isSelected ? 'Selecionado' : 'Escolher Plano'}</span>
-          <ArrowRight size={16} />
-        </button>
-      </div>
     </div>
   );
 }

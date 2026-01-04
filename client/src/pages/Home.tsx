@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { Compass, Loader2, ArrowRight, LogOut, Zap, BookOpen } from 'lucide-react';
+import { Compass, Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock } from 'lucide-react';
 import { Link } from 'wouter';
 import { calculateChart } from '@/lib/numerologyUtils';
 import { NumerologyChart } from '@/types';
-import { PLANS } from '@/types/subscription';
+import { PLANS } from '@/types/payment';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
+import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import Calculator from '@/components/Calculator';
 import Report from '@/components/Report';
 
@@ -21,9 +22,11 @@ import Report from '@/components/Report';
 export default function Home() {
   const [, setLocation] = useLocation();
   const { user, isLoading: userLoading, logout, canGenerateMap, incrementMapsGenerated, getMapsLimit } = useUserSubscription();
+  const { getCustomerByEmail } = usePaymentManagement();
   const [chart, setChart] = useState<NumerologyChart | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [showLimitWarning, setShowLimitWarning] = useState(false);
+  const [showPendingWarning, setShowPendingWarning] = useState(false);
 
   // Redirecionar para login se não estiver autenticado
   useEffect(() => {
@@ -31,6 +34,15 @@ export default function Home() {
       setLocation('/auth');
     }
   }, [user, userLoading, setLocation]);
+
+  useEffect(() => {
+    if (user && user.email !== 'eliane@artwebcreative.com.br') {
+      const customer = getCustomerByEmail(user.email);
+      if (customer && customer.status === 'pending') {
+        setShowPendingWarning(true);
+      }
+    }
+  }, [user, getCustomerByEmail]);
 
   if (userLoading) {
     return (
@@ -47,7 +59,7 @@ export default function Home() {
     return null;
   }
 
-  const currentPlan = PLANS[user.plan];
+  const currentPlan = PLANS[user.plan as keyof typeof PLANS];
   const actualMapsLimit = getMapsLimit(currentPlan.mapsLimit);
   const mapsRemaining = actualMapsLimit === Infinity ? Infinity : actualMapsLimit - user.mapsGenerated;
   const canGenerate = canGenerateMap(actualMapsLimit);
@@ -183,6 +195,22 @@ export default function Home() {
       <div className="container">
         <div className="divider-diagonal"></div>
       </div>
+
+      {/* Pending Warning */}
+      {showPendingWarning && (
+        <section className="container py-8">
+          <div className="max-w-2xl mx-auto bg-blue-50 border-2 border-blue-200 rounded-lg p-6 space-y-4 flex items-start gap-4">
+            <Lock className="text-blue-600 flex-shrink-0 mt-1" size={24} />
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-blue-900">Acesso Pendente de Liberação</h3>
+              <p className="text-blue-800 mt-2">
+                Sua solicitação foi recebida! Estamos analisando seu pagamento. Você receberá um e-mail assim que seu acesso for liberado.
+              </p>
+              <p className="text-sm text-blue-700 mt-2">Tempo médio: 24 horas</p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Limit Warning */}
       {showLimitWarning && (
