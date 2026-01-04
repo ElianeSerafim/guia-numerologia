@@ -10,6 +10,7 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
+import LandingPage from "./pages/LandingPage";
 
 /**
  * App Component - Bússola Numerológica 2026
@@ -23,7 +24,8 @@ import Home from "./pages/Home";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      <Route path="/" component={LandingPage} />
+      <Route path="/app" component={Home} />
       <Route path="/auth" component={Auth} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/faq" component={FAQ} />
