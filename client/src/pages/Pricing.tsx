@@ -139,17 +139,17 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#190825] via-[#2A1240] to-[#190825]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <header className="sticky top-0 z-50 bg-[#190825]/80 backdrop-blur-md border-b border-[#4A2A6A]">
         <div className="container flex items-center justify-between py-4">
           <button
             onClick={() => setLocation('/')}
-            className="text-lg font-bold text-slate-900 hover:text-indigo-600 transition-colors"
+            className="text-lg font-bold text-[#D4AF37] hover:text-[#8A2BE2] transition-colors"
           >
             ← Voltar
           </button>
-          <h1 className="text-xl font-bold text-slate-900">Planos de Assinatura</h1>
+          <h1 className="text-xl font-bold text-[#D4AF37]">Planos de Assinatura</h1>
           <div className="w-20"></div>
         </div>
       </header>
@@ -157,10 +157,10 @@ export default function Pricing() {
       {/* Hero Section */}
       <section className="container py-16 text-center">
         <div className="max-w-3xl mx-auto space-y-4">
-          <h2 className="text-5xl font-bold text-slate-900">
-            Escolha Seu <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">Caminho</span>
+          <h2 className="text-5xl font-bold text-[#D4AF37]">
+            Escolha Seu <span className="text-[#8A2BE2]">Caminho</span>
           </h2>
-          <p className="text-xl text-slate-600">
+          <p className="text-xl text-white">
             Desbloqueie o poder da numerologia com nossos planos flexíveis e acessíveis
           </p>
         </div>
@@ -170,28 +170,28 @@ export default function Pricing() {
       <section className="container py-12">
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Navegador */}
-          <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow">
+          <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow bg-[#2A1240] border border-[#4A2A6A]">
             <div className="flex items-center gap-2">
-              <Zap className="text-amber-500" size={24} />
-              <h3 className="text-2xl font-bold text-slate-900">{PLANS.navigator.name}</h3>
+              <Zap className="text-[#D4AF37]" size={24} />
+              <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.navigator.name}</h3>
             </div>
             <div className="space-y-2">
-              <p className="text-4xl font-bold text-indigo-600">
+              <p className="text-4xl font-bold text-[#8A2BE2]">
                 R$ {PLANS.navigator.price.toFixed(2).replace('.', ',')}
               </p>
-              <p className="text-slate-600">{PLANS.navigator.description}</p>
+              <p className="text-white">{PLANS.navigator.description}</p>
             </div>
             <div className="space-y-3">
               {PLANS.navigator.features.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-700">{feature}</span>
+                  <span className="text-white">{feature}</span>
                 </div>
               ))}
             </div>
             <button
               onClick={() => handleSelectPlan('navigator')}
-              className="w-full py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold flex items-center justify-center gap-2"
+              className="w-full py-3 bg-[#8A2BE2] text-white rounded-lg hover:bg-[#D4AF37] transition-colors font-semibold flex items-center justify-center gap-2"
             >
               <MessageCircle size={18} />
               Contratar via WhatsApp

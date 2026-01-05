@@ -151,19 +151,19 @@
   }
   
   h1 {
-    @apply text-5xl leading-tight text-white;
+    @apply text-5xl leading-tight text-[#D4AF37];
   }
   
   h2 {
-    @apply text-4xl leading-snug text-white;
+    @apply text-4xl leading-snug text-[#D4AF37];
   }
   
   h3 {
-    @apply text-2xl leading-snug text-white;
+    @apply text-2xl leading-snug text-[#D4AF37];
   }
   
   h4, h5, h6 {
-    @apply text-white;
+    @apply text-[#D4AF37];
   }
   
   p {

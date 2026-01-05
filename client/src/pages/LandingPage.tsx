@@ -101,13 +101,13 @@ export default function LandingPage() {
       <section className="pt-32 pb-20 px-4">
         <div className="container max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-white">
+            <h1 className="text-5xl md:text-6xl font-bold text-[#D4AF37]">
               Descubra os Mistérios do Seu{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37]">
+              <span className="text-[#8A2BE2]">
                 Destino
               </span>
             </h1>
-            <p className="text-xl text-[#F3E5F5] max-w-2xl mx-auto">
+            <p className="text-xl text-white max-w-2xl mx-auto">
               Explore a numerologia pitagórica e desbloqueie insights profundos sobre sua vida,
               personalidade e futuro através de cálculos precisos e interpretações detalhadas.
             </p>
@@ -150,10 +150,10 @@ export default function LandingPage() {
       <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">
+            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">
               Por Que Escolher Nossa Plataforma?
             </h2>
-            <p className="text-xl text-[#F3E5F5] max-w-2xl mx-auto">
+            <p className="text-xl text-white max-w-2xl mx-auto">
               Oferecemos a experiência mais completa em numerologia pitagórica com tecnologia
               avançada e interpretações profundas.
             </p>
@@ -170,8 +170,8 @@ export default function LandingPage() {
                   <div className="w-12 h-12 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-lg flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2">{benefit.title}</h3>
-                  <p className="text-[#F3E5F5]">{benefit.description}</p>
+                  <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">{benefit.title}</h3>
+                  <p className="text-white">{benefit.description}</p>
                 </div>
               );
             })}
@@ -183,8 +183,8 @@ export default function LandingPage() {
       <section className="py-20 bg-gradient-to-b from-[#2A1240] to-[#190825]">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Teste Gratuitamente</h2>
-            <p className="text-xl text-[#F3E5F5] max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Teste Gratuitamente</h2>
+            <p className="text-xl text-white max-w-2xl mx-auto">
               Descubra seu Numero do Caminho de Vida com nossa calculadora gratuita. Uma amostra
               do poder da numerologia pitagorica.
             </p>
@@ -200,8 +200,8 @@ export default function LandingPage() {
       <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Como Funciona</h2>
-            <p className="text-xl text-[#F3E5F5]">
+            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Como Funciona</h2>
+            <p className="text-xl text-white">
               Processo simples e rápido para começar sua jornada de autoconhecimento
             </p>
           </div>
@@ -248,8 +248,8 @@ export default function LandingPage() {
                   {index < 5 && <div className="w-1 h-12 bg-gradient-to-b from-[#8A2BE2] to-transparent mt-2"></div>}
                 </div>
                 <div className="pb-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                  <p className="text-[#F3E5F5]">{item.description}</p>
+                  <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">{item.title}</h3>
+                  <p className="text-white">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -261,8 +261,8 @@ export default function LandingPage() {
       <section className="py-20 bg-gradient-to-b from-[#2A1240] to-[#190825]">
         <div className="container max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-white mb-4">Perguntas Frequentes</h2>
-            <p className="text-xl text-[#F3E5F5]">
+            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Perguntas Frequentes</h2>
+            <p className="text-xl text-white">
               Encontre respostas para as dúvidas mais comuns sobre numerologia
             </p>
           </div>
@@ -277,7 +277,7 @@ export default function LandingPage() {
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
                   className="w-full px-6 py-4 flex items-center justify-between bg-[#2A1240] hover:bg-[#3F1F5C] transition-colors"
                 >
-                  <span className="text-lg font-semibold text-white text-left">
+                  <span className="text-lg font-semibold text-[#D4AF37] text-left">
                     {item.question}
                   </span>
                   <ChevronDown
@@ -289,7 +289,7 @@ export default function LandingPage() {
                 </button>
                 {openFaq === index && (
                   <div className="px-6 py-4 bg-[#3F1F5C] border-t border-[#4A2A6A]">
-                    <p className="text-[#F3E5F5]">{item.answer}</p>
+                    <p className="text-white">{item.answer}</p>
                   </div>
                 )}
               </div>
@@ -297,7 +297,7 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-[#F3E5F5] mb-4">Ainda tem dúvidas?</p>
+            <p className="text-white mb-4">Ainda tem dúvidas?</p>
             <button
               onClick={() => setLocation('/faq')}
               className="text-[#D4AF37] font-semibold hover:text-[#8A2BE2] transition-colors"
@@ -312,10 +312,10 @@ export default function LandingPage() {
       <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container max-w-3xl text-center space-y-8">
           <div className="space-y-4">
-            <h2 className="text-4xl font-bold text-white">
+            <h2 className="text-4xl font-bold text-[#D4AF37]">
               Pronto para Descobrir Seu Destino?
             </h2>
-            <p className="text-xl text-[#F3E5F5]">
+            <p className="text-xl text-white">
               Escolha um plano e comece sua jornada de autoconhecimento hoje mesmo.
             </p>
           </div>
@@ -329,7 +329,7 @@ export default function LandingPage() {
 
           {/* Share Section */}
           <div className="mt-12 pt-12 border-t border-[#4A2A6A]">
-            <p className="text-[#F3E5F5] mb-6 font-medium">Compartilhe com seus amigos</p>
+            <p className="text-white mb-6 font-medium">Compartilhe com seus amigos</p>
             <div className="flex justify-center">
               <ShareButtons
                 title="Bússola Numerológica 2026"
