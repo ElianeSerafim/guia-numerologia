@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { useAdminManagement } from '@/hooks/useAdminManagement';
 import { Customer } from '@/types/payment';
-import { Check, X, Trash2, Download, Edit2, Lock, Unlock, Settings, Users, Plus, BarChart3, Tag, History } from 'lucide-react';
+import { Check, X, Trash2, Download, Edit2, Lock, Unlock, Settings, Users, Plus, BarChart3, Tag, History, LogOut } from 'lucide-react';
 import { sendAccessApprovedEmail, sendAccessRejectedEmail } from '@/lib/emailService';
 import SalesReport from '@/components/SalesReport';
 import CouponManagement from '@/components/CouponManagement';
@@ -209,6 +209,20 @@ export default function AdminDashboard() {
             >
               <Settings size={20} />
               Configurações
+            </button>
+            <button
+              onClick={() => {
+                // Limpar dados do localStorage
+                localStorage.removeItem('numerology_user_email');
+                localStorage.removeItem('admin_users');
+                // Redirecionar para página inicial
+                setLocation('/');
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              title="Sair da conta"
+            >
+              <LogOut size={20} />
+              Sair
             </button>
           </div>
         </div>
