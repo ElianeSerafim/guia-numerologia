@@ -94,20 +94,20 @@ export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="dark min-h-screen bg-gradient-to-br from-[#190825] via-[#2A1240] to-[#3F1F5C]">
       <Header />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="container max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-slate-900">
+            <h1 className="text-5xl md:text-6xl font-bold text-white">
               Descubra os Mistérios do Seu{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37]">
                 Destino
               </span>
             </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xl text-[#F3E5F5] max-w-2xl mx-auto">
               Explore a numerologia pitagórica e desbloqueie insights profundos sobre sua vida,
               personalidade e futuro através de cálculos precisos e interpretações detalhadas.
             </p>
@@ -116,13 +116,13 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button
               onClick={() => setLocation('/pricing')}
-              className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg"
+              className="px-8 py-4 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg"
             >
               Ver Planos →
             </button>
             <button
               onClick={() => setLocation('/faq')}
-              className="px-8 py-4 border-2 border-slate-300 text-slate-900 rounded-lg font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-colors text-lg"
+              className="px-8 py-4 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold hover:border-[#8A2BE2] hover:text-[#8A2BE2] transition-colors text-lg"
             >
               Saiba Mais
             </button>
