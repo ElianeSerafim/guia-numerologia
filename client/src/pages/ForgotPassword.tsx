@@ -66,14 +66,14 @@ export default function ForgotPassword() {
               <Compass size={32} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-slate-900">Bússola Numerológica</h1>
+          <h1 className="text-3xl font-bold text-white">Bússola Numerológica</h1>
           <p className="text-slate-600">Recupere seu acesso</p>
         </div>
 
         {/* Recovery Form */}
         {!success ? (
           <form onSubmit={handleSubmit} className="card-mystical space-y-6">
-            <h2 className="text-2xl font-bold text-slate-900">Esqueci minha Senha</h2>
+            <h2 className="text-2xl font-bold text-white">Esqueci minha Senha</h2>
             
             <p className="text-slate-600 text-sm">
               Digite seu e-mail e enviaremos um link para você redefinir sua senha.
@@ -81,7 +81,7 @@ export default function ForgotPassword() {
 
             {/* Email Input */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-semibold text-slate-900">
+              <label htmlFor="email" className="block text-sm font-semibold text-white">
                 Seu E-mail
               </label>
               <div className="relative">
@@ -147,7 +147,7 @@ export default function ForgotPassword() {
             </div>
 
             <div className="text-center space-y-2">
-              <h2 className="text-2xl font-bold text-slate-900">E-mail Enviado!</h2>
+              <h2 className="text-2xl font-bold text-white">E-mail Enviado!</h2>
               <p className="text-slate-600">
                 Verifique seu e-mail <span className="font-semibold text-indigo-600">{email}</span> para o link de recuperação de senha.
               </p>

@@ -35,16 +35,16 @@ export default function MapComparison({ comparison }: MapComparisonProps) {
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold text-slate-900">Análise Comparativa</h2>
+        <h2 className="text-3xl font-bold text-white">Análise Comparativa</h2>
         <div className="flex items-center justify-center gap-4">
           <div className="text-center">
             <p className="text-sm text-slate-600 mb-1">Mapa 1</p>
-            <p className="font-bold text-slate-900">{map1.chart.fullName}</p>
+            <p className="font-bold text-white">{map1.chart.fullName}</p>
           </div>
           <Zap className="text-amber-500" size={24} />
           <div className="text-center">
             <p className="text-sm text-slate-600 mb-1">Mapa 2</p>
-            <p className="font-bold text-slate-900">{map2.chart.fullName}</p>
+            <p className="font-bold text-white">{map2.chart.fullName}</p>
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function MapComparison({ comparison }: MapComparisonProps) {
 
       {/* Similaridades */}
       <div className="card-mystical space-y-4 border-l-4 border-green-500">
-        <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-white flex items-center gap-2">
           <CheckCircle2 className="text-green-600" size={20} />
           Números em Comum
         </h3>
@@ -98,7 +98,7 @@ export default function MapComparison({ comparison }: MapComparisonProps) {
 
       {/* Diferenças */}
       <div className="card-mystical space-y-4 border-l-4 border-amber-500">
-        <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-white flex items-center gap-2">
           <AlertCircle className="text-amber-600" size={20} />
           Diferenças Identificadas
         </h3>
@@ -181,7 +181,7 @@ export default function MapComparison({ comparison }: MapComparisonProps) {
 
       {/* Interpretação */}
       <div className="card-mystical space-y-4 bg-gradient-to-br from-slate-50 to-slate-100">
-        <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+        <h3 className="text-lg font-bold text-white flex items-center gap-2">
           <TrendingUp className="text-slate-600" size={20} />
           Interpretação da Compatibilidade
         </h3>

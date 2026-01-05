@@ -40,7 +40,7 @@ export default function PaymentHistory() {
       case 'pending':
         return 'bg-yellow-100 text-yellow-800';
       default:
-        return 'bg-slate-100 text-slate-800';
+        return 'bg-slate-100 text-white';
     }
   };
 
@@ -102,7 +102,7 @@ export default function PaymentHistory() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-900">Histórico de Pagamentos</h2>
+        <h2 className="text-2xl font-bold text-white">Histórico de Pagamentos</h2>
         <button
           onClick={exportToCSV}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -130,7 +130,7 @@ export default function PaymentHistory() {
                 className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                   filter === f
                     ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
+                    : 'bg-slate-200 text-white hover:bg-slate-300'
                 }`}
               >
                 {f === 'all'
@@ -157,24 +157,24 @@ export default function PaymentHistory() {
             <table className="w-full">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Data</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Cliente</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Email</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Plano</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Valor</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Desconto</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Total</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Cupom</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Status</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Data</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Cliente</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Email</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Plano</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Valor</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Desconto</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Total</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Cupom</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Status</th>
                 </tr>
               </thead>
               <tbody>
                 {filteredPayments.map((payment) => (
                   <tr key={payment.id} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="py-3 px-4 text-slate-900 text-sm">
+                    <td className="py-3 px-4 text-white text-sm">
                       {new Date(payment.createdAt).toLocaleDateString('pt-BR')}
                     </td>
-                    <td className="py-3 px-4 text-slate-900 font-semibold">
+                    <td className="py-3 px-4 text-white font-semibold">
                       {payment.customerName}
                     </td>
                     <td className="py-3 px-4 text-slate-600 text-sm">{payment.customerEmail}</td>
@@ -195,7 +195,7 @@ export default function PaymentHistory() {
                         '-'
                       )}
                     </td>
-                    <td className="py-3 px-4 text-slate-900 font-semibold">
+                    <td className="py-3 px-4 text-white font-semibold">
                       R$ {payment.finalAmount.toFixed(2)}
                     </td>
                     <td className="py-3 px-4 text-slate-600">
@@ -228,11 +228,11 @@ export default function PaymentHistory() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-white rounded-lg shadow-md p-6">
           <p className="text-slate-600 text-sm mb-2">Total de Registros</p>
-          <p className="text-3xl font-bold text-slate-900">{filteredPayments.length}</p>
+          <p className="text-3xl font-bold text-white">{filteredPayments.length}</p>
         </div>
         <div className="bg-white rounded-lg shadow-md p-6">
           <p className="text-slate-600 text-sm mb-2">Valor Total</p>
-          <p className="text-3xl font-bold text-slate-900">
+          <p className="text-3xl font-bold text-white">
             R$ {filteredPayments.reduce((sum, p) => sum + p.finalAmount, 0).toFixed(2)}
           </p>
         </div>

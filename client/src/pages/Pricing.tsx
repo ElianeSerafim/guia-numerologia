@@ -205,7 +205,7 @@ export default function Pricing() {
             </div>
             <div className="flex items-center gap-2">
               <Crown className="text-purple-600" size={24} />
-              <h3 className="text-2xl font-bold text-slate-900">{PLANS.visionary.name}</h3>
+              <h3 className="text-2xl font-bold text-white">{PLANS.visionary.name}</h3>
             </div>
             <div className="space-y-2">
               <p className="text-4xl font-bold text-purple-600">
@@ -234,7 +234,7 @@ export default function Pricing() {
           <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow">
             <div className="flex items-center gap-2">
               <Star className="text-yellow-500" size={24} />
-              <h3 className="text-2xl font-bold text-slate-900">{PLANS.illuminated.name}</h3>
+              <h3 className="text-2xl font-bold text-white">{PLANS.illuminated.name}</h3>
             </div>
             <div className="space-y-2">
               <p className="text-4xl font-bold text-amber-600">
@@ -265,7 +265,7 @@ export default function Pricing() {
       {showCheckout && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-8 space-y-6 max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-slate-900">Confirmar Dados</h2>
+            <h2 className="text-2xl font-bold text-white">Confirmar Dados</h2>
             
             <div className="space-y-4">
               <div>
@@ -296,7 +296,7 @@ export default function Pricing() {
 
               <div className="bg-indigo-50 rounded-lg p-4">
                 <p className="text-sm text-slate-600 mb-2">Plano Selecionado:</p>
-                <p className="font-bold text-slate-900">
+                <p className="font-bold text-white">
                   {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].name}
                 </p>
                 <p className="text-lg font-bold text-indigo-600 mt-1">
@@ -322,7 +322,7 @@ export default function Pricing() {
                   />
                   <button
                     onClick={handleValidateCoupon}
-                    className="px-4 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors font-semibold"
+                    className="px-4 py-2 bg-slate-200 text-white rounded-lg hover:bg-slate-300 transition-colors font-semibold"
                   >
                     Aplicar
                   </button>

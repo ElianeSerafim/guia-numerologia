@@ -102,7 +102,7 @@ export default function CouponManagement() {
     <div className="space-y-6">
       {/* Botão Criar Cupom */}
       <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-slate-900">Gerenciar Cupons</h2>
+        <h2 className="text-2xl font-bold text-white">Gerenciar Cupons</h2>
         <button
           onClick={() => setShowForm(!showForm)}
           className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
@@ -115,7 +115,7 @@ export default function CouponManagement() {
       {/* Formulário de Criação */}
       {showForm && (
         <div className="bg-slate-50 rounded-lg p-6 border border-slate-200">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Criar Novo Cupom</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Criar Novo Cupom</h3>
 
           {formError && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
@@ -126,7 +126,7 @@ export default function CouponManagement() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             {/* Código */}
             <div>
-              <label className="block text-sm font-semibold text-slate-900 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Código do Cupom
               </label>
               <input
@@ -142,7 +142,7 @@ export default function CouponManagement() {
 
             {/* Tipo de Desconto */}
             <div>
-              <label className="block text-sm font-semibold text-slate-900 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Tipo de Desconto
               </label>
               <select
@@ -162,7 +162,7 @@ export default function CouponManagement() {
 
             {/* Valor do Desconto */}
             <div>
-              <label className="block text-sm font-semibold text-slate-900 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Valor do Desconto {formData.discountType === 'percentage' ? '(%)' : '(R$)'}
               </label>
               <input
@@ -178,7 +178,7 @@ export default function CouponManagement() {
 
             {/* Máximo de Usos */}
             <div>
-              <label className="block text-sm font-semibold text-slate-900 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Máximo de Usos
               </label>
               <input
@@ -194,7 +194,7 @@ export default function CouponManagement() {
 
             {/* Data de Expiração */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-slate-900 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Data de Expiração
               </label>
               <input
@@ -208,7 +208,7 @@ export default function CouponManagement() {
 
           {/* Planos Aplicáveis */}
           <div className="mb-4">
-            <label className="block text-sm font-semibold text-slate-900 mb-3">
+            <label className="block text-sm font-semibold text-white mb-3">
               Planos Aplicáveis
             </label>
             <div className="flex gap-4">
@@ -236,7 +236,7 @@ export default function CouponManagement() {
             </button>
             <button
               onClick={() => setShowForm(false)}
-              className="px-4 py-2 bg-slate-300 text-slate-900 rounded-lg hover:bg-slate-400 transition-colors"
+              className="px-4 py-2 bg-slate-300 text-white rounded-lg hover:bg-slate-400 transition-colors"
             >
               Cancelar
             </button>
@@ -255,19 +255,19 @@ export default function CouponManagement() {
             <table className="w-full">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Código</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Desconto</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Usos</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Expiração</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Planos</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Status</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Ações</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Código</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Desconto</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Usos</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Expiração</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Planos</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Status</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Ações</th>
                 </tr>
               </thead>
               <tbody>
                 {coupons.map((coupon) => (
                   <tr key={coupon.id} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="py-3 px-4 font-semibold text-slate-900">{coupon.code}</td>
+                    <td className="py-3 px-4 font-semibold text-white">{coupon.code}</td>
                     <td className="py-3 px-4 text-slate-600">
                       {coupon.discountType === 'percentage'
                         ? `${coupon.discountValue}%`

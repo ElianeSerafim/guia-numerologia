@@ -57,7 +57,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Name Input */}
       <div className="space-y-2">
-        <label htmlFor="name" className="block text-sm font-semibold text-slate-900">
+        <label htmlFor="name" className="block text-sm font-semibold text-white">
           Nome Completo
         </label>
         <input
@@ -86,7 +86,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
 
       {/* Birth Date Input */}
       <div className="space-y-2">
-        <label htmlFor="birthDate" className="block text-sm font-semibold text-slate-900">
+        <label htmlFor="birthDate" className="block text-sm font-semibold text-white">
           Data de Nascimento
         </label>
         <input

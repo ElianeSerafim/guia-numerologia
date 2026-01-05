@@ -23,7 +23,7 @@ export default function NotFound() {
           </div>
         </div>
 
-        <h1 className="text-5xl font-bold text-slate-900">404</h1>
+        <h1 className="text-5xl font-bold text-white">404</h1>
 
         <h2 className="text-2xl font-semibold text-slate-700">
           Página Não Encontrada

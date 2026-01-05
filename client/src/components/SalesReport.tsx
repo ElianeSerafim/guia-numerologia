@@ -80,7 +80,7 @@ export default function SalesReport() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Gráfico de Receita por Data */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Receita por Data</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Receita por Data</h3>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={report.revenueByDate}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -95,7 +95,7 @@ export default function SalesReport() {
 
         {/* Gráfico de Distribuição por Plano */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Vendas por Plano</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Vendas por Plano</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
               <Pie
@@ -119,7 +119,7 @@ export default function SalesReport() {
 
         {/* Gráfico de Vendas por Data */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Número de Vendas por Data</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Número de Vendas por Data</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={report.revenueByDate}>
               <CartesianGrid strokeDasharray="3 3" />
@@ -134,7 +134,7 @@ export default function SalesReport() {
 
         {/* Status de Vendas */}
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Status das Vendas</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Status das Vendas</h3>
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-slate-600">Aprovadas</span>
@@ -150,8 +150,8 @@ export default function SalesReport() {
             </div>
             <div className="pt-4 border-t border-slate-200">
               <div className="flex items-center justify-between">
-                <span className="font-semibold text-slate-900">Total</span>
-                <span className="text-2xl font-bold text-slate-900">
+                <span className="font-semibold text-white">Total</span>
+                <span className="text-2xl font-bold text-white">
                   {report.approvedSales + report.pendingApprovals + report.rejectedSales}
                 </span>
               </div>
@@ -163,20 +163,20 @@ export default function SalesReport() {
       {/* Top Cupons */}
       {report.topCoupons.length > 0 && (
         <div className="bg-white rounded-lg shadow-md p-6">
-          <h3 className="text-lg font-bold text-slate-900 mb-4">Top Cupons Utilizados</h3>
+          <h3 className="text-lg font-bold text-white mb-4">Top Cupons Utilizados</h3>
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b border-slate-200">
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Código</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Usos</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Desconto Total</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Código</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Usos</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Desconto Total</th>
                 </tr>
               </thead>
               <tbody>
                 {report.topCoupons.map((coupon) => (
                   <tr key={coupon.code} className="border-b border-slate-100 hover:bg-slate-50">
-                    <td className="py-3 px-4 font-semibold text-slate-900">{coupon.code}</td>
+                    <td className="py-3 px-4 font-semibold text-white">{coupon.code}</td>
                     <td className="py-3 px-4 text-slate-600">{coupon.usedCount}</td>
                     <td className="py-3 px-4 text-slate-600">R$ {coupon.totalDiscount.toFixed(2)}</td>
                   </tr>

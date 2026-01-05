@@ -41,7 +41,7 @@ export default function DashboardSelector() {
       <div className="max-w-2xl w-full">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">
+          <h1 className="text-4xl font-bold text-white mb-2">
             Bem-vindo de volta!
           </h1>
           <p className="text-lg text-slate-600">
@@ -65,7 +65,7 @@ export default function DashboardSelector() {
                 <LayoutDashboard size={32} className="text-indigo-600" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-900 text-left">
+                <h2 className="text-2xl font-bold text-white text-left">
                   Painel Cliente
                 </h2>
                 <p className="text-slate-600 text-left mt-2">
@@ -92,7 +92,7 @@ export default function DashboardSelector() {
                   <Users size={32} className="text-purple-600" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-900 text-left">
+                  <h2 className="text-2xl font-bold text-white text-left">
                     Painel Admin
                   </h2>
                   <p className="text-slate-600 text-left mt-2">
@@ -132,7 +132,7 @@ export default function DashboardSelector() {
               localStorage.removeItem('numerology_user_email');
               setLocation('/auth');
             }}
-            className="text-slate-600 hover:text-slate-900 font-semibold transition-colors"
+            className="text-slate-600 hover:text-white font-semibold transition-colors"
           >
             Sair da conta
           </button>

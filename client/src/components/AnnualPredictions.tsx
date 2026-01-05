@@ -36,7 +36,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
       <div className="text-center space-y-3">
         <div className="flex items-center justify-center gap-2">
           <Calendar className="text-indigo-600" size={24} />
-          <h2 className="text-3xl font-bold text-slate-900">Previsões Anuais {year}</h2>
+          <h2 className="text-3xl font-bold text-white">Previsões Anuais {year}</h2>
         </div>
         <p className="text-slate-600">
           Seu Ano Pessoal: <span className="font-bold text-indigo-600 text-2xl">{yearNumber}</span>
@@ -60,7 +60,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
         <div className="flex items-start gap-3">
           <Target className="text-amber-600 flex-shrink-0 mt-1" size={20} />
           <div>
-            <h3 className="font-bold text-slate-900 mb-2">Foco Principal do Ano</h3>
+            <h3 className="font-bold text-white mb-2">Foco Principal do Ano</h3>
             <p className="text-slate-700">{prediction.focus}</p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
       {/* Polaridades */}
       <div className="space-y-4">
-        <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+        <h3 className="text-xl font-bold text-white flex items-center gap-2">
           <TrendingUp size={20} className="text-purple-600" />
           Como Este Ano Pode Se Manifestar
         </h3>
@@ -126,7 +126,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
       {/* Ciclos Trimestrais */}
       <div className="space-y-6">
-        <h3 className="text-2xl font-bold text-slate-900">Ciclos Trimestrais</h3>
+        <h3 className="text-2xl font-bold text-white">Ciclos Trimestrais</h3>
         <p className="text-slate-600">
           O ano pessoal é dividido em 4 trimestres, cada um com sua vibração específica e foco particular.
         </p>
@@ -146,7 +146,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                 {/* Header */}
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <h4 className="text-lg font-bold text-slate-900">{ct.title}</h4>
+                    <h4 className="text-lg font-bold text-white">{ct.title}</h4>
                     <p className="text-sm text-slate-600 mt-1">
                       Vibração do CT: <span className="font-bold text-indigo-600 text-lg">{ctNumber}</span>
                     </p>
@@ -160,7 +160,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
                 {/* Atividades Recomendadas */}
                 <div>
-                  <h5 className="font-semibold text-slate-900 mb-2 text-sm">Atividades Recomendadas</h5>
+                  <h5 className="font-semibold text-white mb-2 text-sm">Atividades Recomendadas</h5>
                   <ul className="space-y-1">
                     {ct.activities.slice(0, 3).map((activity, idx) => (
                       <li key={idx} className="flex items-start gap-2 text-sm text-slate-700">
@@ -197,7 +197,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
       {/* Recomendações */}
       <div className="space-y-4">
-        <h3 className="text-xl font-bold text-slate-900">Recomendações para {year}</h3>
+        <h3 className="text-xl font-bold text-white">Recomendações para {year}</h3>
 
         <div className="grid md:grid-cols-2 gap-4">
           {/* Recomendações Positivas */}
@@ -254,7 +254,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
       {/* Nota Final */}
       <div className="bg-slate-100 rounded-lg p-6 border border-slate-300 space-y-3">
-        <h4 className="font-bold text-slate-900">Nota Importante</h4>
+        <h4 className="font-bold text-white">Nota Importante</h4>
         <p className="text-slate-700 text-sm leading-relaxed">
           As previsões anuais dependem diretamente de como você está vivendo seu Mapa Numerológico Natal.
           A vibração do seu Ano Pessoal irá mexer com as posições do seu MNN conforme as regras da técnica.

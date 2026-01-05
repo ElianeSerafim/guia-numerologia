@@ -47,7 +47,7 @@ export default function Header() {
           <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg flex items-center justify-center">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <span className="font-bold text-lg text-slate-900 hidden sm:inline">
+          <span className="font-bold text-lg text-white hidden sm:inline">
             Bússola
           </span>
         </button>
@@ -84,7 +84,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-slate-900"
+          className="md:hidden text-white"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>

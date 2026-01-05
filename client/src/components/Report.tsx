@@ -77,7 +77,7 @@ export default function Report({ chart, onReset }: ReportProps) {
             <ArrowLeft size={20} />
             <span>Novo Cálculo</span>
           </button>
-          <h1 className="text-xl font-bold text-slate-900">Seu Mapa Numerológico</h1>
+          <h1 className="text-xl font-bold text-white">Seu Mapa Numerológico</h1>
           <div className="flex gap-2">
             <button
               onClick={() => setLocation('/history')}
@@ -119,7 +119,7 @@ export default function Report({ chart, onReset }: ReportProps) {
           <div className="lg:col-span-2 space-y-8">
             {/* Welcome Section */}
             <div className="card-mystical">
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">
+              <h2 className="text-3xl font-bold text-white mb-2">
                 Bem-vindo, <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">{chart.fullName}</span>
               </h2>
               <p className="text-slate-600">
@@ -148,30 +148,30 @@ export default function Report({ chart, onReset }: ReportProps) {
           <div className="space-y-6">
             {/* Quick Info */}
             <div className="card-mystical space-y-4">
-              <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3">
+              <h3 className="text-lg font-bold text-white border-b border-slate-200 pb-3">
                 Informações Pessoais
               </h3>
               <div className="space-y-3">
                 <div>
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Nome</p>
-                  <p className="text-slate-900 font-medium">{chart.fullName}</p>
+                  <p className="text-white font-medium">{chart.fullName}</p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Data de Nascimento</p>
-                  <p className="text-slate-900 font-medium">
+                  <p className="text-white font-medium">
                     {new Date(chart.birthDate).toLocaleDateString('pt-BR')}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Idade</p>
-                  <p className="text-slate-900 font-medium">{chart.age} anos</p>
+                  <p className="text-white font-medium">{chart.age} anos</p>
                 </div>
               </div>
             </div>
 
             {/* Key Numbers */}
             <div className="card-mystical space-y-4">
-              <h3 className="text-lg font-bold text-slate-900 border-b border-slate-200 pb-3">
+              <h3 className="text-lg font-bold text-white border-b border-slate-200 pb-3">
                 Números Principais
               </h3>
               <div className="space-y-3">
@@ -188,7 +188,7 @@ export default function Report({ chart, onReset }: ReportProps) {
                   <span className="number-mystical text-3xl">{chart.ex}</span>
                 </div>
                 <div className="flex items-center justify-between pt-3 border-t border-slate-200">
-                  <span className="text-slate-900 font-bold">Mérito (Força)</span>
+                  <span className="text-white font-bold">Mérito (Força)</span>
                   <span className="number-mystical text-3xl">{chart.merito}</span>
                 </div>
               </div>
@@ -215,7 +215,7 @@ export default function Report({ chart, onReset }: ReportProps) {
       {showSaveModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-6 space-y-4">
-            <h2 className="text-2xl font-bold text-slate-900">Salvar Mapa</h2>
+            <h2 className="text-2xl font-bold text-white">Salvar Mapa</h2>
             <p className="text-slate-600">Adicione notas para lembrar detalhes sobre este mapa.</p>
             <textarea
               value={notes}

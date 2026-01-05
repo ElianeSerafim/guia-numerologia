@@ -173,7 +173,7 @@ export default function Compatibility() {
           <div className="text-center mb-16">
             <div className="flex items-center justify-center gap-3 mb-4">
               <Heart className="w-8 h-8 text-red-500" />
-              <h1 className="text-5xl font-bold text-slate-900">Compatibilidade Amorosa</h1>
+              <h1 className="text-5xl font-bold text-white">Compatibilidade Amorosa</h1>
               <Heart className="w-8 h-8 text-red-500" />
             </div>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
@@ -187,7 +187,7 @@ export default function Compatibility() {
               <div className="grid md:grid-cols-2 gap-8 mb-8">
                 {/* Person 1 */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-slate-900 flex items-center gap-2">
+                  <h3 className="text-xl font-semibold text-white flex items-center gap-2">
                     <Users size={20} className="text-indigo-600" />
                     Primeira Pessoa
                   </h3>
@@ -220,7 +220,7 @@ export default function Compatibility() {
 
                 {/* Person 2 */}
                 <div className="space-y-4">
-                  <h3 className="text-xl font-semibold text-slate-900 flex items-center gap-2">
+                  <h3 className="text-xl font-semibold text-white flex items-center gap-2">
                     <Users size={20} className="text-purple-600" />
                     Segunda Pessoa
                   </h3>
@@ -286,7 +286,7 @@ export default function Compatibility() {
               {/* Detailed Scores */}
               <div className="grid md:grid-cols-3 gap-6">
                 <div className="bg-white rounded-xl border border-slate-200 p-6">
-                  <h4 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
                     <Heart size={18} className="text-red-500" />
                     Harmonia Emocional
                   </h4>
@@ -296,11 +296,11 @@ export default function Compatibility() {
                       style={{ width: `${result.emotionalHarmony}%` }}
                     ></div>
                   </div>
-                  <p className="text-2xl font-bold text-slate-900 mt-3">{result.emotionalHarmony}%</p>
+                  <p className="text-2xl font-bold text-white mt-3">{result.emotionalHarmony}%</p>
                 </div>
 
                 <div className="bg-white rounded-xl border border-slate-200 p-6">
-                  <h4 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
                     <Users size={18} className="text-blue-500" />
                     Alinhamento de Comunicação
                   </h4>
@@ -310,11 +310,11 @@ export default function Compatibility() {
                       style={{ width: `${result.communicationAlignment}%` }}
                     ></div>
                   </div>
-                  <p className="text-2xl font-bold text-slate-900 mt-3">{result.communicationAlignment}%</p>
+                  <p className="text-2xl font-bold text-white mt-3">{result.communicationAlignment}%</p>
                 </div>
 
                 <div className="bg-white rounded-xl border border-slate-200 p-6">
-                  <h4 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
                     <TrendingUp size={18} className="text-green-500" />
                     Compatibilidade de Destino
                   </h4>
@@ -324,14 +324,14 @@ export default function Compatibility() {
                       style={{ width: `${result.lifePathCompatibility}%` }}
                     ></div>
                   </div>
-                  <p className="text-2xl font-bold text-slate-900 mt-3">{result.lifePathCompatibility}%</p>
+                  <p className="text-2xl font-bold text-white mt-3">{result.lifePathCompatibility}%</p>
                 </div>
               </div>
 
               {/* Strengths and Challenges */}
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="bg-white rounded-xl border border-green-200 p-6">
-                  <h4 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
                     <CheckCircle size={18} className="text-green-600" />
                     Forças do Relacionamento
                   </h4>
@@ -346,7 +346,7 @@ export default function Compatibility() {
                 </div>
 
                 <div className="bg-white rounded-xl border border-orange-200 p-6">
-                  <h4 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+                  <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
                     <AlertCircle size={18} className="text-orange-600" />
                     Desafios a Superar
                   </h4>
@@ -363,7 +363,7 @@ export default function Compatibility() {
 
               {/* Recommendations */}
               <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl border border-indigo-200 p-6">
-                <h4 className="font-semibold text-slate-900 mb-4">Recomendações para o Casal</h4>
+                <h4 className="font-semibold text-white mb-4">Recomendações para o Casal</h4>
                 <ul className="space-y-3">
                   {result.recommendations.map((rec, idx) => (
                     <li key={idx} className="text-slate-700 flex items-start gap-3">
@@ -378,7 +378,7 @@ export default function Compatibility() {
               <div className="flex gap-4">
                 <button
                   onClick={handleReset}
-                  className="flex-1 px-6 py-3 border-2 border-slate-300 text-slate-900 rounded-lg font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-colors"
+                  className="flex-1 px-6 py-3 border-2 border-slate-300 text-white rounded-lg font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-colors"
                 >
                   Calcular Outra Compatibilidade
                 </button>

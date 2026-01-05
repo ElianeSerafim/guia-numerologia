@@ -110,17 +110,17 @@ export default function Auth() {
               <Compass size={32} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-slate-900">Bússola Numerológica</h1>
+          <h1 className="text-3xl font-bold text-white">Bússola Numerológica</h1>
           <p className="text-slate-600">Descubra os mistérios do seu destino</p>
         </div>
 
         {/* Login Form */}
         <form onSubmit={handleLogin} className="card-mystical space-y-6">
-          <h2 className="text-2xl font-bold text-slate-900">Bem-vindo</h2>
+          <h2 className="text-2xl font-bold text-white">Bem-vindo</h2>
 
           {/* Email Input */}
           <div className="space-y-2">
-            <label htmlFor="email" className="block text-sm font-semibold text-slate-900">
+            <label htmlFor="email" className="block text-sm font-semibold text-white">
               Seu E-mail
             </label>
             <input
@@ -146,7 +146,7 @@ export default function Auth() {
 
           {/* Password Input */}
           <div className="space-y-2">
-            <label htmlFor="password" className="block text-sm font-semibold text-slate-900">
+            <label htmlFor="password" className="block text-sm font-semibold text-white">
               Senha
             </label>
             <div className="relative">

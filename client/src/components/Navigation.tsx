@@ -26,7 +26,7 @@ export default function Navigation() {
       <div className="container flex items-center justify-between py-4">
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-2 font-bold text-xl text-slate-900 hover:text-indigo-600 transition-colors">
+          <a className="flex items-center gap-2 font-bold text-xl text-white hover:text-indigo-600 transition-colors">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center">
               <span className="text-white font-bold">◯</span>
             </div>

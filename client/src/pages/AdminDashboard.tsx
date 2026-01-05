@@ -155,7 +155,7 @@ export default function AdminDashboard() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
         <div className="text-center bg-white rounded-lg shadow-lg p-8 max-w-md">
           <Lock className="w-16 h-16 mx-auto mb-4 text-red-500" />
-          <h1 className="text-2xl font-bold text-slate-900 mb-2">Acesso Restrito</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">Acesso Restrito</h1>
           <p className="text-slate-600 mb-6">Você não tem permissão para acessar o painel administrativo.</p>
           <button
             onClick={() => {
@@ -178,7 +178,7 @@ export default function AdminDashboard() {
         <div className="container py-3">
           <button
             onClick={() => setLocation('/')}
-            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-white transition-colors rounded-lg hover:bg-slate-100"
             title="Voltar para página inicial"
           >
             ← Voltar
@@ -190,7 +190,7 @@ export default function AdminDashboard() {
       <div className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="container py-4 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Painel Administrativo</h1>
+            <h1 className="text-3xl font-bold text-white">Painel Administrativo</h1>
             <p className="text-slate-600 mt-1">Gerenciar clientes e configurações</p>
           </div>
           <div className="flex items-center gap-3">
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
             )}
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-slate-200 text-white rounded-lg hover:bg-slate-300 transition-colors"
             >
               <Settings size={20} />
               Configurações
@@ -232,11 +232,11 @@ export default function AdminDashboard() {
         {/* Admin Management Section */}
         {showAdminManagement && isSuperAdmin && (
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Gerenciar Usuários Admin</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Gerenciar Usuários Admin</h2>
             
             {/* Add New Admin */}
             <div className="bg-slate-50 p-4 rounded-lg mb-6">
-              <h3 className="font-semibold text-slate-900 mb-3">Adicionar Novo Admin</h3>
+              <h3 className="font-semibold text-white mb-3">Adicionar Novo Admin</h3>
               {adminError && (
                 <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded mb-3">
                   {adminError}
@@ -272,17 +272,17 @@ export default function AdminDashboard() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-slate-200">
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Nome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Email</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Tipo</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Status</th>
-                    <th className="text-left py-3 px-4 font-semibold text-slate-900">Ações</th>
+                    <th className="text-left py-3 px-4 font-semibold text-white">Nome</th>
+                    <th className="text-left py-3 px-4 font-semibold text-white">Email</th>
+                    <th className="text-left py-3 px-4 font-semibold text-white">Tipo</th>
+                    <th className="text-left py-3 px-4 font-semibold text-white">Status</th>
+                    <th className="text-left py-3 px-4 font-semibold text-white">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {admins.map((admin) => (
                     <tr key={admin.id} className="border-b border-slate-100 hover:bg-slate-50">
-                      <td className="py-3 px-4 text-slate-900">{admin.name}</td>
+                      <td className="py-3 px-4 text-white">{admin.name}</td>
                       <td className="py-3 px-4 text-slate-600">{admin.email}</td>
                       <td className="py-3 px-4">
                         <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
@@ -337,10 +337,10 @@ export default function AdminDashboard() {
         {/* Settings Section */}
         {showSettings && (
           <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-bold text-slate-900 mb-4">Configurações</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Configurações</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-900 mb-2">
+                <label className="block text-sm font-semibold text-white mb-2">
                   Link do WhatsApp
                 </label>
                 <input
@@ -370,7 +370,7 @@ export default function AdminDashboard() {
               className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
                 activeTab === 'customers'
                   ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-slate-600 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
               <Users size={20} />
@@ -381,7 +381,7 @@ export default function AdminDashboard() {
               className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
                 activeTab === 'reports'
                   ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-slate-600 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
               <BarChart3 size={20} />
@@ -392,7 +392,7 @@ export default function AdminDashboard() {
               className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
                 activeTab === 'coupons'
                   ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-slate-600 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
               <Tag size={20} />
@@ -403,7 +403,7 @@ export default function AdminDashboard() {
               className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
                 activeTab === 'history'
                   ? 'border-indigo-600 text-indigo-600'
-                  : 'border-transparent text-slate-600 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
               <History size={20} />
@@ -431,7 +431,7 @@ export default function AdminDashboard() {
                   className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     filter === f
                       ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-200 text-slate-900 hover:bg-slate-300'
+                      : 'bg-slate-200 text-white hover:bg-slate-300'
                   }`}
                 >
                   {f === 'pending' ? 'Pendentes' : f === 'approved' ? 'Aprovados' : f === 'rejected' ? 'Rejeitados' : 'Todos'}
@@ -477,12 +477,12 @@ export default function AdminDashboard() {
             <table className="w-full">
               <thead>
                 <tr className="bg-slate-50 border-b border-slate-200">
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Nome</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Email</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Plano</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Status</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Data</th>
-                  <th className="text-left py-3 px-4 font-semibold text-slate-900">Ações</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Nome</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Email</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Plano</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Status</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Data</th>
+                  <th className="text-left py-3 px-4 font-semibold text-white">Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -495,7 +495,7 @@ export default function AdminDashboard() {
                 ) : (
                   filteredCustomers.map((customer) => (
                     <tr key={customer.id} className="border-b border-slate-100 hover:bg-slate-50">
-                      <td className="py-3 px-4 text-slate-900">{customer.fullName}</td>
+                      <td className="py-3 px-4 text-white">{customer.fullName}</td>
                       <td className="py-3 px-4 text-slate-600">{customer.email}</td>
                       <td className="py-3 px-4">
                         <span className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold">
@@ -563,7 +563,7 @@ export default function AdminDashboard() {
       {selectedCustomer && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
-            <h3 className="text-xl font-bold text-slate-900 mb-4">
+            <h3 className="text-xl font-bold text-white mb-4">
               {selectedCustomer.status === 'pending' ? 'Aprovar Cliente' : 'Rejeitar Cliente'}
             </h3>
             <p className="text-slate-600 mb-4">
@@ -595,7 +595,7 @@ export default function AdminDashboard() {
               </button>
               <button
                 onClick={() => setSelectedCustomer(null)}
-                className="flex-1 px-4 py-2 bg-slate-300 text-slate-900 rounded-lg hover:bg-slate-400 transition-colors"
+                className="flex-1 px-4 py-2 bg-slate-300 text-white rounded-lg hover:bg-slate-400 transition-colors"
               >
                 Cancelar
               </button>

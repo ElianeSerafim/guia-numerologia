@@ -277,7 +277,7 @@ export default function LifePathCalculator() {
               <div className="w-10 h-10 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center">
                 <Calendar className="w-5 h-5 text-indigo-600" />
               </div>
-              <h3 className="text-2xl font-bold text-slate-900">
+              <h3 className="text-2xl font-bold text-white">
                 Descubra Seu Número do Caminho de Vida
               </h3>
             </div>
@@ -329,14 +329,14 @@ export default function LifePathCalculator() {
               <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-full mb-4">
                 <span className="text-5xl font-bold text-white">{result.number}</span>
               </div>
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">{result.meaning}</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">{result.meaning}</h2>
               <p className="text-slate-600">Seu Número do Caminho de Vida</p>
             </div>
 
             {/* Characteristics */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div>
-                <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 bg-indigo-600 rounded-full"></span>
                   Características
                 </h4>
@@ -350,7 +350,7 @@ export default function LifePathCalculator() {
               </div>
 
               <div>
-                <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+                <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
                   <span className="w-2 h-2 bg-green-600 rounded-full"></span>
                   Forças
                 </h4>
@@ -366,7 +366,7 @@ export default function LifePathCalculator() {
 
             {/* Challenges */}
             <div className="bg-white rounded-lg p-4 mb-8">
-              <h4 className="font-semibold text-slate-900 mb-3 flex items-center gap-2">
+              <h4 className="font-semibold text-white mb-3 flex items-center gap-2">
                 <span className="w-2 h-2 bg-orange-600 rounded-full"></span>
                 Desafios a Superar
               </h4>
@@ -402,7 +402,7 @@ export default function LifePathCalculator() {
               setBirthDate('');
               setError('');
             }}
-            className="w-full px-6 py-2 border-2 border-slate-300 text-slate-900 rounded-lg font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-colors"
+            className="w-full px-6 py-2 border-2 border-slate-300 text-white rounded-lg font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-colors"
           >
             Calcular Outro Número
           </button>

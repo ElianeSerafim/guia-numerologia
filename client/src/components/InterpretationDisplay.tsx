@@ -28,7 +28,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
     <div className="space-y-8">
       {/* Header */}
       <div className="text-center space-y-2">
-        <h2 className="text-3xl font-bold text-slate-900">Interpretações Numerológicas</h2>
+        <h2 className="text-3xl font-bold text-white">Interpretações Numerológicas</h2>
         <p className="text-slate-600">
           Análise completa baseada nas Técnicas Avançadas de Numerologia Pitagórica
         </p>
@@ -49,7 +49,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">{item.label}</h3>
+                  <h3 className="text-xl font-bold text-white">{item.label}</h3>
                   <p className="text-sm text-slate-600">Vibração Numérica: {item.value}</p>
                 </div>
                 <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">
@@ -70,7 +70,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
 
               {/* Nome e Significado */}
               <div>
-                <h4 className="font-bold text-slate-900 mb-2">
+                <h4 className="font-bold text-white mb-2">
                   {interpretation.name}
                 </h4>
                 <p className="text-slate-700 text-sm leading-relaxed">
@@ -80,7 +80,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
 
               {/* Características */}
               <div>
-                <h4 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                <h4 className="font-semibold text-white mb-2 flex items-center gap-2">
                   <CheckCircle size={16} className="text-green-600" />
                   Características Principais
                 </h4>
@@ -98,7 +98,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
 
               {/* Potenciais */}
               <div>
-                <h4 className="font-semibold text-slate-900 mb-2 flex items-center gap-2">
+                <h4 className="font-semibold text-white mb-2 flex items-center gap-2">
                   <Lightbulb size={16} className="text-amber-600" />
                   Potenciais e Oportunidades
                 </h4>
@@ -152,7 +152,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
         <div className="flex items-start gap-3">
           <BookOpen size={20} className="text-slate-600 flex-shrink-0 mt-1" />
           <div>
-            <h4 className="font-bold text-slate-900 mb-2">Sobre as Interpretações</h4>
+            <h4 className="font-bold text-white mb-2">Sobre as Interpretações</h4>
             <p className="text-slate-700 text-sm leading-relaxed">
               Essas interpretações são baseadas nas Técnicas Avançadas de Numerologia Pitagórica.
               Cada número representa uma vibração específíca que influencia diferentes aspectos

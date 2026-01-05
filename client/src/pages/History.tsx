@@ -88,7 +88,7 @@ export default function History() {
             <ArrowLeft size={20} />
             <span>Voltar</span>
           </button>
-          <h1 className="text-xl font-bold text-slate-900">Histórico de Mapas</h1>
+          <h1 className="text-xl font-bold text-white">Histórico de Mapas</h1>
           <button
             onClick={exportHistory}
             className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
@@ -109,7 +109,7 @@ export default function History() {
           </div>
           <div className="card-mystical text-center">
             <p className="text-slate-600 text-sm mb-1">Mais Recente</p>
-            <p className="text-lg font-semibold text-slate-900">
+            <p className="text-lg font-semibold text-white">
               {userMaps.length > 0
                 ? new Date(userMaps[0].savedAt).toLocaleDateString('pt-BR')
                 : 'Nenhum'}
@@ -117,7 +117,7 @@ export default function History() {
           </div>
           <div className="card-mystical text-center">
             <p className="text-slate-600 text-sm mb-1">Espaço Usado</p>
-            <p className="text-lg font-semibold text-slate-900">
+            <p className="text-lg font-semibold text-white">
               {(JSON.stringify(userMaps).length / 1024).toFixed(1)} KB
             </p>
           </div>
@@ -165,7 +165,7 @@ export default function History() {
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <h3 className="font-bold text-slate-900 text-lg">{map.chart.fullName}</h3>
+                    <h3 className="font-bold text-white text-lg">{map.chart.fullName}</h3>
                     <p className="text-xs text-slate-500 mt-1">
                       {new Date(map.savedAt).toLocaleDateString('pt-BR')}
                     </p>
@@ -254,7 +254,7 @@ export default function History() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-96 overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-slate-900">{viewingMap.chart.fullName}</h2>
+              <h2 className="text-2xl font-bold text-white">{viewingMap.chart.fullName}</h2>
               <button
                 onClick={() => setViewingMap(null)}
                 className="text-slate-500 hover:text-slate-700"
@@ -266,24 +266,24 @@ export default function History() {
             <div className="p-6 space-y-6">
               {/* Informações Pessoais */}
               <div>
-                <h3 className="font-bold text-slate-900 mb-3">Informações Pessoais</h3>
+                <h3 className="font-bold text-white mb-3">Informações Pessoais</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-xs text-slate-500 uppercase">Data de Nascimento</p>
-                    <p className="font-medium text-slate-900">
+                    <p className="font-medium text-white">
                       {new Date(viewingMap.chart.birthDate).toLocaleDateString('pt-BR')}
                     </p>
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 uppercase">Idade</p>
-                    <p className="font-medium text-slate-900">{viewingMap.chart.age} anos</p>
+                    <p className="font-medium text-white">{viewingMap.chart.age} anos</p>
                   </div>
                 </div>
               </div>
 
               {/* Números Principais */}
               <div>
-                <h3 className="font-bold text-slate-900 mb-3">Números Principais</h3>
+                <h3 className="font-bold text-white mb-3">Números Principais</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center bg-indigo-50 rounded-lg p-4">
                     <p className="text-xs text-indigo-600 font-semibold mb-1">Caminho de Destino</p>
@@ -303,7 +303,7 @@ export default function History() {
               {/* Notas */}
               {viewingMap.notes && (
                 <div>
-                  <h3 className="font-bold text-slate-900 mb-2">Notas</h3>
+                  <h3 className="font-bold text-white mb-2">Notas</h3>
                   <p className="text-slate-700">{viewingMap.notes}</p>
                 </div>
               )}

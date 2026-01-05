@@ -18,7 +18,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
     <div className="space-y-8">
       {/* Core Numbers */}
       <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-slate-900 mb-6">Números Essenciais</h3>
+        <h3 className="text-2xl font-bold text-white mb-6">Números Essenciais</h3>
         <div className="grid md:grid-cols-2 gap-6">
           <NumberCard
             label="Caminho de Destino"
@@ -43,7 +43,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
         </div>
         <div className="mt-6 pt-6 border-t border-slate-200">
           <div className="flex items-center justify-between">
-            <span className="text-lg font-bold text-slate-900">Mérito (Força de Realização)</span>
+            <span className="text-lg font-bold text-white">Mérito (Força de Realização)</span>
             <span className="number-mystical text-4xl">{chart.merito}</span>
           </div>
           <p className="text-slate-600 text-sm mt-2">
@@ -54,7 +54,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
 
       {/* Life Cycles */}
       <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-slate-900 mb-6">Ciclos de Vida</h3>
+        <h3 className="text-2xl font-bold text-white mb-6">Ciclos de Vida</h3>
         <div className="grid md:grid-cols-3 gap-6">
           <CycleCard
             label="Ciclo Formativo"
@@ -76,7 +76,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
 
       {/* Realizations (Pinnacles) */}
       <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-slate-900 mb-6">Realizações (Pináculos)</h3>
+        <h3 className="text-2xl font-bold text-white mb-6">Realizações (Pináculos)</h3>
         <div className="space-y-4">
           <RealizationCard
             number={1}
@@ -109,7 +109,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
 
       {/* Challenges */}
       <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-slate-900 mb-6">Desafios</h3>
+        <h3 className="text-2xl font-bold text-white mb-6">Desafios</h3>
         <div className="grid md:grid-cols-3 gap-6">
           <ChallengeCard
             label="Desafio Menor 1"
@@ -188,7 +188,7 @@ function RealizationCard({ number, value, ageStart, ageEnd, currentAge }: Realiz
     }`}>
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-semibold text-slate-900">
+          <p className="text-sm font-semibold text-white">
             {number}ª Realização {isActive && <span className="text-gold-mystical font-bold">(ATIVA)</span>}
           </p>
           <p className="text-xs text-slate-600 mt-1">
