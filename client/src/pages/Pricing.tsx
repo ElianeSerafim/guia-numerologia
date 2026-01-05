@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Check, Zap, Crown, Star, ArrowRight, MessageCircle } from 'lucide-react';
 import { PLANS } from '@/types/payment';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
+import { useSalesManagement } from '@/hooks/useSalesManagement';
 import { useLocation } from 'wouter';
 import { sendPurchaseConfirmation } from '@/lib/emailService';
 
@@ -18,9 +19,13 @@ import { sendPurchaseConfirmation } from '@/lib/emailService';
 export default function Pricing() {
   const [, setLocation] = useLocation();
   const { createCustomer, config } = usePaymentManagement();
+  const { validateCoupon, useCoupon, addPaymentRecord } = useSalesManagement();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
+  const [couponCode, setCouponCode] = useState('');
+  const [couponDiscount, setCouponDiscount] = useState(0);
+  const [couponError, setCouponError] = useState('');
   const [showCheckout, setShowCheckout] = useState(false);
   const [error, setError] = useState('');
 
@@ -28,6 +33,31 @@ export default function Pricing() {
     setSelectedPlan(planId);
     setShowCheckout(true);
     setError('');
+    setCouponCode('');
+    setCouponDiscount(0);
+    setCouponError('');
+  };
+
+  const handleValidateCoupon = () => {
+    if (!couponCode.trim()) {
+      setCouponError('Digite um código de cupom');
+      return;
+    }
+
+    if (!selectedPlan) {
+      setCouponError('Selecione um plano primeiro');
+      return;
+    }
+
+    const validation = validateCoupon(couponCode, selectedPlan as 'navigator' | 'visionary' | 'illuminated');
+    if (!validation.valid) {
+      setCouponError(validation.message);
+      setCouponDiscount(0);
+      return;
+    }
+
+    setCouponError('');
+    setCouponDiscount(validation.discount);
   };
 
   const handleCheckout = () => {
@@ -60,17 +90,42 @@ export default function Pricing() {
     const mapsLimit = PLANS[selectedPlan as keyof typeof PLANS].mapsLimit;
     const transactionId = `TXN-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
     
+    // Calcular desconto
+    let finalPrice = planPrice;
+    if (couponDiscount > 0) {
+      if (couponCode.includes('%')) {
+        finalPrice = planPrice * (1 - couponDiscount / 100);
+      } else {
+        finalPrice = planPrice - couponDiscount;
+      }
+      useCoupon(couponCode);
+    }
+    
+    // Adicionar ao histórico de pagamentos
+    addPaymentRecord({
+      customerId: `customer_${Date.now()}`,
+      customerEmail: email,
+      customerName: fullName,
+      plan: selectedPlan as 'navigator' | 'visionary' | 'illuminated',
+      amount: planPrice,
+      discountApplied: planPrice - finalPrice,
+      finalAmount: finalPrice,
+      couponCode: couponCode || undefined,
+      status: 'pending',
+      paymentMethod: 'whatsapp',
+    });
+    
     sendPurchaseConfirmation(
       email,
       fullName,
       planName,
-      planPrice,
+      finalPrice,
       mapsLimit,
       transactionId
     );
 
     // Redirecionar para WhatsApp
-    const message = `Olá! Gostaria de contratar o plano ${planName} (R$ ${planPrice.toFixed(2).replace('.', ',')}). Meu e-mail é: ${email}`;
+    const message = `Olá! Gostaria de contratar o plano ${planName} (R$ ${finalPrice.toFixed(2).replace('.', ',')}). Meu e-mail é: ${email}. ID da Transação: ${transactionId}`;
     const whatsappUrl = `${config.whatsappLink}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
 
@@ -209,7 +264,7 @@ export default function Pricing() {
       {/* Checkout Modal */}
       {showCheckout && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-8 space-y-6">
+          <div className="bg-white rounded-lg max-w-md w-full p-8 space-y-6 max-h-[90vh] overflow-y-auto">
             <h2 className="text-2xl font-bold text-slate-900">Confirmar Dados</h2>
             
             <div className="space-y-4">
@@ -247,6 +302,44 @@ export default function Pricing() {
                 <p className="text-lg font-bold text-indigo-600 mt-1">
                   R$ {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].price.toFixed(2).replace('.', ',')}
                 </p>
+              </div>
+
+              {/* Cupom de Desconto */}
+              <div className="border-t border-slate-200 pt-4">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
+                  Cupom de Desconto (Opcional)
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={couponCode}
+                    onChange={(e) => {
+                      setCouponCode(e.target.value.toUpperCase());
+                      setCouponError('');
+                    }}
+                    placeholder="Digite seu cupom"
+                    className="flex-1 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                  <button
+                    onClick={handleValidateCoupon}
+                    className="px-4 py-2 bg-slate-200 text-slate-900 rounded-lg hover:bg-slate-300 transition-colors font-semibold"
+                  >
+                    Aplicar
+                  </button>
+                </div>
+                {couponError && (
+                  <p className="text-red-600 text-sm mt-2">{couponError}</p>
+                )}
+                {couponDiscount > 0 && (
+                  <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-700 font-semibold text-sm">
+                      ✓ Cupom aplicado! Desconto de R$ {couponDiscount.toFixed(2).replace('.', ',')}
+                    </p>
+                    <p className="text-green-600 text-sm mt-1">
+                      Valor final: R$ {selectedPlan && ((PLANS[selectedPlan as keyof typeof PLANS].price - couponDiscount).toFixed(2).replace('.', ','))}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
 

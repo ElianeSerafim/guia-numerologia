@@ -3,8 +3,11 @@ import { useLocation } from 'wouter';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { useAdminManagement } from '@/hooks/useAdminManagement';
 import { Customer } from '@/types/payment';
-import { Check, X, Trash2, Download, Edit2, Lock, Unlock, Settings, Users, Plus } from 'lucide-react';
+import { Check, X, Trash2, Download, Edit2, Lock, Unlock, Settings, Users, Plus, BarChart3, Tag, History } from 'lucide-react';
 import { sendAccessApprovedEmail, sendAccessRejectedEmail } from '@/lib/emailService';
+import SalesReport from '@/components/SalesReport';
+import CouponManagement from '@/components/CouponManagement';
+import PaymentHistory from '@/components/PaymentHistory';
 
 /**
  * Admin Dashboard - Gerenciamento de Clientes e Pagamentos
@@ -41,6 +44,7 @@ export default function AdminDashboard() {
   const [searchEmail, setSearchEmail] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   const [showAdminManagement, setShowAdminManagement] = useState(false);
+  const [activeTab, setActiveTab] = useState<'customers' | 'reports' | 'coupons' | 'history'>('customers');
   const [newWhatsappLink, setNewWhatsappLink] = useState(config.whatsappLink);
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [notes, setNotes] = useState('');
@@ -303,7 +307,58 @@ export default function AdminDashboard() {
           </div>
         )}
 
+        {/* Tabs */}
+        <div className="bg-white rounded-lg shadow-md mb-6 border-b border-slate-200">
+          <div className="flex gap-0">
+            <button
+              onClick={() => setActiveTab('customers')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+                activeTab === 'customers'
+                  ? 'border-indigo-600 text-indigo-600'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Users size={20} />
+              Clientes
+            </button>
+            <button
+              onClick={() => setActiveTab('reports')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+                activeTab === 'reports'
+                  ? 'border-indigo-600 text-indigo-600'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <BarChart3 size={20} />
+              Relatórios
+            </button>
+            <button
+              onClick={() => setActiveTab('coupons')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+                activeTab === 'coupons'
+                  ? 'border-indigo-600 text-indigo-600'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <Tag size={20} />
+              Cupons
+            </button>
+            <button
+              onClick={() => setActiveTab('history')}
+              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+                activeTab === 'history'
+                  ? 'border-indigo-600 text-indigo-600'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
+              }`}
+            >
+              <History size={20} />
+              Histórico
+            </button>
+          </div>
+        </div>
+
         {/* Filters */}
+        {activeTab === 'customers' && (
         <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex gap-4 flex-wrap">
             <input
@@ -337,8 +392,31 @@ export default function AdminDashboard() {
             </button>
           </div>
         </div>
+        )}
+
+        {/* Relatórios Tab */}
+        {activeTab === 'reports' && (
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <SalesReport />
+          </div>
+        )}
+
+        {/* Cupons Tab */}
+        {activeTab === 'coupons' && (
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <CouponManagement />
+          </div>
+        )}
+
+        {/* Histórico Tab */}
+        {activeTab === 'history' && (
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <PaymentHistory />
+          </div>
+        )}
 
         {/* Customers Table */}
+        {activeTab === 'customers' && (
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
@@ -423,6 +501,7 @@ export default function AdminDashboard() {
             </table>
           </div>
         </div>
+        )}
       </div>
 
       {/* Modal para Aprovar/Rejeitar */}
