@@ -44,6 +44,11 @@ export const useAdminManagement = (currentEmail: string | null) => {
     if (currentEmail === SUPER_ADMIN_EMAIL) {
       setIsSuperAdmin(true);
       setIsAdmin(true);
+      // Garantir que admin está no localStorage
+      const storedAdmins = localStorage.getItem(ADMIN_STORAGE_KEY);
+      if (!storedAdmins) {
+        initializeDefaultAdmin();
+      }
       return;
     }
 

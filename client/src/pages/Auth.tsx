@@ -67,6 +67,22 @@ export default function Auth() {
       registerUser(email, 'premium');
       // Armazenar e-mail para DashboardSelector
       localStorage.setItem('numerology_user_email', email);
+      
+      // Inicializar admin se for super admin
+      if (email === 'eliane@artwebcreative.com.br') {
+        const defaultAdmin = {
+          id: 'super_admin_1',
+          email: email,
+          name: 'Administrador Principal',
+          role: 'super_admin',
+          createdAt: new Date().toISOString(),
+          createdBy: 'system',
+          isActive: true,
+        };
+        localStorage.setItem('admin_users', JSON.stringify([defaultAdmin]));
+        console.log('Admin inicializado:', localStorage.getItem('admin_users'));
+      }
+      
       setShowPricingHint(false);
       
       // Redirecionar para selecao de painel apos sucesso

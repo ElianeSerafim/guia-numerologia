@@ -23,8 +23,8 @@ import LandingPage from "./pages/LandingPage";
  * - Indigo (#4C1D95) and gold (#D4AF37) accents
  * - Smooth transitions and subtle feedback
  */
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={LandingPage} />

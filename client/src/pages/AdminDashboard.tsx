@@ -54,7 +54,10 @@ export default function AdminDashboard() {
 
   // Verificar autenticação (apenas admin)
   useEffect(() => {
-    if (!isAdmin) {
+    // Permitir acesso ao admin se for super admin ou admin
+    // Verificar se eh super admin por email
+    const userEmail = localStorage.getItem('numerology_user_email');
+    if (userEmail !== 'eliane@artwebcreative.com.br' && !isAdmin) {
       setLocation('/');
     }
   }, [isAdmin, setLocation]);
@@ -139,7 +142,10 @@ export default function AdminDashboard() {
 
   const filteredCustomers = getFilteredCustomers();
 
-  if (!isAdmin) {
+  // Permitir acesso se for super admin por email
+  const isSuperAdminByEmail = userEmail === 'eliane@artwebcreative.com.br';
+  
+  if (!isSuperAdminByEmail && !isAdmin) {
     return null;
   }
 

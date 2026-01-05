@@ -14,7 +14,17 @@ import { LayoutDashboard, Users } from 'lucide-react';
 export default function DashboardSelector() {
   const [, setLocation] = useLocation();
   const userEmail = localStorage.getItem('numerology_user_email');
-  const { isAdmin } = useAdminManagement(userEmail);
+  const { isAdmin, isSuperAdmin } = useAdminManagement(userEmail);
+  
+  // Debug
+  useEffect(() => {
+    console.log('DashboardSelector Debug:', {
+      userEmail,
+      isAdmin,
+      isSuperAdmin,
+      storedAdmins: localStorage.getItem('admin_users')
+    });
+  }, [userEmail, isAdmin, isSuperAdmin]);
 
   useEffect(() => {
     if (!userEmail) {
