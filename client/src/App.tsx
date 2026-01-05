@@ -7,7 +7,8 @@ import FAQ from "@/pages/FAQ";
 import History from "@/pages/History";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Compatibility from "@/pages/Compatibility";
-import DashboardSelector from "@/pages/DashboardSelector";
+import DashboardSelector from "./pages/DashboardSelector";
+import ForgotPassword from "./pages/ForgotPassword";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -29,6 +30,7 @@ function Router() {
       <Route path="/" component={LandingPage} />
       <Route path="/app" component={Home} />
       <Route path="/auth" component={Auth} />
+      <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/dashboard-selector" component={DashboardSelector} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/faq" component={FAQ} />

@@ -154,9 +154,14 @@ export default function Auth() {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
-            <p className="text-xs text-slate-500">
-              Senha: numerologia2026
-            </p>
+
+            <div className="flex justify-end">
+              <Link href="/forgot-password">
+                <a className="text-sm text-indigo-600 hover:text-indigo-700 font-semibold">
+                  Esqueci minha senha
+                </a>
+              </Link>
+            </div>
           </div>
 
           {/* Error Message */}

@@ -658,3 +658,176 @@ export async function sendAccessRejectedEmail(
     html
   });
 }
+
+
+/**
+ * Gera template HTML para recuperação de senha
+ */
+export function generatePasswordResetEmail(
+  customerName: string,
+  resetLink: string
+): string {
+  return `
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        body {
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
+          padding: 20px;
+        }
+        .container {
+          max-width: 600px;
+          margin: 0 auto;
+          background: white;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 10px 40px rgba(217, 119, 6, 0.1);
+        }
+        .header {
+          background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+          padding: 40px 20px;
+          text-align: center;
+          color: white;
+        }
+        .header h1 {
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 8px;
+        }
+        .header p {
+          font-size: 14px;
+          opacity: 0.9;
+        }
+        .content {
+          padding: 40px;
+        }
+        .greeting {
+          font-size: 18px;
+          color: #1e293b;
+          margin-bottom: 24px;
+          font-weight: 600;
+        }
+        .message {
+          color: #475569;
+          line-height: 1.6;
+          margin-bottom: 32px;
+          font-size: 14px;
+        }
+        .warning-box {
+          background: #fef3c7;
+          border-left: 4px solid #d97706;
+          padding: 20px;
+          border-radius: 8px;
+          margin-bottom: 32px;
+        }
+        .warning-text {
+          color: #92400e;
+          font-size: 13px;
+          line-height: 1.5;
+        }
+        .cta-button {
+          display: inline-block;
+          background: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+          color: white;
+          padding: 14px 32px;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 14px;
+          margin-bottom: 32px;
+          width: 100%;
+          text-align: center;
+          transition: transform 0.2s;
+        }
+        .cta-button:hover {
+          transform: translateY(-2px);
+        }
+        .footer {
+          background: #f8fafc;
+          padding: 24px 40px;
+          border-top: 1px solid #e2e8f0;
+          text-align: center;
+          font-size: 12px;
+          color: #64748b;
+        }
+        .footer-link {
+          color: #d97706;
+          text-decoration: none;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="header">
+          <h1>🔐 Recuperação de Senha</h1>
+          <p>Bússola Numerológica 2026</p>
+        </div>
+        
+        <div class="content">
+          <div class="greeting">Olá, ${customerName}!</div>
+          
+          <div class="message">
+            Recebemos uma solicitação para redefinir a senha da sua conta. Clique no botão abaixo para criar uma nova senha.
+          </div>
+          
+          <div class="warning-box">
+            <div class="warning-text">
+              ⚠️ <strong>Segurança:</strong> Se você não solicitou esta recuperação de senha, ignore este e-mail. Sua conta permanecerá segura.
+            </div>
+          </div>
+          
+          <a href="${resetLink}" class="cta-button">Redefinir Minha Senha →</a>
+          
+          <div class="message">
+            <strong>Ou copie este link:</strong><br>
+            <code style="background: #f1f5f9; padding: 8px 12px; border-radius: 4px; word-break: break-all; font-size: 12px;">${resetLink}</code>
+          </div>
+          
+          <div class="message">
+            Este link expira em 24 horas. Se precisar de ajuda, entre em contato conosco pelo WhatsApp.
+          </div>
+        </div>
+        
+        <div class="footer">
+          <p>© 2026 Bússola Numerológica. Todos os direitos reservados.</p>
+          <p>
+            <a href="#" class="footer-link">Termos de Serviço</a> | 
+            <a href="#" class="footer-link">Política de Privacidade</a>
+          </p>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+}
+
+/**
+ * Envia e-mail de recuperação de senha
+ */
+export async function sendPasswordResetEmail(
+  email: string
+): Promise<boolean> {
+  // Gerar link de recuperação (em produção, seria um token seguro)
+  const resetToken = Math.random().toString(36).substring(2, 15);
+  const resetLink = `https://bussola-numerologica.com/reset-password?token=${resetToken}`;
+  
+  // Extrair nome do e-mail (antes do @)
+  const customerName = email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1);
+  
+  const html = generatePasswordResetEmail(customerName, resetLink);
+
+  return sendEmail({
+    to: email,
+    subject: `🔐 Recuperação de Senha - Bússola Numerológica 2026`,
+    html
+  });
+}
