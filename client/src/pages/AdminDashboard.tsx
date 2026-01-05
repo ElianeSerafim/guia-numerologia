@@ -145,12 +145,39 @@ export default function AdminDashboard() {
   // Permitir acesso se for super admin por email
   const isSuperAdminByEmail = userEmail === 'eliane@artwebcreative.com.br';
   
-  if (!isSuperAdminByEmail && !isAdmin) {
-    return null;
+  if (!isSuperAdminByEmail) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
+        <div className="text-center bg-white rounded-lg shadow-lg p-8 max-w-md">
+          <Lock className="w-16 h-16 mx-auto mb-4 text-red-500" />
+          <h1 className="text-2xl font-bold text-slate-900 mb-2">Acesso Restrito</h1>
+          <p className="text-slate-600 mb-6">Você não tem permissão para acessar o painel administrativo.</p>
+          <button
+            onClick={() => setLocation('/')}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+          >
+            ← Voltar para Página Inicial
+          </button>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+      {/* Back Button */}
+      <div className="bg-white border-b border-slate-200">
+        <div className="container py-3">
+          <button
+            onClick={() => setLocation('/')}
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors rounded-lg hover:bg-slate-100"
+            title="Voltar para página inicial"
+          >
+            ← Voltar
+          </button>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div className="container py-4 flex items-center justify-between">
