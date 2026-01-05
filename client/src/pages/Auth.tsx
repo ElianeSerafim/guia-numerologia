@@ -1,22 +1,27 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'wouter';
-import { Compass, ArrowRight, AlertCircle, CheckCircle } from 'lucide-react';
+import { Compass, ArrowRight, AlertCircle, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
 import { PREMIUM_EMAILS } from '@/types/subscription';
 
 /**
  * Auth Page - Página de Autenticação
  * 
- * Design: Elegante e místico com foco em conversão
- * - Formulário limpo e direto
+ * Design: Elegante e místico com foco em segurança
+ * - Formulário com e-mail e senha
+ * - Validação segura
  * - Feedback visual claro
- * - Integração com sistema de planos
  */
+
+// Senha padrão para demo (em produção, usar autenticação real)
+const DEFAULT_PASSWORD = 'numerologia2026';
 
 export default function Auth() {
   const [, setLocation] = useLocation();
   const { registerUser, isPremiumEmail } = useUserSubscription();
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPricingHint, setShowPricingHint] = useState(false);
@@ -26,6 +31,7 @@ export default function Auth() {
     setError('');
     setIsLoading(true);
 
+    // Validar e-mail
     if (!email.trim()) {
       setError('Por favor, insira seu e-mail');
       setIsLoading(false);
@@ -34,6 +40,19 @@ export default function Auth() {
 
     if (!email.includes('@')) {
       setError('E-mail inválido');
+      setIsLoading(false);
+      return;
+    }
+
+    // Validar senha
+    if (!password.trim()) {
+      setError('Por favor, insira sua senha');
+      setIsLoading(false);
+      return;
+    }
+
+    if (password !== DEFAULT_PASSWORD) {
+      setError('Senha incorreta');
       setIsLoading(false);
       return;
     }
@@ -108,6 +127,38 @@ export default function Auth() {
             )}
           </div>
 
+          {/* Password Input */}
+          <div className="space-y-2">
+            <label htmlFor="password" className="block text-sm font-semibold text-slate-900">
+              Senha
+            </label>
+            <div className="relative">
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setError('');
+                }}
+                placeholder="Digite sua senha"
+                disabled={isLoading}
+                className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all disabled:opacity-50"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 transition-colors"
+                disabled={isLoading}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+            <p className="text-xs text-slate-500">
+              Senha: numerologia2026
+            </p>
+          </div>
+
           {/* Error Message */}
           {error && (
             <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 border border-red-200">
@@ -129,7 +180,7 @@ export default function Auth() {
               </>
             ) : (
               <>
-                <span>Continuar</span>
+                <span>Entrar</span>
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </>
             )}
