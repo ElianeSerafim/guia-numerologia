@@ -297,8 +297,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="border-t border-[#4A2A6A] bg-[#1A0820]">
-        <div className="container py-8 text-center text-white text-sm font-light">
+        <div className="container py-8 text-center text-white text-sm font-light space-y-2">
           <p>Bússola Numerológica 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
+          <p className="text-xs text-[#D4AF37]">Desenvolvido por <span className="font-semibold">Artweb Creative</span></p>
         </div>
       </footer>
     </div>
