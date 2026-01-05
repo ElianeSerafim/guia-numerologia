@@ -6,6 +6,7 @@
 
 import { useLocation } from 'wouter';
 import { Mail, MessageCircle, Heart } from 'lucide-react';
+import { ShareButtons } from './ShareButtons';
 
 export default function Footer() {
   const [, setLocation] = useLocation();
@@ -112,6 +113,20 @@ export default function Footer() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Divider */}
+        <div className="border-t border-slate-800 my-8"></div>
+
+        {/* Share Section */}
+        <div className="mb-8 text-center">
+          <p className="text-sm text-slate-400 mb-4">Compartilhe a Bussola Numerologica</p>
+          <ShareButtons
+            title="Bussola Numerologica 2026"
+            description="Descubra os misterios do seu destino com a numerologia pitagorica. Calculos precisos e interpretacoes detalhadas."
+            showLabel={false}
+            variant="horizontal"
+          />
         </div>
 
         {/* Divider */}

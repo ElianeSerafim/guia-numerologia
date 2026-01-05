@@ -13,6 +13,7 @@ import { useLocation } from 'wouter';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LifePathCalculator from '@/components/LifePathCalculator';
+import { ShareButtons } from '@/components/ShareButtons';
 import { Check, Zap, Gift, Clock, Shield, Star, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 
@@ -325,6 +326,19 @@ export default function LandingPage() {
           >
             Ver Planos e Começar →
           </button>
+
+          {/* Share Section */}
+          <div className="mt-12 pt-12 border-t border-slate-200">
+            <p className="text-slate-600 mb-6 font-medium">Compartilhe com seus amigos</p>
+            <div className="flex justify-center">
+              <ShareButtons
+                title="Bússola Numerológica 2026"
+                description="Descubra os mistérios do seu destino com a numerologia pitagórica. Cálculos precisos e interpretações detalhadas."
+                showLabel={true}
+                variant="horizontal"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
