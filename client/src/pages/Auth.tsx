@@ -14,7 +14,7 @@ import { PREMIUM_EMAILS } from '@/types/subscription';
  */
 
 // Senha padrão para demo (em produção, usar autenticação real)
-const DEFAULT_PASSWORD = 'numerologia2026';
+const DEFAULT_PASSWORD = 'Bdigital@2025';
 
 export default function Auth() {
   const [, setLocation] = useLocation();
@@ -51,7 +51,7 @@ export default function Auth() {
       return;
     }
 
-    if (password !== DEFAULT_PASSWORD) {
+    if (password.trim() !== DEFAULT_PASSWORD) {
       setError('Senha incorreta');
       setIsLoading(false);
       return;
@@ -65,18 +65,19 @@ export default function Auth() {
     if (isPremium) {
       // Registrar com plano premium
       registerUser(email, 'premium');
+      // Armazenar e-mail para DashboardSelector
+      localStorage.setItem('numerology_user_email', email);
       setShowPricingHint(false);
+      
+      // Redirecionar para selecao de painel apos sucesso
+      setTimeout(() => {
+        setLocation('/dashboard-selector');
+      }, 500);
     } else {
-      // Mostrar opção de planos
+      // Mostrar opcao de planos
       setShowPricingHint(true);
       setIsLoading(false);
-      return;
     }
-
-    // Redirecionar para seleção de painel
-    setTimeout(() => {
-      setLocation('/dashboard-selector');
-    }, 500);
   };
 
   const handleChoosePlan = () => {

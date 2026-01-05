@@ -588,6 +588,11 @@ export async function sendEmail(emailData: EmailData): Promise<boolean> {
       timestamp: new Date().toISOString()
     });
 
+    // Mostrar alerta para recuperacao de senha em ambiente de teste
+    if (emailData.subject.includes('Recuperacao')) {
+      console.log('AMBIENTE DE TESTE - Senha padrao: Bdigital@2025');
+    }
+
     // Simular delay de envio
     await new Promise(resolve => setTimeout(resolve, 500));
 
