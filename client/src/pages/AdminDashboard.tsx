@@ -54,13 +54,16 @@ export default function AdminDashboard() {
 
   // Verificar autenticação (apenas admin)
   useEffect(() => {
-    // Permitir acesso ao admin se for super admin ou admin
-    // Verificar se eh super admin por email
+    // Permitir acesso ao admin se for super admin por email
     const userEmail = localStorage.getItem('numerology_user_email');
-    if (userEmail !== 'eliane@artwebcreative.com.br' && !isAdmin) {
+    console.log('AdminDashboard - userEmail:', userEmail);
+    
+    // Se não for super admin, redirecionar imediatamente
+    if (userEmail !== 'eliane@artwebcreative.com.br') {
+      console.log('Acesso negado - redirecionando para home');
       setLocation('/');
     }
-  }, [isAdmin, setLocation]);
+  }, [setLocation]);
 
   // Filtrar clientes
   const getFilteredCustomers = () => {
@@ -144,7 +147,9 @@ export default function AdminDashboard() {
 
   // Permitir acesso se for super admin por email
   const isSuperAdminByEmail = userEmail === 'eliane@artwebcreative.com.br';
+  console.log('AdminDashboard - isSuperAdminByEmail:', isSuperAdminByEmail, 'userEmail:', userEmail);
   
+  // Se não for super admin, mostrar página de acesso restrito com botão de voltar
   if (!isSuperAdminByEmail) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
@@ -153,8 +158,11 @@ export default function AdminDashboard() {
           <h1 className="text-2xl font-bold text-slate-900 mb-2">Acesso Restrito</h1>
           <p className="text-slate-600 mb-6">Você não tem permissão para acessar o painel administrativo.</p>
           <button
-            onClick={() => setLocation('/')}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+            onClick={() => {
+              console.log('Botão voltar clicado');
+              setLocation('/');
+            }}
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium w-full"
           >
             ← Voltar para Página Inicial
           </button>
