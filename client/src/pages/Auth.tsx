@@ -54,9 +54,9 @@ export default function Auth() {
       return;
     }
 
-    // Redirecionar para home
+    // Redirecionar para seleção de painel
     setTimeout(() => {
-      setLocation('/');
+      setLocation('/dashboard-selector');
     }, 500);
   };
 
