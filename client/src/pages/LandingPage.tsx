@@ -129,7 +129,7 @@ export default function LandingPage() {
           </div>
 
           {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-6 pt-8 text-sm text-slate-600">
+          <div className="flex flex-wrap justify-center gap-6 pt-8 text-sm text-white">
             <div className="flex items-center gap-2">
               <Shield size={18} className="text-green-600" />
               <span>100% Seguro e Privado</span>
@@ -147,13 +147,13 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-white/50 backdrop-blur-sm">
+      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+            <h2 className="text-4xl font-bold text-white mb-4">
               Por Que Escolher Nossa Plataforma?
             </h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <p className="text-xl text-[#F3E5F5] max-w-2xl mx-auto">
               Oferecemos a experiência mais completa em numerologia pitagórica com tecnologia
               avançada e interpretações profundas.
             </p>
@@ -165,13 +165,13 @@ export default function LandingPage() {
               return (
                 <div
                   key={index}
-                  className="p-8 bg-white rounded-xl border border-slate-200 hover:border-indigo-300 hover:shadow-lg transition-all"
+                  className="p-8 bg-[#2A1240] rounded-xl border border-[#4A2A6A] hover:border-[#D4AF37] hover:shadow-lg transition-all"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-lg flex items-center justify-center mb-4">
-                    <Icon className="w-6 h-6 text-indigo-600" />
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-lg flex items-center justify-center mb-4">
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">{benefit.title}</h3>
-                  <p className="text-slate-600">{benefit.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{benefit.title}</h3>
+                  <p className="text-[#F3E5F5]">{benefit.description}</p>
                 </div>
               );
             })}
@@ -180,11 +180,11 @@ export default function LandingPage() {
       </section>
 
       {/* Life Path Calculator Section */}
-      <section className="py-20 bg-white/50 backdrop-blur-sm">
+      <section className="py-20 bg-gradient-to-b from-[#2A1240] to-[#190825]">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Teste Gratuitamente</h2>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-white mb-4">Teste Gratuitamente</h2>
+            <p className="text-xl text-[#F3E5F5] max-w-2xl mx-auto">
               Descubra seu Numero do Caminho de Vida com nossa calculadora gratuita. Uma amostra
               do poder da numerologia pitagorica.
             </p>
@@ -197,11 +197,11 @@ export default function LandingPage() {
       </section>
 
       {/* Delivery Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Como Funciona</h2>
-            <p className="text-xl text-slate-600">
+            <h2 className="text-4xl font-bold text-white mb-4">Como Funciona</h2>
+            <p className="text-xl text-[#F3E5F5]">
               Processo simples e rápido para começar sua jornada de autoconhecimento
             </p>
           </div>
@@ -240,16 +240,16 @@ export default function LandingPage() {
                 description: 'Baixe seus mapas completos em PDF para consultar sempre',
               },
             ].map((item, index) => (
-              <div key={index} className="flex gap-6">
+                      <div className="flex gap-6">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-full flex items-center justify-center text-white font-bold text-lg">
                     {item.step}
                   </div>
-                  {index < 5 && <div className="w-1 h-12 bg-gradient-to-b from-indigo-600 to-transparent mt-2"></div>}
+                  {index < 5 && <div className="w-1 h-12 bg-gradient-to-b from-[#8A2BE2] to-transparent mt-2"></div>}
                 </div>
                 <div className="pb-6">
-                  <h3 className="text-xl font-semibold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-slate-600">{item.description}</p>
+                  <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                  <p className="text-[#F3E5F5]">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -258,11 +258,11 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white/50 backdrop-blur-sm">
+      <section className="py-20 bg-gradient-to-b from-[#2A1240] to-[#190825]">
         <div className="container max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">Perguntas Frequentes</h2>
-            <p className="text-xl text-slate-600">
+            <h2 className="text-4xl font-bold text-white mb-4">Perguntas Frequentes</h2>
+            <p className="text-xl text-[#F3E5F5]">
               Encontre respostas para as dúvidas mais comuns sobre numerologia
             </p>
           </div>
@@ -271,25 +271,25 @@ export default function LandingPage() {
             {faqItems.map((item, index) => (
               <div
                 key={index}
-                className="border border-slate-200 rounded-lg overflow-hidden hover:border-indigo-300 transition-colors"
+                className="border border-[#4A2A6A] rounded-lg overflow-hidden hover:border-[#D4AF37] transition-colors"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-slate-50 transition-colors"
+                  className="w-full px-6 py-4 flex items-center justify-between bg-[#2A1240] hover:bg-[#3F1F5C] transition-colors"
                 >
-                  <span className="text-lg font-semibold text-slate-900 text-left">
+                  <span className="text-lg font-semibold text-white text-left">
                     {item.question}
                   </span>
                   <ChevronDown
                     size={20}
-                    className={`text-indigo-600 flex-shrink-0 transition-transform ${
+                    className={`text-[#D4AF37] flex-shrink-0 transition-transform ${
                       openFaq === index ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="px-6 py-4 bg-slate-50 border-t border-slate-200">
-                    <p className="text-slate-700">{item.answer}</p>
+                  <div className="px-6 py-4 bg-[#3F1F5C] border-t border-[#4A2A6A]">
+                    <p className="text-[#F3E5F5]">{item.answer}</p>
                   </div>
                 )}
               </div>
@@ -297,10 +297,10 @@ export default function LandingPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <p className="text-slate-600 mb-4">Ainda tem dúvidas?</p>
+            <p className="text-[#F3E5F5] mb-4">Ainda tem dúvidas?</p>
             <button
               onClick={() => setLocation('/faq')}
-              className="text-indigo-600 font-semibold hover:text-indigo-700 transition-colors"
+              className="text-[#D4AF37] font-semibold hover:text-[#8A2BE2] transition-colors"
             >
               Ver todas as perguntas →
             </button>
@@ -309,27 +309,27 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container max-w-3xl text-center space-y-8">
           <div className="space-y-4">
-            <h2 className="text-4xl font-bold text-slate-900">
+            <h2 className="text-4xl font-bold text-white">
               Pronto para Descobrir Seu Destino?
             </h2>
-            <p className="text-xl text-slate-600">
+            <p className="text-xl text-[#F3E5F5]">
               Escolha um plano e comece sua jornada de autoconhecimento hoje mesmo.
             </p>
           </div>
 
           <button
             onClick={() => setLocation('/pricing')}
-            className="px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg inline-block"
+            className="px-8 py-4 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg inline-block"
           >
             Ver Planos e Começar →
           </button>
 
           {/* Share Section */}
-          <div className="mt-12 pt-12 border-t border-slate-200">
-            <p className="text-slate-600 mb-6 font-medium">Compartilhe com seus amigos</p>
+          <div className="mt-12 pt-12 border-t border-[#4A2A6A]">
+            <p className="text-[#F3E5F5] mb-6 font-medium">Compartilhe com seus amigos</p>
             <div className="flex justify-center">
               <ShareButtons
                 title="Bússola Numerológica 2026"

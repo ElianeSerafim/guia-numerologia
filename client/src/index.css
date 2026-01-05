@@ -151,15 +151,23 @@
   }
   
   h1 {
-    @apply text-5xl leading-tight;
+    @apply text-5xl leading-tight text-white;
   }
   
   h2 {
-    @apply text-4xl leading-snug;
+    @apply text-4xl leading-snug text-white;
   }
   
   h3 {
-    @apply text-2xl leading-snug;
+    @apply text-2xl leading-snug text-white;
+  }
+  
+  h4, h5, h6 {
+    @apply text-white;
+  }
+  
+  p {
+    @apply text-white;
   }
   
   /* Mystical Number Styling */
