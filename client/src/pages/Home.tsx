@@ -91,32 +91,32 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen bg-[#190825]">
       {/* Header Navigation */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="container flex items-center justify-between py-4">
+      <header className="sticky top-0 z-50 bg-[#190825]/95 backdrop-blur-md border-b border-[#4A2A6A]">
+        <div className="container flex items-center justify-between py-5 px-4 md:px-0">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700">
+            <div className="p-2.5 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37]">
               <Compass size={24} className="text-white" />
             </div>
-            <h1 className="text-xl font-bold text-slate-900">Bússola Numerológica</h1>
+            <h1 className="text-2xl font-bold text-[#D4AF37]">Bússola Numerológica</h1>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/faq">
-              <a className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600" title="Aprenda">
+              <a className="p-2.5 rounded-lg hover:bg-[#2A1240] transition-colors text-[#D4AF37]" title="Aprenda">
                 <BookOpen size={20} />
               </a>
             </Link>
-            <div className="text-right">
-              <p className="text-sm text-slate-600">{user.email}</p>
-              <p className="text-xs font-semibold text-indigo-600">{currentPlan.name}</p>
+            <div className="text-right hidden md:block">
+              <p className="text-sm text-white font-medium">{user.email}</p>
+              <p className="text-xs font-semibold text-[#D4AF37]">{currentPlan.name}</p>
             </div>
             <button
               onClick={() => {
                 logout();
                 setLocation('/auth');
               }}
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
+              className="p-2.5 rounded-lg hover:bg-[#2A1240] transition-colors text-red-400"
               title="Sair"
             >
               <LogOut size={20} />
@@ -126,25 +126,25 @@ export default function Home() {
       </header>
 
       {/* Usage Bar */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="container py-4">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-semibold text-slate-900">
-              Mapas Gerados: {user.mapsGenerated} / {actualMapsLimit === Infinity ? '∞' : actualMapsLimit}
+      <div className="bg-[#2A1240] border-b border-[#4A2A6A]">
+        <div className="container py-6 px-4 md:px-0">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-sm font-semibold text-white">
+              Mapas Gerados: <span className="text-[#D4AF37]">{user.mapsGenerated}</span> / <span className="text-[#D4AF37]">{actualMapsLimit === Infinity ? '∞' : actualMapsLimit}</span>
             </span>
             {!canGenerate && (
               <button
                 onClick={() => setLocation('/pricing')}
-                className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                className="text-sm font-semibold text-[#D4AF37] hover:text-[#FFD700] flex items-center gap-1 transition-colors"
               >
                 <Zap size={14} />
                 Upgrade
               </button>
             )}
           </div>
-          <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-[#1A0820] rounded-full h-3 overflow-hidden border border-[#4A2A6A]">
             <div
-              className="bg-gradient-to-r from-indigo-600 to-purple-700 h-full transition-all duration-300"
+              className="bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] h-full transition-all duration-300 rounded-full"
               style={{ width: actualMapsLimit === Infinity ? '100%' : `${(user.mapsGenerated / actualMapsLimit) * 100}%` }}
             ></div>
           </div>
@@ -152,38 +152,38 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section className="container py-16 md:py-24">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-200">
-            <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
-            <span className="text-sm font-medium text-indigo-700">Descubra seu destino numerológico</span>
+      <section className="container py-12 md:py-20 px-4 md:px-0">
+        <div className="max-w-3xl mx-auto text-center space-y-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2A1240] border border-[#4A2A6A]">
+            <span className="w-2 h-2 rounded-full bg-[#8A2BE2] animate-pulse"></span>
+            <span className="text-sm font-medium text-[#D4AF37]">Descubra seu destino numerológico</span>
           </div>
 
-          <h2 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight">
-            Desvende os Mistérios da <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">Numerologia</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+            Desvende os Mistérios da <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37]">Numerologia</span>
           </h2>
 
-          <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-lg text-white leading-relaxed max-w-2xl mx-auto font-light">
             Utilize o método pitagórico para calcular seu Caminho de Destino, Motivação, Expressão e muito mais. 
             Receba interpretações personalizadas com inteligência artificial.
           </p>
 
-          <div className="flex flex-wrap gap-4 justify-center pt-4">
-            <div className="flex items-center gap-2 text-slate-700">
-              <div className="w-8 h-8 rounded-full bg-gold-mystical/20 flex items-center justify-center">
-                <span className="text-sm font-bold text-indigo-600">✓</span>
+          <div className="flex flex-wrap gap-6 justify-center pt-4">
+            <div className="flex items-center gap-3 text-white">
+              <div className="w-8 h-8 rounded-full bg-[#8A2BE2]/30 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-bold text-[#D4AF37]">✓</span>
               </div>
               <span className="text-sm">Cálculos Automáticos</span>
             </div>
-            <div className="flex items-center gap-2 text-slate-700">
-              <div className="w-8 h-8 rounded-full bg-gold-mystical/20 flex items-center justify-center">
-                <span className="text-sm font-bold text-indigo-600">✓</span>
+            <div className="flex items-center gap-3 text-white">
+              <div className="w-8 h-8 rounded-full bg-[#8A2BE2]/30 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-bold text-[#D4AF37]">✓</span>
               </div>
               <span className="text-sm">Interpretações com IA</span>
             </div>
-            <div className="flex items-center gap-2 text-slate-700">
-              <div className="w-8 h-8 rounded-full bg-gold-mystical/20 flex items-center justify-center">
-                <span className="text-sm font-bold text-indigo-600">✓</span>
+            <div className="flex items-center gap-3 text-white">
+              <div className="w-8 h-8 rounded-full bg-[#8A2BE2]/30 flex items-center justify-center flex-shrink-0">
+                <span className="text-sm font-bold text-[#D4AF37]">✓</span>
               </div>
               <span className="text-sm">Previsões para 2026</span>
             </div>
@@ -232,11 +232,11 @@ export default function Home() {
       )}
 
       {/* Calculator Section */}
-      <section className="container py-16">
+      <section className="container py-16 px-4 md:px-0">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold text-slate-900 mb-2">Comece Agora</h3>
-            <p className="text-slate-600">
+            <h3 className="text-4xl font-bold text-[#D4AF37] mb-3">Comece Agora</h3>
+            <p className="text-white text-lg font-light">
               {canGenerate
                 ? actualMapsLimit === Infinity
                   ? 'Você tem acesso ILIMITADO a mapas numerológicos'
@@ -260,35 +260,35 @@ export default function Home() {
       </section>
 
       {/* Info Section */}
-      <section className="container py-16">
+      <section className="container py-16 px-4 md:px-0">
         <div className="divider-diagonal"></div>
         <div className="grid md:grid-cols-3 gap-8 py-12">
-          <div className="card-mystical">
-            <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-indigo-600">1</span>
+          <div className="card-mystical bg-[#2A1240] border border-[#4A2A6A]">
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
+              <span className="text-2xl font-bold text-white">1</span>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 mb-2">Caminho de Destino</h4>
-            <p className="text-slate-600 text-sm">
+            <h4 className="text-lg font-bold text-[#D4AF37] mb-3">Caminho de Destino</h4>
+            <p className="text-white text-sm leading-relaxed font-light">
               Descubra sua missão de vida e o propósito maior que o universo reservou para você.
             </p>
           </div>
 
-          <div className="card-mystical">
-            <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-indigo-600">2</span>
+          <div className="card-mystical bg-[#2A1240] border border-[#4A2A6A]">
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
+              <span className="text-2xl font-bold text-white">2</span>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 mb-2">Números Pessoais</h4>
-            <p className="text-slate-600 text-sm">
+            <h4 className="text-lg font-bold text-[#D4AF37] mb-3">Números Pessoais</h4>
+            <p className="text-white text-sm leading-relaxed font-light">
               Compreenda sua motivação, expressão e o eu íntimo que define sua personalidade.
             </p>
           </div>
 
-          <div className="card-mystical">
-            <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-indigo-600">3</span>
+          <div className="card-mystical bg-[#2A1240] border border-[#4A2A6A]">
+            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
+              <span className="text-2xl font-bold text-white">3</span>
             </div>
-            <h4 className="text-lg font-bold text-slate-900 mb-2">Previsões 2026</h4>
-            <p className="text-slate-600 text-sm">
+            <h4 className="text-lg font-bold text-[#D4AF37] mb-3">Previsões 2026</h4>
+            <p className="text-white text-sm leading-relaxed font-light">
               Veja o que o ano de 2026 reserva para você segundo a numerologia pitagórica.
             </p>
           </div>
@@ -296,8 +296,8 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 bg-slate-50">
-        <div className="container py-8 text-center text-slate-600 text-sm">
+      <footer className="border-t border-[#4A2A6A] bg-[#1A0820]">
+        <div className="container py-8 text-center text-white text-sm font-light">
           <p>Bússola Numerológica 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
         </div>
       </footer>

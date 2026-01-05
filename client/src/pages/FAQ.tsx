@@ -184,15 +184,15 @@ export default function FAQ() {
     : FAQ_ITEMS.filter(item => item.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-[#190825] via-[#2A1240] to-[#190825]">
       {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-16">
+      <header className="bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white py-16">
         <div className="container text-center space-y-4">
           <div className="flex items-center justify-center gap-3 mb-4">
             <BookOpen size={32} />
-            <h1 className="text-4xl font-bold">Centro de Aprendizado</h1>
+            <h1 className="text-4xl font-bold text-white">Centro de Aprendizado</h1>
           </div>
-          <p className="text-lg text-indigo-100 max-w-2xl mx-auto">
+          <p className="text-lg text-white max-w-2xl mx-auto">
             Aprenda sobre o método pitagórico, entenda o significado de cada número e como usar a numerologia para sua evolução pessoal.
           </p>
         </div>
@@ -203,11 +203,11 @@ export default function FAQ() {
         {/* FAQ Section */}
         <section className="mb-20">
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-              <HelpCircle size={28} className="text-indigo-600" />
+            <h2 className="text-3xl font-bold text-[#D4AF37] mb-4 flex items-center gap-3">
+              <HelpCircle size={28} className="text-[#D4AF37]" />
               Perguntas Frequentes
             </h2>
-            <p className="text-slate-600">
+            <p className="text-white">
               Encontre respostas para as dúvidas mais comuns sobre numerologia pitagórica.
             </p>
           </div>
@@ -226,8 +226,8 @@ export default function FAQ() {
                 onClick={() => setSelectedCategory(cat.value as any)}
                 className={`px-4 py-2 rounded-full font-medium transition-all ${
                   selectedCategory === cat.value
-                    ? 'bg-indigo-600 text-white shadow-lg'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:border-indigo-600'
+                    ? 'bg-[#8A2BE2] text-white shadow-lg'
+                    : 'bg-[#2A1240] text-white border border-[#4A2A6A] hover:border-[#D4AF37]'
                 }`}
               >
                 {cat.label}
@@ -246,20 +246,20 @@ export default function FAQ() {
                   onClick={() => setExpandedId(expandedId === item.id ? null : item.id)}
                   className="w-full flex items-center justify-between p-6 hover:bg-indigo-50 transition-colors"
                 >
-                  <h3 className="text-lg font-semibold text-slate-900 text-left">
+                  <h3 className="text-lg font-semibold text-[#D4AF37] text-left">
                     {item.question}
                   </h3>
                   <ChevronDown
                     size={20}
-                    className={`text-indigo-600 flex-shrink-0 transition-transform ${
+                    className={`text-[#D4AF37] flex-shrink-0 transition-transform ${
                       expandedId === item.id ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
 
                 {expandedId === item.id && (
-                  <div className="px-6 pb-6 border-t border-slate-200 pt-4">
-                    <p className="text-slate-700 leading-relaxed">
+                  <div className="px-6 pb-6 border-t border-[#4A2A6A] pt-4">
+                    <p className="text-white leading-relaxed">
                       {item.answer}
                     </p>
                   </div>
@@ -272,11 +272,11 @@ export default function FAQ() {
         {/* Numbers Section */}
         <section>
           <div className="mb-12">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4 flex items-center gap-3">
-              <Lightbulb size={28} className="text-indigo-600" />
+            <h2 className="text-3xl font-bold text-[#D4AF37] mb-4 flex items-center gap-3">
+              <Lightbulb size={28} className="text-[#D4AF37]" />
               Os 9 Números Pitagóricos
             </h2>
-            <p className="text-slate-600">
+            <p className="text-white">
               Conheça o significado e as características de cada número.
             </p>
           </div>
@@ -286,34 +286,34 @@ export default function FAQ() {
             {NUMBERS_INFO.map((num) => (
               <div
                 key={num.number}
-                className="card-mystical space-y-4 border-l-4 border-indigo-600 hover:shadow-lg transition-shadow"
+                className="card-mystical space-y-4 border-l-4 border-[#D4AF37] hover:shadow-lg transition-shadow bg-[#2A1240] border border-[#4A2A6A]"
               >
                 {/* Number Header */}
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900">{num.name}</h3>
-                    <p className="text-sm text-slate-600">{num.keyword}</p>
+                    <h3 className="text-xl font-bold text-[#D4AF37]">{num.name}</h3>
+                    <p className="text-sm text-[#8A2BE2]">{num.keyword}</p>
                   </div>
-                  <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">
+                  <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37]">
                     {num.number}
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-slate-700 text-sm leading-relaxed">
+                <p className="text-white text-sm leading-relaxed">
                   {num.description}
                 </p>
 
                 {/* Positive Traits */}
                 <div>
-                  <p className="text-xs font-bold text-green-700 uppercase tracking-wide mb-2">
+                  <p className="text-xs font-bold text-green-400 uppercase tracking-wide mb-2">
                     Aspectos Positivos
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {num.positivo.map((trait) => (
                       <span
                         key={trait}
-                        className="px-2 py-1 rounded-full bg-green-100 text-green-700 text-xs font-medium"
+                        className="px-2 py-1 rounded-full bg-green-900 text-green-300 text-xs font-medium"
                       >
                         {trait}
                       </span>
@@ -323,14 +323,14 @@ export default function FAQ() {
 
                 {/* Negative Traits */}
                 <div>
-                  <p className="text-xs font-bold text-red-700 uppercase tracking-wide mb-2">
+                  <p className="text-xs font-bold text-red-400 uppercase tracking-wide mb-2">
                     Aspectos a Trabalhar
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {num.negativo.map((trait) => (
                       <span
                         key={trait}
-                        className="px-2 py-1 rounded-full bg-red-100 text-red-700 text-xs font-medium"
+                        className="px-2 py-1 rounded-full bg-red-900 text-red-300 text-xs font-medium"
                       >
                         {trait}
                       </span>
@@ -339,11 +339,11 @@ export default function FAQ() {
                 </div>
 
                 {/* Professions */}
-                <div className="pt-4 border-t border-slate-200">
-                  <p className="text-xs font-bold text-indigo-700 uppercase tracking-wide mb-2">
+                <div className="pt-4 border-t border-[#4A2A6A]">
+                  <p className="text-xs font-bold text-[#D4AF37] uppercase tracking-wide mb-2">
                     Profissões Afins
                   </p>
-                  <p className="text-sm text-slate-700">
+                  <p className="text-sm text-white">
                     {num.profissoes.join(', ')}
                   </p>
                 </div>
@@ -354,37 +354,37 @@ export default function FAQ() {
 
         {/* Tips Section */}
         <section className="mt-20">
-          <div className="card-mystical bg-gradient-to-br from-indigo-50 to-purple-50 border-indigo-200 space-y-6">
-            <h2 className="text-2xl font-bold text-indigo-900 flex items-center gap-3">
-              <Lightbulb size={24} className="text-indigo-600" />
+          <div className="card-mystical bg-gradient-to-br from-[#2A1240] to-[#1A0820] border-[#4A2A6A] space-y-6">
+            <h2 className="text-2xl font-bold text-[#D4AF37] flex items-center gap-3">
+              <Lightbulb size={24} className="text-[#D4AF37]" />
               Dicas para Usar a Numerologia
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <h3 className="font-bold text-indigo-900">✨ Autoconhecimento</h3>
-                <p className="text-indigo-800 text-sm">
+                <h3 className="font-bold text-[#D4AF37]">✨ Autoconhecimento</h3>
+                <p className="text-white text-sm">
                   Use seu mapa numerológico como ferramenta de autoconhecimento. Identifique seus pontos fortes e áreas de desenvolvimento.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h3 className="font-bold text-indigo-900">🎯 Tomada de Decisões</h3>
-                <p className="text-indigo-800 text-sm">
+                <h3 className="font-bold text-[#D4AF37]">🎯 Tomada de Decisões</h3>
+                <p className="text-white text-sm">
                   Considere suas vibrações numerológicas ao tomar decisões importantes. Alinhe suas ações com sua essência.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h3 className="font-bold text-indigo-900">🌱 Evolução Pessoal</h3>
-                <p className="text-indigo-800 text-sm">
+                <h3 className="font-bold text-[#D4AF37]">🌱 Evolução Pessoal</h3>
+                <p className="text-white text-sm">
                   Trabalhe conscientemente em seus desafios numerológicos. A evolução vem do autoconhecimento e ação.
                 </p>
               </div>
 
               <div className="space-y-2">
-                <h3 className="font-bold text-indigo-900">🔮 Intuição</h3>
-                <p className="text-indigo-800 text-sm">
+                <h3 className="font-bold text-[#D4AF37]">🔮 Intuição</h3>
+                <p className="text-white text-sm">
                   Combine a análise numerológica com sua intuição. A sabedoria vem da integração da razão e intuição.
                 </p>
               </div>
