@@ -240,7 +240,7 @@ export default function LandingPage() {
                 description: 'Baixe seus mapas completos em PDF para consultar sempre',
               },
             ].map((item, index) => (
-                      <div className="flex gap-6">
+                      <div key={item.step} className="flex gap-6">
                 <div className="flex flex-col items-center">
                   <div className="w-12 h-12 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-full flex items-center justify-center text-white font-bold text-lg">
                     {item.step}
