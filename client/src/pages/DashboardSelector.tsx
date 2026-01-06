@@ -37,17 +37,17 @@ export default function DashboardSelector() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#190825] flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white mb-2">
             Bem-vindo de volta!
           </h1>
-          <p className="text-lg text-slate-600">
+          <p className="text-lg text-white">
             Escolha qual painel você deseja acessar
           </p>
-          <p className="text-sm text-slate-500 mt-2">
+          <p className="text-sm text-[#D4AF37] mt-2">
             {userEmail}
           </p>
         </div>
@@ -57,23 +57,23 @@ export default function DashboardSelector() {
           {/* Painel Cliente */}
           <button
             onClick={() => setLocation('/app')}
-            className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200 hover:border-indigo-300"
+            className="group relative overflow-hidden rounded-2xl bg-[#2A1240] p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#4A2A6A] hover:border-[#8A2BE2]"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#8A2BE2]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative space-y-4">
-              <div className="inline-flex p-4 bg-indigo-100 rounded-xl group-hover:bg-indigo-200 transition-colors">
-                <LayoutDashboard size={32} className="text-indigo-600" />
+              <div className="inline-flex p-4 bg-[#8A2BE2]/20 rounded-xl group-hover:bg-[#8A2BE2]/30 transition-colors">
+                <LayoutDashboard size={32} className="text-[#8A2BE2]" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white text-left">
+                <h2 className="text-2xl font-bold text-[#D4AF37] text-left">
                   Painel Cliente
                 </h2>
-                <p className="text-slate-600 text-left mt-2">
+                <p className="text-white text-left mt-2">
                   Gere seus mapas numerológicos, visualize histórico e acesse suas análises
                 </p>
               </div>
               <div className="pt-4">
-                <span className="inline-block px-4 py-2 bg-indigo-100 text-indigo-600 rounded-lg font-semibold group-hover:bg-indigo-200 transition-colors">
+                <span className="inline-block px-4 py-2 bg-[#8A2BE2]/20 text-[#D4AF37] rounded-lg font-semibold group-hover:bg-[#8A2BE2]/30 transition-colors">
                   Acessar →
                 </span>
               </div>
@@ -84,39 +84,39 @@ export default function DashboardSelector() {
           {isAdmin ? (
             <button
               onClick={() => setLocation('/admin')}
-              className="group relative overflow-hidden rounded-2xl bg-white p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-200 hover:border-purple-300"
+              className="group relative overflow-hidden rounded-2xl bg-[#2A1240] p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#4A2A6A] hover:border-[#D4AF37]"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="relative space-y-4">
-                <div className="inline-flex p-4 bg-purple-100 rounded-xl group-hover:bg-purple-200 transition-colors">
-                  <Users size={32} className="text-purple-600" />
+                <div className="inline-flex p-4 bg-[#D4AF37]/20 rounded-xl group-hover:bg-[#D4AF37]/30 transition-colors">
+                  <Users size={32} className="text-[#D4AF37]" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white text-left">
+                  <h2 className="text-2xl font-bold text-[#D4AF37] text-left">
                     Painel Admin
                   </h2>
-                  <p className="text-slate-600 text-left mt-2">
+                  <p className="text-white text-left mt-2">
                     Gerencie clientes, visualize relatórios, cupons e histórico de pagamentos
                   </p>
                 </div>
                 <div className="pt-4">
-                  <span className="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-lg font-semibold group-hover:bg-purple-200 transition-colors">
+                  <span className="inline-block px-4 py-2 bg-[#D4AF37]/20 text-[#D4AF37] rounded-lg font-semibold group-hover:bg-[#D4AF37]/30 transition-colors">
                     Acessar →
                   </span>
                 </div>
               </div>
             </button>
           ) : (
-            <div className="rounded-2xl bg-slate-100 p-8 border border-slate-200 opacity-50">
+            <div className="rounded-2xl bg-[#1A0820] p-8 border border-[#4A2A6A] opacity-50">
               <div className="space-y-4">
-                <div className="inline-flex p-4 bg-slate-200 rounded-xl">
-                  <Users size={32} className="text-slate-400" />
+                <div className="inline-flex p-4 bg-[#4A2A6A] rounded-xl">
+                  <Users size={32} className="text-[#8A2BE2]" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-slate-400">
+                  <h2 className="text-2xl font-bold text-[#8A2BE2]">
                     Painel Admin
                   </h2>
-                  <p className="text-slate-400 mt-2">
+                  <p className="text-white/50 mt-2">
                     Acesso restrito a administradores
                   </p>
                 </div>
@@ -132,7 +132,7 @@ export default function DashboardSelector() {
               localStorage.removeItem('numerology_user_email');
               setLocation('/auth');
             }}
-            className="text-slate-600 hover:text-white font-semibold transition-colors"
+            className="text-[#D4AF37] hover:text-white font-semibold transition-colors"
           >
             Sair da conta
           </button>

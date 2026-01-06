@@ -70,10 +70,10 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           }}
           disabled={disabled}
           placeholder="Ex: João Silva Santos"
-          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed
+          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-gray-400
             ${errors.name
-              ? 'border-red-500 bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500/50'
-              : 'border-slate-200 bg-white hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500'
+              ? 'border-red-500 bg-[#2A1240] focus:outline-none focus:ring-2 focus:ring-red-500/50'
+              : 'border-[#8A2BE2] bg-[#1A0820] hover:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]/50 focus:border-[#D4AF37]'
             }`}
         />
         {errors.name && (
@@ -98,10 +98,10 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
             if (errors.birthDate) setErrors({ ...errors, birthDate: undefined });
           }}
           disabled={disabled}
-          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed
+          className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed text-white
             ${errors.birthDate
-              ? 'border-red-500 bg-red-50 focus:outline-none focus:ring-2 focus:ring-red-500/50'
-              : 'border-slate-200 bg-white hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500'
+              ? 'border-red-500 bg-[#2A1240] focus:outline-none focus:ring-2 focus:ring-red-500/50'
+              : 'border-[#8A2BE2] bg-[#1A0820] hover:border-[#D4AF37] focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]/50 focus:border-[#D4AF37]'
             }`}
         />
         {errors.birthDate && (
@@ -123,7 +123,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
       </button>
 
       {/* Info Text */}
-      <p className="text-xs text-slate-500 text-center">
+      <p className="text-xs text-white/70 text-center">
         Seus dados são processados localmente e não são armazenados em nossos servidores.
       </p>
     </form>
