@@ -265,7 +265,7 @@ export default function Pricing() {
       {showCheckout && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-8 space-y-6 max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-white">Confirmar Dados</h2>
+            <h2 className="text-2xl font-bold text-slate-900">Confirmar Dados</h2>
             
             <div className="space-y-4">
               <div>
@@ -277,7 +277,7 @@ export default function Pricing() {
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Seu nome completo"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
                 />
               </div>
 
@@ -290,13 +290,13 @@ export default function Pricing() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="seu@email.com"
-                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
                 />
               </div>
 
               <div className="bg-indigo-50 rounded-lg p-4">
                 <p className="text-sm text-slate-600 mb-2">Plano Selecionado:</p>
-                <p className="font-bold text-white">
+                <p className="font-bold text-slate-900">
                   {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].name}
                 </p>
                 <p className="text-lg font-bold text-indigo-600 mt-1">
@@ -310,7 +310,7 @@ export default function Pricing() {
                   Cupom de Desconto (Opcional)
                 </label>
                 <div className="flex gap-2">
-                  <input
+                    <input
                     type="text"
                     value={couponCode}
                     onChange={(e) => {
@@ -318,7 +318,7 @@ export default function Pricing() {
                       setCouponError('');
                     }}
                     placeholder="Digite seu cupom"
-                    className="flex-1 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="flex-1 px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
                   />
                   <button
                     onClick={handleValidateCoupon}
