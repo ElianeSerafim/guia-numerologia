@@ -7,9 +7,10 @@ export interface NumerologyChart {
   ex: number; // Expressão (Expression) - Soma Total
   merito: number; // Mérito - Força de Realização (MO + CD)
   desafios: {
-    d1: number; // Desafio Menor 1
-    d2: number; // Desafio Menor 2
-    dm: number; // Desafio Maior
+    d1: number; // Desafio Menor 1: |Dia - Mês|
+    d2: number; // Desafio Menor 2: |Dia - Ano|
+    d3: number; // Desafio Menor 3: |Mês - Ano|
+    dm: number; // Desafio Maior: |D1 - D3|
   };
   realizacoes: {
     r1: number;

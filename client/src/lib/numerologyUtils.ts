@@ -124,9 +124,10 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   // ========================================
   // 4. DESAFIOS
   // ========================================
-  const d1 = reduceNumber(Math.abs(monthR - dayR));    // Desafio Menor 1
-  const d2 = reduceNumber(Math.abs(yearR - monthR));   // Desafio Menor 2
-  const dm = reduceNumber(Math.abs(d1 - d2));          // Desafio Maior
+  const d1 = reduceNumber(Math.abs(dayR - monthR));    // Desafio Menor 1: |dia - mês|
+  const d2 = reduceNumber(Math.abs(dayR - yearR));     // Desafio Menor 2: |dia - ano|
+  const d3 = reduceNumber(Math.abs(monthR - yearR));   // Desafio Menor 3: |mês - ano|
+  const dm = reduceNumber(Math.abs(d1 - d3));          // Desafio Maior: |D1 - D3|
 
   // ========================================
   // 5. ANOS PESSOAIS E CICLOS TRIMESTRAIS
@@ -196,7 +197,7 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     realizationAges: { r1End: r1EndAge, r2End: r2EndAge, r3End: r3EndAge },
     
     // Desafios
-    desafios: { d1, d2, dm },
+    desafios: { d1, d2, d3, dm },
     
     // Anos Pessoais
     personalYear: pyCurrentReduced,

@@ -110,21 +110,26 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
       {/* Challenges */}
       <div className="card-mystical">
         <h3 className="text-2xl font-bold text-white mb-6">Desafios</h3>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 gap-6">
           <ChallengeCard
             label="Desafio Menor 1"
             value={chart.desafios.d1}
-            description="Primeiro desafio a superar"
+            description="|Dia - Mês|"
           />
           <ChallengeCard
             label="Desafio Menor 2"
             value={chart.desafios.d2}
-            description="Segundo desafio a superar"
+            description="|Dia - Ano|"
+          />
+          <ChallengeCard
+            label="Desafio Menor 3"
+            value={chart.desafios.d3}
+            description="|Mês - Ano|"
           />
           <ChallengeCard
             label="Desafio Maior"
             value={chart.desafios.dm}
-            description="Desafio principal de vida"
+            description="|D1 - D3|"
             highlight
           />
         </div>
