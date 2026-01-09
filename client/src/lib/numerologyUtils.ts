@@ -58,17 +58,20 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
  * Calcula o Mapa Numerológico Natal (MNN) completo
  * Baseado em: Técnicas Avançadas de Numerologia Pitagórica
  * 
+ * CORREÇÃO IMPORTANTE:
+ * - Todos os cálculos devem usar os VALORES ORIGINAIS (day, month, year)
+ * - Depois reduzir o resultado final, NÃO os componentes
+ * 
  * Fórmulas:
  * - Caminho de Destino (CD): dia + mês + ano (reduzido)
  * - Motivação (MO): soma das vogais do nome
  * - Expressão (EX): soma de todas as letras do nome
  * - Eu Íntimo (EU): soma das consoantes do nome
- * - Mérito: MO + CD
- * - Ciclos de Vida: C1=mês, C2=dia, C3=ano
- * - Realizações (Pináculos): R1=dia+mês, R2=dia+ano, R3=R1+R2, R4=mês+ano
- * - Desafios: D1=|mês-dia|, D2=|mês-ano|, DM=|D1-D2|
+ * - Mérito: MO + CD (reduzido)
+ * - Ciclos de Vida: C1=mês, C2=dia, C3=ano (reduzidos)
+ * - Realizações (Pináculos): R1=dia+mês, R2=dia+ano, R3=R1+R2, R4=mês+ano (reduzidos)
+ * - Desafios: D1=|mês-dia|, D2=|mês-ano|, DM=|D1-D2| (reduzidos)
  * - Ano Pessoal: dia + mês + ano (reduzido)
- * - Ciclos Trimestrais: CT1=AP+C_vida, CT2=AP+Realização, CT3=AP-DM, CT4=CT1+CT2+CT3
  */
 export const calculateChart = (fullName: string, birthDate: string): any => {
   const parts = birthDate.split('-');
@@ -76,17 +79,12 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const month = parseInt(parts[1]);
   const day = parseInt(parts[2]);
 
-  // Reduzir componentes da data
-  const dayR = reduceNumber(day);
-  const monthR = reduceNumber(month);
-  const yearR = reduceNumber(year);
-
   // ========================================
   // 1. NÚMEROS PRINCIPAIS DO MNN
   // ========================================
   
-  // Caminho de Destino (CD): dia + mês + ano
-  const cd = reduceNumber(dayR + monthR + yearR);
+  // Caminho de Destino (CD): dia + mês + ano (VALORES ORIGINAIS, depois reduzir)
+  const cd = reduceNumber(day + month + year);
 
   // Motivação (MO): soma das vogais do nome
   const mo = calculateNameNumber(fullName, 'vowels');
@@ -97,23 +95,23 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   // Expressão (EX): soma de todas as letras do nome
   const ex = calculateNameNumber(fullName, 'all');
 
-  // Mérito (Força de Realização): MO + CD
+  // Mérito (Força de Realização): MO + CD (reduzido)
   const merito = reduceNumber(mo + cd);
 
   // ========================================
-  // 2. CICLOS DE VIDA
+  // 2. CICLOS DE VIDA (reduzidos individualmente)
   // ========================================
-  const c1 = monthR;  // Ciclo 1: Mês
-  const c2 = dayR;    // Ciclo 2: Dia
-  const c3 = yearR;   // Ciclo 3: Ano
+  const c1 = reduceNumber(month);  // Ciclo 1: Mês
+  const c2 = reduceNumber(day);    // Ciclo 2: Dia
+  const c3 = reduceNumber(year);   // Ciclo 3: Ano
 
   // ========================================
-  // 3. REALIZAÇÕES (PINÁCULOS)
+  // 3. REALIZAÇÕES (PINÁCULOS) - usar valores originais depois reduzir
   // ========================================
-  const r1 = reduceNumber(dayR + monthR);        // Realização 1
-  const r2 = reduceNumber(dayR + yearR);        // Realização 2
-  const r3 = reduceNumber(r1 + r2);             // Realização 3
-  const r4 = reduceNumber(monthR + yearR);      // Realização 4
+  const r1 = reduceNumber(day + month);        // Realização 1
+  const r2 = reduceNumber(day + year);         // Realização 2
+  const r3 = reduceNumber(r1 + r2);            // Realização 3
+  const r4 = reduceNumber(month + year);       // Realização 4
 
   // Idades das Realizações
   const cdSimple = (cd === 11 || cd === 22 || cd === 33) ? reduceNumber(cd, false) : cd;
@@ -122,12 +120,12 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const r3EndAge = r2EndAge + 9;
 
   // ========================================
-  // 4. DESAFIOS
+  // 4. DESAFIOS - usar valores originais depois reduzir
   // ========================================
-  const d1 = reduceNumber(Math.abs(dayR - monthR));    // Desafio Menor 1: |dia - mês|
-  const d2 = reduceNumber(Math.abs(dayR - yearR));     // Desafio Menor 2: |dia - ano|
-  const d3 = reduceNumber(Math.abs(monthR - yearR));   // Desafio Menor 3: |mês - ano|
-  const dm = reduceNumber(Math.abs(d1 - d3));          // Desafio Maior: |D1 - D3|
+  const d1 = reduceNumber(Math.abs(day - month));    // Desafio Menor 1: |dia - mês|
+  const d2 = reduceNumber(Math.abs(day - year));     // Desafio Menor 2: |dia - ano|
+  const d3 = reduceNumber(Math.abs(month - year));   // Desafio Menor 3: |mês - ano|
+  const dm = reduceNumber(Math.abs(d1 - d3));        // Desafio Maior: |D1 - D3|
 
   // ========================================
   // 5. ANOS PESSOAIS E CICLOS TRIMESTRAIS
@@ -145,11 +143,11 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     (currentMonth === month && currentDay >= day);
 
   const yearForAP = hasHadBirthdayThisYear ? currentYear : currentYear - 1;
-  const pyCurrentRaw = dayR + monthR + reduceNumber(yearForAP);
+  const pyCurrentRaw = day + month + yearForAP;
   const pyCurrentReduced = reduceNumber(pyCurrentRaw);
 
   // Ano Pessoal 2026
-  const py2026Raw = dayR + monthR + reduceNumber(2026);
+  const py2026Raw = day + month + 2026;
   const py2026 = reduceNumber(py2026Raw);
 
   // Mês Pessoal Atual

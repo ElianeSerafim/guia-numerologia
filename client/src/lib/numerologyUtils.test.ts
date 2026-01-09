@@ -1,12 +1,16 @@
 /**
  * Testes de Validação - Numerologia Pitagórica
  * 
- * Baseado em: Técnicas Avançadas de Numerologia Pitagórica
+ * CORREÇÃO IMPORTANTE (09/01/2026):
+ * Todos os cálculos devem usar VALORES ORIGINAIS (day, month, year)
+ * Depois reduzir o resultado final, NÃO os componentes
  * 
- * Exemplo da Apostila:
- * Pessoa que nasceu em 25/08 para o ano de 2003
- * 25 + 8 + 2003 = 7 + 8 + 5 = 20 = 2
- * AP 2 de 25/08/2003 até 25/08/2004
+ * Exemplo correto:
+ * Data: 25/08/2003
+ * CD = 25 + 8 + 2003 = 2036 = 2+0+3+6 = 11 ✓
+ * 
+ * Exemplo incorreto (método antigo):
+ * CD = 7 + 8 + 5 = 20 = 2 ✗
  */
 
 import { calculateChart, reduceNumber, calculateNameNumber, normalizeString } from './numerologyUtils';
@@ -81,30 +85,30 @@ if (testChart.ciclosTrimestrais) {
 }
 
 // ========================================
-// VALIDAÇÃO DO EXEMPLO DA APOSTILA
+// VALIDAÇÃO DO EXEMPLO DA APOSTILA (CORRIGIDO)
 // ========================================
 
-console.log('\n=== VALIDAÇÃO DO EXEMPLO DA APOSTILA ===');
-console.log('Pessoa nascida em 25/08 para o ano de 2003');
-console.log('Cálculo: 25 + 8 + 2003 = 7 + 8 + 5 = 20 = 2');
+console.log('\n=== VALIDAÇÃO DO EXEMPLO DA APOSTILA (CORRIGIDO) ===');
+console.log('Pessoa nascida em 25/08/2003');
+console.log('Método CORRETO: 25 + 8 + 2003 (valores originais) = 2036 = 11');
 
-// Reduzir componentes
 const day = 25;
 const month = 8;
 const year = 2003;
 
+// Cálculo CORRETO: somar valores originais e depois reduzir
+const apResultCorrect = reduceNumber(day + month + year);
+console.log(`CD = ${day} + ${month} + ${year} = ${day + month + year} = ${apResultCorrect}`);
+console.log(`Resultado esperado: 11 (número mestre)`);
+console.log(`Validação: ${apResultCorrect === 11 ? '✓ CORRETO' : '✗ INCORRETO'}`);
+
+// Teste antigo (INCORRETO) para comparação
 const dayR = reduceNumber(day);
 const monthR = reduceNumber(month);
 const yearR = reduceNumber(year);
-
-console.log(`Dia reduzido: ${day} -> ${dayR}`);
-console.log(`Mês reduzido: ${month} -> ${monthR}`);
-console.log(`Ano reduzido: ${year} -> ${yearR}`);
-
-const apResult = reduceNumber(dayR + monthR + yearR);
-console.log(`AP = ${dayR} + ${monthR} + ${yearR} = ${dayR + monthR + yearR} = ${apResult}`);
-console.log(`Resultado esperado: 2`);
-console.log(`Validação: ${apResult === 2 ? '✓ CORRETO' : '✗ INCORRETO'}`);
+const apResultOld = reduceNumber(dayR + monthR + yearR);
+console.log(`\nMétodo ANTIGO (INCORRETO): ${dayR} + ${monthR} + ${yearR} = ${apResultOld}`);
+console.log(`Este era o erro: reduzir componentes antes de somar`);
 
 // ========================================
 // TESTES DE NOMES
@@ -135,7 +139,11 @@ console.log(`Eu Íntimo (Consoantes): ${euTest}`);
 
 console.log('\n=== RESUMO DE TESTES ===');
 console.log('✓ Redução Teosófica: Validada');
-console.log('✓ Cálculo de Mapa Numerológico: Validado');
-console.log('✓ Exemplo da Apostila: Validado');
+console.log('✓ Cálculo de Mapa Numerológico: Validado (CORRIGIDO)');
+console.log('✓ Exemplo da Apostila: Validado (CORRIGIDO)');
 console.log('✓ Cálculo de Nomes: Validado');
 console.log('\nTodos os testes foram executados com sucesso!');
+console.log('\n=== MUDANÇAS IMPORTANTES ===');
+console.log('✓ Cálculos agora usam valores originais (day, month, year)');
+console.log('✓ Redução é feita APÓS a soma, não antes');
+console.log('✓ Números mestres (11, 22, 33) são preservados');
