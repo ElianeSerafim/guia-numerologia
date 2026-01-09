@@ -152,11 +152,11 @@ export default function AdminDashboard() {
   // Se não for super admin, mostrar página de acesso restrito com botão de voltar
   if (!isSuperAdminByEmail) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center p-4">
-        <div className="text-center bg-white rounded-lg shadow-lg p-8 max-w-md">
+      <div className="min-h-screen bg-[#190825] flex items-center justify-center p-4">
+        <div className="text-center bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-lg p-8 max-w-md">
           <Lock className="w-16 h-16 mx-auto mb-4 text-red-500" />
           <h1 className="text-2xl font-bold text-white mb-2">Acesso Restrito</h1>
-          <p className="text-slate-600 mb-6">Você não tem permissão para acessar o painel administrativo.</p>
+          <p className="text-[#B8A8D8] mb-6">Você não tem permissão para acessar o painel administrativo.</p>
           <button
             onClick={() => {
               console.log('Botão voltar clicado');
@@ -172,13 +172,13 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-[#190825]">
       {/* Back Button */}
-      <div className="bg-white border-b border-slate-200">
+      <div className="bg-[#2A1A4A] border-b border-[#4A2A6A]">
         <div className="container py-3">
           <button
             onClick={() => setLocation('/')}
-            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-slate-600 hover:text-white transition-colors rounded-lg hover:bg-slate-100"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#D4AF37] hover:text-[#FFD700] transition-colors rounded-lg hover:bg-[#4A2A6A]"
             title="Voltar para página inicial"
           >
             ← Voltar
@@ -187,17 +187,17 @@ export default function AdminDashboard() {
       </div>
 
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 sticky top-0 z-40">
+      <div className="bg-[#2A1A4A] border-b border-[#4A2A6A] sticky top-0 z-40">
         <div className="container py-4 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-white">Painel Administrativo</h1>
-            <p className="text-slate-600 mt-1">Gerenciar clientes e configurações</p>
+            <p className="text-[#B8A8D8] mt-1">Gerenciar clientes e configurações</p>
           </div>
           <div className="flex items-center gap-3">
             {isSuperAdmin && (
               <button
                 onClick={() => setShowAdminManagement(!showAdminManagement)}
-                className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
               >
                 <Users size={20} />
                 Admins ({admins.length})
@@ -205,7 +205,7 @@ export default function AdminDashboard() {
             )}
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-200 text-white rounded-lg hover:bg-slate-300 transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-[#D4AF37] text-[#190825] rounded-lg hover:bg-[#FFD700] transition-colors font-semibold"
             >
               <Settings size={20} />
               Configurações
@@ -231,14 +231,14 @@ export default function AdminDashboard() {
       <div className="container py-8">
         {/* Admin Management Section */}
         {showAdminManagement && isSuperAdmin && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">Gerenciar Usuários Admin</h2>
             
             {/* Add New Admin */}
-            <div className="bg-slate-50 p-4 rounded-lg mb-6">
+            <div className="bg-[#1A0A2A] p-4 rounded-lg mb-6 border border-[#4A2A6A]">
               <h3 className="font-semibold text-white mb-3">Adicionar Novo Admin</h3>
               {adminError && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 rounded mb-3">
+                <div className="bg-red-900/30 border border-red-700 text-red-300 px-3 py-2 rounded mb-3">
                   {adminError}
                 </div>
               )}
