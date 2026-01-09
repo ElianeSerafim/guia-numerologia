@@ -248,14 +248,14 @@ export default function AdminDashboard() {
                   placeholder="Email do novo admin"
                   value={newAdminEmail}
                   onChange={(e) => setNewAdminEmail(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="flex-1 px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
                 />
                 <input
                   type="text"
                   placeholder="Nome completo"
                   value={newAdminName}
                   onChange={(e) => setNewAdminName(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="flex-1 px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
                 />
                 <button
                   onClick={handleAddAdmin}
@@ -336,7 +336,7 @@ export default function AdminDashboard() {
 
         {/* Settings Section */}
         {showSettings && (
-          <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6 mb-8">
             <h2 className="text-2xl font-bold text-white mb-4">Configurações</h2>
             <div className="space-y-4">
               <div>
@@ -348,13 +348,13 @@ export default function AdminDashboard() {
                   value={newWhatsappLink}
                   onChange={(e) => setNewWhatsappLink(e.target.value)}
                   placeholder="https://wa.me/5511999999999"
-                  className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-4 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
                 />
-                <p className="text-sm text-slate-600 mt-1">Formato: https://wa.me/5511999999999</p>
+                <p className="text-sm text-[#B8A8D8] mt-1">Formato: https://wa.me/5511999999999</p>
               </div>
               <button
                 onClick={handleSaveWhatsapp}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+                className="px-4 py-2 bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
               >
                 Salvar Configurações
               </button>
@@ -363,7 +363,7 @@ export default function AdminDashboard() {
         )}
 
         {/* Tabs */}
-        <div className="bg-white rounded-lg shadow-md mb-6 border-b border-slate-200">
+        <div className="bg-[#2A1A4A] rounded-lg shadow-md mb-6 border-b border-[#4A2A6A]">
           <div className="flex gap-0">
             <button
               onClick={() => setActiveTab('customers')}
@@ -414,14 +414,14 @@ export default function AdminDashboard() {
 
         {/* Filters */}
         {activeTab === 'customers' && (
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6 mb-6">
           <div className="flex gap-4 flex-wrap">
             <input
               type="text"
               placeholder="Buscar por email ou nome..."
               value={searchEmail}
               onChange={(e) => setSearchEmail(e.target.value)}
-              className="flex-1 min-w-64 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 min-w-64 px-4 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
             />
             <div className="flex gap-2">
               {(['pending', 'approved', 'rejected', 'all'] as const).map((f) => (
@@ -430,8 +430,8 @@ export default function AdminDashboard() {
                   onClick={() => setFilter(f)}
                   className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     filter === f
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-200 text-white hover:bg-slate-300'
+                      ? 'bg-[#8A2BE2] text-white'
+                      : 'bg-[#4A2A6A] text-white hover:bg-[#6A3A8A]'
                   }`}
                 >
                   {f === 'pending' ? 'Pendentes' : f === 'approved' ? 'Aprovados' : f === 'rejected' ? 'Rejeitados' : 'Todos'}
@@ -451,28 +451,28 @@ export default function AdminDashboard() {
 
         {/* Relatórios Tab */}
         {activeTab === 'reports' && (
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
             <SalesReport />
           </div>
         )}
 
         {/* Cupons Tab */}
         {activeTab === 'coupons' && (
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
             <CouponManagement />
           </div>
         )}
 
         {/* Histórico Tab */}
         {activeTab === 'history' && (
-          <div className="bg-white rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
             <PaymentHistory />
           </div>
         )}
 
         {/* Customers Table */}
         {activeTab === 'customers' && (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -562,7 +562,7 @@ export default function AdminDashboard() {
       {/* Modal para Aprovar/Rejeitar */}
       {selectedCustomer && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-lg max-w-md w-full p-6">
             <h3 className="text-xl font-bold text-white mb-4">
               {selectedCustomer.status === 'pending' ? 'Aprovar Cliente' : 'Rejeitar Cliente'}
             </h3>

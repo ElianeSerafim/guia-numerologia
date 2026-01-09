@@ -114,11 +114,11 @@ export default function CouponManagement() {
 
       {/* Formulário de Criação */}
       {showForm && (
-        <div className="bg-slate-50 rounded-lg p-6 border border-slate-200">
+        <div className="bg-[#1A0A2A] rounded-lg p-6 border border-[#4A2A6A]">
           <h3 className="text-lg font-bold text-white mb-4">Criar Novo Cupom</h3>
 
           {formError && (
-            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+            <div className="bg-red-900/30 border border-red-700 text-red-300 px-4 py-3 rounded-lg mb-4">
               {formError}
             </div>
           )}
@@ -136,7 +136,7 @@ export default function CouponManagement() {
                   setFormData({ ...formData, code: e.target.value.toUpperCase() })
                 }
                 placeholder="EX: DESCONTO20"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
               />
             </div>
 
@@ -153,7 +153,7 @@ export default function CouponManagement() {
                     discountType: e.target.value as 'percentage' | 'fixed',
                   })
                 }
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
               >
                 <option value="percentage">Percentual (%)</option>
                 <option value="fixed">Valor Fixo (R$)</option>
@@ -172,7 +172,7 @@ export default function CouponManagement() {
                   setFormData({ ...formData, discountValue: parseFloat(e.target.value) })
                 }
                 placeholder="0"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
               />
             </div>
 
@@ -188,7 +188,7 @@ export default function CouponManagement() {
                   setFormData({ ...formData, maxUses: parseInt(e.target.value) })
                 }
                 placeholder="0"
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
               />
             </div>
 
@@ -201,7 +201,7 @@ export default function CouponManagement() {
                 type="date"
                 value={formData.expiryDate}
                 onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
-                className="w-full px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
               />
             </div>
           </div>
@@ -218,9 +218,9 @@ export default function CouponManagement() {
                     type="checkbox"
                     checked={formData.applicablePlans.includes(plan)}
                     onChange={() => handleTogglePlan(plan)}
-                    className="w-4 h-4 rounded border-slate-300"
+                    className="w-4 h-4 rounded border-[#4A2A6A]"
                   />
-                  <span className="text-slate-700">{getPlanLabel(plan)}</span>
+                  <span className="text-white">{getPlanLabel(plan)}</span>
                 </label>
               ))}
             </div>
