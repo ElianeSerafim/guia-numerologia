@@ -5,6 +5,7 @@ import { ArrowLeft, Download, Printer, Loader2, Save, History, BookOpen } from '
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
 import AnnualPredictions from './AnnualPredictions';
+import PersonalYearProgress from './PersonalYearProgress';
 import { exportMapToPDF } from '@/lib/pdfExport';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
 import { useMapHistory } from '@/hooks/useMapHistory';
@@ -180,6 +181,14 @@ export default function Report({ chart, onReset }: ReportProps) {
                 Aqui está seu mapa numerológico completo baseado no método pitagórico. Seus números revelam sua essência, missão de vida e potencial para 2026. Explore cada seção para compreender melhor sua jornada pessoal.
               </p>
             </div>
+
+            {/* Personal Year Progress - NOVO */}
+            <div>
+              <PersonalYearProgress chart={chart} />
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
 
             {/* Chart Display */}
             <div>
