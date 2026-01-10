@@ -27,3 +27,8 @@
 - [x] Unificar cards de "Idade das Realizações" e "Realizações Pínáculos" em um único card - CONCLUÍDO
 - [x] Usar cálculos do card "Idade das Realizações" (que está correto) - CONCLUÍDO
 - [x] Mostrar os Pínáculos (Ciclos de Vida) com as idades corretas - CONCLUÍDO
+
+
+## Formatação de Data
+
+- [x] Adicionar máscara de entrada DD/MM/YYYY no campo de data (formatação automática enquanto digita) - CONCLUÍDO

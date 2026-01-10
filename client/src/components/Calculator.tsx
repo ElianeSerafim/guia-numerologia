@@ -97,9 +97,19 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           inputMode="numeric"
           placeholder="DD/MM/YYYY"
           value={birthDate}
+          maxLength={10}
           onChange={(e) => {
             let value = e.target.value;
-            // Aceitar ambos os formatos: DD/MM/YYYY e YYYY-MM-DD
+            value = value.replace(/[^0-9]/g, '');
+            if (value.length > 0) {
+              if (value.length <= 2) {
+                value = value;
+              } else if (value.length <= 4) {
+                value = value.slice(0, 2) + '/' + value.slice(2);
+              } else if (value.length <= 8) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4) + '/' + value.slice(4);
+              }
+            }
             setBirthDate(value);
             if (errors.birthDate) setErrors({ ...errors, birthDate: undefined });
           }}
