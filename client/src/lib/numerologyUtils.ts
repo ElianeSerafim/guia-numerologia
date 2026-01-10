@@ -34,7 +34,7 @@ export const reduceNumber = (num: number, masterNumbers: boolean = true): number
   return reduceNumber(sum, masterNumbers);
 };
 
-export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'consonants'): number => {
+export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'consonants' = 'all'): number => {
   const normalized = normalizeString(name);
   let sum = 0;
 
@@ -42,19 +42,20 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
     const val = LETTER_VALUES[char] || 0;
     const isVowel = VOWELS.includes(char);
 
+    // Reduzir cada letra primeiro (ex: J=10 → 1+0=1)
+    const reducedVal = reduceNumber(val);
+
     if (filter === 'all') {
-      sum += val;
+      sum += reducedVal;
     } else if (filter === 'vowels' && isVowel) {
-      sum += val;
+      sum += reducedVal;
     } else if (filter === 'consonants' && !isVowel) {
-      sum += val;
+      sum += reducedVal;
     }
   }
 
   return reduceNumber(sum);
-};
-
-/**
+};/**
  * Calcula o Mapa Numerológico Natal (MNN) completo
  * 
  * MÉTODO CORRETO:
