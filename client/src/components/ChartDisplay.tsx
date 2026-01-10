@@ -69,45 +69,73 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
         </div>
       </div>
 
-      {/* Idades de Realizacao */}
+      {/* Realizações (Pínáculos) - Unificado */}
       <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-white mb-6">Idades de Realizacao</h3>
+        <h3 className="text-2xl font-bold text-white mb-6">Realizações (Pínáculos)</h3>
         <div className="space-y-4">
           {(() => {
             const idades = calcularIdadesRealizacoes(chart.cd);
+            const r1Fim = 36 - chart.cd;
+            const r2Inicio = r1Fim + 1;
+            const r2Fim = r2Inicio + 9;
+            const r3Inicio = r2Fim + 1;
+            const r3Fim = r3Inicio + 9;
+            const r4Inicio = r3Fim + 1;
+            
+            const isR1Active = chart.age <= r1Fim;
+            const isR2Active = chart.age >= r2Inicio && chart.age <= r2Fim;
+            const isR3Active = chart.age >= r3Inicio && chart.age <= r3Fim;
+            const isR4Active = chart.age >= r4Inicio;
+            
             return (
               <>
-                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                  isR1Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
+                }`}>
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="text-lg font-bold text-yellow-400">1a Realizacao</h4>
+                      <h4 className="text-lg font-bold text-yellow-400">
+                        1ª Realização {isR1Active && <span className="text-sm">(ATIVA)</span>}
+                      </h4>
                       <p className="text-white mt-1">{idades.r1}</p>
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r1}</span>
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                  isR2Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
+                }`}>
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="text-lg font-bold text-yellow-400">2a Realizacao</h4>
+                      <h4 className="text-lg font-bold text-yellow-400">
+                        2ª Realização {isR2Active && <span className="text-sm">(ATIVA)</span>}
+                      </h4>
                       <p className="text-white mt-1">{idades.r2}</p>
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r2}</span>
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                  isR3Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
+                }`}>
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="text-lg font-bold text-yellow-400">3a Realizacao</h4>
+                      <h4 className="text-lg font-bold text-yellow-400">
+                        3ª Realização {isR3Active && <span className="text-sm">(ATIVA)</span>}
+                      </h4>
                       <p className="text-white mt-1">{idades.r3}</p>
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r3}</span>
                   </div>
                 </div>
-                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                  isR4Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
+                }`}>
                   <div className="flex items-start justify-between">
                     <div>
-                      <h4 className="text-lg font-bold text-yellow-400">4a Realizacao</h4>
+                      <h4 className="text-lg font-bold text-yellow-400">
+                        4ª Realização {isR4Active && <span className="text-sm">(ATIVA)</span>}
+                      </h4>
                       <p className="text-white mt-1">{idades.r4}</p>
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r4}</span>
@@ -141,38 +169,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
         </div>
       </div>
 
-      {/* Realizations (Pinnacles) */}
-      <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-white mb-6">Realizações (Pináculos)</h3>
-        <div className="space-y-4">
-          <RealizationCard
-            number={1}
-            value={chart.realizacoes.r1}
-            ageEnd={chart.realizationAges.r1End}
-            currentAge={chart.age}
-          />
-          <RealizationCard
-            number={2}
-            value={chart.realizacoes.r2}
-            ageStart={chart.realizationAges.r1End + 1}
-            ageEnd={chart.realizationAges.r2End}
-            currentAge={chart.age}
-          />
-          <RealizationCard
-            number={3}
-            value={chart.realizacoes.r3}
-            ageStart={chart.realizationAges.r2End + 1}
-            ageEnd={chart.realizationAges.r3End}
-            currentAge={chart.age}
-          />
-          <RealizationCard
-            number={4}
-            value={chart.realizacoes.r4}
-            ageStart={chart.realizationAges.r3End}
-            currentAge={chart.age}
-          />
-        </div>
-      </div>
+
 
       {/* Challenges */}
       <div className="card-mystical">
@@ -241,37 +238,6 @@ function CycleCard({ label, value, description }: CycleCardProps) {
   );
 }
 
-interface RealizationCardProps {
-  number: number;
-  value: number;
-  ageStart?: number;
-  ageEnd?: number;
-  currentAge: number;
-}
-
-function RealizationCard({ number, value, ageStart, ageEnd, currentAge }: RealizationCardProps) {
-  const isActive = ageStart ? currentAge >= ageStart && currentAge <= (ageEnd || 999) : currentAge <= (ageEnd || 999);
-  
-  return (
-    <div className={`p-4 rounded-lg border-2 transition-all ${
-      isActive
-        ? 'bg-gold-mystical/10 border-gold-mystical/50'
-        : 'bg-slate-50 border-slate-200'
-    }`}>
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-sm font-semibold text-white">
-            {number}ª Realização {isActive && <span className="text-gold-mystical font-bold">(ATIVA)</span>}
-          </p>
-          <p className="text-xs text-slate-600 mt-1">
-            {ageStart ? `Dos ${ageStart} aos ${ageEnd} anos` : `Até ${ageEnd} anos`}
-          </p>
-        </div>
-        <span className="number-mystical text-3xl">{value}</span>
-      </div>
-    </div>
-  );
-}
 
 interface ChallengeCardProps {
   label: string;

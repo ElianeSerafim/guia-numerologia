@@ -20,3 +20,10 @@
 - [x] Data de nascimento invertida: digita 04/01/1970, aparece 01/04/1970 (DD/MM vs MM/DD) - RESOLVIDO
 - [x] Textos com fundo roxo precisam ser brancos (melhor contraste) - RESOLVIDO
 - [x] Progresso de Ano Pessoal com erro - RESOLVIDO
+
+
+## Nova Solicitação
+
+- [x] Unificar cards de "Idade das Realizações" e "Realizações Pínáculos" em um único card - CONCLUÍDO
+- [x] Usar cálculos do card "Idade das Realizações" (que está correto) - CONCLUÍDO
+- [x] Mostrar os Pínáculos (Ciclos de Vida) com as idades corretas - CONCLUÍDO
