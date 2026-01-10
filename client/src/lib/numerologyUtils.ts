@@ -199,6 +199,9 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     eu,
     ex,
     merito,
+    personalYear: pyCurrentReduced,
+    personalYear2026: py2026,
+    personalMonth: pm,
     ciclos: {
       c1,
       c2,
@@ -221,14 +224,9 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
       d3,
       dm,
     },
-    anosPessoais: {
-      current: pyCurrentReduced,
-      py2026,
-      pm,
-    },
     ciclosTrimestrais: {
-      current: { ct1, ct2, ct3, ct4 },
-      py2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 },
+      atual: { ct1, ct2, ct3, ct4 },
+      ano2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 },
     },
   };
 };

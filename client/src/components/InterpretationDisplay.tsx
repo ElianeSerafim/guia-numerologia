@@ -73,7 +73,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
                 <h4 className="font-bold text-white mb-2">
                   {interpretation.name}
                 </h4>
-                <p className="text-slate-700 text-sm leading-relaxed">
+                <p className="text-white text-sm leading-relaxed">
                   {interpretation.regras}
                 </p>
               </div>
@@ -104,7 +104,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
                 </h4>
                 <ul className="space-y-1">
                   {interpretation.potenciais.map((pot) => (
-                    <li key={pot} className="flex items-start gap-2 text-sm text-slate-700">
+                    <li key={pot} className="flex items-start gap-2 text-sm text-white">
                       <span className="text-amber-600 font-bold mt-0.5">▸</span>
                       <span>{pot}</span>
                     </li>

@@ -152,19 +152,22 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
         <h3 className="text-2xl font-bold text-white mb-6">Ciclos de Vida</h3>
         <div className="grid md:grid-cols-3 gap-6">
           <CycleCard
-            label="Ciclo Formativo"
+            label="1º Ciclo Formativo"
             value={chart.ciclos.c1}
             description="Mês de nascimento - Formação"
+            ageRange="0 aos 29 anos"
           />
           <CycleCard
-            label="Ciclo Produtivo"
+            label="2º Ciclo Produtivo"
             value={chart.ciclos.c2}
             description="Dia de nascimento - Ação"
+            ageRange="29 aos 56 anos"
           />
           <CycleCard
-            label="Ciclo de Colheita"
+            label="3º Ciclo de Colheita"
             value={chart.ciclos.c3}
             description="Ano de nascimento - Realização"
+            ageRange="56 anos em diante"
           />
         </div>
       </div>
@@ -224,9 +227,10 @@ interface CycleCardProps {
   label: string;
   value: number;
   description: string;
+  ageRange?: string;
 }
 
-function CycleCard({ label, value, description }: CycleCardProps) {
+function CycleCard({ label, value, description, ageRange }: CycleCardProps) {
   return (
     <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200">
       <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-2">{label}</p>
@@ -234,6 +238,7 @@ function CycleCard({ label, value, description }: CycleCardProps) {
         <span className="number-mystical text-3xl text-indigo-600">{value}</span>
       </div>
       <p className="text-sm text-indigo-700">{description}</p>
+      {ageRange && <p className="text-xs text-indigo-600 font-semibold mt-2 pt-2 border-t border-indigo-200">{ageRange}</p>}
     </div>
   );
 }

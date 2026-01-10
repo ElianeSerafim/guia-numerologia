@@ -32,3 +32,10 @@
 ## Formatação de Data
 
 - [x] Adicionar máscara de entrada DD/MM/YYYY no campo de data (formatação automática enquanto digita) - CONCLUÍDO
+
+
+## Problemas Urgentes (Nova Sessão)
+
+- [x] Textos escuros em cards roxos de interpretação detalhada - mudar para branco - RESOLVIDO
+- [x] Adicionar faixas de idade nos Ciclos de Vida (0-29, 29-56, 56+) - RESOLVIDO
+- [x] Previsões 2026 não estão carregando - RESOLVIDO (personalYear2026 agora retorna corretamente)
