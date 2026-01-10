@@ -51,3 +51,15 @@
 - [x] Adicionar faixas de idade dos desafios - CONCLUÍDO
 - [ ] Criar componente de exportação PDF - PRÓXIMO PASSO
 - [ ] Integrar ao fluxo de geração de mapas - PRÓXIMO PASSO
+
+
+## Integração de Template Premium de E-book (Sessão Atual)
+
+- [x] Integrar novo template ao ebookGenerator.ts - CONCLUÍDO
+- [x] Atualizar rota de e-book para usar Puppeteer - CONCLUÍDO
+- [x] Instalar puppeteer para conversão HTML→PDF - CONCLUÍDO
+- [x] Otimizar para mobile (sem espaçamento excessivo) - CONCLUÍDO
+- [x] Adicionar paleta roxo/rosa/dourado - CONCLUÍDO
+- [x] Adicionar numeração de página - CONCLUÍDO
+- [x] Quebras de página A4 - CONCLUÍDO
+- [ ] Fazer checkpoint e deploy em produção
