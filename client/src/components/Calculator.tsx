@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { ArrowRight, AlertCircle } from 'lucide-react';
+import { validateBirthDate } from '../lib/dateValidation';
 
 /**
  * Calculator Component
  * 
  * Design: Minimalista com foco em usabilidade
  * - Clean form inputs com focus states claros
- * - Validação em tempo real
+ * - Validação robusta de datas
  * - Feedback visual para erros
  */
 
@@ -23,22 +24,22 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
   const validate = () => {
     const newErrors: { name?: string; birthDate?: string } = {};
 
+    // Validar nome
     if (!name.trim()) {
       newErrors.name = 'Nome completo é obrigatório';
     } else if (name.trim().split(' ').length < 2) {
       newErrors.name = 'Por favor, insira seu nome completo';
+    } else if (name.trim().length > 100) {
+      newErrors.name = 'Nome muito longo (máximo 100 caracteres)';
     }
 
+    // Validar data de nascimento com função robusta
     if (!birthDate) {
       newErrors.birthDate = 'Data de nascimento é obrigatória';
     } else {
-      const date = new Date(birthDate);
-      const today = new Date();
-      if (date > today) {
-        newErrors.birthDate = 'Data de nascimento não pode ser no futuro';
-      }
-      if (date.getFullYear() < 1900) {
-        newErrors.birthDate = 'Data de nascimento parece inválida';
+      const validation = validateBirthDate(birthDate);
+      if (!validation.isValid) {
+        newErrors.birthDate = validation.error || 'Data de nascimento inválida';
       }
     }
 
@@ -70,6 +71,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           }}
           disabled={disabled}
           placeholder="Ex: João Silva Santos"
+          maxLength={100}
           className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-gray-400
             ${errors.name
               ? 'border-red-500 bg-[#2A1240] focus:outline-none focus:ring-2 focus:ring-red-500/50'
@@ -77,8 +79,8 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
             }`}
         />
         {errors.name && (
-          <div className="flex items-center gap-2 text-red-600 text-sm">
-            <AlertCircle size={16} />
+          <div className="flex items-center gap-2 text-red-400 text-sm">
+            <AlertCircle size={16} className="flex-shrink-0" />
             <span>{errors.name}</span>
           </div>
         )}
@@ -105,11 +107,14 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
             }`}
         />
         {errors.birthDate && (
-          <div className="flex items-center gap-2 text-red-600 text-sm">
-            <AlertCircle size={16} />
+          <div className="flex items-start gap-2 text-red-400 text-sm bg-red-500/10 p-3 rounded-lg border border-red-500/20">
+            <AlertCircle size={16} className="flex-shrink-0 mt-0.5" />
             <span>{errors.birthDate}</span>
           </div>
         )}
+        <p className="text-xs text-white/60">
+          Use o formato DD/MM/YYYY ou selecione a data no calendário
+        </p>
       </div>
 
       {/* Submit Button */}
