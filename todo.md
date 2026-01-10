@@ -39,3 +39,14 @@
 - [x] Textos escuros em cards roxos de interpretação detalhada - mudar para branco - RESOLVIDO
 - [x] Adicionar faixas de idade nos Ciclos de Vida (0-29, 29-56, 56+) - RESOLVIDO
 - [x] Previsões 2026 não estão carregando - RESOLVIDO (personalYear2026 agora retorna corretamente)
+
+
+## Base de Conhecimento Abran (Metodologia Oficial)
+
+- [x] Receber arquivos JSON com Base de Conhecimento - CONCLUÍDO
+- [x] Integrar knowledgeBase.json ao projeto - CONCLUÍDO
+- [x] Criar ebookGenerator.ts com regras inegociáveis - CONCLUÍDO
+- [x] Validar estrutura e chaves do JSON - CONCLUÍDO
+- [x] Testar geração de e-books com dados reais - PRONTO PARA TESTAR
+- [ ] Criar componente de exportação PDF - PRÓXIMO PASSO
+- [ ] Integrar ao fluxo de geração de mapas - PRÓXIMO PASSO

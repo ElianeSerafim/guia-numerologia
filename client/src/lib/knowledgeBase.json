@@ -1,0 +1,71 @@
+{
+  "posicoes": {
+    "CD": "Caminho do Destino: Missão prática e trilho de vida.",
+    "MO": "Motivação: O desejo profundo da alma.",
+    "DM": "Desafio (Pedágio): O aprendizado obrigatório.",
+    "ME": "Mérito: Propósito Elevado e Reconhecimento.",
+    "C1": "Ciclo 1: Formação da Base.",
+    "C2": "Ciclo 2: Expansão e Consolidação.",
+    "C3": "Ciclo 3: Sabedoria e Legado.",
+    "R1": "Realização 1: Primeiras Conquistas.",
+    "R2": "Realização 2: Amadurecimento.",
+    "R3": "Realização 3: Expressão da Essência.",
+    "R4": "Realização 4: Legado e Impacto."
+  },
+  "interpretacoes": {
+    "1": {
+      "base": "Liderança, pioneirismo e coragem de abrir caminhos.",
+      "mo": "Desejo de independência e ser referência.",
+      "dm": "Vencer o autoritarismo ou a insegurança.",
+      "ciclo_realizacao": "Ambiente de atividade e oportunidade de liderança."
+    },
+    "2": {
+      "base": "Parcerias, diplomacia e sensibilidade emocional.",
+      "mo": "Desejo de paz, harmonia e pertencimento.",
+      "dm": "Aprender a dizer não e colocar limites.",
+      "ciclo_realizacao": "Ambiente de cooperação e uniões sólidas."
+    },
+    "3": {
+      "base": "Comunicação, criatividade e expansão social.",
+      "mo": "Desejo de expressar talentos e espalhar alegria.",
+      "dm": "Vencer a dispersão e a superficialidade.",
+      "ciclo_realizacao": "Ambiente social e brilho através da fala/arte."
+    },
+    "4": {
+      "base": "Trabalho, organização e bases sólidas.",
+      "mo": "Busca por segurança e estabilidade.",
+      "dm": "Vencer a rigidez e o excesso de controlo.",
+      "ciclo_realizacao": "Ambiente de construção e disciplina."
+    },
+    "5": {
+      "base": "Liberdade, mudanças e novas experiências.",
+      "mo": "Desejo de variedade e prazer da descoberta.",
+      "dm": "Desenvolver foco e gerir a ansiedade.",
+      "ciclo_realizacao": "Ambiente de movimento, viagens e inovação."
+    },
+    "6": {
+      "base": "Amor, responsabilidade e cuidado familiar.",
+      "mo": "Desejo de proteger e servir ao próximo.",
+      "dm": "Não se sobrecarregar com problemas alheios.",
+      "ciclo_realizacao": "Ambiente de ajustes domésticos e harmonia."
+    },
+    "7": {
+      "base": "Autoconhecimento, estudo e espiritualidade.",
+      "mo": "Busca por silêncio e sabedoria profunda.",
+      "dm": "Não se isolar demais ou ser excessivamente frio.",
+      "ciclo_realizacao": "Ambiente de especialização e busca da verdade."
+    },
+    "8": {
+      "base": "Poder, gestão material e justiça.",
+      "mo": "Desejo de reconhecimento e eficiência.",
+      "dm": "Lidar com o poder e dinheiro de forma ética.",
+      "ciclo_realizacao": "Ambiente de colheita material e autoridade."
+    },
+    "11": {
+      "base": "Ser um farol, inspiração e intuição elevada.",
+      "mo": "Desejo de transcendência e guiar outros.",
+      "dm": "Manter os pés no chão e evitar o nervosismo.",
+      "ciclo_realizacao": "Ambiente de forte voltagem espiritual e exemplo."
+    }
+  }
+}
