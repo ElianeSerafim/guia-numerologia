@@ -195,6 +195,11 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
       r3,
       r4,
     },
+    realizationAges: {
+      r1End: r1EndAge,
+      r2End: r2EndAge,
+      r3End: r3EndAge,
+    },
     desafios: {
       d1,
       d2,
