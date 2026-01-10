@@ -267,7 +267,7 @@ export default function Home() {
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
               <span className="text-2xl font-bold text-white">1</span>
             </div>
-            <h4 className="text-lg font-bold text-[#D4AF37] mb-3">Caminho de Destino</h4>
+            <h4 className="text-lg font-bold text-white mb-3">Caminho de Destino</h4>
             <p className="text-white text-sm leading-relaxed font-light">
               Descubra sua missão de vida e o propósito maior que o universo reservou para você.
             </p>
@@ -277,7 +277,7 @@ export default function Home() {
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
               <span className="text-2xl font-bold text-white">2</span>
             </div>
-            <h4 className="text-lg font-bold text-[#D4AF37] mb-3">Números Pessoais</h4>
+            <h4 className="text-lg font-bold text-white mb-3">Números Pessoais</h4>
             <p className="text-white text-sm leading-relaxed font-light">
               Compreenda sua motivação, expressão e o eu íntimo que define sua personalidade.
             </p>
@@ -287,7 +287,7 @@ export default function Home() {
             <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
               <span className="text-2xl font-bold text-white">3</span>
             </div>
-            <h4 className="text-lg font-bold text-[#D4AF37] mb-3">Previsões 2026</h4>
+            <h4 className="text-lg font-bold text-white mb-3">Previsões 2026</h4>
             <p className="text-white text-sm leading-relaxed font-light">
               Veja o que o ano de 2026 reserva para você segundo a numerologia pitagórica.
             </p>

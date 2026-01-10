@@ -52,7 +52,9 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
   }
 
   return reduceNumber(sum);
-};/**
+};
+
+/**
  * Calcula o Mapa Numerológico Natal (MNN) completo
  * 
  * MÉTODO CORRETO:
