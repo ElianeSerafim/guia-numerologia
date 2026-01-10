@@ -6,7 +6,8 @@ const LETTER_VALUES: Record<string, number> = {
   e: 5, n: 5, w: 5,
   f: 6, o: 6, x: 6,
   g: 7, p: 7, y: 7,
-  h: 8, q: 8, z: 8
+  h: 8, q: 8, z: 8,
+  i: 9, r: 9
 };
 
 const VOWELS = ['a', 'e', 'i', 'o', 'u'];
@@ -70,10 +71,24 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
  * - CD: 2 + 5 + 4 = 11
  */
 export const calculateChart = (fullName: string, birthDate: string): any => {
-  const parts = birthDate.split('-');
-  const year = parseInt(parts[0]);
-  const month = parseInt(parts[1]);
-  const day = parseInt(parts[2]);
+  // Aceitar ambos os formatos: YYYY-MM-DD e DD/MM/YYYY
+  let year: number, month: number, day: number;
+  
+  if (birthDate.includes('-')) {
+    // Formato YYYY-MM-DD (do input type="date")
+    const parts = birthDate.split('-');
+    year = parseInt(parts[0]);
+    month = parseInt(parts[1]);
+    day = parseInt(parts[2]);
+  } else if (birthDate.includes('/')) {
+    // Formato DD/MM/YYYY
+    const parts = birthDate.split('/');
+    day = parseInt(parts[0]);
+    month = parseInt(parts[1]);
+    year = parseInt(parts[2]);
+  } else {
+    throw new Error('Formato de data inválido. Use DD/MM/YYYY ou YYYY-MM-DD.');
+  }
 
   // ========================================
   // REDUZIR DIA, MÊS E ANO INDIVIDUALMENTE

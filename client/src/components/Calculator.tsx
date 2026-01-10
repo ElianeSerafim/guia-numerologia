@@ -93,10 +93,14 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
         </label>
         <input
           id="birthDate"
-          type="date"
+          type="text"
+          inputMode="numeric"
+          placeholder="DD/MM/YYYY"
           value={birthDate}
           onChange={(e) => {
-            setBirthDate(e.target.value);
+            let value = e.target.value;
+            // Aceitar ambos os formatos: DD/MM/YYYY e YYYY-MM-DD
+            setBirthDate(value);
             if (errors.birthDate) setErrors({ ...errors, birthDate: undefined });
           }}
           disabled={disabled}
@@ -113,7 +117,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           </div>
         )}
         <p className="text-xs text-white/60">
-          Use o formato DD/MM/YYYY ou selecione a data no calendário
+          Use o formato DD/MM/YYYY (ex: 04/01/1970)
         </p>
       </div>
 
