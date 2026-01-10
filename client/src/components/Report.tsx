@@ -224,21 +224,39 @@ export default function Report({ chart, onReset }: ReportProps) {
               </h3>
               <div className="space-y-5">
                 <div>
-                  <p className="text-xs font-semibold text-[#B8A8D8] uppercase tracking-widest mb-2">Nome Completo</p>
+                  <p className="text-xs font-semibold text-white uppercase tracking-widest mb-2">Nome Completo</p>
                   <p className="text-white font-medium text-lg">{chart.fullName}</p>
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-[#B8A8D8] uppercase tracking-widest mb-2">Data de Nascimento</p>
+                  <p className="text-xs font-semibold text-white uppercase tracking-widest mb-2">Data de Nascimento</p>
                   <p className="text-white font-medium text-lg">
-                    {new Date(chart.birthDate).toLocaleDateString('pt-BR', { 
-                      year: 'numeric', 
-                      month: 'long', 
-                      day: 'numeric' 
-                    })}
+                    {(() => {
+                      // Aceitar ambos os formatos: DD/MM/YYYY e YYYY-MM-DD
+                      let day, month, year;
+                      if (chart.birthDate.includes('/')) {
+                        const parts = chart.birthDate.split('/');
+                        day = parseInt(parts[0]);
+                        month = parseInt(parts[1]) - 1; // mês é 0-indexed
+                        year = parseInt(parts[2]);
+                      } else if (chart.birthDate.includes('-')) {
+                        const parts = chart.birthDate.split('-');
+                        year = parseInt(parts[0]);
+                        month = parseInt(parts[1]) - 1;
+                        day = parseInt(parts[2]);
+                      } else {
+                        return chart.birthDate;
+                      }
+                      const date = new Date(year, month, day);
+                      return date.toLocaleDateString('pt-BR', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      });
+                    })()}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs font-semibold text-[#B8A8D8] uppercase tracking-widest mb-2">Idade</p>
+                  <p className="text-xs font-semibold text-white uppercase tracking-widest mb-2">Idade</p>
                   <p className="text-white font-medium text-lg">{chart.age} anos</p>
                 </div>
               </div>
@@ -251,15 +269,15 @@ export default function Report({ chart, onReset }: ReportProps) {
               </h3>
               <div className="space-y-5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[#B8A8D8] font-medium">Caminho de Destino</span>
+                  <span className="text-white font-medium">Caminho de Destino</span>
                   <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">{chart.cd}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#B8A8D8] font-medium">Motivação</span>
+                  <span className="text-white font-medium">Motivação</span>
                   <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">{chart.mo}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[#B8A8D8] font-medium">Expressão</span>
+                  <span className="text-white font-medium">Expressão</span>
                   <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">{chart.ex}</span>
                 </div>
                 <div className="flex items-center justify-between pt-5 border-t border-[#4A2A6A]">
@@ -277,7 +295,7 @@ export default function Report({ chart, onReset }: ReportProps) {
               <div className="text-center space-y-4">
                 <p className="text-sm text-[#D4AF37] font-semibold uppercase tracking-wide">Seu Ano Pessoal</p>
                 <div className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">{chart.personalYear2026}</div>
-                <p className="text-sm text-[#B8A8D8] leading-relaxed">
+                <p className="text-sm text-white leading-relaxed">
                   {getYearDescription(chart.personalYear2026)}
                 </p>
               </div>

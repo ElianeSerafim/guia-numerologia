@@ -13,3 +13,10 @@
 - [x] Cálculo do EU não está correto - deveria ser 6 para "Eliane Serafim dos Santos" - RESOLVIDO: Adicionado I=9 e R=9 ao LETTER_VALUES
 - [x] Contraste dos cards roxos - texto ouro em fundo roxo é difícil de ler - Verificado: Contraste está OK (#F3E5F5 em #2A1240)
 - [x] Data de nascimento exibida incorretamente (04/01/1970 aparece como 3/01/1970) - RESOLVIDO: Mudado input de type="date" para type="text" e adicionado suporte para DD/MM/YYYY no calculateChart
+
+
+## Problemas Novos (Após Deploy)
+
+- [x] Data de nascimento invertida: digita 04/01/1970, aparece 01/04/1970 (DD/MM vs MM/DD) - RESOLVIDO
+- [x] Textos com fundo roxo precisam ser brancos (melhor contraste) - RESOLVIDO
+- [x] Progresso de Ano Pessoal com erro - RESOLVIDO
