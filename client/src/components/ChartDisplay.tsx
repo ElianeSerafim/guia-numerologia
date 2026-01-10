@@ -1,5 +1,7 @@
 import { NumerologyChart } from '@/types';
 
+import { calcularIdadesRealizacoes } from '@/lib/numerologyUtils';
+
 /**
  * ChartDisplay Component
  * 
@@ -7,6 +9,7 @@ import { NumerologyChart } from '@/types';
  * - Grid de números com destaque em ouro
  * - Organização clara por categorias
  * - Animações de entrada escalonadas
+ * - Idades de realização baseadas no Caminho de Destino
  */
 
 interface ChartDisplayProps {
@@ -49,6 +52,56 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
           <p className="text-slate-600 text-sm mt-2">
             Combinação de sua motivação e caminho de destino - sua força de realização
           </p>
+        </div>
+      </div>
+
+      {/* Idades de Realizacao */}
+      <div className="card-mystical">
+        <h3 className="text-2xl font-bold text-white mb-6">Idades de Realizacao</h3>
+        <div className="space-y-4">
+          {(() => {
+            const idades = calcularIdadesRealizacoes(chart.cd);
+            return (
+              <>
+                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold text-yellow-400">1a Realizacao</h4>
+                      <p className="text-white mt-1">{idades.r1}</p>
+                    </div>
+                    <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r1}</span>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold text-yellow-400">2a Realizacao</h4>
+                      <p className="text-white mt-1">{idades.r2}</p>
+                    </div>
+                    <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r2}</span>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold text-yellow-400">3a Realizacao</h4>
+                      <p className="text-white mt-1">{idades.r3}</p>
+                    </div>
+                    <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r3}</span>
+                  </div>
+                </div>
+                <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border border-purple-500/50 rounded-lg p-4">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold text-yellow-400">4a Realizacao</h4>
+                      <p className="text-white mt-1">{idades.r4}</p>
+                    </div>
+                    <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r4}</span>
+                  </div>
+                </div>
+              </>
+            );
+          })()}
         </div>
       </div>
 

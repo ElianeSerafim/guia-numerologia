@@ -213,3 +213,29 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     hasHadBirthdayThisYear
   };
 };
+
+/**
+ * Calcula as idades de realização (Realizações) baseado no Caminho de Destino
+ * Cada realização tem duração de 9 anos, exceto a primeira que varia
+ * 
+ * Fórmula:
+ * - R1: 0 aos (36 - CD) anos
+ * - R2: (36 - CD + 1) aos (36 - CD + 10) anos
+ * - R3: (36 - CD + 11) aos (36 - CD + 20) anos
+ * - R4: Acima de (36 - CD + 21) anos
+ */
+export const calcularIdadesRealizacoes = (cd: number) => {
+  const r1Fim = 36 - cd;
+  const r2Inicio = r1Fim + 1;
+  const r2Fim = r2Inicio + 9;
+  const r3Inicio = r2Fim + 1;
+  const r3Fim = r3Inicio + 9;
+  const r4Inicio = r3Fim + 1;
+
+  return {
+    r1: `0 aos ${r1Fim} anos`,
+    r2: `${r2Inicio} aos ${r2Fim} anos`,
+    r3: `${r3Inicio} aos ${r3Fim} anos`,
+    r4: `Acima de ${r4Inicio} anos`
+  };
+};
