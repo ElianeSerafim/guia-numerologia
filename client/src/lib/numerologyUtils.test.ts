@@ -1,149 +1,141 @@
-/**
- * Testes de Validação - Numerologia Pitagórica
- * 
- * CORREÇÃO IMPORTANTE (09/01/2026):
- * Todos os cálculos devem usar VALORES ORIGINAIS (day, month, year)
- * Depois reduzir o resultado final, NÃO os componentes
- * 
- * Exemplo correto:
- * Data: 25/08/2003
- * CD = 25 + 8 + 2003 = 2036 = 2+0+3+6 = 11 ✓
- * 
- * Exemplo incorreto (método antigo):
- * CD = 7 + 8 + 5 = 20 = 2 ✗
- */
+import { describe, it, expect } from 'vitest';
+import { calculateChart, reduceNumber, calcularIdadesRealizacoes } from './numerologyUtils';
 
-import { calculateChart, reduceNumber, calculateNameNumber, normalizeString } from './numerologyUtils';
+describe('Numerology Utils - Cálculos Corrigidos', () => {
+  describe('reduceNumber', () => {
+    it('deve reduzir 20 para 2', () => {
+      expect(reduceNumber(20)).toBe(2);
+    });
 
-// ========================================
-// TESTES DE REDUÇÃO TEOSÓFICA
-// ========================================
+    it('deve reduzir 5 para 5', () => {
+      expect(reduceNumber(5)).toBe(5);
+    });
 
-console.log('=== TESTES DE REDUÇÃO TEOSÓFICA ===');
+    it('deve reduzir 1966 para 4', () => {
+      // 1966 → 1+9+6+6 = 22 → 2+2 = 4
+      expect(reduceNumber(1966)).toBe(4);
+    });
 
-// Teste 1: Redução simples
-console.log('Teste 1 - Redução de 25:');
-console.log('25 -> 2+5 = 7:', reduceNumber(25) === 7 ? '✓ PASSOU' : '✗ FALHOU');
+    it('deve reduzir 1955 para 2', () => {
+      // 1955 → 1+9+5+5 = 20 → 2+0 = 2
+      expect(reduceNumber(1955)).toBe(2);
+    });
 
-// Teste 2: Redução de 2003
-console.log('Teste 2 - Redução de 2003:');
-console.log('2003 -> 2+0+0+3 = 5:', reduceNumber(2003) === 5 ? '✓ PASSOU' : '✗ FALHOU');
+    it('deve reconhecer número mestre 11', () => {
+      expect(reduceNumber(11)).toBe(11);
+    });
 
-// Teste 3: Redução de 8
-console.log('Teste 3 - Redução de 8:');
-console.log('8 -> 8:', reduceNumber(8) === 8 ? '✓ PASSOU' : '✗ FALHOU');
+    it('deve reconhecer número mestre 22', () => {
+      expect(reduceNumber(22)).toBe(22);
+    });
 
-// Teste 4: Números Mestres
-console.log('Teste 4 - Número Mestre 11:');
-console.log('11 -> 11 (não reduz):', reduceNumber(11) === 11 ? '✓ PASSOU' : '✗ FALHOU');
+    it('deve reconhecer número mestre 33', () => {
+      expect(reduceNumber(33)).toBe(33);
+    });
 
-console.log('Teste 5 - Número Mestre 22:');
-console.log('22 -> 22 (não reduz):', reduceNumber(22) === 22 ? '✓ PASSOU' : '✗ FALHOU');
+    it('deve reduzir 11 para 2 sem números mestres', () => {
+      expect(reduceNumber(11, false)).toBe(2);
+    });
+  });
 
-// ========================================
-// TESTES DE CÁLCULO DO MAPA NUMEROLÓGICO
-// ========================================
+  describe('calculateChart - Exemplo 1: 20/05/1966', () => {
+    const chart = calculateChart('Test Person', '1966-05-20');
 
-console.log('\n=== TESTES DE CÁLCULO DO MAPA NUMEROLÓGICO ===');
+    it('deve calcular CD = 11', () => {
+      // Dia: 20 → 2
+      // Mês: 05 → 5
+      // Ano: 1966 → 4
+      // CD: 2 + 5 + 4 = 11
+      expect(chart.cd).toBe(11);
+    });
 
-// Exemplo: Pessoa nascida em 25/08/1980 com nome "JOÃO SILVA"
-const testChart = calculateChart('JOÃO SILVA', '1980-08-25');
+    it('deve calcular ciclos corretamente', () => {
+      expect(chart.ciclos.c1).toBe(5);  // Mês: 05 → 5
+      expect(chart.ciclos.c2).toBe(2);  // Dia: 20 → 2
+      expect(chart.ciclos.c3).toBe(4);  // Ano: 1966 → 4
+    });
 
-console.log('\nExemplo: JOÃO SILVA - 25/08/1980');
-console.log('Caminho de Destino (CD):', testChart.cd);
-console.log('Motivação (MO):', testChart.mo);
-console.log('Expressão (EX):', testChart.ex);
-console.log('Eu Íntimo (EU):', testChart.eu);
-console.log('Mérito:', testChart.merito);
+    it('deve calcular realizações corretamente', () => {
+      expect(chart.realizacoes.r1).toBe(7);  // 2 + 5 = 7
+      expect(chart.realizacoes.r2).toBe(6);  // 2 + 4 = 6
+      expect(chart.realizacoes.r3).toBe(4);  // 7 + 6 = 13 → 4
+      expect(chart.realizacoes.r4).toBe(9);  // 5 + 4 = 9
+    });
 
-console.log('\nCiclos de Vida:');
-console.log('C1 (Formativo - Mês):', testChart.ciclos.c1);
-console.log('C2 (Produtivo - Dia):', testChart.ciclos.c2);
-console.log('C3 (Colheita - Ano):', testChart.ciclos.c3);
+    it('deve calcular desafios corretamente', () => {
+      expect(chart.desafios.d1).toBe(3);  // |2 - 5| = 3
+      expect(chart.desafios.d2).toBe(2);  // |2 - 4| = 2
+      expect(chart.desafios.d3).toBe(1);  // |5 - 4| = 1
+      expect(chart.desafios.dm).toBe(2);  // |3 - 1| = 2
+    });
+  });
 
-console.log('\nRealizações:');
-console.log('R1:', testChart.realizacoes.r1);
-console.log('R2:', testChart.realizacoes.r2);
-console.log('R3:', testChart.realizacoes.r3);
-console.log('R4:', testChart.realizacoes.r4);
+  describe('calculateChart - Exemplo 2: 03/07/1955', () => {
+    const chart = calculateChart('Test Person', '1955-07-03');
 
-console.log('\nDesafios:');
-console.log('D1:', testChart.desafios.d1);
-console.log('D2:', testChart.desafios.d2);
-console.log('DM:', testChart.desafios.dm);
+    it('deve calcular CD = 3', () => {
+      // Dia: 03 → 3
+      // Mês: 07 → 7
+      // Ano: 1955 → 2
+      // CD: 3 + 7 + 2 = 12 → 1 + 2 = 3
+      expect(chart.cd).toBe(3);
+    });
 
-console.log('\nAnos Pessoais:');
-console.log('Ano Pessoal Atual:', testChart.personalYear);
-console.log('Ano Pessoal 2026:', testChart.personalYear2026);
+    it('deve calcular ciclos corretamente', () => {
+      expect(chart.ciclos.c1).toBe(7);  // Mês: 07 → 7
+      expect(chart.ciclos.c2).toBe(3);  // Dia: 03 → 3
+      expect(chart.ciclos.c3).toBe(2);  // Ano: 1955 → 2
+    });
 
-console.log('\nCiclos Trimestrais 2026:');
-if (testChart.ciclosTrimestrais) {
-  console.log('CT1 2026:', testChart.ciclosTrimestrais.ano2026.ct1);
-  console.log('CT2 2026:', testChart.ciclosTrimestrais.ano2026.ct2);
-  console.log('CT3 2026:', testChart.ciclosTrimestrais.ano2026.ct3);
-  console.log('CT4 2026:', testChart.ciclosTrimestrais.ano2026.ct4);
-}
+    it('deve calcular realizações corretamente', () => {
+      expect(chart.realizacoes.r1).toBe(1);  // 3 + 7 = 10 → 1
+      expect(chart.realizacoes.r2).toBe(5);  // 3 + 2 = 5
+      expect(chart.realizacoes.r3).toBe(6);  // 1 + 5 = 6
+      expect(chart.realizacoes.r4).toBe(9);  // 7 + 2 = 9
+    });
 
-// ========================================
-// VALIDAÇÃO DO EXEMPLO DA APOSTILA (CORRIGIDO)
-// ========================================
+    it('deve calcular desafios corretamente', () => {
+      expect(chart.desafios.d1).toBe(4);  // |3 - 7| = 4
+      expect(chart.desafios.d2).toBe(1);  // |3 - 2| = 1
+      expect(chart.desafios.d3).toBe(5);  // |7 - 2| = 5
+      expect(chart.desafios.dm).toBe(1);  // |4 - 5| = 1
+    });
+  });
 
-console.log('\n=== VALIDAÇÃO DO EXEMPLO DA APOSTILA (CORRIGIDO) ===');
-console.log('Pessoa nascida em 25/08/2003');
-console.log('Método CORRETO: 25 + 8 + 2003 (valores originais) = 2036 = 11');
+  describe('calcularIdadesRealizacoes', () => {
+    it('deve calcular idades para CD = 11', () => {
+      const idades = calcularIdadesRealizacoes(11);
+      expect(idades.r1).toBe('0 aos 25 anos');
+      expect(idades.r2).toBe('26 aos 34 anos');
+      expect(idades.r3).toBe('35 aos 43 anos');
+      expect(idades.r4).toBe('Acima de 44 anos');
+    });
 
-const day = 25;
-const month = 8;
-const year = 2003;
+    it('deve calcular idades para CD = 3', () => {
+      const idades = calcularIdadesRealizacoes(3);
+      expect(idades.r1).toBe('0 aos 33 anos');
+      expect(idades.r2).toBe('34 aos 42 anos');
+      expect(idades.r3).toBe('43 aos 51 anos');
+      expect(idades.r4).toBe('Acima de 52 anos');
+    });
+  });
 
-// Cálculo CORRETO: somar valores originais e depois reduzir
-const apResultCorrect = reduceNumber(day + month + year);
-console.log(`CD = ${day} + ${month} + ${year} = ${day + month + year} = ${apResultCorrect}`);
-console.log(`Resultado esperado: 11 (número mestre)`);
-console.log(`Validação: ${apResultCorrect === 11 ? '✓ CORRETO' : '✗ INCORRETO'}`);
+  describe('Validação de Método Correto', () => {
+    it('deve usar valores reduzidos para cálculos de desafios', () => {
+      // Garantir que desafios usam valores reduzidos, não originais
+      const chart = calculateChart('Test', '1966-05-20');
+      
+      // D1 deve ser |2-5| = 3, não |20-5| = 15
+      expect(chart.desafios.d1).toBe(3);
+      expect(chart.desafios.d1).not.toBe(15);
+    });
 
-// Teste antigo (INCORRETO) para comparação
-const dayR = reduceNumber(day);
-const monthR = reduceNumber(month);
-const yearR = reduceNumber(year);
-const apResultOld = reduceNumber(dayR + monthR + yearR);
-console.log(`\nMétodo ANTIGO (INCORRETO): ${dayR} + ${monthR} + ${yearR} = ${apResultOld}`);
-console.log(`Este era o erro: reduzir componentes antes de somar`);
-
-// ========================================
-// TESTES DE NOMES
-// ========================================
-
-console.log('\n=== TESTES DE CÁLCULO DE NOMES ===');
-
-// Teste: Normalização de string
-console.log('Teste - Normalização:');
-console.log('Entrada: "João Silva"');
-console.log('Saída:', normalizeString('João Silva'));
-console.log('Esperado: "joaosilva"');
-
-// Teste: Cálculo de números do nome
-const testName = 'MARIA';
-const moTest = calculateNameNumber(testName, 'vowels');
-const exTest = calculateNameNumber(testName, 'all');
-const euTest = calculateNameNumber(testName, 'consonants');
-
-console.log(`\nNome: ${testName}`);
-console.log(`Motivação (Vogais): ${moTest}`);
-console.log(`Expressão (Todas): ${exTest}`);
-console.log(`Eu Íntimo (Consoantes): ${euTest}`);
-
-// ========================================
-// RESUMO
-// ========================================
-
-console.log('\n=== RESUMO DE TESTES ===');
-console.log('✓ Redução Teosófica: Validada');
-console.log('✓ Cálculo de Mapa Numerológico: Validado (CORRIGIDO)');
-console.log('✓ Exemplo da Apostila: Validado (CORRIGIDO)');
-console.log('✓ Cálculo de Nomes: Validado');
-console.log('\nTodos os testes foram executados com sucesso!');
-console.log('\n=== MUDANÇAS IMPORTANTES ===');
-console.log('✓ Cálculos agora usam valores originais (day, month, year)');
-console.log('✓ Redução é feita APÓS a soma, não antes');
-console.log('✓ Números mestres (11, 22, 33) são preservados');
+    it('deve usar valores reduzidos para cálculos de realizações', () => {
+      const chart = calculateChart('Test', '1966-05-20');
+      
+      // R1 deve ser 2+5 = 7, não 20+5 = 25
+      expect(chart.realizacoes.r1).toBe(7);
+      expect(chart.realizacoes.r1).not.toBe(25);
+    });
+  });
+});

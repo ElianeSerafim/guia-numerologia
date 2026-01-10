@@ -56,22 +56,18 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
 
 /**
  * Calcula o Mapa Numerológico Natal (MNN) completo
- * Baseado em: Técnicas Avançadas de Numerologia Pitagórica
  * 
- * CORREÇÃO IMPORTANTE:
- * - Todos os cálculos devem usar os VALORES ORIGINAIS (day, month, year)
- * - Depois reduzir o resultado final, NÃO os componentes
+ * MÉTODO CORRETO:
+ * 1. Reduzir DIA a um dígito
+ * 2. Reduzir MÊS a um dígito
+ * 3. Reduzir ANO a um dígito
+ * 4. Somar os três reduzidos e reduzir novamente
  * 
- * Fórmulas:
- * - Caminho de Destino (CD): dia + mês + ano (reduzido)
- * - Motivação (MO): soma das vogais do nome
- * - Expressão (EX): soma de todas as letras do nome
- * - Eu Íntimo (EU): soma das consoantes do nome
- * - Mérito: MO + CD (reduzido)
- * - Ciclos de Vida: C1=mês, C2=dia, C3=ano (reduzidos)
- * - Realizações (Pináculos): R1=dia+mês, R2=dia+ano, R3=R1+R2, R4=mês+ano (reduzidos)
- * - Desafios: D1=|mês-dia|, D2=|mês-ano|, DM=|D1-D2| (reduzidos)
- * - Ano Pessoal: dia + mês + ano (reduzido)
+ * Exemplo: 20/05/1966
+ * - Dia: 20 → 2+0 = 2
+ * - Mês: 05 → 0+5 = 5
+ * - Ano: 1966 → 1+9+6+6 = 22 → 2+2 = 4
+ * - CD: 2 + 5 + 4 = 11
  */
 export const calculateChart = (fullName: string, birthDate: string): any => {
   const parts = birthDate.split('-');
@@ -80,11 +76,18 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const day = parseInt(parts[2]);
 
   // ========================================
+  // REDUZIR DIA, MÊS E ANO INDIVIDUALMENTE
+  // ========================================
+  const dayReduced = reduceNumber(day);
+  const monthReduced = reduceNumber(month);
+  const yearReduced = reduceNumber(year);
+
+  // ========================================
   // 1. NÚMEROS PRINCIPAIS DO MNN
   // ========================================
   
-  // Caminho de Destino (CD): dia + mês + ano (VALORES ORIGINAIS, depois reduzir)
-  const cd = reduceNumber(day + month + year);
+  // Caminho de Destino (CD): dayReduced + monthReduced + yearReduced
+  const cd = reduceNumber(dayReduced + monthReduced + yearReduced);
 
   // Motivação (MO): soma das vogais do nome
   const mo = calculateNameNumber(fullName, 'vowels');
@@ -99,19 +102,19 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const merito = reduceNumber(mo + cd);
 
   // ========================================
-  // 2. CICLOS DE VIDA (reduzidos individualmente)
+  // 2. CICLOS DE VIDA
   // ========================================
-  const c1 = reduceNumber(month);  // Ciclo 1: Mês
-  const c2 = reduceNumber(day);    // Ciclo 2: Dia
-  const c3 = reduceNumber(year);   // Ciclo 3: Ano
+  const c1 = monthReduced;  // Ciclo 1: Mês reduzido
+  const c2 = dayReduced;    // Ciclo 2: Dia reduzido
+  const c3 = yearReduced;   // Ciclo 3: Ano reduzido
 
   // ========================================
-  // 3. REALIZAÇÕES (PINÁCULOS) - usar valores originais depois reduzir
+  // 3. REALIZAÇÕES (PINÁCULOS)
   // ========================================
-  const r1 = reduceNumber(day + month);        // Realização 1
-  const r2 = reduceNumber(day + year);         // Realização 2
-  const r3 = reduceNumber(r1 + r2);            // Realização 3
-  const r4 = reduceNumber(month + year);       // Realização 4
+  const r1 = reduceNumber(dayReduced + monthReduced);        // Realização 1
+  const r2 = reduceNumber(dayReduced + yearReduced);         // Realização 2
+  const r3 = reduceNumber(r1 + r2);                          // Realização 3
+  const r4 = reduceNumber(monthReduced + yearReduced);       // Realização 4
 
   // Idades das Realizações
   const cdSimple = (cd === 11 || cd === 22 || cd === 33) ? reduceNumber(cd, false) : cd;
@@ -120,12 +123,12 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const r3EndAge = r2EndAge + 9;
 
   // ========================================
-  // 4. DESAFIOS - usar valores originais depois reduzir
+  // 4. DESAFIOS
   // ========================================
-  const d1 = reduceNumber(Math.abs(day - month));    // Desafio Menor 1: |dia - mês|
-  const d2 = reduceNumber(Math.abs(day - year));     // Desafio Menor 2: |dia - ano|
-  const d3 = reduceNumber(Math.abs(month - year));   // Desafio Menor 3: |mês - ano|
-  const dm = reduceNumber(Math.abs(d1 - d3));        // Desafio Maior: |D1 - D3|
+  const d1 = reduceNumber(Math.abs(dayReduced - monthReduced));    // Desafio Menor 1
+  const d2 = reduceNumber(Math.abs(dayReduced - yearReduced));     // Desafio Menor 2
+  const d3 = reduceNumber(Math.abs(monthReduced - yearReduced));   // Desafio Menor 3
+  const dm = reduceNumber(Math.abs(d1 - d3));                      // Desafio Maior
 
   // ========================================
   // 5. ANOS PESSOAIS E CICLOS TRIMESTRAIS
@@ -143,25 +146,21 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     (currentMonth === month && currentDay >= day);
 
   const yearForAP = hasHadBirthdayThisYear ? currentYear : currentYear - 1;
-  const pyCurrentRaw = day + month + yearForAP;
+  const pyCurrentRaw = dayReduced + monthReduced + reduceNumber(yearForAP);
   const pyCurrentReduced = reduceNumber(pyCurrentRaw);
 
   // Ano Pessoal 2026
-  const py2026Raw = day + month + 2026;
+  const py2026Raw = dayReduced + monthReduced + reduceNumber(2026);
   const py2026 = reduceNumber(py2026Raw);
 
   // Mês Pessoal Atual
   const pm = reduceNumber(pyCurrentReduced + currentMonth);
 
   // Ciclos Trimestrais para o Ano Pessoal Atual
-  // CT1 = AP + Ciclo de Vida Atual
   const ct1 = reduceNumber(pyCurrentReduced + c1);
-  // CT2 = AP + Realização Atual de Vida
   const ct2 = reduceNumber(pyCurrentReduced + r1);
-  // CT3 = AP - Desafio Menor (com tratamento para negativo)
   const ct3Raw = pyCurrentReduced - dm;
   const ct3 = ct3Raw <= 0 ? reduceNumber(ct3Raw + 9) : reduceNumber(ct3Raw);
-  // CT4 = soma dos 3 primeiros CTs
   const ct4 = reduceNumber(ct1 + ct2 + ct3);
 
   // Ciclos Trimestrais para 2026
@@ -179,52 +178,45 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   return {
     fullName,
     birthDate,
-    
-    // Números principais
+    age,
     cd,
     mo,
     eu,
     ex,
     merito,
-    
-    // Ciclos de vida
-    ciclos: { c1, c2, c3 },
-    
-    // Realizações (Pináculos)
-    realizacoes: { r1, r2, r3, r4 },
-    realizationAges: { r1End: r1EndAge, r2End: r2EndAge, r3End: r3EndAge },
-    
-    // Desafios
-    desafios: { d1, d2, d3, dm },
-    
-    // Anos Pessoais
-    personalYear: pyCurrentReduced,
-    personalYear2026: py2026,
-    personalMonth: pm,
-    
-    // Ciclos Trimestrais
-    ciclosTrimestrais: {
-      atual: { ct1, ct2, ct3, ct4 },
-      ano2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 }
+    ciclos: {
+      c1,
+      c2,
+      c3,
     },
-    
-    // Informações adicionais
-    age,
-    hasHadBirthdayThisYear
+    realizacoes: {
+      r1,
+      r2,
+      r3,
+      r4,
+    },
+    desafios: {
+      d1,
+      d2,
+      d3,
+      dm,
+    },
+    anosPessoais: {
+      current: pyCurrentReduced,
+      py2026,
+      pm,
+    },
+    ciclosTrimestrais: {
+      current: { ct1, ct2, ct3, ct4 },
+      py2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 },
+    },
   };
 };
 
 /**
- * Calcula as idades de realização (Realizações) baseado no Caminho de Destino
- * Cada realização tem duração de 9 anos, exceto a primeira que varia
- * 
- * Fórmula:
- * - R1: 0 aos (36 - CD) anos
- * - R2: (36 - CD + 1) aos (36 - CD + 10) anos
- * - R3: (36 - CD + 11) aos (36 - CD + 20) anos
- * - R4: Acima de (36 - CD + 21) anos
+ * Calcula as idades de realização baseado no Caminho de Destino
  */
-export const calcularIdadesRealizacoes = (cd: number) => {
+export function calcularIdadesRealizacoes(cd: number) {
   const r1Fim = 36 - cd;
   const r2Inicio = r1Fim + 1;
   const r2Fim = r2Inicio + 9;
@@ -238,4 +230,20 @@ export const calcularIdadesRealizacoes = (cd: number) => {
     r3: `${r3Inicio} aos ${r3Fim} anos`,
     r4: `Acima de ${r4Inicio} anos`
   };
+}
+
+// Interpretações dos números
+export const numberInterpretations: Record<number, string> = {
+  1: "Liderança, independência, iniciativa e determinação",
+  2: "Equilíbrio, cooperação, sensibilidade e diplomacia",
+  3: "Criatividade, comunicação, expressão e alegria",
+  4: "Estabilidade, ordem, trabalho e praticidade",
+  5: "Liberdade, mudança, aventura e versatilidade",
+  6: "Harmonia, responsabilidade, cuidado e amor",
+  7: "Espiritualidade, análise, introspecção e sabedoria",
+  8: "Poder, sucesso, abundância e autoridade",
+  9: "Compaixão, humanidade, finalização e universalidade",
+  11: "Intuição, inspiração, iluminação e sensibilidade elevada",
+  22: "Mestre construtor, visão grandiosa, manifestação em larga escala",
+  33: "Mestre curador, amor incondicional, sabedoria e compaixão",
 };
