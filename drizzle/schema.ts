@@ -185,3 +185,31 @@ export const paymentHistoryRelations = relations(paymentHistory, ({ one }) => ({
     references: [customers.id],
   }),
 }));
+
+/**
+ * Favorites table for storing user favorite sections and interpretations
+ */
+export const favorites = pgTable("favorites", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  mapId: integer("mapId").notNull(),
+  sectionType: varchar("sectionType", { length: 50 }).notNull(), // cd, mo, eu, ex, merito, ciclos, realizacoes, desafios, etc
+  sectionTitle: varchar("sectionTitle", { length: 255 }).notNull(),
+  sectionContent: text("sectionContent").notNull(),
+  notes: text("notes"), // User's personal notes about this favorite
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type Favorite = typeof favorites.$inferSelect;
+export type InsertFavorite = typeof favorites.$inferInsert;
+
+/**
+ * Updated relations with favorites
+ */
+export const favoritesRelations = relations(favorites, ({ one }) => ({
+  numerologyMap: one(numerologyMaps, {
+    fields: [favorites.mapId],
+    references: [numerologyMaps.id],
+  }),
+}));

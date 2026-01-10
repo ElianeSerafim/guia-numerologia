@@ -1,6 +1,7 @@
 import { NumerologyChart } from '@/types';
-
+import FavoriteButton from './FavoriteButton';
 import { calcularIdadesRealizacoes } from '@/lib/numerologyUtils';
+import { useUserSubscription } from '@/hooks/useUserSubscription';
 
 /**
  * ChartDisplay Component
@@ -17,11 +18,24 @@ interface ChartDisplayProps {
 }
 
 export default function ChartDisplay({ chart }: ChartDisplayProps) {
+  const { user } = useUserSubscription();
   return (
     <div className="space-y-8">
       {/* Core Numbers */}
       <div className="card-mystical">
-        <h3 className="text-2xl font-bold text-white mb-6">Números Essenciais</h3>
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-2xl font-bold text-white">Números Essenciais</h3>
+          {user && (
+            <FavoriteButton
+              email={user.email}
+              mapId={1}
+              sectionType="core-numbers"
+              sectionTitle="Números Essenciais"
+              sectionContent={JSON.stringify({ cd: chart.cd, mo: chart.mo, eu: chart.eu, ex: chart.ex, merito: chart.merito })}
+              isFavorited={false}
+            />
+          )}
+        </div>
         <div className="grid md:grid-cols-2 gap-6">
           <NumberCard
             label="Caminho de Destino"

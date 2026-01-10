@@ -8,6 +8,7 @@ import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import ebookRouter from "../routes/ebook";
+import favoritesRouter from "../routes/favorites";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -38,6 +39,8 @@ async function startServer() {
   registerOAuthRoutes(app);
   // E-book routes
   app.use("/api/ebook", ebookRouter);
+  // Favorites routes
+  app.use("/api/favorites", favoritesRouter);
   // tRPC API
   app.use(
     "/api/trpc",

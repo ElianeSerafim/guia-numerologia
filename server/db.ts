@@ -15,6 +15,8 @@ import {
   paymentHistory,
   InsertReport,
   reports,
+  InsertFavorite,
+  favorites,
   Customer,
   Admin
 } from "../drizzle/schema";
@@ -311,4 +313,65 @@ export async function getAllReports() {
   if (!db) return [];
   
   return await db.select().from(reports);
+}
+
+/**
+ * Favorites Management
+ */
+export async function createFavorite(favorite: InsertFavorite) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(favorites).values(favorite).returning();
+  return result[0];
+}
+
+export async function getFavoritesByEmail(email: string) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db.select().from(favorites).where(eq(favorites.email, email));
+}
+
+export async function getFavoritesByMapId(mapId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db.select().from(favorites).where(eq(favorites.mapId, mapId));
+}
+
+export async function deleteFavorite(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.delete(favorites)
+    .where(eq(favorites.id, id))
+    .returning();
+  return result[0];
+}
+
+export async function updateFavorite(id: number, updates: Partial<typeof favorites.$inferSelect>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.update(favorites)
+    .set({ ...updates, updatedAt: new Date() })
+    .where(eq(favorites.id, id))
+    .returning();
+  return result[0];
+}
+
+export async function checkIfFavorited(email: string, mapId: number, sectionType: string) {
+  const db = await getDb();
+  if (!db) return false;
+  
+  const result = await db.select().from(favorites).where(
+    and(
+      eq(favorites.email, email),
+      eq(favorites.mapId, mapId),
+      eq(favorites.sectionType, sectionType)
+    )
+  ).limit(1);
+  
+  return result.length > 0;
 }
