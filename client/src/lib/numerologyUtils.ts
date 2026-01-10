@@ -42,15 +42,12 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
     const val = LETTER_VALUES[char] || 0;
     const isVowel = VOWELS.includes(char);
 
-    // Reduzir cada letra primeiro (ex: J=10 → 1+0=1)
-    const reducedVal = reduceNumber(val);
-
     if (filter === 'all') {
-      sum += reducedVal;
+      sum += val;
     } else if (filter === 'vowels' && isVowel) {
-      sum += reducedVal;
+      sum += val;
     } else if (filter === 'consonants' && !isVowel) {
-      sum += reducedVal;
+      sum += val;
     }
   }
 
