@@ -48,5 +48,6 @@
 - [x] Criar ebookGenerator.ts com regras inegociáveis - CONCLUÍDO
 - [x] Validar estrutura e chaves do JSON - CONCLUÍDO
 - [x] Testar geração de e-books com dados reais - PRONTO PARA TESTAR
+- [x] Adicionar faixas de idade dos desafios - CONCLUÍDO
 - [ ] Criar componente de exportação PDF - PRÓXIMO PASSO
 - [ ] Integrar ao fluxo de geração de mapas - PRÓXIMO PASSO

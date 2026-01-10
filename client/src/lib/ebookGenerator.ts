@@ -109,16 +109,22 @@ export const gerarEbook = (chart: NumerologyChart): string => {
   
   // DESAFIOS DA VIDA
   ebook += `## Desafios da Vida\n\n`;
-  ebook += `### Desafio 1 (0-29 anos)\n\n`;
-  ebook += `Número: ${chart.desafios.d1}\n\n`;
+  ebook += `### 1º Desafio: Dos 0 aos 29 Anos\n\n`;
+  ebook += `**Número:** ${chart.desafios.d1}\n\n`;
+  ebook += `**Faixa Etária:** Dos 0 aos 29 anos\n\n`;
   ebook += `${getInterpretacao(chart.desafios.d1)}\n\n`;
+  ebook += `${getInterpretacao(chart.desafios.d1, 'dm')}\n\n`;
   
-  ebook += `### Desafio 2 (29-56 anos)\n\n`;
-  ebook += `Número: ${chart.desafios.d2}\n\n`;
+  ebook += `### 2º Desafio: Dos 29 aos 56 Anos\n\n`;
+  ebook += `**Número:** ${chart.desafios.d2}\n\n`;
+  ebook += `**Faixa Etária:** Dos 29 aos 56 anos\n\n`;
   ebook += `${getInterpretacao(chart.desafios.d2)}\n\n`;
+  ebook += `${getInterpretacao(chart.desafios.d2, 'dm')}\n\n`;
   
-  ebook += `### Desafio Maior (Vida Inteira)\n\n`;
-  ebook += `Número: ${chart.desafios.dm}\n\n`;
+  ebook += `### Desafio Maior (O Seu Pedágio): Por Toda a Vida\n\n`;
+  ebook += `**Número:** ${chart.desafios.dm}\n\n`;
+  ebook += `**Faixa Etária:** Por toda a vida\n\n`;
+  ebook += `${getInterpretacao(chart.desafios.dm)}\n\n`;
   ebook += `${getInterpretacao(chart.desafios.dm, 'dm')}\n\n`;
   
   // CICLOS DE VIDA
