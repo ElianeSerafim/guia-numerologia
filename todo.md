@@ -69,4 +69,7 @@
 - [x] ERRO: ebookGenerator.ts não existe em src/lib/ - RESOLVIDO: Arquivo criado
 - [x] Criar ebookGenerator.ts com função exportarEbookHTML - CONCLUÍDO
 - [x] Instalar Chrome para Puppeteer - CONCLUÍDO
-- [ ] Corrigir erro "Cannot read properties of undefined (reading 'toString')" - EM INVESTIGAÇÃO
+- [x] Corrigir erro "Cannot read properties of undefined (reading 'toString')" - RESOLVIDO
+- [x] Problema: Servidor importava ebookGenerator do cliente em vez do servidor - CORRIGIDO
+- [x] Problema: Propriedade 'me' deveria ser 'merito' - CORRIGIDO
+- [x] Geração de e-book testada e funcionando - PDF de 8 páginas gerado com sucesso

@@ -1,19 +1,9 @@
 import { Router, Request, Response } from 'express';
-import { exportarEbookHTML } from '@/lib/ebookGenerator';
+import { exportarEbookHTML } from '../lib/ebookGenerator';
 import { NumerologyChart } from '@/types';
-let puppeteer: any;
+import puppeteer from 'puppeteer';
 
 const router = Router();
-
-// Carregar Puppeteer dinamicamente
-(async () => {
-  try {
-    puppeteer = await import('puppeteer');
-    console.log('[ebook.ts] Puppeteer carregado com sucesso');
-  } catch (error) {
-    console.error('[ebook.ts] Erro ao carregar Puppeteer:', error);
-  }
-})();
 
 interface EbookRequest extends Request {
   body: {
@@ -28,14 +18,9 @@ interface EbookRequest extends Request {
 async function htmlToPdf(htmlContent: string): Promise<Buffer> {
   let browser;
   try {
-    if (!puppeteer) {
-      console.error('[htmlToPdf] Puppeteer não foi carregado');
-      throw new Error('Puppeteer não disponível');
-    }
     console.log('[htmlToPdf] Iniciando Puppeteer...');
-    const puppeteerModule = puppeteer.default || puppeteer;
-    browser = await puppeteerModule.launch({
-      headless: 'new',
+    browser = await puppeteer.launch({
+      headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
     });
     console.log('[htmlToPdf] Browser iniciado');
@@ -57,8 +42,7 @@ async function htmlToPdf(htmlContent: string): Promise<Buffer> {
         bottom: '1.5cm',
         left: '1.5cm'
       },
-      printBackground: true,
-      displayHeaderFooter: false
+      printBackground: true
     });
     console.log('[htmlToPdf] PDF gerado, tamanho:', pdfData.length);
     
@@ -67,9 +51,12 @@ async function htmlToPdf(htmlContent: string): Promise<Buffer> {
     
     await browser.close();
     console.log('[htmlToPdf] Browser fechado');
-    return pdfBuffer as Buffer;
+    return pdfBuffer;
   } catch (error) {
     console.error('[htmlToPdf] Erro ao gerar PDF:', error);
+    if (error instanceof Error) {
+      console.error('[htmlToPdf] Stack trace:', error.stack);
+    }
     if (browser) {
       try {
         await browser.close();
@@ -84,7 +71,7 @@ async function htmlToPdf(htmlContent: string): Promise<Buffer> {
 // Rota para gerar e-book premium
 router.post('/generate', async (req: EbookRequest, res: Response) => {
   try {
-    console.log('[ebook.ts] Requisição recebida:', { body: req.body });
+    console.log('[ebook.ts] Requisição recebida');
     const { chart, userEmail } = req.body;
     
     console.log('[ebook.ts] Validando dados...');
@@ -120,7 +107,10 @@ router.post('/generate', async (req: EbookRequest, res: Response) => {
     res.setHeader('Content-Length', pdfBuffer.length);
     res.send(pdfBuffer);
   } catch (error) {
-    console.error('Erro ao gerar e-book:', error);
+    console.error('[ebook.ts] Erro ao gerar e-book:', error);
+    if (error instanceof Error) {
+      console.error('[ebook.ts] Stack trace:', error.stack);
+    }
     const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido';
     res.status(500).json({ error: 'Erro ao gerar e-book', details: errorMessage });
   }
