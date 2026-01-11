@@ -63,3 +63,10 @@
 - [x] Adicionar numeração de página - CONCLUÍDO
 - [x] Quebras de página A4 - CONCLUÍDO
 - [ ] Fazer checkpoint e deploy em produção
+
+## Erro Crítico Identificado (Sessão Atual)
+
+- [x] ERRO: ebookGenerator.ts não existe em src/lib/ - RESOLVIDO: Arquivo criado
+- [x] Criar ebookGenerator.ts com função exportarEbookHTML - CONCLUÍDO
+- [x] Instalar Chrome para Puppeteer - CONCLUÍDO
+- [ ] Corrigir erro "Cannot read properties of undefined (reading 'toString')" - EM INVESTIGAÇÃO
