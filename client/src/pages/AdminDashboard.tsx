@@ -65,6 +65,12 @@ export default function AdminDashboard() {
     }
   }, [setLocation]);
 
+  // Sincronizar newWhatsappLink quando config muda
+  useEffect(() => {
+    console.log('[AdminDashboard] Config atualizado:', config);
+    setNewWhatsappLink(config.whatsappLink);
+  }, [config]);
+
   // Filtrar clientes
   const getFilteredCustomers = () => {
     let filtered: Customer[] = [];

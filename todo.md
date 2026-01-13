@@ -73,3 +73,11 @@
 - [x] Problema: Servidor importava ebookGenerator do cliente em vez do servidor - CORRIGIDO
 - [x] Problema: Propriedade 'me' deveria ser 'merito' - CORRIGIDO
 - [x] Geração de e-book testada e funcionando - PDF de 8 páginas gerado com sucesso
+
+
+## Erro: WhatsApp não salva corretamente no Admin
+
+- [x] Problema: Cadastro do WhatsApp não persiste quando cliente acessa plano - RESOLVIDO
+- [x] Causa: Estado newWhatsappLink não sincroniza com config quando muda - IDENTIFICADA
+- [x] Solução: Adicionar useEffect para sincronizar estado com config - IMPLEMENTADA
+- [x] Teste: Verificar se WhatsApp salvo é recuperado corretamente - PRONTO PARA TESTAR

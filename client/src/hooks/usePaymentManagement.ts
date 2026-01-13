@@ -7,6 +7,24 @@ const STORAGE_KEY_CONFIG = 'numerology_payment_config';
 const ADMIN_EMAIL = 'eliane@artwebcreative.com.br';
 const DEFAULT_WHATSAPP = 'https://wa.me/5511999999999';
 
+// Validar e normalizar link do WhatsApp
+const normalizeWhatsappLink = (link: string): string => {
+  if (!link || !link.trim()) return DEFAULT_WHATSAPP;
+  
+  // Se for apenas número, converter para formato wa.me
+  if (/^\d+$/.test(link.trim())) {
+    return `https://wa.me/${link.trim()}`;
+  }
+  
+  // Se for número com caracteres especiais, limpar e converter
+  const cleanNumber = link.replace(/\D/g, '');
+  if (cleanNumber && cleanNumber !== '11999999999') {
+    return `https://wa.me/${cleanNumber}`;
+  }
+  
+  return link.trim();
+};
+
 /**
  * Hook para gerenciar clientes, pagamentos e status
  * 
@@ -40,7 +58,12 @@ export function usePaymentManagement() {
 
       const storedConfig = localStorage.getItem(STORAGE_KEY_CONFIG);
       if (storedConfig) {
-        setConfig(JSON.parse(storedConfig));
+        const parsedConfig = JSON.parse(storedConfig);
+        if (parsedConfig.whatsappLink) {
+          parsedConfig.whatsappLink = normalizeWhatsappLink(parsedConfig.whatsappLink);
+        }
+        console.log('[usePaymentManagement] Config carregada:', parsedConfig);
+        setConfig(parsedConfig);
       }
     } catch (error) {
       console.error('Erro ao carregar dados:', error);
@@ -52,6 +75,7 @@ export function usePaymentManagement() {
   // Salvar clientes no localStorage
   const saveCustomers = useCallback((newCustomers: Customer[]) => {
     try {
+      console.log('[usePaymentManagement] Salvando clientes:', newCustomers.length);
       localStorage.setItem(STORAGE_KEY_CUSTOMERS, JSON.stringify(newCustomers));
       setCustomers(newCustomers);
     } catch (error) {
@@ -62,6 +86,12 @@ export function usePaymentManagement() {
   // Salvar config no localStorage
   const saveConfig = useCallback((newConfig: PaymentConfig) => {
     try {
+      if (!newConfig.whatsappLink || newConfig.whatsappLink.includes('99999999')) {
+        console.warn('[usePaymentManagement] Tentativa de salvar WhatsApp genérico, ignorando');
+        return;
+      }
+      
+      console.log('[usePaymentManagement] Salvando config:', newConfig);
       localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(newConfig));
       setConfig(newConfig);
     } catch (error) {
@@ -71,7 +101,9 @@ export function usePaymentManagement() {
 
   // Atualizar link do WhatsApp
   const updateWhatsappLink = useCallback((link: string) => {
-    const newConfig = { ...config, whatsappLink: link };
+    const normalizedLink = normalizeWhatsappLink(link);
+    console.log('[usePaymentManagement] Atualizando WhatsApp:', { original: link, normalized: normalizedLink });
+    const newConfig = { ...config, whatsappLink: normalizedLink };
     saveConfig(newConfig);
   }, [config, saveConfig]);
 
