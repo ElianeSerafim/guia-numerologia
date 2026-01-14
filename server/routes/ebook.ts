@@ -83,8 +83,8 @@ router.post('/generate', async (req: EbookRequest, res: Response) => {
       return res.status(400).json({ error: 'userEmail é obrigatório' });
     }
     
-    if (!chart.fullName || chart.cd === undefined || chart.personalYear2026 === undefined) {
-      return res.status(400).json({ error: 'Dados incompletos no chart' });
+    if (!chart.fullName) {
+      return res.status(400).json({ error: 'fullName é obrigatório' });
     }
     
     console.log('[ebook.ts] Chamando exportarEbookHTML...');

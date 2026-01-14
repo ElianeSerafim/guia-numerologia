@@ -73,6 +73,8 @@
 - [x] Problema: Servidor importava ebookGenerator do cliente em vez do servidor - CORRIGIDO
 - [x] Problema: Propriedade 'me' deveria ser 'merito' - CORRIGIDO
 - [x] Geração de e-book testada e funcionando - PDF de 8 páginas gerado com sucesso
+- [x] Correção: Validarção muito rigorosa rejeitava charts incompletos - CORRIGIDO
+- [x] Chrome reinstalado após reset do sandbox
 
 
 ## Erro: WhatsApp não salva corretamente no Admin
