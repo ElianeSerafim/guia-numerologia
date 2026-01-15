@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { exportarEbookHTML } from '../lib/ebookGenerator';
 import { NumerologyChart } from '@/types';
-import puppeteer from 'puppeteer';
+import { jsPDF } from 'jspdf';
 
 const router = Router();
 
@@ -13,57 +13,72 @@ interface EbookRequest extends Request {
 }
 
 /**
- * Converte HTML para PDF usando Puppeteer
+ * Converte HTML para PDF usando jsPDF puro
+ * Extrai texto do HTML e formata no PDF
  */
-async function htmlToPdf(htmlContent: string): Promise<Buffer> {
-  let browser;
+async function htmlToPdfSimple(htmlContent: string, fullName: string): Promise<Buffer> {
   try {
-    console.log('[htmlToPdf] Iniciando Puppeteer...');
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    console.log('[htmlToPdfSimple] Iniciando conversão HTML para PDF...');
+    
+    // Remover tags HTML e extrair texto
+    const textContent = htmlContent
+      .replace(/<style[^>]*>.*?<\/style>/g, '') // Remover estilos
+      .replace(/<script[^>]*>.*?<\/script>/g, '') // Remover scripts
+      .replace(/<[^>]*>/g, '') // Remover tags HTML
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&')
+      .trim();
+    
+    // Criar PDF
+    const pdf = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: 'a4'
     });
-    console.log('[htmlToPdf] Browser iniciado');
     
-    const page = await browser.newPage();
-    console.log('[htmlToPdf] Página criada');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 15;
+    const maxWidth = pageWidth - 2 * margin;
     
-    // Definir tamanho de página A4
-    console.log('[htmlToPdf] Definindo conteúdo HTML...');
-    await page.setContent(htmlContent, { waitUntil: 'networkidle0' });
-    console.log('[htmlToPdf] Conteúdo definido');
+    // Adicionar título
+    pdf.setFontSize(18);
+    pdf.setFont('', 'bold');
+    pdf.text('Guia de Numerologia', margin, margin);
+    pdf.setFont('', 'normal');
     
-    console.log('[htmlToPdf] Gerando PDF...');
-    const pdfData = await page.pdf({
-      format: 'A4',
-      margin: {
-        top: '1.5cm',
-        right: '1.5cm',
-        bottom: '1.5cm',
-        left: '1.5cm'
-      },
-      printBackground: true
+    // Adicionar nome
+    pdf.setFontSize(14);
+    pdf.text(`${fullName}`, margin, margin + 10);
+    
+    // Adicionar conteúdo
+    pdf.setFontSize(11);
+    const lines = pdf.splitTextToSize(textContent, maxWidth);
+    
+    let yPosition = margin + 25;
+    const lineHeight = 6;
+    const pageHeightWithMargin = pageHeight - margin;
+    
+    lines.forEach((line: string, index: number) => {
+      if (yPosition > pageHeightWithMargin) {
+        pdf.addPage();
+        yPosition = margin;
+      }
+      pdf.text(line, margin, yPosition);
+      yPosition += lineHeight;
     });
-    console.log('[htmlToPdf] PDF gerado, tamanho:', pdfData.length);
     
-    const pdfBuffer = Buffer.from(pdfData);
-    console.log('[htmlToPdf] Buffer criado');
+    console.log('[htmlToPdfSimple] PDF gerado com sucesso');
     
-    await browser.close();
-    console.log('[htmlToPdf] Browser fechado');
+    // Converter PDF para Buffer
+    const pdfBuffer = Buffer.from(pdf.output('arraybuffer'));
+    console.log('[htmlToPdfSimple] Buffer criado, tamanho:', pdfBuffer.length);
+    
     return pdfBuffer;
   } catch (error) {
-    console.error('[htmlToPdf] Erro ao gerar PDF:', error);
-    if (error instanceof Error) {
-      console.error('[htmlToPdf] Stack trace:', error.stack);
-    }
-    if (browser) {
-      try {
-        await browser.close();
-      } catch (closeError) {
-        console.error('[htmlToPdf] Erro ao fechar browser:', closeError);
-      }
-    }
+    console.error('[htmlToPdfSimple] Erro ao converter HTML para PDF:', error);
     throw error;
   }
 }
@@ -92,9 +107,9 @@ router.post('/generate', async (req: EbookRequest, res: Response) => {
     const htmlContent = exportarEbookHTML(chart);
     console.log('[ebook.ts] HTML gerado, tamanho:', htmlContent.length);
     
-    console.log('[ebook.ts] Convertendo HTML para PDF...');
-    // Converter HTML para PDF
-    const pdfBuffer = await htmlToPdf(htmlContent);
+    console.log('[ebook.ts] Convertendo HTML para PDF com jsPDF...');
+    // Converter HTML para PDF usando jsPDF
+    const pdfBuffer = await htmlToPdfSimple(htmlContent, chart.fullName);
     console.log('[ebook.ts] PDF gerado, tamanho:', pdfBuffer.length);
     
     if (!pdfBuffer || pdfBuffer.length === 0) {

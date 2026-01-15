@@ -75,6 +75,8 @@
 - [x] Geração de e-book testada e funcionando - PDF de 8 páginas gerado com sucesso
 - [x] Correção: Validarção muito rigorosa rejeitava charts incompletos - CORRIGIDO
 - [x] Chrome reinstalado após reset do sandbox
+- [x] Migração de Puppeteer para jsPDF - CONCLUÍDA
+- [x] E-book gerado com sucesso usando jsPDF (PDF 1.3)
 
 
 ## Erro: WhatsApp não salva corretamente no Admin
