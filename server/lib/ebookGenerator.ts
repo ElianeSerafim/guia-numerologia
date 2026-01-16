@@ -1,5 +1,24 @@
 import { NumerologyChart } from '@/types';
 
+import { getNumberInterpretation, getElementInterpretation } from './knowledgeBase';
+
+function generateNumberInterpretationHTML(number: number, label: string): string {
+  const interp = getNumberInterpretation(number);
+  if (!interp) return '';
+  
+  return `
+    <div class="card card-roxo" style="margin-bottom: 1rem;">
+      <p><strong>${label} (${number})</strong></p>
+      <p><strong>Essência:</strong> ${interp.essencia}</p>
+      <p><strong>Luz:</strong> ${interp.luz}</p>
+      <p><strong>Sombra:</strong> ${interp.sombra}</p>
+      <p><strong>Aspecto Físico:</strong> ${interp.fisico}</p>
+      <p><strong>Prática Afetiva:</strong> ${interp.pratica_afetiva}</p>
+      <p><strong>Válvula de Escape:</strong> ${interp.valvula_escape}</p>
+    </div>
+  `;
+}
+
 /**
  * Gera HTML premium de e-book numerológico
  * Paleta: Roxo #4A148C, Rosa #C71585, Dourado #D4AF37
@@ -306,33 +325,23 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
     <h3>Caminho de Destino (CD): ${cd}</h3>
     <div class="numero-grande">${cd}</div>
-    <div class="card card-roxo">
-      <p><strong>Essência:</strong> Sua missão de vida e propósito maior no universo.</p>
-    </div>
+    ${generateNumberInterpretationHTML(cd, 'Caminho de Destino')}
 
     <h3>Motivação (MO): ${mo}</h3>
     <div class="numero-grande">${mo}</div>
-    <div class="card card-rosa">
-      <p><strong>Essência:</strong> Sua motivação interior e desejos profundos.</p>
-    </div>
+    ${generateNumberInterpretationHTML(mo, 'Motivação')}
 
     <h3>Eu Íntimo (EU): ${eu}</h3>
     <div class="numero-grande">${eu}</div>
-    <div class="card">
-      <p><strong>Essência:</strong> Seu eu verdadeiro e autêntico.</p>
-    </div>
+    ${generateNumberInterpretationHTML(eu, 'Eu Íntimo')}
 
     <h3>Expressão (EX): ${ex}</h3>
     <div class="numero-grande">${ex}</div>
-    <div class="card card-roxo">
-      <p><strong>Essência:</strong> Como você se expressa no mundo.</p>
-    </div>
+    ${generateNumberInterpretationHTML(ex, 'Expressão')}
 
     <h3>Mérito (ME): ${me}</h3>
     <div class="numero-grande">${me}</div>
-    <div class="card card-rosa">
-      <p><strong>Essência:</strong> Seu mérito pessoal e valor intrínseco.</p>
-    </div>
+    ${generateNumberInterpretationHTML(me, 'Mérito')}
   </div>
 
   <!-- CICLOS DE VIDA -->
