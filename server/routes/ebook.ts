@@ -20,16 +20,20 @@ async function htmlToPdfSimple(htmlContent: string, fullName: string): Promise<B
   try {
     console.log('[htmlToPdfSimple] Iniciando conversão HTML para PDF...');
     
-    // Remover tags HTML e extrair texto
-    const textContent = htmlContent
-      .replace(/<style[^>]*>.*?<\/style>/g, '') // Remover estilos
-      .replace(/<script[^>]*>.*?<\/script>/g, '') // Remover scripts
-      .replace(/<[^>]*>/g, '') // Remover tags HTML
+    // Remover tags HTML mas PRESERVAR o conteúdo de texto
+    // Usar [\s\S] em vez de . para capturar quebras de linha
+    let textContent = htmlContent
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/g, '') // Remover estilos (com dotAll)
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/g, '') // Remover scripts (com dotAll)
+      .replace(/<[^>]*>/g, '\n') // Substituir tags por quebra de linha
       .replace(/&nbsp;/g, ' ')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>')
       .replace(/&amp;/g, '&')
+      .replace(/\n\s*\n/g, '\n') // Remover linhas em branco múltiplas
       .trim();
+    
+    console.log('[htmlToPdfSimple] Conteúdo extraído, tamanho:', textContent.length);
     
     // Criar PDF
     const pdf = new jsPDF({

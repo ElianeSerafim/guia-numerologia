@@ -77,6 +77,8 @@
 - [x] Chrome reinstalado após reset do sandbox
 - [x] Migração de Puppeteer para jsPDF - CONCLUÍDA
 - [x] E-book gerado com sucesso usando jsPDF (PDF 1.3)
+- [x] Correção: Regex para remover CSS com [°s\S] em vez de . - CONCLUÍDA
+- [x] Conteúdo numerológico agora aparece corretamente no PDF - TESTADO
 
 
 ## Erro: WhatsApp não salva corretamente no Admin
