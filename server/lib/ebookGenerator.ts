@@ -250,9 +250,10 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
       I. Grade Vibracional<br/>
       II. Números Essenciais<br/>
       III. Ciclos de Vida<br/>
-      IV. Realizações (Pínáculos)<br/>
+      IV. Realizações (Pínaculos)<br/>
       V. Desafios<br/>
-      VI. Previsões para 2026
+      VI. Ciclos Trimestrais 2026<br/>
+      VII. Previsões para 2026
     </p>
     <div class="divisor">✦ ✦ ✦</div>
     <p style="margin-top: 2rem; text-align: center; color: #999;">
@@ -412,9 +413,34 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     </div>
   </div>
 
+  <!-- CICLOS TRIMESTRAIS -->
+  <div class="page">
+    <h2>VI. Ciclos Trimestrais 2026</h2>
+    <div class="divisor">✦ ✦ ✦</div>
+    <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
+      Os ciclos trimestrais detalham as vibrações específicas de cada trimestre do ano pessoal, indicando o "clima" e as oportunidades de cada período.
+    </p>
+    <div class="card card-rosa">
+      <p><strong>1º Trimestre (Junho a Agosto)</strong></p>
+      <p>Foco em planejamento e base emocional. Período de início e estabelecimento de direções.</p>
+    </div>
+    <div class="card card-roxo">
+      <p><strong>2º Trimestre (Setembro a Novembro)</strong></p>
+      <p>Foco em ação e expansão. Período para fazer acontecer no mundo prático.</p>
+    </div>
+    <div class="card card-rosa">
+      <p><strong>3º Trimestre (Dezembro a Fevereiro)</strong></p>
+      <p>Foco em colheita e análise. Período para avaliar resultados e fazer ajustes.</p>
+    </div>
+    <div class="card card-roxo">
+      <p><strong>4º Trimestre (Março a Maio)</strong></p>
+      <p>Foco em encerramento. Período de preparação para a nova jornada.</p>
+    </div>
+  </div>
+
   <!-- PREVISÕES 2026 -->
   <div class="page">
-    <h2>VI. Previsões para 2026</h2>
+    <h2>VII. Previsões para 2026</h2>
     <div class="divisor">✦ ✦ ✦</div>
 
     <h3>Seu Ano Pessoal: ${personalYear2026}</h3>

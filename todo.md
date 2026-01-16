@@ -87,3 +87,14 @@
 - [x] Causa: Estado newWhatsappLink não sincroniza com config quando muda - IDENTIFICADA
 - [x] Solução: Adicionar useEffect para sincronizar estado com config - IMPLEMENTADA
 - [x] Teste: Verificar se WhatsApp salvo é recuperado corretamente - PRONTO PARA TESTAR
+
+
+## Correção: Ciclos Trimestrais (Períodos de 3 meses)
+
+- [x] Localizar código de cálculo de ciclos trimestrais no dashboard
+- [x] Corrigir 1º Trimestre: AP + Mês de Nascimento (reduzido)
+- [x] Corrigir 2º Trimestre: AP + Dia de Nascimento (reduzido)
+- [x] Corrigir 3º Trimestre: AP + Ano de Nascimento (reduzido)
+- [x] Corrigir 4º Trimestre: AP + Próximo AP
+- [x] Testar com exemplo: Adriana (04/06/1975) em 2026
+- [x] Atualizar e-book com ciclos trimestrais corretos

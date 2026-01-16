@@ -172,18 +172,18 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const pm = reduceNumber(pyCurrentReduced + currentMonth);
 
   // Ciclos Trimestrais para o Ano Pessoal Atual
-  const ct1 = reduceNumber(pyCurrentReduced + c1);
-  const ct2 = reduceNumber(pyCurrentReduced + r1);
-  const ct3Raw = pyCurrentReduced - dm;
-  const ct3 = ct3Raw <= 0 ? reduceNumber(ct3Raw + 9) : reduceNumber(ct3Raw);
-  const ct4 = reduceNumber(ct1 + ct2 + ct3);
+  const ct1 = reduceNumber(pyCurrentReduced + monthReduced);
+  const ct2 = reduceNumber(pyCurrentReduced + dayReduced);
+  const ct3 = reduceNumber(pyCurrentReduced + yearReduced);
+  const pyNextYear = reduceNumber(dayReduced + monthReduced + reduceNumber(currentYear + 1));
+  const ct4 = reduceNumber(pyCurrentReduced + pyNextYear);
 
   // Ciclos Trimestrais para 2026
-  const ct1_2026 = reduceNumber(py2026 + c1);
-  const ct2_2026 = reduceNumber(py2026 + r1);
-  const ct3_2026Raw = py2026 - dm;
-  const ct3_2026 = ct3_2026Raw <= 0 ? reduceNumber(ct3_2026Raw + 9) : reduceNumber(ct3_2026Raw);
-  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026);
+  const ct1_2026 = reduceNumber(py2026 + monthReduced);
+  const ct2_2026 = reduceNumber(py2026 + dayReduced);
+  const ct3_2026 = reduceNumber(py2026 + yearReduced);
+  const py2027 = reduceNumber(dayReduced + monthReduced + reduceNumber(2027));
+  const ct4_2026 = reduceNumber(py2026 + py2027);
 
   // ========================================
   // 6. IDADE
