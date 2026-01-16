@@ -1,6 +1,5 @@
 import { NumerologyChart } from '@/types';
-
-import { getNumberInterpretation, getElementInterpretation } from './knowledgeBase';
+import { getNumberInterpretation } from './knowledgeBase';
 
 function generateNumberInterpretationHTML(number: number, label: string): string {
   const interp = getNumberInterpretation(number);
@@ -21,8 +20,8 @@ function generateNumberInterpretationHTML(number: number, label: string): string
 
 /**
  * Gera HTML premium de e-book numerológico
+ * Baseado no modelo profissional de Eliane Serafim
  * Paleta: Roxo #4A148C, Rosa #C71585, Dourado #D4AF37
- * Design: Mobile-first, A4, sem páginas em branco
  */
 export function exportarEbookHTML(chart: NumerologyChart): string {
   try {
@@ -55,7 +54,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
     console.log('[ebookGenerator] Dados extraídos:', { fullName, cd, mo, eu, ex, me, personalYear2026, dataNascimento });
 
-    // HTML do e-book
+    // HTML do e-book com template profissional de Eliane
     const html = `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
