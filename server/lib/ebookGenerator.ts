@@ -1,5 +1,5 @@
 import { NumerologyChart } from '@/types';
-import { getNumberInterpretation } from './knowledgeBase';
+import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation } from './knowledgeBase';
 
 function generateNumberInterpretationHTML(number: number, label: string): string {
   const interp = getNumberInterpretation(number);
@@ -375,25 +375,25 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     <h3>1ª Realização: ${cd}</h3>
     <p>Período: 0 aos ${36 - cd} anos</p>
     <div class="card card-roxo">
-      <p>Primeira fase de realização e desenvolvimento pessoal.</p>
+      <p>${getRealizationInterpretation(cd) || 'Primeira fase de realização e desenvolvimento pessoal.'}</p>
     </div>
 
     <h3>2ª Realização: ${mo}</h3>
     <p>Período: ${36 - cd + 1} aos ${36 - cd + 10} anos</p>
     <div class="card card-rosa">
-      <p>Segunda fase de realização e maturidade.</p>
+      <p>${getRealizationInterpretation(mo) || 'Segunda fase de realização e maturidade.'}</p>
     </div>
 
     <h3>3ª Realização: ${eu}</h3>
     <p>Período: ${36 - cd + 11} aos ${36 - cd + 20} anos</p>
     <div class="card">
-      <p>Terceira fase de realização e plenitude.</p>
+      <p>${getRealizationInterpretation(eu) || 'Terceira fase de realização e plenitude.'}</p>
     </div>
 
     <h3>4ª Realização: ${ex}</h3>
     <p>Período: ${36 - cd + 21}+ anos</p>
     <div class="card card-roxo">
-      <p>Quarta fase de realização e legado.</p>
+      <p>${getRealizationInterpretation(ex) || 'Quarta fase de realização e legado.'}</p>
     </div>
   </div>
 
@@ -405,19 +405,19 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     <h3>1º Desafio</h3>
     <p>Período: 0 aos 29 anos</p>
     <div class="card card-rosa">
-      <p>Seu primeiro grande desafio na jornada de vida.</p>
+      <p>${getChallengeInterpretation(cd) || 'Seu primeiro grande desafio na jornada de vida.'}</p>
     </div>
 
     <h3>2º Desafio</h3>
     <p>Período: 29 aos 56 anos</p>
     <div class="card">
-      <p>Seu segundo grande desafio e oportunidade de crescimento.</p>
+      <p>${getChallengeInterpretation(mo) || 'Seu segundo grande desafio e oportunidade de crescimento.'}</p>
     </div>
 
     <h3>O Seu Pedágio (Desafio Maior)</h3>
     <p>Período: Por toda a vida</p>
     <div class="card card-roxo">
-      <p><strong>Este é o seu maior desafio pessoal:</strong> A lição fundamental que você veio aprender nesta vida.</p>
+      <p><strong>Este é o seu maior desafio pessoal:</strong> ${getChallengeInterpretation(eu) || 'A lição fundamental que você veio aprender nesta vida.'}</p>
     </div>
   </div>
 

@@ -165,6 +165,48 @@ export function getNumberInterpretation(number: number | string): NumberInterpre
   return numberInterpretations[num] || null;
 }
 
+// Interpretações de Desafios adaptadas por número
+export const challengeInterpretations: Record<number | string, string> = {
+  1: "Aprender a equilibrar independência com colaboração. O desafio é não ser dominador e reconhecer que precisa dos outros.",
+  2: "Desenvolver assertividade e confiança em si mesmo. O desafio é sair da passividade e tomar decisões próprias.",
+  3: "Focar e aprofundar ao invés de dispersar. O desafio é completar projetos e ser consistente.",
+  4: "Flexibilizar rigidez e aceitar mudanças. O desafio é aprender que nem tudo pode ser controlado.",
+  5: "Encontrar estabilidade dentro da liberdade. O desafio é não usar a liberdade como fuga.",
+  6: "Aprender a colocar limites saudáveis. O desafio é não se sacrificar pelos outros.",
+  7: "Confiar em sua intuição e conhecimento. O desafio é não se isolar em análise paralisante.",
+  8: "Usar poder com responsabilidade e ética. O desafio é não ser ganancioso ou manipulador.",
+  9: "Completar ciclos e deixar ir. O desafio é aceitar perdas e transformações necessárias.",
+  11: "Integrar sensibilidade com ação. O desafio é transformar intuição em realização prática.",
+  22: "Construir legados duradouros. O desafio é manter visão ampla sem perder em detalhes.",
+  33: "Servir com compaixão sem se esgotar. O desafio é equilibrar dar e receber."
+};
+
+// Interpretações de Realizações adaptadas por número
+export const realizationInterpretations: Record<number | string, string> = {
+  1: "Período de liderança, inovação e independência. Oportunidade para iniciar novos projetos e ser pioneiro.",
+  2: "Período de relacionamentos, parcerias e diplomacia. Oportunidade para colaborar e criar harmonia.",
+  3: "Período de expressão criativa e comunicação. Oportunidade para se expressar e inspirar outros.",
+  4: "Período de construção, estrutura e trabalho. Oportunidade para estabelecer bases sólidas.",
+  5: "Período de liberdade, mudança e aventura. Oportunidade para explorar novas possibilidades.",
+  6: "Período de responsabilidade, família e serviço. Oportunidade para cuidar e criar harmonia.",
+  7: "Período de introspecção, sabedoria e espiritualidade. Oportunidade para aprofundar conhecimento.",
+  8: "Período de poder, abundância e realização material. Oportunidade para alcançar sucesso.",
+  9: "Período de conclusão, transformação e humanitarismo. Oportunidade para completar ciclos.",
+  11: "Período de iluminação e inspiração. Oportunidade para conectar-se com propósito maior.",
+  22: "Período de construção de legados. Oportunidade para impactar o mundo de forma duradoura.",
+  33: "Período de compaixão universal. Oportunidade para servir e elevar consciência coletiva."
+};
+
 export function getElementInterpretation(element: string): ElementInterpretation | null {
   return elementInterpretations[element.toUpperCase()] || null;
+}
+
+export function getChallengeInterpretation(number: number | string): string | null {
+  const num = typeof number === 'string' ? parseInt(number, 10) : number;
+  return challengeInterpretations[num] || null;
+}
+
+export function getRealizationInterpretation(number: number | string): string | null {
+  const num = typeof number === 'string' ? parseInt(number, 10) : number;
+  return realizationInterpretations[num] || null;
 }
