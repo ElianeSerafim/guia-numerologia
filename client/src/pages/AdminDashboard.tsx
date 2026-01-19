@@ -54,18 +54,17 @@ export default function AdminDashboard() {
   const [adminError, setAdminError] = useState('');
   const [renascimentoData, setRenascimentoData] = useState<Record<string, { hasFactoGrave: boolean; factoGraveType: string; notes: string }>>({});
 
+  // Verificar se usuário é admin no banco de dados
+  const { data: adminStatus, isLoading: checkingAdmin } = trpc.admins.isAdmin.useQuery();
+
   // Verificar autenticação (apenas admin)
   useEffect(() => {
-    // Permitir acesso ao admin se for super admin por email
-    const userEmail = localStorage.getItem('numerology_user_email');
-    console.log('AdminDashboard - userEmail:', userEmail);
-    
-    // Se não for super admin, redirecionar imediatamente
-    if (userEmail !== 'eliane@artwebcreative.com.br') {
-      console.log('Acesso negado - redirecionando para home');
+    // Se não for admin (verificado no banco), redirecionar
+    if (!checkingAdmin && !adminStatus?.isAdmin) {
+      console.log('Acesso negado - usuário não é admin');
       setLocation('/');
     }
-  }, [setLocation]);
+  }, [checkingAdmin, adminStatus, setLocation]);
 
   // Sincronizar newWhatsappLink quando config muda
   useEffect(() => {

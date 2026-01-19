@@ -1,0 +1,8 @@
+{
+  "query": "INSERT INTO admins (email, name, role, isActive, createdBy, createdAt, updatedAt) VALUES ('eliane@artwebcreative.com.br', 'Eliane Serafim', 'admin', true, 'system', NOW(), NOW()) ON CONFLICT (email) DO UPDATE SET role='admin', isActive=true, updatedAt=NOW();",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3CzvXe7TNQM217h.285ae8e8654a --database DDDSdpbSdmbb2LJ2vD6g8U --execute INSERT INTO admins (email, name, role, isActive, createdBy, createdAt, updatedAt) VALUES ('eliane@artwebcreative.com.br', 'Eliane Serafim', 'admin', true, 'system', NOW(), NOW()) ON CONFLICT (email) DO UPDATE SET role='admin', isActive=true, updatedAt=NOW();",
+  "returncode": 1,
+  "logs": [
+    "ERROR 1064 (42000) at line 1: You have an error in your SQL syntax; check the manual that corresponds to your TiDB version for the right syntax to use line 1 column 190 near \"CONFLICT (email) DO UPDATE SET role='admin', isActive=true, updatedAt=NOW()\""
+  ]
+}

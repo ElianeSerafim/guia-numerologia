@@ -140,6 +140,15 @@ export const appRouter = router({
    * Admin Management Routes
    */
   admins: router({
+    // Check if current user is admin
+    isAdmin: protectedProcedure.query(async ({ ctx }) => {
+      const adminUser = await db.getAdminByEmail(ctx.user?.email || '');
+      return {
+        isAdmin: !!adminUser,
+        admin: adminUser || null,
+      };
+    }),
+
     // Get all admins (admin only)
     getAll: adminProcedure.query(async () => {
       return await db.getAllAdmins();
