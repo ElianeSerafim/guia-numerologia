@@ -210,3 +210,24 @@ export function getRealizationInterpretation(number: number | string): string | 
   const num = typeof number === 'string' ? parseInt(number, 10) : number;
   return realizationInterpretations[num] || null;
 }
+
+// Interpretações de Ciclos Trimestrais adaptadas por número
+export const quarterlyInterpretations: Record<number | string, string> = {
+  1: "Trimestre de liderança e novos começos. Período para iniciar projetos, tomar decisões corajosas e estabelecer sua autoridade. Foco em independência e inovação.",
+  2: "Trimestre de relacionamentos e diplomacia. Período para colaborar, ouvir e criar harmonia. Foco em parcerias, sensibilidade e intuição.",
+  3: "Trimestre de criatividade e expressão. Período para se comunicar, criar e inspirar. Foco em alegria, talento artístico e networking.",
+  4: "Trimestre de estrutura e trabalho. Período para construir bases sólidas, organizar e disciplinar. Foco em confiabilidade, estabilidade e produtividade.",
+  5: "Trimestre de liberdade e mudança. Período para explorar, adaptar e experimentar. Foco em flexibilidade, aventura e transformação.",
+  6: "Trimestre de responsabilidade e cuidado. Período para servir, harmonizar e cuidar. Foco em família, comunidade e ajuda ao próximo.",
+  7: "Trimestre de introspecção e sabedoria. Período para aprofundar conhecimento, meditar e refletir. Foco em espiritualidade, análise e verdade.",
+  8: "Trimestre de poder e abundância. Período para manifestar sucesso, liderar com autoridade e alcançar objetivos materiais. Foco em realização e prosperidade.",
+  9: "Trimestre de conclusão e transformação. Período para completar ciclos, soltar o passado e preparar renovação. Foco em humanitarismo e evolução.",
+  11: "Trimestre de iluminação e inspiração. Período para conectar-se com propósito maior, intuição elevada e visão espiritual. Foco em iluminação e serviço.",
+  22: "Trimestre de construção de legados. Período para impactar o mundo de forma duradoura, construir grandes projetos. Foco em visão ampla e realização concreta.",
+  33: "Trimestre de compaixão universal. Período para servir com amor incondicional, elevar consciência coletiva. Foco em cura e elevação espiritual."
+};
+
+export function getQuarterlyInterpretation(number: number | string): string | null {
+  const num = typeof number === 'string' ? parseInt(number, 10) : number;
+  return quarterlyInterpretations[num] || null;
+}

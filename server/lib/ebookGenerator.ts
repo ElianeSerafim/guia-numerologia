@@ -1,5 +1,5 @@
 import { NumerologyChart } from '@/types';
-import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation } from './knowledgeBase';
+import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation, getQuarterlyInterpretation } from './knowledgeBase';
 
 function generateNumberInterpretationHTML(number: number, label: string): string {
   const interp = getNumberInterpretation(number);
