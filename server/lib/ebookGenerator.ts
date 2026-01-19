@@ -529,23 +529,43 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     <h2>VII. Ciclos Trimestrais 2026</h2>
     <div class="divisor">✦ ✦ ✦</div>
     <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
-      Os ciclos trimestrais detalham as vibrações específicas de cada trimestre do ano pessoal, indicando o "clima" e as oportunidades de cada período.
+      Os ciclos trimestrais detalham as vibrações específicas de cada trimestre do ano pessoal em 2026. Cada período traz uma energia única, oportunidades e desafios que o convidam a evoluir.
     </p>
-    <div class="card card-rosa">
-      <p><strong>1º Trimestre (Junho a Agosto)</strong></p>
-      <p>Foco em planejamento e base emocional. Período de início e estabelecimento de direções.</p>
+    
+    <div class="card card-rosa" style="margin-bottom: 1.5rem;">
+      <p><strong>1º Trimestre (Junho a Agosto 2026) - Ciclo Trimestral 1</strong></p>
+      <p style="line-height: 1.6; color: #333;">
+        A energia do 1 marca o início de um novo ciclo trimestral. Este é um período de liderança e novos começos. 
+        Você é convidado a tomar iniciativas, começar projetos que estavam em espera e estabelecer novas direções. 
+        É tempo de coragem, inovação e ação decisiva. Confie em sua capacidade de liderar este período.
+      </p>
     </div>
-    <div class="card card-roxo">
-      <p><strong>2º Trimestre (Setembro a Novembro)</strong></p>
-      <p>Foco em ação e expansão. Período para fazer acontecer no mundo prático.</p>
+    
+    <div class="card card-roxo" style="margin-bottom: 1.5rem;">
+      <p><strong>2º Trimestre (Setembro a Novembro 2026) - Ciclo Trimestral 2</strong></p>
+      <p style="line-height: 1.6; color: #333;">
+        A energia do 2 traz colaboração e relacionamentos. Este é um período para aprofundar conexões, trabalhar em equipe 
+        e criar harmonia ao seu redor. Sensibilidade, intuição e diplomacia são suas ferramentas. Permita-se ser receptivo 
+        e vulnerável. As parcerias florescem neste tempo.
+      </p>
     </div>
-    <div class="card card-rosa">
-      <p><strong>3º Trimestre (Dezembro a Fevereiro)</strong></p>
-      <p>Foco em colheita e análise. Período para avaliar resultados e fazer ajustes.</p>
+    
+    <div class="card card-rosa" style="margin-bottom: 1.5rem;">
+      <p><strong>3º Trimestre (Dezembro a Fevereiro 2027) - Ciclo Trimestral 3</strong></p>
+      <p style="line-height: 1.6; color: #333;">
+        A energia do 3 desperta criatividade e expressão. Este é um período para comunicar, criar e inspirar. 
+        Sua voz importa. Compartilhe seus talentos, conecte-se com outras pessoas e celebre a vida. Criatividade, 
+        alegria e networking marcam este trimestre. Expresse-se com autenticidade.
+      </p>
     </div>
-    <div class="card card-roxo">
-      <p><strong>4º Trimestre (Março a Maio)</strong></p>
-      <p>Foco em encerramento. Período de preparação para a nova jornada.</p>
+    
+    <div class="card card-roxo" style="margin-bottom: 1.5rem;">
+      <p><strong>4º Trimestre (Março a Maio 2027) - Ciclo Trimestral 4</strong></p>
+      <p style="line-height: 1.6; color: #333;">
+        A energia do 4 convida à estrutura e consolidação. Este é um período para organizar, trabalhar com disciplina 
+        e estabelecer bases sólidas. Confiabilidade, estabilidade e produtividade são suas aliadas. Invista em fundações 
+        que duram. Prepare-se para o próximo ciclo anual com segurança e solidez.
+      </p>
     </div>
   </div>
 

@@ -213,18 +213,18 @@ export function getRealizationInterpretation(number: number | string): string | 
 
 // Interpretações de Ciclos Trimestrais adaptadas por número
 export const quarterlyInterpretations: Record<number | string, string> = {
-  1: "Trimestre de liderança e novos começos. Período para iniciar projetos, tomar decisões corajosas e estabelecer sua autoridade. Foco em independência e inovação.",
-  2: "Trimestre de relacionamentos e diplomacia. Período para colaborar, ouvir e criar harmonia. Foco em parcerias, sensibilidade e intuição.",
-  3: "Trimestre de criatividade e expressão. Período para se comunicar, criar e inspirar. Foco em alegria, talento artístico e networking.",
-  4: "Trimestre de estrutura e trabalho. Período para construir bases sólidas, organizar e disciplinar. Foco em confiabilidade, estabilidade e produtividade.",
-  5: "Trimestre de liberdade e mudança. Período para explorar, adaptar e experimentar. Foco em flexibilidade, aventura e transformação.",
-  6: "Trimestre de responsabilidade e cuidado. Período para servir, harmonizar e cuidar. Foco em família, comunidade e ajuda ao próximo.",
-  7: "Trimestre de introspecção e sabedoria. Período para aprofundar conhecimento, meditar e refletir. Foco em espiritualidade, análise e verdade.",
-  8: "Trimestre de poder e abundância. Período para manifestar sucesso, liderar com autoridade e alcançar objetivos materiais. Foco em realização e prosperidade.",
-  9: "Trimestre de conclusão e transformação. Período para completar ciclos, soltar o passado e preparar renovação. Foco em humanitarismo e evolução.",
-  11: "Trimestre de iluminação e inspiração. Período para conectar-se com propósito maior, intuição elevada e visão espiritual. Foco em iluminação e serviço.",
-  22: "Trimestre de construção de legados. Período para impactar o mundo de forma duradoura, construir grandes projetos. Foco em visão ampla e realização concreta.",
-  33: "Trimestre de compaixão universal. Período para servir com amor incondicional, elevar consciência coletiva. Foco em cura e elevação espiritual."
+  1: "Trimestre de liderança e novos começos. Este é um período de iniciativa e coragem. A energia do 1 convida você a tomar as rédeas, começar aquilo que sempre adiou e estabelecer sua autoridade com segurança. É tempo de inovação, independência e ação decisiva. Confie em sua capacidade de liderar.",
+  2: "Trimestre de relacionamentos e diplomacia. A energia do 2 traz suavidade e colaboração. Este é um período para aprofundar relacionamentos, ouvir com empatia e criar harmonia ao seu redor. Sensibilidade, intuição e parcerias florescem. Permita-se ser receptivo e vulnerável.",
+  3: "Trimestre de criatividade e expressão. A energia do 3 desperta sua criatividade. Este é um período para se comunicar com alegria, expressar seus talentos artísticos e conectar-se com outras pessoas. Sua voz importa. Compartilhe suas ideias, crie, inspire e celebre a vida.",
+  4: "Trimestre de estrutura e trabalho. A energia do 4 convida à construção sólida. Este é um período para organizar sua vida, trabalhar com disciplina e estabelecer bases duradouras. Confiabilidade, estabilidade e produtividade são suas aliadas. Invista em fundações que duram.",
+  5: "Trimestre de liberdade e mudança. A energia do 5 traz movimento e transformação. Este é um período para explorar, adaptar-se e experimentar novas possibilidades. Flexibilidade, aventura e curiosidade o guiam. Abraçe a mudança com confiança e leveza.",
+  6: "Trimestre de responsabilidade e cuidado. A energia do 6 desperta seu coração. Este é um período para servir, harmonizar e cuidar de quem ama. Família, comunidade e ajuda ao próximo ganham importância. Equilibre o cuidado com os outros com o cuidado consigo mesmo.",
+  7: "Trimestre de introspecção e sabedoria. A energia do 7 convida à profundidade. Este é um período para aprofundar seu conhecimento, meditar, refletir e conectar-se com sua verdade interior. Espiritualidade, análise e autoconhecimento florescem. Ouça sua intuição.",
+  8: "Trimestre de poder e abundância. A energia do 8 manifesta sucesso material. Este é um período para exercer liderança com autoridade, alcançar objetivos ambiciosos e atrair prosperidade. Realização, poder e abundância estão ao seu alcance. Acredite em seu potencial.",
+  9: "Trimestre de conclusão e transformação. A energia do 9 convida ao encerramento consciente. Este é um período para completar ciclos, soltar o que não serve mais e preparar renovação. Humanitarismo, compaixão e evolução espiritual marcam este tempo. Deixe ir com amor.",
+  11: "Trimestre de iluminação e inspiração. A energia do 11 eleva sua consciência. Este é um período para conectar-se com seu propósito maior, acessar intuição elevada e receber inspiração espiritual. Iluminação e serviço elevado guiam seu caminho. Confie na sabedoria interior.",
+  22: "Trimestre de construção de legados. A energia do 22 materializa visões grandiosas. Este é um período para impactar o mundo de forma duradoura, construir projetos significativos e deixar um legado. Visão ampla e realização concreta caminham juntas. Sonhe grande.",
+  33: "Trimestre de compaixão universal. A energia do 33 expande seu coração. Este é um período para servir com amor incondicional, elevar a consciência coletiva e trazer cura. Compaixão, elevação espiritual e amor universal marcam este tempo sagrado. Sirva com o coração aberto."
 };
 
 export function getQuarterlyInterpretation(number: number | string): string | null {
