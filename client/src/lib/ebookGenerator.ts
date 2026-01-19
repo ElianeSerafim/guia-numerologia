@@ -79,6 +79,7 @@ const getEbookHTML = (content: string): string => {
 
 html, body {
   height: 100%;
+  width: 100%;
 }
 
 body {
@@ -86,32 +87,54 @@ body {
   line-height: 1.5;
   color: #2c2c2c;
   background-color: #f5f3f0;
-  padding: 1rem;
-  font-size: 13px;
+  padding: 0.75rem;
+  font-size: 12px;
   orphans: 3;
   widows: 3;
+  /* Mobile First */
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
+/* Tablet (768px - 1024px) */
 @media (min-width: 768px) {
   body {
-    padding: 1.5rem;
+    padding: 1rem;
     max-width: 850px;
     margin: 0 auto;
+    font-size: 13px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  body {
+    padding: 1.5rem;
+    max-width: 900px;
     font-size: 14px;
   }
 }
 
 h1 {
-  font-size: 1.3em;
+  font-size: 1.1em;
   text-align: center;
-  margin: 0.5rem 0 0.3rem;
+  margin: 0.4rem 0 0.2rem;
   color: #4A148C;
   font-weight: 600;
   letter-spacing: 0.5px;
   page-break-after: avoid;
+  line-height: 1.3;
 }
 
 @media (min-width: 768px) {
+  h1 {
+    font-size: 1.4em;
+    margin: 0.6rem 0 0.3rem;
+  }
+}
+
+@media (min-width: 1024px) {
   h1 {
     font-size: 1.6em;
     margin: 0.8rem 0 0.4rem;
@@ -119,15 +142,23 @@ h1 {
 }
 
 h2 {
-  font-size: 1.1em;
+  font-size: 0.95em;
   text-align: center;
-  margin: 0.5rem 0 0.3rem;
+  margin: 0.4rem 0 0.2rem;
   color: #C71585;
   font-weight: 600;
   page-break-after: avoid;
+  line-height: 1.3;
 }
 
 @media (min-width: 768px) {
+  h2 {
+    font-size: 1.15em;
+    margin: 0.6rem 0 0.3rem;
+  }
+}
+
+@media (min-width: 1024px) {
   h2 {
     font-size: 1.3em;
     margin: 0.8rem 0 0.4rem;
@@ -135,14 +166,22 @@ h2 {
 }
 
 h3 {
-  font-size: 0.95em;
-  margin: 0.4rem 0 0.2rem;
+  font-size: 0.85em;
+  margin: 0.3rem 0 0.15rem;
   color: #4A148C;
   font-weight: 600;
   page-break-after: avoid;
+  line-height: 1.3;
 }
 
 @media (min-width: 768px) {
+  h3 {
+    font-size: 0.95em;
+    margin: 0.4rem 0 0.2rem;
+  }
+}
+
+@media (min-width: 1024px) {
   h3 {
     font-size: 1em;
     margin: 0.6rem 0 0.3rem;
@@ -150,15 +189,25 @@ h3 {
 }
 
 p {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   text-align: justify;
-  line-height: 1.5;
-  font-size: 0.93em;
+  line-height: 1.4;
+  font-size: 0.88em;
   orphans: 2;
   widows: 2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 @media (min-width: 768px) {
+  p {
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+    font-size: 0.92em;
+  }
+}
+
+@media (min-width: 1024px) {
   p {
     margin-bottom: 0.6rem;
     line-height: 1.6;
@@ -203,12 +252,20 @@ p {
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 0.4rem 0;
-  font-size: 0.82em;
+  margin: 0.3rem 0;
+  font-size: 0.75em;
   page-break-inside: avoid;
+  table-layout: fixed;
 }
 
 @media (min-width: 768px) {
+  table {
+    margin: 0.4rem 0;
+    font-size: 0.85em;
+  }
+}
+
+@media (min-width: 1024px) {
   table {
     margin: 0.6rem 0;
     font-size: 0.9em;
