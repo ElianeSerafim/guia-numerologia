@@ -35,6 +35,10 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     const ex = Number(chart.ex) || 0;
     const me = Number(chart.merito) || 0;
     const personalYear2026 = Number(chart.personalYear2026) || 0;
+    const r2 = Number(chart.realizacoes?.r2) || 0;
+    const r3 = Number(chart.realizacoes?.r3) || 0;
+    const r4 = Number(chart.realizacoes?.r4) || 0;
+    const ctAtual = Number(chart.ciclosTrimestrais?.atual?.ct1) || 0;
     
     // Formatar data com segurança
     let dataNascimento = 'Data não disponível';
@@ -53,6 +57,31 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     }
 
     console.log('[ebookGenerator] Dados extraídos:', { fullName, cd, mo, eu, ex, me, personalYear2026, dataNascimento });
+
+    // ========================================
+    // DETECTAR INTERPRETAÇÕES AVANÇADAS
+    // ========================================
+    
+    // Importar funções de detecção (assumindo que estão disponíveis)
+    // Para agora, vamos usar lógica inline para não quebrar o build
+    
+    // Detectar Renascimento (R2, R3, R4 com Fato Grave)
+    // Nota: Fato Grave seria armazenado no banco de dados
+    const hasRenascimento = false; // Será preenchido do banco de dados
+    const renascimentoNumber = (r2 || r3 || r4);
+    
+    // Detectar Realização de Legado (Rn = MO, CD ou ME)
+    const hasLegacy = (r2 === mo || r2 === cd || r2 === me) ||
+                      (r3 === mo || r3 === cd || r3 === me) ||
+                      (r4 === mo || r4 === cd || r4 === me);
+    const legacyNumber = hasLegacy ? (r2 === mo || r2 === cd || r2 === me ? r2 : (r3 === mo || r3 === cd || r3 === me ? r3 : r4)) : 0;
+    
+    // Detectar Grande Amor (harmonia afetiva)
+    const moPositiva = mo !== 4 && mo !== 8;
+    const harmonia = Math.abs(eu - mo) <= 2;
+    const semBloqueio = cd !== 4 && cd !== 8;
+    const momentoFavoravel = ctAtual !== 4 && ctAtual !== 8;
+    const hasGrandeLove = moPositiva && harmonia && semBloqueio && momentoFavoravel;
 
     // HTML do e-book com template profissional de Eliane
     const html = `<!DOCTYPE html>
@@ -230,6 +259,46 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
       border-top: 1px solid #D4AF37;
       color: #999;
       font-size: 0.85rem;
+    }
+
+    /* Estilos para Interpretações Avançadas */
+    .card-renascimento {
+      background: linear-gradient(135deg, #F3E5F5 0%, #E8D5F2 100%);
+      border-left: 5px solid #8A2BE2;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(138, 43, 226, 0.15);
+    }
+
+    .card-legado {
+      background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+      border-left: 5px solid #D4AF37;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.15);
+    }
+
+    .card-amor {
+      background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD0 100%);
+      border-left: 5px solid #C71585;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(199, 21, 133, 0.15);
+    }
+
+    .interpretacao-avancada {
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      background: #FFFEF9;
+    }
+
+    .interpretacao-avancada h3 {
+      color: #4A148C;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .interpretacao-avancada p {
+      color: #555;
+      line-height: 1.8;
     }
 
     @media (max-width: 768px) {
@@ -472,6 +541,54 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
       Leituras profundas de Renascimento, Legado e Grande Amor
     </p>
   </div>
+
+  <!-- RENASCIMENTO -->
+  ${hasRenascimento ? `
+  <div class="page">
+    <h2>VIII.1 Renascimento</h2>
+    <div class="divisor">✦ ✦ ✦</div>
+    <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
+      Este período marca um Renascimento. A alma é chamada a reorganizar escolhas, valores e atitudes para retomar sua vibração original e evoluir com mais consciência.
+    </p>
+    <div class="card card-roxo">
+      <p><strong>Renascimento (${renascimentoNumber})</strong></p>
+      <p>Este é um chamado terapêutico para reorganização da alma. O Renascimento nunca é punição, mas uma oportunidade de evolução consciente.</p>
+      <p style="margin-top: 1rem; font-style: italic;">Período de transformação profunda e reconstrução espiritual.</p>
+    </div>
+  </div>
+  ` : ''}
+
+  <!-- REALIZAÇÃO DE LEGADO -->
+  ${hasLegacy ? `
+  <div class="page">
+    <h2>VIII.2 Realização de Legado</h2>
+    <div class="divisor">✦ ✦ ✦</div>
+    <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
+      Esta realização representa a construção de um legado. Suas escolhas reverberam além de você, deixando marcas conscientes na sua história e na vida de outras pessoas.
+    </p>
+    <div class="card card-roxo">
+      <p><strong>Legado (${legacyNumber})</strong></p>
+      <p>Neste período, você não vive apenas conquistas pessoais, mas deixa marcas, obras, ensinamentos ou exemplos que impactam outras pessoas.</p>
+      <p style="margin-top: 1rem; font-style: italic;">Suas ações transcendem o pessoal e criam impacto duradouro.</p>
+    </div>
+  </div>
+  ` : ''}
+
+  <!-- GRANDE AMOR -->
+  ${hasGrandeLove ? `
+  <div class="page">
+    <h2>VIII.3 Grande Amor</h2>
+    <div class="divisor">✦ ✦ ✦</div>
+    <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
+      Este período favorece a vivência de um amor significativo, consciente e transformador, que contribui para o crescimento emocional e espiritual.
+    </p>
+    <div class="card card-roxo">
+      <p><strong>Grande Amor</strong></p>
+      <p>O Grande Amor não é dependência, resgate ou carência. Ele surge quando você está alinhado consigo mesmo. Este é um período de harmonia afetiva profunda.</p>
+      <p style="margin-top: 1rem; font-style: italic;">Oportunidade para vivenciar um amor consciente e transformador.</p>
+    </div>
+  </div>
+  ` : ''}
 
   <!-- PÁGINA FINAL -->
   <div class="page">

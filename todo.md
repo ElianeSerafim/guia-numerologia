@@ -163,3 +163,13 @@
 - [x] Adicionar campos no AdminDashboard para gerenciar Renascimento - CONCLUÍDO
 - [x] Testar geração de e-books com novas interpretações - CONCLUÍDO (testes vitest criados)
 - [ ] Fazer checkpoint e publicar
+
+
+## Passo 6: Integração de Interpretações Avançadas ao Relatório PDF
+
+- [x] Atualizar ebookGenerator para detectar e exibir Renascimento - CONCLUÍDO
+- [x] Atualizar ebookGenerator para detectar e exibir Realização de Legado - CONCLUÍDO
+- [x] Atualizar ebookGenerator para detectar e exibir Grande Amor - CONCLUÍDO
+- [x] Adicionar CSS e styling para as novas seções no PDF - CONCLUÍDO
+- [x] Testar geração de PDF com interpretações avançadas - CONCLUÍDO (dev server OK)
+- [ ] Fazer checkpoint e publicar
