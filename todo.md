@@ -226,3 +226,11 @@
 - [x] Adicionar mensagem acolhedora para upgrade - CONCLUÍDO
 - [x] Testar fluxo completo de planos e bloqueio - CONCLUÍDO (dev server OK)
 - [ ] Fazer checkpoint e publicar
+
+
+## Passo 12: Modal de Confirmação de Dados Antes do Cálculo
+
+- [x] Criar modal de confirmação de dados no Calculator - CONCLUÍDO
+- [x] Adicionar validação obrigatória antes do cálculo - CONCLUÍDO
+- [x] Testar fluxo de confirmação - CONCLUÍDO (dev server OK)
+- [ ] Fazer checkpoint e publicar

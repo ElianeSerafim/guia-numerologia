@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowRight, AlertCircle } from 'lucide-react';
+import { ArrowRight, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { validateBirthDate } from '../lib/dateValidation';
 
 /**
@@ -20,6 +20,9 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
   const [name, setName] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [errors, setErrors] = useState<{ name?: string; birthDate?: string }>({});
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [pendingName, setPendingName] = useState('');
+  const [pendingBirthDate, setPendingBirthDate] = useState('');
 
   const validate = () => {
     const newErrors: { name?: string; birthDate?: string } = {};
@@ -50,11 +53,27 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validate()) {
-      onSubmit(name, birthDate);
+      setPendingName(name);
+      setPendingBirthDate(birthDate);
+      setShowConfirmation(true);
     }
   };
 
+  const handleConfirm = () => {
+    onSubmit(pendingName, pendingBirthDate);
+    setShowConfirmation(false);
+    setPendingName('');
+    setPendingBirthDate('');
+  };
+
+  const handleCancel = () => {
+    setShowConfirmation(false);
+    setPendingName('');
+    setPendingBirthDate('');
+  };
+
   return (
+    <>
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Name Input */}
       <div className="space-y-2">
@@ -157,5 +176,59 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
         Seus dados são processados localmente e não são armazenados em nossos servidores.
       </p>
     </form>
+
+    {/* Confirmation Modal */}
+    {showConfirmation && (
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6 animate-in fade-in zoom-in duration-300">
+          {/* Header */}
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
+              <CheckCircle2 className="text-purple-600" size={24} />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-900">Confirme seus dados</h3>
+              <p className="text-sm text-slate-600">Verifique se as informações estão corretas</p>
+            </div>
+          </div>
+
+          {/* Data Review */}
+          <div className="space-y-4 bg-slate-50 rounded-lg p-4">
+            <div>
+              <p className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Nome de Solteiro</p>
+              <p className="text-lg font-semibold text-slate-900 mt-1">{pendingName}</p>
+            </div>
+            <div className="border-t border-slate-200 pt-4">
+              <p className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Data de Nascimento</p>
+              <p className="text-lg font-semibold text-slate-900 mt-1">{pendingBirthDate}</p>
+            </div>
+          </div>
+
+          {/* Warning Message */}
+          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+            <p className="text-sm text-amber-900">
+              <span className="font-semibold">⚠️ Atenção:</span> Você tem direito a apenas <span className="font-bold">1 cálculo</span> com este plano. Certifique-se de que os dados estão corretos antes de prosseguir.
+            </p>
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-3 pt-4">
+            <button
+              onClick={handleCancel}
+              className="flex-1 px-4 py-3 rounded-lg border-2 border-slate-300 text-slate-900 font-semibold hover:bg-slate-50 transition-colors"
+            >
+              Corrigir Dados
+            </button>
+            <button
+              onClick={handleConfirm}
+              className="flex-1 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all"
+            >
+              Confirmar e Calcular
+            </button>
+          </div>
+        </div>
+      </div>
+    )}
+    </>
   );
 }
