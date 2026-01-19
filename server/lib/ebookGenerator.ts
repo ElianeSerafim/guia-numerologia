@@ -1,5 +1,5 @@
 import { NumerologyChart } from '@/types';
-import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation, getQuarterlyInterpretation, getRenascimentoInterpretation, getLegacyInterpretation, getGrandeLoveInterpretation } from './knowledgeBase';
+import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation, getQuarterlyInterpretation, getRenascimentoInterpretation, getLegacyInterpretation, getGrandeLoveInterpretation, getElementInterpretation } from './knowledgeBase';
 
 function generateNumberInterpretationHTML(number: number, label: string): string {
   const interp = getNumberInterpretation(number);
@@ -14,6 +14,18 @@ function generateNumberInterpretationHTML(number: number, label: string): string
       <p><strong>Aspecto Físico:</strong> ${interp.fisico}</p>
       <p><strong>Prática Afetiva:</strong> ${interp.pratica_afetiva}</p>
       <p><strong>Válvula de Escape:</strong> ${interp.valvula_escape}</p>
+    </div>
+  `;
+}
+
+function generateElementInterpretationHTML(element: string): string {
+  const interp = getElementInterpretation(element);
+  if (!interp) return '';
+  
+  return `
+    <div class="card card-rosa" style="margin-bottom: 1rem; border-left: 4px solid #C71585;">
+      <p><strong>${interp.nome}</strong></p>
+      <p style="line-height: 1.6; color: #333;">${interp.significado}</p>
     </div>
   `;
 }
@@ -349,9 +361,30 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     </p>
   </div>
 
+  <!-- VISÃO GERAL -->
+  <div class="page">
+    <h2>I. Visão Geral - Sua Jornada Numerológica</h2>
+    <div class="divisor">✦ ✦ ✦</div>
+    
+    <p style="font-size: 1.1rem; line-height: 1.8; color: #333; margin-bottom: 1.5rem;">
+      Bem-vindo(a) a esta jornada de autoconhecimento. Seu mapa numerológico é um reflexo da sua alma nesta encarnação. 
+      Cada número representa um aspecto diferente da sua essência, uma faceta da sua jornada. Juntos, eles contam a história 
+      única e sagrada da sua vida.
+    </p>
+    
+    <div style="background: linear-gradient(135deg, #f5e6f0 0%, #f0e6f5 100%); padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+      <h3 style="color: #4A148C; margin-top: 0;">Os Pilares da Sua Vida</h3>
+      ${generateElementInterpretationHTML('CD')}
+      ${generateElementInterpretationHTML('MO')}
+      ${generateElementInterpretationHTML('EU')}
+      ${generateElementInterpretationHTML('DM')}
+      ${generateElementInterpretationHTML('ME')}
+    </div>
+  </div>
+
   <!-- GRADE VIBRACIONAL -->
   <div class="page">
-    <h2>I. Grade Vibracional</h2>
+    <h2>II. Grade Vibracional</h2>
     <div class="divisor">✦ ✦ ✦</div>
     
     <div class="grade-vibracional">
@@ -389,7 +422,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
   <!-- NÚMEROS ESSENCIAIS -->
   <div class="page">
-    <h2>II. Números Essenciais</h2>
+    <h2>III. Números Essenciais</h2>
     <div class="divisor">✦ ✦ ✦</div>
 
     <h3>Caminho de Destino (CD): ${cd}</h3>
@@ -415,7 +448,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
   <!-- CICLOS DE VIDA -->
   <div class="page">
-    <h2>III. Ciclos de Vida</h2>
+    <h2>IV. Ciclos de Vida</h2>
     <div class="divisor">✦ ✦ ✦</div>
 
     <h3>1º Ciclo Formativo: ${cd}</h3>
@@ -439,7 +472,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
   <!-- REALIZAÇÕES -->
   <div class="page">
-    <h2>IV. Realizações (Pínáculos)</h2>
+    <h2>V. Realizações (Pínáculos)</h2>
     <div class="divisor">✦ ✦ ✦</div>
 
     <h3>1ª Realização: ${cd}</h3>
@@ -469,7 +502,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
   <!-- DESAFIOS -->
   <div class="page">
-    <h2>V. Desafios</h2>
+    <h2>VI. Desafios</h2>
     <div class="divisor">✦ ✦ ✦</div>
 
     <h3>1º Desafio</h3>
@@ -493,7 +526,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
   <!-- CICLOS TRIMESTRAIS -->
   <div class="page">
-    <h2>VI. Ciclos Trimestrais 2026</h2>
+    <h2>VII. Ciclos Trimestrais 2026</h2>
     <div class="divisor">✦ ✦ ✦</div>
     <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
       Os ciclos trimestrais detalham as vibrações específicas de cada trimestre do ano pessoal, indicando o "clima" e as oportunidades de cada período.
@@ -518,7 +551,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 
   <!-- PREVISÕES 2026 -->
   <div class="page">
-    <h2>VII. Previsões para 2026</h2>
+    <h2>VIII. Previsões para 2026</h2>
     <div class="divisor">✦ ✦ ✦</div>
 
     <h3>Seu Ano Pessoal: ${personalYear2026}</h3>

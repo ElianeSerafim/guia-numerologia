@@ -120,43 +120,43 @@ export const numberInterpretations: Record<number | string, NumberInterpretation
 export const elementInterpretations: Record<string, ElementInterpretation> = {
   CD: {
     nome: "Caminho do Destino",
-    significado: "Missão de vida e aprendizados práticos nesta encarnação"
+    significado: "Sua missão de vida nesta encarnação. O propósito maior que sua alma escolheu para aprender, crescer e contribuir. É o fio condutor que une suas experiências em um significado coerente."
   },
   MO: {
     nome: "Motivação",
-    significado: "Desejo interno da alma e o que move suas escolhas"
+    significado: "O desejo profundo da sua alma. Aquilo que verdadeiramente te move, independente de expectativas externas. É a bússola interna que guia suas escolhas mais autênticas."
   },
   DM: {
-    nome: "Desafio",
-    significado: "Pedágio obrigatório de aprendizado"
+    nome: "Desafio Maior",
+    significado: "O pedágio obrigatório de aprendizado nesta vida. Não é punição, mas oportunidade de evolução. Representa a área onde você mais crescerá se abraçar a transformação com consciência."
   },
   ME: {
     nome: "Mérito",
-    significado: "Força conquistada pela soma de experiências"
+    significado: "A força que você conquistou pela soma de todas as suas experiências. É o seu poder acumulado, a sabedoria que carrega e a capacidade que desenvolveu para lidar com a vida."
   },
   EU: {
     nome: "Expressão",
-    significado: "Como a pessoa se manifesta no mundo"
+    significado: "Como você naturalmente se manifesta no mundo. Sua forma de ser, sua energia, sua presença. É o reflexo visível da sua alma no dia a dia."
   },
   R1: {
     nome: "Realização 1",
-    significado: "Primeiro grande ciclo de aprendizado (sem renascimento)"
+    significado: "Seu primeiro grande ciclo de aprendizado (aproximadamente 0-29 anos). Período de formação, descoberta e construção das bases da sua vida. Sem possibilidade de renascimento, é um ciclo de consolidação."
   },
   R2: {
     nome: "Realização 2",
-    significado: "Segundo ciclo com possibilidade de renascimento"
+    significado: "Seu segundo ciclo de vida (aproximadamente 29-56 anos). Período de ação, realização e possível renascimento. Se um fato grave ocorrer, a alma se reorganiza para retomar sua vibração original com mais consciência."
   },
   R3: {
     nome: "Realização 3",
-    significado: "Ciclo de maturidade e renascimento consciente"
+    significado: "Seu terceiro ciclo (aproximadamente 56-83 anos). Ciclo de maturidade, integração e renascimento consciente. Aqui você colhe o que plantou e pode deixar legados significativos."
   },
   R4: {
     nome: "Realização 4",
-    significado: "Síntese final, legado e colheita"
+    significado: "Seu quarto ciclo (a partir de aproximadamente 83 anos). Síntese final, colheita e legado. Período de encerramento de ciclos, integração de aprendizados e herança que deixará para o mundo."
   },
   CV: {
     nome: "Ciclos de Vida",
-    significado: "Fases cronológicas que marcam evolução e desafios"
+    significado: "As fases cronológicas que marcam sua evolução. Cada ciclo traz desafios e oportunidades específicas. Compreender seus ciclos é alinhar-se com o ritmo natural da sua jornada."
   }
 };
 
