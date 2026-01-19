@@ -9,6 +9,7 @@ import { sendAccessApprovedEmail, sendAccessRejectedEmail } from '@/lib/emailSer
 import SalesReport from '@/components/SalesReport';
 import CouponManagement from '@/components/CouponManagement';
 import PaymentHistory from '@/components/PaymentHistory';
+import AdminManagement from '@/components/AdminManagement';
 
 /**
  * Admin Dashboard - Gerenciamento de Clientes e Pagamentos
@@ -45,7 +46,7 @@ export default function AdminDashboard() {
   const [searchEmail, setSearchEmail] = useState('');
   const [showSettings, setShowSettings] = useState(false);
   const [showAdminManagement, setShowAdminManagement] = useState(false);
-  const [activeTab, setActiveTab] = useState<'customers' | 'reports' | 'coupons' | 'history'>('customers');
+  const [activeTab, setActiveTab] = useState<'customers' | 'reports' | 'coupons' | 'history' | 'admins'>('customers');
   const [newWhatsappLink, setNewWhatsappLink] = useState(config.whatsappLink);
   const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
   const [notes, setNotes] = useState('');
@@ -513,6 +514,17 @@ export default function AdminDashboard() {
               <History size={18} />
               Histórico
             </button>
+            <button
+              onClick={() => setActiveTab('admins')}
+              className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
+                activeTab === 'admins'
+                  ? 'border-indigo-600 text-indigo-600'
+                  : 'border-transparent text-slate-600 hover:text-white'
+              }`}
+            >
+              <Users size={18} />
+              Admins
+            </button>
           </div>
         </div>
 
@@ -572,6 +584,13 @@ export default function AdminDashboard() {
         {activeTab === 'history' && (
           <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
             <PaymentHistory />
+          </div>
+        )}
+
+        {/* Admins Tab */}
+        {activeTab === 'admins' && (
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
+            <AdminManagement />
           </div>
         )}
 
