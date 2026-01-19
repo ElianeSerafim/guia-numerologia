@@ -20,7 +20,10 @@ import {
   Customer,
   Admin,
   renascimento,
-  InsertRenascimento
+  InsertRenascimento,
+  subscriptions,
+  InsertSubscription,
+  Subscription
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -453,4 +456,110 @@ export async function getAllRenascimentos() {
   if (!db) return [];
   
   return await db.select().from(renascimento);
+}
+
+
+/**
+ * Subscription Management
+ */
+export async function createSubscription(data: InsertSubscription): Promise<Subscription | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db
+      .insert(subscriptions)
+      .values(data)
+      .returning();
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error creating subscription:", error);
+    return null;
+  }
+}
+
+export async function getSubscriptionByCustomerId(customerId: number): Promise<Subscription | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.customerId, customerId))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error getting subscription:", error);
+    return null;
+  }
+}
+
+export async function getSubscriptionByEmail(email: string): Promise<Subscription | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.email, email))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error getting subscription by email:", error);
+    return null;
+  }
+}
+
+export async function updateSubscription(customerId: number, data: Partial<InsertSubscription>): Promise<Subscription | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db
+      .update(subscriptions)
+      .set({ ...data, updatedAt: new Date() })
+      .where(eq(subscriptions.customerId, customerId))
+      .returning();
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error updating subscription:", error);
+    return null;
+  }
+}
+
+export async function incrementMapsGenerated(customerId: number): Promise<Subscription | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const subscription = await getSubscriptionByCustomerId(customerId);
+    if (!subscription) return null;
+
+    const result = await db
+      .update(subscriptions)
+      .set({ 
+        mapsGenerated: subscription.mapsGenerated + 1,
+        updatedAt: new Date()
+      })
+      .where(eq(subscriptions.customerId, customerId))
+      .returning();
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error incrementing maps generated:", error);
+    return null;
+  }
+}
+
+export async function getAllSubscriptions(): Promise<Subscription[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db.select().from(subscriptions);
+  } catch (error) {
+    console.error("[Database] Error getting all subscriptions:", error);
+    return [];
+  }
 }

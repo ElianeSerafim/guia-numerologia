@@ -405,3 +405,6 @@ export const appRouter = router({
 });
 
 export type AppRouter = typeof appRouter;
+
+// Subscription and Payment Procedures are added below
+// This will be integrated in the next update

@@ -247,3 +247,41 @@ export const renascimentoRelations = relations(renascimento, ({ one }) => ({
   }),
 }));
 
+
+
+/**
+ * Subscriptions table for storing user subscription plans and payment info
+ * Tracks which plan each user has, how many maps they can generate, and payment status
+ */
+export const subscriptions = pgTable("subscriptions", {
+  id: serial("id").primaryKey(),
+  customerId: integer("customerId").notNull().unique(),
+  email: varchar("email", { length: 320 }).notNull(),
+  plan: varchar("plan", { length: 50 }).notNull(), // "navegador", "visionario", "iluminado"
+  planPrice: decimal("planPrice", { precision: 10, scale: 2 }).notNull(), // R$29.90, R$59.90, R$200.00
+  mapsLimit: integer("mapsLimit").notNull(), // 1, 3, or 10
+  mapsGenerated: integer("mapsGenerated").default(0).notNull(), // How many maps user has generated
+  paymentStatus: varchar("paymentStatus", { length: 50 }).notNull(), // "pending", "completed", "failed"
+  infinetepayOrderId: varchar("infinetepayOrderId", { length: 255 }), // Order ID from Infinetepay
+  infinetepayNsu: varchar("infinetepayNsu", { length: 255 }), // Transaction NSU from Infinetepay
+  infinetepayAut: varchar("infinetepayAut", { length: 255 }), // Authorization code from Infinetepay
+  cardBrand: varchar("cardBrand", { length: 50 }), // mastercard, visa, elo, etc
+  paymentMethod: varchar("paymentMethod", { length: 50 }), // "credit", "debit", "pix"
+  installments: integer("installments").default(1), // Number of installments (1-12)
+  activatedAt: timestamp("activatedAt"), // When subscription became active
+  expiresAt: timestamp("expiresAt"), // When subscription expires (if applicable)
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+export type Subscription = typeof subscriptions.$inferSelect;
+export type InsertSubscription = typeof subscriptions.$inferInsert;
+
+/**
+ * Relations for Subscriptions
+ */
+export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
+  customer: one(customers, {
+    fields: [subscriptions.customerId],
+    references: [customers.id],
+  }),
+}));

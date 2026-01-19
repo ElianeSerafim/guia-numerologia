@@ -204,3 +204,15 @@
 - [x] Adicionar seção expandida de ciclos trimestrais no PDF - CONCLUÍDO
 - [x] Testar geração de e-books com interpretações de ciclos trimestrais - CONCLUÍDO (dev server OK)
 - [ ] Fazer checkpoint e publicar
+
+
+## Passo 10: Integração com Infinetepay e Sistema de Planos
+
+- [x] Criar tabela de subscriptions no banco de dados com limites de mapas - CONCLUÍDO
+- [x] Integrar DeepLink do Infinetepay com tRPC procedures - EM PROGRESSO (infinetepay.ts criado)
+- [ ] Criar webhook para confirmar pagamento e ativar assinatura
+- [ ] Atualizar Home.tsx com seleção de planos e checkout
+- [ ] Implementar lógica de bloqueio de mapas quando limite atingido
+- [ ] Adicionar gestão de assinaturas no AdminDashboard
+- [ ] Testar fluxo completo de pagamento e geração de mapas
+- [ ] Fazer checkpoint e publicar
