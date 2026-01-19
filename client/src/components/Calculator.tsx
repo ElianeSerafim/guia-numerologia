@@ -141,6 +141,17 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
       </button>
 
+      {/* Upgrade Message */}
+      {disabled && (
+        <div className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-lg">
+          <p className="text-sm text-white/80 text-center">
+            Você atingiu o limite de mapas do seu plano atual. 
+            <br />
+            <span className="text-purple-300 font-semibold">Faça upgrade para continuar sua jornada numerológica.</span>
+          </p>
+        </div>
+      )}
+
       {/* Info Text */}
       <p className="text-xs text-white/70 text-center">
         Seus dados são processados localmente e não são armazenados em nossos servidores.

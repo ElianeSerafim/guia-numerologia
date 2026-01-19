@@ -216,3 +216,13 @@
 - [ ] Adicionar gestão de assinaturas no AdminDashboard
 - [ ] Testar fluxo completo de pagamento e geração de mapas
 - [ ] Fazer checkpoint e publicar
+
+
+## Passo 11: Interface de Planos e Bloqueio de Mapas
+
+- [x] Criar interface de seleção de planos no Home.tsx - CONCLUÍDO
+- [ ] Integrar tRPC para iniciar pagamento via Infinetepay - PRÓXIMO
+- [x] Implementar bloqueio de mapas no Calculator - CONCLUÍDO
+- [x] Adicionar mensagem acolhedora para upgrade - CONCLUÍDO
+- [x] Testar fluxo completo de planos e bloqueio - CONCLUÍDO (dev server OK)
+- [ ] Fazer checkpoint e publicar

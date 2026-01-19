@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { Compass, Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock } from 'lucide-react';
+import { Compass, Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock, Check } from 'lucide-react';
 import { Link } from 'wouter';
 import { calculateChart } from '@/lib/numerologyUtils';
 import { NumerologyChart } from '@/types';
-import { PLANS } from '@/types/payment';
-import { useUserSubscription } from '@/hooks/useUserSubscription';
-import { usePaymentManagement } from '@/hooks/usePaymentManagement';
+import { useAuth } from '@/_core/hooks/useAuth';
+import { trpc } from '@/lib/trpc';
 import Calculator from '@/components/Calculator';
 import Report from '@/components/Report';
 
@@ -19,32 +18,78 @@ import Report from '@/components/Report';
  * - Interface elegante e mística
  */
 
+const PLANS = {
+  navegador: {
+    name: "Navegador",
+    price: "R$ 29,90",
+    priceValue: 2990,
+    mapsLimit: 1,
+    features: [
+      "1 mapa numerológico",
+      "Interpretações básicas",
+      "Acesso por 30 dias",
+      "Suporte por email"
+    ],
+    icon: "🧭",
+    color: "from-blue-500 to-blue-600",
+    popular: false
+  },
+  visionario: {
+    name: "Visionário",
+    price: "R$ 59,90",
+    priceValue: 5990,
+    mapsLimit: 3,
+    features: [
+      "3 mapas numerológicos",
+      "Interpretações avançadas",
+      "Ciclos trimestrais 2026",
+      "Suporte prioritário",
+      "Relatórios em PDF"
+    ],
+    icon: "🔮",
+    color: "from-purple-500 to-purple-600",
+    popular: true
+  },
+  iluminado: {
+    name: "Iluminado",
+    price: "R$ 200,00",
+    priceValue: 20000,
+    mapsLimit: 10,
+    features: [
+      "10 mapas numerológicos",
+      "Interpretações completas",
+      "Renascimento & Legado",
+      "Suporte 24/7",
+      "E-books personalizados",
+      "Consultoria numerológica"
+    ],
+    icon: "✨",
+    color: "from-yellow-500 to-yellow-600",
+    popular: false
+  }
+};
+
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { user, isLoading: userLoading, logout, canGenerateMap, incrementMapsGenerated, getMapsLimit } = useUserSubscription();
-  const { getCustomerByEmail } = usePaymentManagement();
+  const { user, loading, isAuthenticated } = useAuth();
   const [chart, setChart] = useState<NumerologyChart | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [showLimitWarning, setShowLimitWarning] = useState(false);
-  const [showPendingWarning, setShowPendingWarning] = useState(false);
+  const [showPlans, setShowPlans] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  
+  // tRPC queries (placeholder - será implementado com tRPC procedures)
+  const subscription = null;
+  const canGenerate = { canGenerate: true, mapsRemaining: 1, reason: "OK" };
+  const initiatePaymentMutation = { mutateAsync: async () => ({}) };
 
   // Redirecionar para login se não estiver autenticado
   useEffect(() => {
-    if (!userLoading && !user) {
+    if (!loading && !isAuthenticated) {
       setLocation('/auth');
     }
-  }, [user, userLoading, setLocation]);
+  }, [isAuthenticated, loading, setLocation]);
 
-  useEffect(() => {
-    if (user && user.email !== 'eliane@artwebcreative.com.br') {
-      const customer = getCustomerByEmail(user.email);
-      if (customer && customer.status === 'pending') {
-        setShowPendingWarning(true);
-      }
-    }
-  }, [user, getCustomerByEmail]);
-
-  if (userLoading) {
+  if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center">
         <div className="text-center space-y-4">
@@ -55,35 +100,37 @@ export default function Home() {
     );
   }
 
-  if (!user) {
+  if (!isAuthenticated) {
     return null;
   }
 
-  const currentPlan = PLANS[user.plan as keyof typeof PLANS];
-  const actualMapsLimit = getMapsLimit(currentPlan.mapsLimit);
-  const mapsRemaining = actualMapsLimit === Infinity ? Infinity : actualMapsLimit - user.mapsGenerated;
-  const canGenerate = canGenerateMap(actualMapsLimit);
-
   const handleCalculate = (name: string, birthDate: string) => {
-    if (!canGenerate) {
-      setShowLimitWarning(true);
+    if (!canGenerate?.canGenerate) {
+      setShowPlans(true);
       return;
     }
 
     setIsLoading(true);
-
-    // Simulate brief loading for better UX
     setTimeout(() => {
       const calculatedChart = calculateChart(name, birthDate);
       setChart(calculatedChart);
-      incrementMapsGenerated();
       setIsLoading(false);
     }, 800);
   };
 
+  const handleInitiatePayment = async (planKey: string) => {
+    try {
+      // Placeholder - será implementado com tRPC
+      alert(`Plano ${planKey} selecionado. Redirecionando para pagamento...`);
+      // const result = await initiatePaymentMutation.mutateAsync({...});
+      // if (result?.deepLink) { window.location.href = result.deepLink; }
+    } catch (error) {
+      console.error("Erro ao iniciar pagamento:", error);
+    }
+  };
+
   const handleReset = () => {
     setChart(null);
-    setShowLimitWarning(false);
   };
 
   if (chart) {
@@ -91,32 +138,34 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#190825]">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
       {/* Header Navigation */}
-      <header className="sticky top-0 z-50 bg-[#190825]/95 backdrop-blur-md border-b border-[#4A2A6A]">
-        <div className="container flex items-center justify-between py-5 px-4 md:px-0">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div className="container flex items-center justify-between py-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37]">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700">
               <Compass size={24} className="text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-[#D4AF37]">Bússola Numerológica</h1>
+            <h1 className="text-xl font-bold text-slate-900">Bússola Numerológica</h1>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/faq">
-              <a className="p-2.5 rounded-lg hover:bg-[#2A1240] transition-colors text-[#D4AF37]" title="Aprenda">
+              <a className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600" title="Aprenda">
                 <BookOpen size={20} />
               </a>
             </Link>
-            <div className="text-right hidden md:block">
-              <p className="text-sm text-white font-medium">{user.email}</p>
-              <p className="text-xs font-semibold text-[#D4AF37]">{currentPlan.name}</p>
+            <div className="text-right">
+              <p className="text-sm text-slate-600">{user?.email}</p>
+              {subscription && (
+                <p className="text-xs font-semibold text-indigo-600">Plano Ativo</p>
+              )}
             </div>
             <button
               onClick={() => {
-                logout();
+                // Logout logic
                 setLocation('/auth');
               }}
-              className="p-2.5 rounded-lg hover:bg-[#2A1240] transition-colors text-red-400"
+              className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
               title="Sair"
             >
               <LogOut size={20} />
@@ -126,182 +175,231 @@ export default function Home() {
       </header>
 
       {/* Usage Bar */}
-      <div className="bg-[#2A1240] border-b border-[#4A2A6A]">
-        <div className="container py-6 px-4 md:px-0">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-semibold text-white">
-              Mapas Gerados: <span className="text-[#D4AF37]">{user.mapsGenerated}</span> / <span className="text-[#D4AF37]">{actualMapsLimit === Infinity ? '∞' : actualMapsLimit}</span>
-            </span>
-            {!canGenerate && (
-              <button
-                onClick={() => setLocation('/pricing')}
-                className="text-sm font-semibold text-[#D4AF37] hover:text-[#FFD700] flex items-center gap-1 transition-colors"
-              >
-                <Zap size={14} />
-                Upgrade
-              </button>
-            )}
-          </div>
-          <div className="w-full bg-[#1A0820] rounded-full h-3 overflow-hidden border border-[#4A2A6A]">
-            <div
-              className="bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] h-full transition-all duration-300 rounded-full"
-              style={{ width: actualMapsLimit === Infinity ? '100%' : `${(user.mapsGenerated / actualMapsLimit) * 100}%` }}
-            ></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Hero Section */}
-      <section className="container py-12 md:py-20 px-4 md:px-0">
-        <div className="max-w-3xl mx-auto text-center space-y-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2A1240] border border-[#4A2A6A]">
-            <span className="w-2 h-2 rounded-full bg-[#8A2BE2] animate-pulse"></span>
-            <span className="text-sm font-medium text-[#D4AF37]">Descubra seu destino numerológico</span>
-          </div>
-
-          <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
-            Desvende os Mistérios da <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37]">Numerologia</span>
-          </h2>
-
-          <p className="text-lg text-white leading-relaxed max-w-2xl mx-auto font-light">
-            Utilize o método pitagórico para calcular seu Caminho de Destino, Motivação, Expressão e muito mais. 
-            Receba interpretações personalizadas com inteligência artificial.
-          </p>
-
-          <div className="flex flex-wrap gap-6 justify-center pt-4">
-            <div className="flex items-center gap-3 text-white">
-              <div className="w-8 h-8 rounded-full bg-[#8A2BE2]/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-sm font-bold text-[#D4AF37]">✓</span>
-              </div>
-              <span className="text-sm">Cálculos Automáticos</span>
+      {subscription && (
+        <div className="bg-white border-b border-slate-200">
+          <div className="container py-4">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-semibold text-slate-900">
+                Mapas Gerados: 0 / 1
+              </span>
+              {!canGenerate?.canGenerate && (
+                <button
+                  onClick={() => setShowPlans(true)}
+                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                >
+                  <Zap size={14} />
+                  Upgrade
+                </button>
+              )}
             </div>
-            <div className="flex items-center gap-3 text-white">
-              <div className="w-8 h-8 rounded-full bg-[#8A2BE2]/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-sm font-bold text-[#D4AF37]">✓</span>
-              </div>
-              <span className="text-sm">Interpretações com IA</span>
-            </div>
-            <div className="flex items-center gap-3 text-white">
-              <div className="w-8 h-8 rounded-full bg-[#8A2BE2]/30 flex items-center justify-center flex-shrink-0">
-                <span className="text-sm font-bold text-[#D4AF37]">✓</span>
-              </div>
-              <span className="text-sm">Previsões para 2026</span>
+            <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+              <div
+                className="bg-gradient-to-r from-indigo-600 to-purple-700 h-full transition-all duration-300"
+                style={{ width: '0%' }}
+              ></div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Divider */}
-      <div className="container">
-        <div className="divider-diagonal"></div>
-      </div>
-
-      {/* Pending Warning */}
-      {showPendingWarning && (
-        <section className="container py-8">
-          <div className="max-w-2xl mx-auto bg-blue-50 border-2 border-blue-200 rounded-lg p-6 space-y-4 flex items-start gap-4">
-            <Lock className="text-blue-600 flex-shrink-0 mt-1" size={24} />
-            <div className="flex-1">
-              <h3 className="text-lg font-bold text-blue-900">Acesso Pendente de Liberação</h3>
-              <p className="text-blue-800 mt-2">
-                Sua solicitação foi recebida! Estamos analisando seu pagamento. Você receberá um e-mail assim que seu acesso for liberado.
-              </p>
-              <p className="text-sm text-blue-700 mt-2">Tempo médio: 24 horas</p>
-            </div>
-          </div>
-        </section>
       )}
 
-      {/* Limit Warning */}
-      {showLimitWarning && (
-        <section className="container py-8">
-          <div className="max-w-2xl mx-auto bg-amber-50 border-2 border-amber-200 rounded-lg p-6 space-y-4">
-            <h3 className="text-lg font-bold text-amber-900">Limite de Mapas Atingido</h3>
-            <p className="text-amber-800">
-              Você já gerou {user.mapsGenerated} mapas numerológicos. Para gerar mais, faça upgrade do seu plano.
-            </p>
+      {/* Plans Section */}
+      {showPlans && (
+        <section className="container py-16">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold text-slate-900 mb-4">Escolha Seu Plano</h2>
+              <p className="text-lg text-slate-600">Desvende os mistérios da numerologia com o plano perfeito para você</p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              {Object.entries(PLANS).map(([key, plan]) => (
+                <div
+                  key={key}
+                  className={`relative rounded-2xl overflow-hidden transition-all duration-300 ${
+                    plan.popular ? 'ring-2 ring-purple-500 md:scale-105' : ''
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute top-0 right-0 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 text-sm font-bold rounded-bl-lg">
+                      Popular
+                    </div>
+                  )}
+                  
+                  <div className={`bg-gradient-to-br ${plan.color} p-8 text-white`}>
+                    <div className="text-5xl mb-4">{plan.icon}</div>
+                    <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                    <div className="text-4xl font-bold mb-1">{plan.price}</div>
+                    <p className="text-sm opacity-90">por mês</p>
+                  </div>
+
+                  <div className="bg-white p-8">
+                    <ul className="space-y-4 mb-8">
+                      {plan.features.map((feature, idx) => (
+                        <li key={idx} className="flex items-start gap-3">
+                          <Check size={20} className="text-green-500 flex-shrink-0 mt-0.5" />
+                          <span className="text-slate-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <button
+                      onClick={() => handleInitiatePayment(key)}
+                      disabled={false}
+                      className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
+                        plan.popular
+                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:shadow-lg'
+                          : 'bg-slate-100 text-slate-900 hover:bg-slate-200'
+                      }`}
+                    >
+                      Escolher Plano
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
             <button
-              onClick={() => setLocation('/pricing')}
-              className="btn-mystical inline-flex items-center gap-2"
+              onClick={() => setShowPlans(false)}
+              className="mt-8 mx-auto block text-slate-600 hover:text-slate-900 font-semibold"
             >
-              <span>Ver Planos Premium</span>
-              <ArrowRight size={18} />
+              ← Voltar
             </button>
           </div>
         </section>
       )}
 
-      {/* Calculator Section */}
-      <section className="container py-16 px-4 md:px-0">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold text-[#D4AF37] mb-3">Comece Agora</h3>
-            <p className="text-white text-lg font-light">
-              {canGenerate
-                ? actualMapsLimit === Infinity
-                  ? 'Você tem acesso ILIMITADO a mapas numerológicos'
-                  : `Você tem ${mapsRemaining} mapa${mapsRemaining !== 1 ? 's' : ''} disponível${mapsRemaining !== 1 ? 's' : ''}`
-                : 'Você atingiu o limite de mapas do seu plano'}
-            </p>
-          </div>
-
-          {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-16 space-y-4">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 rounded-full border-4 border-slate-200"></div>
-                <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-600 border-r-indigo-600 animate-spin"></div>
+      {/* Hero Section */}
+      {!showPlans && (
+        <>
+          <section className="container py-16 md:py-24">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-200">
+                <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+                <span className="text-sm font-medium text-indigo-700">Descubra seu destino numerológico</span>
               </div>
-              <p className="text-slate-600">Calculando seu mapa numerológico...</p>
-            </div>
-          ) : (
-            <Calculator onSubmit={handleCalculate} disabled={!canGenerate} />
-          )}
-        </div>
-      </section>
 
-      {/* Info Section */}
-      <section className="container py-16 px-4 md:px-0">
-        <div className="divider-diagonal"></div>
-        <div className="grid md:grid-cols-3 gap-8 py-12">
-          <div className="card-mystical bg-[#2A1240] border border-[#4A2A6A]">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-white">1</span>
-            </div>
-            <h4 className="text-lg font-bold text-white mb-3">Caminho de Destino</h4>
-            <p className="text-white text-sm leading-relaxed font-light">
-              Descubra sua missão de vida e o propósito maior que o universo reservou para você.
-            </p>
-          </div>
+              <h2 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight">
+                Desvende os Mistérios da <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">Numerologia</span>
+              </h2>
 
-          <div className="card-mystical bg-[#2A1240] border border-[#4A2A6A]">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-white">2</span>
-            </div>
-            <h4 className="text-lg font-bold text-white mb-3">Números Pessoais</h4>
-            <p className="text-white text-sm leading-relaxed font-light">
-              Compreenda sua motivação, expressão e o eu íntimo que define sua personalidade.
-            </p>
-          </div>
+              <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+                Utilize o método pitagórico para calcular seu Caminho de Destino, Motivação, Expressão e muito mais. 
+                Receba interpretações personalizadas com inteligência artificial.
+              </p>
 
-          <div className="card-mystical bg-[#2A1240] border border-[#4A2A6A]">
-            <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-white">3</span>
+              <div className="flex flex-wrap gap-4 justify-center pt-4">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                    <span className="text-sm font-bold text-indigo-600">✓</span>
+                  </div>
+                  <span className="text-sm">Cálculos Automáticos</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-700">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                    <span className="text-sm font-bold text-indigo-600">✓</span>
+                  </div>
+                  <span className="text-sm">Interpretações com IA</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-700">
+                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                    <span className="text-sm font-bold text-indigo-600">✓</span>
+                  </div>
+                  <span className="text-sm">Previsões para 2026</span>
+                </div>
+              </div>
             </div>
-            <h4 className="text-lg font-bold text-white mb-3">Previsões 2026</h4>
-            <p className="text-white text-sm leading-relaxed font-light">
-              Veja o que o ano de 2026 reserva para você segundo a numerologia pitagórica.
-            </p>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Footer */}
-      <footer className="border-t border-[#4A2A6A] bg-[#1A0820]">
-        <div className="container py-8 text-center text-white text-sm font-light space-y-2">
-          <p>Bússola Numerológica 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
-          <p className="text-xs text-[#D4AF37]">Desenvolvido por <span className="font-semibold">Artweb Creative</span></p>
-        </div>
-      </footer>
+          {/* Calculator Section */}
+          <section className="container py-16">
+            <div className="max-w-2xl mx-auto">
+              <div className="text-center mb-12">
+                <h3 className="text-3xl font-bold text-slate-900 mb-2">Comece Agora</h3>
+                <p className="text-slate-600">
+                  {canGenerate?.canGenerate
+                    ? `Você tem ${canGenerate?.mapsRemaining || 1} mapa${canGenerate?.mapsRemaining !== 1 ? 's' : ''} disponível${canGenerate?.mapsRemaining !== 1 ? 's' : ''}`
+                    : 'Escolha um plano para começar'}
+                </p>
+              </div>
+
+              {isLoading ? (
+                <div className="flex flex-col items-center justify-center py-16 space-y-4">
+                  <div className="relative w-16 h-16">
+                    <div className="absolute inset-0 rounded-full border-4 border-slate-200"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-600 border-r-indigo-600 animate-spin"></div>
+                  </div>
+                  <p className="text-slate-600">Calculando seu mapa numerológico...</p>
+                </div>
+              ) : (
+                <Calculator onSubmit={handleCalculate} disabled={!canGenerate?.canGenerate} />
+              )}
+
+              {!canGenerate?.canGenerate && (
+                <div className="mt-8 p-6 bg-amber-50 border-2 border-amber-200 rounded-lg">
+                  <div className="flex gap-4">
+                    <Lock className="text-amber-600 flex-shrink-0" size={24} />
+                    <div>
+                      <h4 className="font-bold text-amber-900 mb-2">Limite de Mapas Atingido</h4>
+                      <p className="text-amber-800 mb-4">
+                        Você já gerou todos os mapas do seu plano. Para gerar mais, faça upgrade do seu plano.
+                      </p>
+                      <button
+                        onClick={() => setShowPlans(true)}
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
+                      >
+                        <span>Ver Planos Premium</span>
+                        <ArrowRight size={18} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
+
+          {/* Info Section */}
+          <section className="container py-16">
+            <div className="grid md:grid-cols-3 gap-8 py-12">
+              <div className="rounded-xl p-8 bg-white shadow-md hover:shadow-lg transition-all">
+                <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-indigo-600">1</span>
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Caminho de Destino</h4>
+                <p className="text-slate-600 text-sm">
+                  Descubra sua missão de vida e o propósito maior que o universo reservou para você.
+                </p>
+              </div>
+
+              <div className="rounded-xl p-8 bg-white shadow-md hover:shadow-lg transition-all">
+                <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-indigo-600">2</span>
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Números Pessoais</h4>
+                <p className="text-slate-600 text-sm">
+                  Compreenda sua motivação, expressão e o eu íntimo que define sua personalidade.
+                </p>
+              </div>
+
+              <div className="rounded-xl p-8 bg-white shadow-md hover:shadow-lg transition-all">
+                <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-indigo-600">3</span>
+                </div>
+                <h4 className="text-lg font-bold text-slate-900 mb-2">Previsões 2026</h4>
+                <p className="text-slate-600 text-sm">
+                  Veja o que o ano de 2026 reserva para você segundo a numerologia pitagórica.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* Footer */}
+          <footer className="border-t border-slate-200 bg-slate-50">
+            <div className="container py-8 text-center text-slate-600 text-sm">
+              <p>Bússola Numerológica 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
+            </div>
+          </footer>
+        </>
+      )}
     </div>
   );
 }
