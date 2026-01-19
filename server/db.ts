@@ -18,7 +18,9 @@ import {
   InsertFavorite,
   favorites,
   Customer,
-  Admin
+  Admin,
+  renascimento,
+  InsertRenascimento
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -374,4 +376,81 @@ export async function checkIfFavorited(email: string, mapId: number, sectionType
   ).limit(1);
   
   return result.length > 0;
+}
+
+
+/**
+ * Renascimento Management
+ */
+export async function createRenascimento(data: {
+  customerId: number;
+  email: string;
+  hasFactoGrave: boolean;
+  factoGraveType?: string;
+  notes?: string;
+  realizacao?: number;
+  realizacaoNumber?: number;
+  updatedBy?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.insert(renascimento).values(data).returning();
+  return result[0];
+}
+
+export async function getRenascimentoByCustomerId(customerId: number) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.select().from(renascimento)
+    .where(eq(renascimento.customerId, customerId))
+    .limit(1);
+  
+  return result[0] || null;
+}
+
+export async function getRenascimentoByEmail(email: string) {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.select().from(renascimento)
+    .where(eq(renascimento.email, email))
+    .limit(1);
+  
+  return result[0] || null;
+}
+
+export async function updateRenascimento(customerId: number, updates: {
+  hasFactoGrave?: boolean;
+  factoGraveType?: string;
+  notes?: string;
+  realizacao?: number;
+  realizacaoNumber?: number;
+  updatedBy?: string;
+}) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const result = await db.update(renascimento)
+    .set({ ...updates, updatedAt: new Date() })
+    .where(eq(renascimento.customerId, customerId))
+    .returning();
+  
+  return result[0] || null;
+}
+
+export async function deleteRenascimento(customerId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.delete(renascimento)
+    .where(eq(renascimento.customerId, customerId));
+}
+
+export async function getAllRenascimentos() {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db.select().from(renascimento);
 }

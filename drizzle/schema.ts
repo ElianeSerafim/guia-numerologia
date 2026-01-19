@@ -170,6 +170,7 @@ export type InsertReport = typeof reports.$inferInsert;
 export const customersRelations = relations(customers, ({ many }) => ({
   numerologyMaps: many(numerologyMaps),
   paymentHistory: many(paymentHistory),
+  renascimento: many(renascimento),
 }));
 
 export const numerologyMapsRelations = relations(numerologyMaps, ({ one }) => ({
@@ -213,3 +214,36 @@ export const favoritesRelations = relations(favorites, ({ one }) => ({
     references: [numerologyMaps.id],
   }),
 }));
+
+
+/**
+ * Renascimento table for storing advanced interpretation data
+ * Stores information about Renascimento (Rebirth) events for clients
+ */
+export const renascimento = pgTable("renascimento", {
+  id: serial("id").primaryKey(),
+  customerId: integer("customerId").notNull(),
+  email: varchar("email", { length: 320 }).notNull(),
+  hasFactoGrave: boolean("hasFactoGrave").default(false).notNull(),
+  factoGraveType: varchar("factoGraveType", { length: 100 }), // enfermidade, acidente, perda_material, perda_afetiva
+  notes: text("notes"), // Admin notes about the Renascimento
+  realizacao: integer("realizacao"), // Which realization (2, 3, or 4)
+  realizacaoNumber: integer("realizacaoNumber"), // The number of the realization
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  updatedBy: varchar("updatedBy", { length: 320 }), // Admin email who last updated
+});
+
+export type Renascimento = typeof renascimento.$inferSelect;
+export type InsertRenascimento = typeof renascimento.$inferInsert;
+
+/**
+ * Relations for Renascimento
+ */
+export const renascimentoRelations = relations(renascimento, ({ one }) => ({
+  customer: one(customers, {
+    fields: [renascimento.customerId],
+    references: [customers.id],
+  }),
+}));
+

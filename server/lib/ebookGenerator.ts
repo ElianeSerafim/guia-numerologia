@@ -66,7 +66,8 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     // Para agora, vamos usar lógica inline para não quebrar o build
     
     // Detectar Renascimento (R2, R3, R4 com Fato Grave)
-    // Nota: Fato Grave seria armazenado no banco de dados
+    // Nota: Fato Grave é armazenado no banco de dados
+    // Para agora, vamos usar false como padrão (será preenchido pelo cliente)
     const hasRenascimento = false; // Será preenchido do banco de dados
     const renascimentoNumber = (r2 || r3 || r4);
     

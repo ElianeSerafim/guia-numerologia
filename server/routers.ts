@@ -334,6 +334,74 @@ export const appRouter = router({
         });
       }),
   }),
+  /**
+   * Renascimento Management Routes
+   */
+  renascimento: router({
+    // Get Renascimento by customer ID (admin only)
+    getByCustomerId: adminProcedure
+      .input(z.object({ customerId: z.number() }))
+      .query(async ({ input }) => {
+        return await db.getRenascimentoByCustomerId(input.customerId);
+      }),
+
+    // Get Renascimento by email (admin only)
+    getByEmail: adminProcedure
+      .input(z.object({ email: z.string().email() }))
+      .query(async ({ input }) => {
+        return await db.getRenascimentoByEmail(input.email);
+      }),
+
+    // Create or update Renascimento (admin only)
+    upsert: adminProcedure
+      .input(z.object({
+        customerId: z.number(),
+        email: z.string().email(),
+        hasFactoGrave: z.boolean(),
+        factoGraveType: z.enum(['enfermidade', 'acidente', 'perda_material', 'perda_afetiva']).optional(),
+        notes: z.string().optional(),
+        realizacao: z.number().optional(),
+        realizacaoNumber: z.number().optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        const existing = await db.getRenascimentoByCustomerId(input.customerId);
+        
+        if (existing) {
+          return await db.updateRenascimento(input.customerId, {
+            hasFactoGrave: input.hasFactoGrave,
+            factoGraveType: input.factoGraveType,
+            notes: input.notes,
+            realizacao: input.realizacao,
+            realizacaoNumber: input.realizacaoNumber,
+            updatedBy: ctx.user?.email ?? undefined,
+          });
+        } else {
+          return await db.createRenascimento({
+            customerId: input.customerId,
+            email: input.email,
+            hasFactoGrave: input.hasFactoGrave,
+            factoGraveType: input.factoGraveType,
+            notes: input.notes,
+            realizacao: input.realizacao,
+            realizacaoNumber: input.realizacaoNumber,
+            updatedBy: ctx.user?.email ?? undefined,
+          });
+        }
+      }),
+
+    // Get all Renascimentos (admin only)
+    getAll: adminProcedure.query(async () => {
+      return await db.getAllRenascimentos();
+    }),
+
+    // Delete Renascimento (admin only)
+    delete: adminProcedure
+      .input(z.object({ customerId: z.number() }))
+      .mutation(async ({ input }) => {
+        await db.deleteRenascimento(input.customerId);
+        return { success: true };
+      }),
+  }),
 });
 
 export type AppRouter = typeof appRouter;

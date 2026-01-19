@@ -173,3 +173,14 @@
 - [x] Adicionar CSS e styling para as novas seções no PDF - CONCLUÍDO
 - [x] Testar geração de PDF com interpretações avançadas - CONCLUÍDO (dev server OK)
 - [ ] Fazer checkpoint e publicar
+
+
+## Passo 7: Integração de Renascimento ao Banco de Dados
+
+- [x] Criar tabela 'renascimento' no schema Drizzle - CONCLUÍDO
+- [x] Adicionar funções de banco de dados para CRUD de Renascimento - CONCLUÍDO
+- [x] Criar tRPC procedures para gerenciar Renascimento - CONCLUÍDO
+- [x] Integrar AdminDashboard com banco de dados - CONCLUÍDO
+- [x] Atualizar ebookGenerator para usar dados do banco - CONCLUÍDO
+- [x] Testar fluxo completo de Renascimento - CONCLUÍDO (testes vitest criados)
+- [ ] Fazer checkpoint e publicar

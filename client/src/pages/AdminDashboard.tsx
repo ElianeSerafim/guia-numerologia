@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
+import { trpc } from '@/lib/trpc';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { useAdminManagement } from '@/hooks/useAdminManagement';
 import { Customer } from '@/types/payment';
@@ -126,6 +127,33 @@ export default function AdminDashboard() {
       setShowSettings(false);
     }
   };
+
+  // Mutation para salvar Renascimento
+  const renascimentoUpsert = trpc.renascimento.upsert.useMutation();
+
+  const handleSaveRenascimento = async () => {
+    // Salvar dados de Renascimento para cada cliente
+    for (const [email, data] of Object.entries(renascimentoData)) {
+      if (data.hasFactoGrave || data.factoGraveType || data.notes) {
+        const customer = customers.find(c => c.email === email);
+        if (customer) {
+          try {
+            await renascimentoUpsert.mutateAsync({
+              customerId: parseInt(customer.id),
+              email: customer.email,
+              hasFactoGrave: data.hasFactoGrave || false,
+              factoGraveType: data.factoGraveType as any,
+              notes: data.notes,
+            });
+          } catch (error) {
+            console.error('Erro ao salvar Renascimento:', error);
+          }
+        }
+      }
+    }
+    setShowSettings(false);
+  };
+
 
   const handleAddAdmin = () => {
     setAdminError('');
@@ -426,7 +454,10 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 <button
-                  onClick={handleSaveWhatsapp}
+                  onClick={() => {
+                    handleSaveWhatsapp();
+                    handleSaveRenascimento();
+                  }}
                   className="w-full md:w-auto px-4 md:px-6 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors font-semibold mt-4"
                 >
                   Salvar Configurações
