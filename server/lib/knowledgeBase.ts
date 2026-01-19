@@ -231,3 +231,69 @@ export function getQuarterlyInterpretation(number: number | string): string | nu
   const num = typeof number === 'string' ? parseInt(number, 10) : number;
   return quarterlyInterpretations[num] || null;
 }
+
+
+// ===== INTERPRETAÇÕES AVANÇADAS =====
+
+// Renascimento: Ocorre em R2, R3 ou R4 quando há um Fato Grave
+export const renascimentoInterpretations: Record<number | string, string> = {
+  1: "Renascimento através da liderança consciente. A alma é chamada a reorganizar sua independência e reconhecer que a verdadeira força vem da colaboração. Período de reconstrução da identidade com maior humildade e abertura.",
+  2: "Renascimento através da sensibilidade e relacionamentos. A alma é chamada a reorganizar suas relações e aprender que a vulnerabilidade é força. Período de reconstrução emocional com maior assertividade.",
+  3: "Renascimento através da expressão autêntica. A alma é chamada a reorganizar sua criatividade e comunicação. Período de reconstrução da voz pessoal com maior profundidade.",
+  4: "Renascimento através da estrutura renovada. A alma é chamada a reorganizar suas bases e aprender flexibilidade. Período de reconstrução da estabilidade com maior adaptação.",
+  5: "Renascimento através da liberdade consciente. A alma é chamada a reorganizar sua relação com mudança. Período de reconstrução da autonomia com maior responsabilidade.",
+  6: "Renascimento através do amor transformador. A alma é chamada a reorganizar seus cuidados e limites. Período de reconstrução da compaixão com maior autopreservação.",
+  7: "Renascimento através da sabedoria adquirida. A alma é chamada a reorganizar seu conhecimento. Período de reconstrução da verdade com maior compartilhamento.",
+  8: "Renascimento através do poder ético. A alma é chamada a reorganizar sua relação com controle e abundância. Período de reconstrução da autoridade com maior integridade.",
+  9: "Renascimento através da transformação completa. A alma é chamada a reorganizar seus ciclos. Período de reconstrução do humanitarismo com maior consciência.",
+  11: "Renascimento através da iluminação prática. A alma é chamada a reorganizar sua intuição. Período de reconstrução da inspiração com maior ancoragem.",
+  22: "Renascimento através do legado reconstruído. A alma é chamada a reorganizar seus grandes projetos. Período de reconstrução da visão com maior sabedoria.",
+  33: "Renascimento através da compaixão elevada. A alma é chamada a reorganizar seu serviço. Período de reconstrução do amor universal com maior equilíbrio."
+};
+
+// Realização de Legado: Ocorre quando Rn = MO, CD ou ME
+export const legacyInterpretations: Record<number | string, string> = {
+  1: "Legado de liderança e pioneirismo. Suas escolhas deixam marcas de coragem e inovação que inspiram outras pessoas a serem ousadas e autênticas.",
+  2: "Legado de empatia e diplomacia. Suas escolhas deixam marcas de sensibilidade e compreensão que curam e harmonizam relacionamentos.",
+  3: "Legado de criatividade e expressão. Suas escolhas deixam marcas de beleza e comunicação que inspiram criatividade em outros.",
+  4: "Legado de estrutura e confiabilidade. Suas escolhas deixam marcas de solidez que servem como base para gerações futuras.",
+  5: "Legado de liberdade e adaptação. Suas escolhas deixam marcas de coragem para mudar que libertam outros de padrões limitantes.",
+  6: "Legado de amor e responsabilidade. Suas escolhas deixam marcas de cuidado que fortalecem famílias e comunidades.",
+  7: "Legado de sabedoria e verdade. Suas escolhas deixam marcas de conhecimento que iluminam caminhos para outros.",
+  8: "Legado de poder ético e prosperidade. Suas escolhas deixam marcas de integridade que demonstram que sucesso e ética caminham juntos.",
+  9: "Legado de transformação e humanitarismo. Suas escolhas deixam marcas de compaixão que elevam a consciência coletiva.",
+  11: "Legado de iluminação e inspiração. Suas escolhas deixam marcas de visão espiritual que conectam outros com propósito maior.",
+  22: "Legado de construção duradoura. Suas escolhas deixam marcas de realização em grande escala que impactam gerações.",
+  33: "Legado de amor universal. Suas escolhas deixam marcas de cura e elevação que transformam a consciência coletiva."
+};
+
+// Grande Amor: Identificado por harmonia afetiva entre ciclos, MO e EU
+export const grandeLoveInterpretations: Record<number | string, string> = {
+  1: "Grande Amor de liderança compartilhada. Um amor que reconhece sua força e o convida a liderar com coração. Parceria que celebra sua coragem e o apoia em novas jornadas.",
+  2: "Grande Amor de sensibilidade profunda. Um amor que honra sua empatia e cria espaço para vulnerabilidade mútua. Parceria que nutre através da compreensão.",
+  3: "Grande Amor de expressão criativa. Um amor que celebra sua criatividade e o inspira a se expressar mais plenamente. Parceria que dança junto à sua alegria.",
+  4: "Grande Amor de estabilidade compartilhada. Um amor que constrói bases sólidas e cria segurança. Parceria que cresce junto através de compromisso.",
+  5: "Grande Amor de liberdade respeitada. Um amor que honra sua necessidade de liberdade e cresce através da adaptação. Parceria que evolui sem prender.",
+  6: "Grande Amor de cuidado mútuo. Um amor que nutre e é nutrido. Parceria que cria harmonia através do respeito e responsabilidade.",
+  7: "Grande Amor de profundidade espiritual. Um amor que convida à introspecção compartilhada. Parceria que cresce através da verdade e sabedoria.",
+  8: "Grande Amor de realização conjunta. Um amor que apoia seus objetivos e cresce através do sucesso compartilhado. Parceria que prospera juntos.",
+  9: "Grande Amor de transformação mútua. Um amor que permite crescimento e mudança. Parceria que evolui através de ciclos de renovação.",
+  11: "Grande Amor de iluminação compartilhada. Um amor que conecta em nível espiritual profundo. Parceria que eleva consciência mutuamente.",
+  22: "Grande Amor de legado construído. Um amor que cria impacto duradouro juntos. Parceria que deixa marcas significativas no mundo.",
+  33: "Grande Amor de compaixão universal. Um amor que serve à humanidade. Parceria que cura e eleva consciência coletiva."
+};
+
+export function getRenascimentoInterpretation(number: number | string): string | null {
+  const num = typeof number === 'string' ? parseInt(number, 10) : number;
+  return renascimentoInterpretations[num] || null;
+}
+
+export function getLegacyInterpretation(number: number | string): string | null {
+  const num = typeof number === 'string' ? parseInt(number, 10) : number;
+  return legacyInterpretations[num] || null;
+}
+
+export function getGrandeLoveInterpretation(number: number | string): string | null {
+  const num = typeof number === 'string' ? parseInt(number, 10) : number;
+  return grandeLoveInterpretations[num] || null;
+}

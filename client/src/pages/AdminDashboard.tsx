@@ -51,6 +51,7 @@ export default function AdminDashboard() {
   const [newAdminEmail, setNewAdminEmail] = useState('');
   const [newAdminName, setNewAdminName] = useState('');
   const [adminError, setAdminError] = useState('');
+  const [renascimentoData, setRenascimentoData] = useState<Record<string, { hasFactoGrave: boolean; factoGraveType: string; notes: string }>>({});
 
   // Verificar autenticação (apenas admin)
   useEffect(() => {
@@ -364,9 +365,69 @@ export default function AdminDashboard() {
                   />
                   <p className="text-xs md:text-sm text-[#B8A8D8] mt-1">Formato: https://wa.me/5511999999999</p>
                 </div>
+                <div className="border-t border-[#4A2A6A] pt-4 mt-4">
+                  <h3 className="text-lg font-bold text-white mb-4">Gerenciar Renascimento</h3>
+                  <p className="text-sm text-[#B8A8D8] mb-3">Registre Fatos Graves para clientes em Renascimento (R2, R3, R4)</p>
+                  <div className="space-y-3 max-h-64 overflow-y-auto">
+                    {customers.filter(c => c.status === 'approved').map(customer => (
+                      <div key={customer.id} className="bg-[#1A0A2A] p-3 rounded-lg border border-[#4A2A6A]">
+                        <p className="text-sm font-semibold text-white mb-2">{customer.email}</p>
+                        <label className="flex items-center gap-2 text-sm text-[#B8A8D8] mb-2">
+                          <input
+                            type="checkbox"
+                            checked={renascimentoData[customer.email]?.hasFactoGrave || false}
+                            onChange={(e) => setRenascimentoData({
+                              ...renascimentoData,
+                              [customer.email]: {
+                                ...renascimentoData[customer.email],
+                                hasFactoGrave: e.target.checked
+                              }
+                            })}
+                            className="w-4 h-4"
+                          />
+                          Tem Fato Grave?
+                        </label>
+                        {renascimentoData[customer.email]?.hasFactoGrave && (
+                          <>
+                            <select
+                              value={renascimentoData[customer.email]?.factoGraveType || ''}
+                              onChange={(e) => setRenascimentoData({
+                                ...renascimentoData,
+                                [customer.email]: {
+                                  ...renascimentoData[customer.email],
+                                  factoGraveType: e.target.value
+                                }
+                              })}
+                              className="w-full px-2 py-1 text-xs border border-[#4A2A6A] bg-[#0A0A1A] text-white rounded mb-2"
+                            >
+                              <option value="">Selecione o tipo...</option>
+                              <option value="enfermidade">Enfermidade Física Grave</option>
+                              <option value="acidente">Acidente Grave</option>
+                              <option value="perda_material">Perda Material Significativa</option>
+                              <option value="perda_afetiva">Perda Afetiva Significativa</option>
+                            </select>
+                            <textarea
+                              value={renascimentoData[customer.email]?.notes || ''}
+                              onChange={(e) => setRenascimentoData({
+                                ...renascimentoData,
+                                [customer.email]: {
+                                  ...renascimentoData[customer.email],
+                                  notes: e.target.value
+                                }
+                              })}
+                              placeholder="Notas sobre o Renascimento..."
+                              className="w-full px-2 py-1 text-xs border border-[#4A2A6A] bg-[#0A0A1A] text-white rounded"
+                              rows={2}
+                            />
+                          </>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <button
                   onClick={handleSaveWhatsapp}
-                  className="w-full md:w-auto px-4 md:px-6 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors font-semibold"
+                  className="w-full md:w-auto px-4 md:px-6 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors font-semibold mt-4"
                 >
                   Salvar Configurações
                 </button>

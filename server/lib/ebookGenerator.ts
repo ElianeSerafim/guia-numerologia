@@ -1,5 +1,5 @@
 import { NumerologyChart } from '@/types';
-import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation, getQuarterlyInterpretation } from './knowledgeBase';
+import { getNumberInterpretation, getChallengeInterpretation, getRealizationInterpretation, getQuarterlyInterpretation, getRenascimentoInterpretation, getLegacyInterpretation, getGrandeLoveInterpretation } from './knowledgeBase';
 
 function generateNumberInterpretationHTML(number: number, label: string): string {
   const interp = getNumberInterpretation(number);
@@ -461,6 +461,15 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
     <div class="divisor">✦ ✦ ✦</div>
     <p style="text-align: center; margin-top: 2rem; font-style: italic; color: #666;">
       Este é seu guia pessoal de numerologia. Use-o como ferramenta de autoconhecimento e reflexão.
+    </p>
+  </div>
+
+  <!-- INTERPRETAÇÕES AVANÇADAS -->
+  <div class="page">
+    <h2>VIII. Interpretações Avançadas</h2>
+    <div class="divisor">✦ ✦ ✦</div>
+    <p style="margin-bottom: 1.5rem; font-style: italic; color: #666;">
+      Leituras profundas de Renascimento, Legado e Grande Amor
     </p>
   </div>
 

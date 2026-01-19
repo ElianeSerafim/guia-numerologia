@@ -265,3 +265,61 @@ export const numberInterpretations: Record<number, string> = {
   22: "Mestre construtor, visão grandiosa, manifestação em larga escala",
   33: "Mestre curador, amor incondicional, sabedoria e compaixão",
 };
+
+
+/**
+ * Detecta se há Renascimento (R2, R3 ou R4)
+ * Renascimento ocorre quando há um Fato Grave e a pessoa está em R2, R3 ou R4
+ */
+export function detectRenascimento(realizacao: number, hasFactoGrave: boolean): boolean {
+  // Renascimento só pode ocorrer em R2, R3 ou R4
+  const canHaveRenascimento = realizacao === 2 || realizacao === 3 || realizacao === 4;
+  return canHaveRenascimento && hasFactoGrave;
+}
+
+/**
+ * Detecta se há Realização de Legado
+ * Ocorre quando uma Realização (R2, R3 ou R4) = MO, CD ou ME
+ */
+export function detectLegacy(
+  realizacao: number,
+  realizacaoNumber: number,
+  mo: number,
+  cd: number,
+  merito: number
+): boolean {
+  // Legado só pode ocorrer em R2, R3 ou R4
+  if (realizacao === 1) return false;
+  
+  // Verifica se o número da realização coincide com MO, CD ou ME
+  return realizacaoNumber === mo || realizacaoNumber === cd || realizacaoNumber === merito;
+}
+
+/**
+ * Detecta Grande Amor baseado em harmonia afetiva
+ * Critérios:
+ * - Ativação positiva da MO (MO não é 4, 8 ou números com sombra forte)
+ * - Harmonia entre EU e MO (diferença <= 2)
+ * - Ausência de Bloqueio afetivo (CD não é 4 ou 8)
+ * - Momento favorável nos ciclos (CT atual não é 4 ou 8)
+ */
+export function detectGrandeLove(
+  mo: number,
+  eu: number,
+  cd: number,
+  ctAtual: number
+): boolean {
+  // Ativação positiva da MO
+  const moPositiva = mo !== 4 && mo !== 8;
+  
+  // Harmonia entre EU e MO (diferença pequena)
+  const harmonia = Math.abs(eu - mo) <= 2;
+  
+  // Ausência de Bloqueio afetivo
+  const semBloqueio = cd !== 4 && cd !== 8;
+  
+  // Momento favorável nos ciclos
+  const momentoFavoravel = ctAtual !== 4 && ctAtual !== 8;
+  
+  return moPositiva && harmonia && semBloqueio && momentoFavoravel;
+}
