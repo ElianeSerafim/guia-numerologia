@@ -296,12 +296,7 @@ export default function Home() {
                   </div>
                   <span className="text-sm">Cálculos Automáticos</span>
                 </div>
-                <div className="flex items-center gap-2 text-slate-700">
-                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <span className="text-sm font-bold text-indigo-600">✓</span>
-                  </div>
-                  <span className="text-sm">Interpretações com IA</span>
-                </div>
+
                 <div className="flex items-center gap-2 text-slate-700">
                   <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
                     <span className="text-sm font-bold text-indigo-600">✓</span>
