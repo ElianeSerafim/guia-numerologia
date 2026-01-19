@@ -194,27 +194,31 @@ export default function AdminDashboard() {
 
       {/* Header */}
       <div className="bg-[#2A1A4A] border-b border-[#4A2A6A] sticky top-0 z-40">
-        <div className="container py-4 flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold text-white">Painel Administrativo</h1>
-            <p className="text-[#B8A8D8] mt-1">Gerenciar clientes e configurações</p>
+        <div className="container py-4">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+            <div>
+              <h1 className="text-2xl md:text-3xl font-bold text-white">Painel Administrativo</h1>
+              <p className="text-[#B8A8D8] mt-1 text-sm md:text-base">Gerenciar clientes e configurações</p>
+            </div>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3">
             {isSuperAdmin && (
               <button
                 onClick={() => setShowAdminManagement(!showAdminManagement)}
-                className="flex items-center gap-2 px-4 py-2 bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
               >
-                <Users size={20} />
-                Admins ({admins.length})
+                <Users size={18} />
+                <span className="hidden sm:inline">Admins ({admins.length})</span>
+                <span className="sm:hidden">Admins</span>
               </button>
             )}
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="flex items-center gap-2 px-4 py-2 bg-[#D4AF37] text-[#190825] rounded-lg hover:bg-[#FFD700] transition-colors font-semibold"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-[#D4AF37] text-[#190825] rounded-lg hover:bg-[#FFD700] transition-colors font-semibold"
             >
-              <Settings size={20} />
-              Configurações
+              <Settings size={18} />
+              <span className="hidden sm:inline">Configurações</span>
+              <span className="sm:hidden">Config</span>
             </button>
             <button
               onClick={() => {
@@ -224,74 +228,75 @@ export default function AdminDashboard() {
                 // Redirecionar para página inicial
                 setLocation('/');
               }}
-              className="flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
               title="Sair da conta"
             >
-              <LogOut size={20} />
-              Sair
+              <LogOut size={18} />
+              <span className="hidden sm:inline">Sair</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="container py-8">
+      <div className="container py-4 md:py-8 px-2 md:px-0">
         {/* Admin Management Section */}
         {showAdminManagement && isSuperAdmin && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Gerenciar Usuários Admin</h2>
+          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-4 md:p-6 mb-8">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Gerenciar Usuários Admin</h2>
             
             {/* Add New Admin */}
-            <div className="bg-[#1A0A2A] p-4 rounded-lg mb-6 border border-[#4A2A6A]">
-              <h3 className="font-semibold text-white mb-3">Adicionar Novo Admin</h3>
+            <div className="bg-[#1A0A2A] p-3 md:p-4 rounded-lg mb-6 border border-[#4A2A6A]">
+              <h3 className="font-semibold text-white mb-3 text-sm md:text-base">Adicionar Novo Admin</h3>
               {adminError && (
-                <div className="bg-red-900/30 border border-red-700 text-red-300 px-3 py-2 rounded mb-3">
+                <div className="bg-red-900/30 border border-red-700 text-red-300 px-3 py-2 rounded mb-3 text-sm">
                   {adminError}
                 </div>
               )}
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
                 <input
                   type="email"
                   placeholder="Email do novo admin"
                   value={newAdminEmail}
                   onChange={(e) => setNewAdminEmail(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                  className="flex-1 px-3 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
                 />
                 <input
                   type="text"
                   placeholder="Nome completo"
                   value={newAdminName}
                   onChange={(e) => setNewAdminName(e.target.value)}
-                  className="flex-1 px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                  className="flex-1 px-3 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
                 />
                 <button
                   onClick={handleAddAdmin}
-                  className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  className="flex items-center justify-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors whitespace-nowrap"
                 >
-                  <Plus size={20} />
-                  Adicionar
+                  <Plus size={18} />
+                  <span className="hidden sm:inline">Adicionar</span>
+                  <span className="sm:hidden">Add</span>
                 </button>
               </div>
             </div>
 
             {/* Admin List */}
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-max">
                 <thead>
                   <tr className="border-b border-slate-200">
-                    <th className="text-left py-3 px-4 font-semibold text-white">Nome</th>
-                    <th className="text-left py-3 px-4 font-semibold text-white">Email</th>
-                    <th className="text-left py-3 px-4 font-semibold text-white">Tipo</th>
-                    <th className="text-left py-3 px-4 font-semibold text-white">Status</th>
-                    <th className="text-left py-3 px-4 font-semibold text-white">Ações</th>
+                    <th className="text-left py-3 px-3 md:px-4 font-semibold text-white text-sm md:text-base">Nome</th>
+                    <th className="text-left py-3 px-3 md:px-4 font-semibold text-white text-sm md:text-base">Email</th>
+                    <th className="text-left py-3 px-3 md:px-4 font-semibold text-white text-sm md:text-base">Tipo</th>
+                    <th className="text-left py-3 px-3 md:px-4 font-semibold text-white text-sm md:text-base">Status</th>
+                    <th className="text-left py-3 px-3 md:px-4 font-semibold text-white text-sm md:text-base">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
                   {admins.map((admin) => (
                     <tr key={admin.id} className="border-b border-slate-100 hover:bg-slate-50">
-                      <td className="py-3 px-4 text-white">{admin.name}</td>
-                      <td className="py-3 px-4 text-slate-600">{admin.email}</td>
-                      <td className="py-3 px-4">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      <td className="py-3 px-3 md:px-4 text-white text-sm md:text-base">{admin.name}</td>
+                      <td className="py-3 px-3 md:px-4 text-slate-600 text-sm md:text-base">{admin.email}</td>
+                      <td className="py-3 px-3 md:px-4">
+                        <span className={`px-3 py-1 rounded-full text-xs md:text-sm font-semibold ${
                           admin.role === 'super_admin'
                             ? 'bg-purple-100 text-purple-800'
                             : 'bg-blue-100 text-blue-800'
@@ -299,8 +304,8 @@ export default function AdminDashboard() {
                           {admin.role === 'super_admin' ? 'Super Admin' : 'Admin'}
                         </span>
                       </td>
-                      <td className="py-3 px-4">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      <td className="py-3 px-3 md:px-4">
+                        <span className={`px-3 py-1 rounded-full text-xs md:text-sm font-semibold ${
                           admin.isActive
                             ? 'bg-green-100 text-green-800'
                             : 'bg-red-100 text-red-800'
@@ -308,7 +313,7 @@ export default function AdminDashboard() {
                           {admin.isActive ? 'Ativo' : 'Inativo'}
                         </span>
                       </td>
-                      <td className="py-3 px-4 flex gap-2">
+                      <td className="py-3 px-3 md:px-4 flex gap-1 md:gap-2">
                         {admin.role !== 'super_admin' && (
                           <>
                             <button
@@ -342,77 +347,79 @@ export default function AdminDashboard() {
 
         {/* Settings Section */}
         {showSettings && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6 mb-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Configurações</h2>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-semibold text-white mb-2">
-                  Link do WhatsApp
-                </label>
-                <input
-                  type="text"
-                  value={newWhatsappLink}
-                  onChange={(e) => setNewWhatsappLink(e.target.value)}
-                  placeholder="https://wa.me/5511999999999"
-                  className="w-full px-4 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
-                />
-                <p className="text-sm text-[#B8A8D8] mt-1">Formato: https://wa.me/5511999999999</p>
+          <div className="container py-4 md:py-8 px-2 md:px-0">
+            <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-4 md:p-6 mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Configurações</h2>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-white mb-2">
+                    Link do WhatsApp
+                  </label>
+                  <input
+                    type="text"
+                    value={newWhatsappLink}
+                    onChange={(e) => setNewWhatsappLink(e.target.value)}
+                    placeholder="https://wa.me/5511999999999"
+                    className="w-full px-3 md:px-4 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                  />
+                  <p className="text-xs md:text-sm text-[#B8A8D8] mt-1">Formato: https://wa.me/5511999999999</p>
+                </div>
+                <button
+                  onClick={handleSaveWhatsapp}
+                  className="w-full md:w-auto px-4 md:px-6 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors font-semibold"
+                >
+                  Salvar Configurações
+                </button>
               </div>
-              <button
-                onClick={handleSaveWhatsapp}
-                className="px-4 py-2 bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
-              >
-                Salvar Configurações
-              </button>
             </div>
           </div>
         )}
 
         {/* Tabs */}
-        <div className="bg-[#2A1A4A] rounded-lg shadow-md mb-6 border-b border-[#4A2A6A]">
-          <div className="flex gap-0">
+        <div className="bg-[#2A1A4A] rounded-lg shadow-md mb-6 border-b border-[#4A2A6A] overflow-x-auto">
+          <div className="flex gap-0 min-w-max md:min-w-0">
             <button
               onClick={() => setActiveTab('customers')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+              className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'customers'
                   ? 'border-indigo-600 text-indigo-600'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
-              <Users size={20} />
+              <Users size={18} />
               Clientes
             </button>
             <button
               onClick={() => setActiveTab('reports')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+              className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'reports'
                   ? 'border-indigo-600 text-indigo-600'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
-              <BarChart3 size={20} />
+              <BarChart3 size={18} />
               Relatórios
             </button>
             <button
               onClick={() => setActiveTab('coupons')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+              className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'coupons'
                   ? 'border-indigo-600 text-indigo-600'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
-              <Tag size={20} />
+              <Tag size={18} />
               Cupons
             </button>
             <button
               onClick={() => setActiveTab('history')}
-              className={`flex items-center gap-2 px-6 py-4 font-semibold border-b-2 transition-colors ${
+              className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'history'
                   ? 'border-indigo-600 text-indigo-600'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
-              <History size={20} />
+              <History size={18} />
               Histórico
             </button>
           </div>
@@ -420,21 +427,21 @@ export default function AdminDashboard() {
 
         {/* Filters */}
         {activeTab === 'customers' && (
-        <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6 mb-6">
-          <div className="flex gap-4 flex-wrap">
+        <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-4 md:p-6 mb-6">
+          <div className="flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
             <input
               type="text"
               placeholder="Buscar por email ou nome..."
               value={searchEmail}
               onChange={(e) => setSearchEmail(e.target.value)}
-              className="flex-1 min-w-64 px-4 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+              className="flex-1 min-w-0 md:min-w-64 px-3 md:px-4 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
             />
-            <div className="flex gap-2">
+            <div className="flex gap-1 md:gap-2 flex-wrap">
               {(['pending', 'approved', 'rejected', 'all'] as const).map((f) => (
                 <button
                   key={f}
                   onClick={() => setFilter(f)}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                  className={`px-2 md:px-4 py-2 text-xs md:text-sm rounded-lg font-semibold transition-colors whitespace-nowrap ${
                     filter === f
                       ? 'bg-[#8A2BE2] text-white'
                       : 'bg-[#4A2A6A] text-white hover:bg-[#6A3A8A]'
@@ -446,10 +453,11 @@ export default function AdminDashboard() {
             </div>
             <button
               onClick={() => exportCustomers()}
-              className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2"
+              className="px-3 md:px-4 py-2 text-sm md:text-base bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center justify-center gap-2 whitespace-nowrap"
             >
-              <Download size={20} />
-              Exportar
+              <Download size={18} />
+              <span className="hidden sm:inline">Exportar</span>
+              <span className="sm:hidden">Export</span>
             </button>
           </div>
         </div>
