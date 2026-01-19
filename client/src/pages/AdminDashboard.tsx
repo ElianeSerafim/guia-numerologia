@@ -63,28 +63,19 @@ export default function AdminDashboard() {
 
   // Verificar autenticação (apenas admin)
   useEffect(() => {
-    // Enquanto está carregando, não fazer nada
-    if (checkingAdmin) {
-      console.log('Verificando permissões de admin...');
+    const userEmail = localStorage.getItem('numerology_user_email');
+    console.log('[AdminDashboard] Acesso:', { checkingAdmin, adminStatus, queryError, userEmail });
+
+    if (checkingAdmin) return;
+
+    // Permitir acesso se for Eliane OU se for admin no banco
+    if (userEmail === 'eliane@artwebcreative.com.br' || adminStatus?.isAdmin) {
+      console.log('[AdminDashboard] Acesso permitido');
       return;
     }
 
-    // Se houve erro, permitir acesso (fallback para email hardcoded)
-    if (queryError) {
-      console.log('Erro ao verificar admin:', queryError);
-      const userEmail = localStorage.getItem('numerology_user_email');
-      if (userEmail !== 'eliane@artwebcreative.com.br') {
-        console.log('Acesso negado - não é super admin');
-        setLocation('/');
-      }
-      return;
-    }
-
-    // Se não for admin (verificado no banco), redirecionar
-    if (!adminStatus?.isAdmin) {
-      console.log('Acesso negado - usuário não é admin no banco');
-      setLocation('/');
-    }
+    console.log('[AdminDashboard] Acesso negado');
+    setLocation('/');
   }, [checkingAdmin, adminStatus, queryError, setLocation]);
 
   // Sincronizar newWhatsappLink quando config muda

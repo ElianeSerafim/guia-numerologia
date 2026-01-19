@@ -1,39 +1,38 @@
-import { 
-  pgTable, 
-  pgEnum, 
+import {
+  mysqlTable, 
   serial, 
   varchar, 
   text, 
   timestamp, 
   boolean, 
-  integer,
+  int,
   decimal,
-  jsonb,
+  json,
   date
-} from "drizzle-orm/pg-core";
+} from "drizzle-orm/mysql-core";
 import { relations } from "drizzle-orm";
 
 /**
  * PostgreSQL Enum for user roles
  */
-export const roleEnum = pgEnum("role", ["user", "admin"]);
+
 
 /**
  * PostgreSQL Enum for subscription plans
  */
-export const planEnum = pgEnum("plan", ["basic", "professional", "premium"]);
+
 
 /**
  * PostgreSQL Enum for customer status
  */
-export const customerStatusEnum = pgEnum("customer_status", ["pending", "approved", "rejected"]);
+
 
 /**
  * Core user table backing auth flow.
  * Extend this file with additional tables as your product grows.
  * Columns use camelCase to match both database fields and generated types.
  */
-export const users = pgTable("users", {
+export const users = mysqlTable("users", {
   /**
    * Surrogate primary key. Auto-incremented numeric value managed by the database.
    * Use this for relations between tables.
@@ -44,7 +43,7 @@ export const users = pgTable("users", {
   name: text("name"),
   email: varchar("email", { length: 320 }).unique(),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: roleEnum("role").default("user").notNull(),
+  role: varchar("role", { length: 20 }).default("user").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
@@ -56,13 +55,13 @@ export type InsertUser = typeof users.$inferInsert;
 /**
  * Customers table for managing subscription customers
  */
-export const customers = pgTable("customers", {
+export const customers = mysqlTable("customers", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
-  plan: planEnum("plan").default("basic").notNull(),
-  status: customerStatusEnum("status").default("pending").notNull(),
-  mapsGenerated: integer("mapsGenerated").default(0).notNull(),
+  plan: varchar("plan", { length: 20 }).default("basic").notNull(),
+  status: varchar("status", { length: 20 }).default("pending").notNull(),
+  mapsGenerated: int("mapsGenerated").default(0).notNull(),
   paymentMethod: varchar("paymentMethod", { length: 50 }),
   paymentId: varchar("paymentId", { length: 255 }),
   amount: decimal("amount", { precision: 10, scale: 2 }),
@@ -78,13 +77,13 @@ export type InsertCustomer = typeof customers.$inferInsert;
 /**
  * Numerology maps table for storing generated maps
  */
-export const numerologyMaps = pgTable("numerology_maps", {
+export const numerologyMaps = mysqlTable("numerology_maps", {
   id: serial("id").primaryKey(),
-  customerId: integer("customerId").notNull(),
+  customerId: int("customerId").notNull(),
   email: varchar("email", { length: 320 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   birthDate: varchar("birthDate", { length: 50 }).notNull(),
-  chartData: jsonb("chartData").notNull(), // Store the complete chart as JSON
+  chartData: json("chartData").notNull(), // Store the complete chart as JSON
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
 
@@ -94,7 +93,7 @@ export type InsertNumerologyMap = typeof numerologyMaps.$inferInsert;
 /**
  * Admins table for managing admin users
  */
-export const admins = pgTable("admins", {
+export const admins = mysqlTable("admins", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
@@ -111,12 +110,12 @@ export type InsertAdmin = typeof admins.$inferInsert;
 /**
  * Coupons table for managing discount codes
  */
-export const coupons = pgTable("coupons", {
+export const coupons = mysqlTable("coupons", {
   id: serial("id").primaryKey(),
   code: varchar("code", { length: 50 }).notNull().unique(),
-  discountPercentage: integer("discountPercentage").notNull(),
-  maxUses: integer("maxUses"),
-  currentUses: integer("currentUses").default(0).notNull(),
+  discountPercentage: int("discountPercentage").notNull(),
+  maxUses: int("maxUses"),
+  currentUses: int("currentUses").default(0).notNull(),
   expiresAt: timestamp("expiresAt"),
   isActive: boolean("isActive").default(true).notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -129,11 +128,11 @@ export type InsertCoupon = typeof coupons.$inferInsert;
 /**
  * Payment history table for tracking all transactions
  */
-export const paymentHistory = pgTable("payment_history", {
+export const paymentHistory = mysqlTable("payment_history", {
   id: serial("id").primaryKey(),
-  customerId: integer("customerId").notNull(),
+  customerId: int("customerId").notNull(),
   email: varchar("email", { length: 320 }).notNull(),
-  plan: planEnum("plan").notNull(),
+  plan: varchar("plan", { length: 20 }).notNull(),
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
   currency: varchar("currency", { length: 3 }).default("BRL"),
   status: varchar("status", { length: 50 }).notNull(), // pending, completed, failed
@@ -152,11 +151,11 @@ export type InsertPaymentHistory = typeof paymentHistory.$inferInsert;
 /**
  * Reports table for storing admin reports
  */
-export const reports = pgTable("reports", {
+export const reports = mysqlTable("reports", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   type: varchar("type", { length: 50 }).notNull(), // sales, customers, usage, etc
-  data: jsonb("data").notNull(),
+  data: json("data").notNull(),
   generatedBy: varchar("generatedBy", { length: 320 }),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });
@@ -190,10 +189,10 @@ export const paymentHistoryRelations = relations(paymentHistory, ({ one }) => ({
 /**
  * Favorites table for storing user favorite sections and interpretations
  */
-export const favorites = pgTable("favorites", {
+export const favorites = mysqlTable("favorites", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull(),
-  mapId: integer("mapId").notNull(),
+  mapId: int("mapId").notNull(),
   sectionType: varchar("sectionType", { length: 50 }).notNull(), // cd, mo, eu, ex, merito, ciclos, realizacoes, desafios, etc
   sectionTitle: varchar("sectionTitle", { length: 255 }).notNull(),
   sectionContent: text("sectionContent").notNull(),
@@ -220,15 +219,15 @@ export const favoritesRelations = relations(favorites, ({ one }) => ({
  * Renascimento table for storing advanced interpretation data
  * Stores information about Renascimento (Rebirth) events for clients
  */
-export const renascimento = pgTable("renascimento", {
+export const renascimento = mysqlTable("renascimento", {
   id: serial("id").primaryKey(),
-  customerId: integer("customerId").notNull(),
+  customerId: int("customerId").notNull(),
   email: varchar("email", { length: 320 }).notNull(),
   hasFactoGrave: boolean("hasFactoGrave").default(false).notNull(),
   factoGraveType: varchar("factoGraveType", { length: 100 }), // enfermidade, acidente, perda_material, perda_afetiva
   notes: text("notes"), // Admin notes about the Renascimento
-  realizacao: integer("realizacao"), // Which realization (2, 3, or 4)
-  realizacaoNumber: integer("realizacaoNumber"), // The number of the realization
+  realizacao: int("realizacao"), // Which realization (2, 3, or 4)
+  realizacaoNumber: int("realizacaoNumber"), // The number of the realization
   createdAt: timestamp("createdAt").defaultNow().notNull(),
   updatedAt: timestamp("updatedAt").defaultNow().notNull(),
   updatedBy: varchar("updatedBy", { length: 320 }), // Admin email who last updated
@@ -253,21 +252,21 @@ export const renascimentoRelations = relations(renascimento, ({ one }) => ({
  * Subscriptions table for storing user subscription plans and payment info
  * Tracks which plan each user has, how many maps they can generate, and payment status
  */
-export const subscriptions = pgTable("subscriptions", {
+export const subscriptions = mysqlTable("subscriptions", {
   id: serial("id").primaryKey(),
-  customerId: integer("customerId").notNull().unique(),
+  customerId: int("customerId").notNull().unique(),
   email: varchar("email", { length: 320 }).notNull(),
   plan: varchar("plan", { length: 50 }).notNull(), // "navegador", "visionario", "iluminado"
   planPrice: decimal("planPrice", { precision: 10, scale: 2 }).notNull(), // R$29.90, R$59.90, R$200.00
-  mapsLimit: integer("mapsLimit").notNull(), // 1, 3, or 10
-  mapsGenerated: integer("mapsGenerated").default(0).notNull(), // How many maps user has generated
+  mapsLimit: int("mapsLimit").notNull(), // 1, 3, or 10
+  mapsGenerated: int("mapsGenerated").default(0).notNull(), // How many maps user has generated
   paymentStatus: varchar("paymentStatus", { length: 50 }).notNull(), // "pending", "completed", "failed"
   infinetepayOrderId: varchar("infinetepayOrderId", { length: 255 }), // Order ID from Infinetepay
   infinetepayNsu: varchar("infinetepayNsu", { length: 255 }), // Transaction NSU from Infinetepay
   infinetepayAut: varchar("infinetepayAut", { length: 255 }), // Authorization code from Infinetepay
   cardBrand: varchar("cardBrand", { length: 50 }), // mastercard, visa, elo, etc
   paymentMethod: varchar("paymentMethod", { length: 50 }), // "credit", "debit", "pix"
-  installments: integer("installments").default(1), // Number of installments (1-12)
+  installments: int("installments").default(1), // Number of installments (1-12)
   activatedAt: timestamp("activatedAt"), // When subscription became active
   expiresAt: timestamp("expiresAt"), // When subscription expires (if applicable)
   createdAt: timestamp("createdAt").defaultNow().notNull(),
@@ -290,13 +289,13 @@ export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
 /**
  * Map History Table - Stores all generated numerology maps
  */
-export const mapHistory = pgTable("map_history", {
+export const mapHistory = mysqlTable("map_history", {
   id: serial("id").primaryKey(),
-  subscriptionId: integer("subscriptionId").notNull(), // Reference to subscription
-  customerId: integer("customerId").notNull(), // Reference to customer
+  subscriptionId: int("subscriptionId").notNull(), // Reference to subscription
+  customerId: int("customerId").notNull(), // Reference to customer
   name: varchar("name", { length: 255 }).notNull(), // Full name used for calculation
   birthDate: date("birthDate").notNull(), // Birth date used for calculation
-  mapData: jsonb("mapData").notNull(), // Full numerology chart data (CD, MO, DM, ME, EU, R1-R4, CV, etc)
+  mapData: json("mapData").notNull(), // Full numerology chart data (CD, MO, DM, ME, EU, R1-R4, CV, etc)
   pdfUrl: varchar("pdfUrl", { length: 1024 }), // URL to generated PDF in S3
   pdfKey: varchar("pdfKey", { length: 1024 }), // S3 key for the PDF
   generatedAt: timestamp("generatedAt").defaultNow().notNull(),

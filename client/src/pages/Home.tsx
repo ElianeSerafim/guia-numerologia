@@ -83,11 +83,12 @@ export default function Home() {
   const initiatePaymentMutation = { mutateAsync: async () => ({}) };
 
   // Redirecionar para login se não estiver autenticado
-  useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      setLocation('/auth');
-    }
-  }, [isAuthenticated, loading, setLocation]);
+  // Comentado: deixar o usuário ver a página mesmo sem autenticação
+  // useEffect(() => {
+  //   if (!loading && !isAuthenticated) {
+  //     setLocation('/auth');
+  //   }
+  // }, [isAuthenticated, loading, setLocation]);
 
   if (loading) {
     return (
@@ -100,9 +101,10 @@ export default function Home() {
     );
   }
 
-  if (!isAuthenticated) {
-    return null;
-  }
+  // Permitir acesso mesmo sem autenticação
+  // if (!isAuthenticated) {
+  //   return null;
+  // }
 
   const handleCalculate = (name: string, birthDate: string) => {
     if (!canGenerate?.canGenerate) {
