@@ -9,6 +9,7 @@ import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
 import ebookRouter from "../routes/ebook";
 import favoritesRouter from "../routes/favorites";
+import webhookRouter from "../webhooks/infinitepay";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -41,6 +42,8 @@ async function startServer() {
   app.use("/api/ebook", ebookRouter);
   // Favorites routes
   app.use("/api/favorites", favoritesRouter);
+  // Webhook routes
+  app.use("/api/webhooks", webhookRouter);
   // tRPC API
   app.use(
     "/api/trpc",

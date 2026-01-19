@@ -4,6 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
 import { z } from "zod";
 import * as db from "./db";
+import { getCustomerByEmail, getMapById, getMapHistoryByCustomerId, deleteMapHistory } from "./db";
 import { TRPCError } from "@trpc/server";
 
 // Helper to check if user is admin
@@ -402,6 +403,72 @@ export const appRouter = router({
         return { success: true };
       }),
   }),
+
+  /**
+   * Map History Router
+   */
+  mapHistory: {
+    getMyMaps: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (!ctx.user?.email) {
+          throw new TRPCError({ code: 'UNAUTHORIZED' });
+        }
+        
+        // Get customer by email
+        const customer = await getCustomerByEmail(ctx.user.email);
+        if (!customer) {
+          return [];
+        }
+        
+        // Get map history
+        const maps = await getMapHistoryByCustomerId(customer.id);
+        return maps;
+      }),
+
+    getMapById: protectedProcedure
+      .input(z.object({ mapId: z.number() }))
+      .query(async ({ input, ctx }) => {
+        if (!ctx.user?.email) {
+          throw new TRPCError({ code: 'UNAUTHORIZED' });
+        }
+        
+        const map = await getMapById(input.mapId);
+        if (!map) {
+          throw new TRPCError({ code: 'NOT_FOUND' });
+        }
+        
+        // Verify ownership
+        const customer = await getCustomerByEmail(ctx.user.email);
+        if (!customer || map.customerId !== customer.id) {
+          throw new TRPCError({ code: 'FORBIDDEN' });
+        }
+        
+        return map;
+      }),
+
+    deleteMap: protectedProcedure
+      .input(z.object({ mapId: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (!ctx.user?.email) {
+          throw new TRPCError({ code: 'UNAUTHORIZED' });
+        }
+        
+        const map = await getMapById(input.mapId);
+        if (!map) {
+          throw new TRPCError({ code: 'NOT_FOUND' });
+        }
+        
+        // Verify ownership
+        const customer = await getCustomerByEmail(ctx.user.email);
+        if (!customer || map.customerId !== customer.id) {
+          throw new TRPCError({ code: 'FORBIDDEN' });
+        }
+        
+        await deleteMapHistory(input.mapId);
+        return { success: true };
+      }),
+  },
+
 });
 
 export type AppRouter = typeof appRouter;

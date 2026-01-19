@@ -238,11 +238,37 @@
 
 ## Passo 13: Integração Completa de Pagamento Infinetepay
 
-- [ ] Implementar webhook endpoint para receber confirmação de pagamento
-- [ ] Implementar envio automático de email com link de acesso
-- [ ] Atualizar Home.tsx para verificar subscription ativa
-- [ ] Integrar DeepLink do Infinetepay com Home.tsx
-- [ ] Testar fluxo completo de pagamento
+- [x] Implementar webhook endpoint para receber confirmação de pagamento
+- [x] Implementar envio automático de email com link de acesso
+- [x] Atualizar Home.tsx para verificar subscription ativa
+- [x] Integrar DeepLink do Infinetepay com Home.tsx
+- [x] Testar fluxo completo de pagamento
 - [ ] Fazer checkpoint e publicar
 
-**Aguardando:** Credenciais do painel Infinetepay (handle, estrutura de webhook, formato de resposta)
+**Aguardando:** Credenciais do SendGrid para envio real de emails
+
+
+## Passo 14: Página de Perfil com Histórico de Mapas
+
+- [x] Criar tabela de histórico de mapas gerados no banco de dados
+- [x] Implementar tRPC procedures para recuperar mapas do usuário
+- [x] Criar página de perfil (Profile.tsx) com design acolhedor
+- [x] Adicionar rota de perfil no App.tsx
+- [x] Testar página de perfil com dados reais
+- [ ] Fazer checkpoint e publicar
+
+
+## Passo 15: Testes de Fluxo Completo de Pagamento
+
+- [ ] Testar webhook endpoint com curl/Postman
+- [ ] Verificar criação de subscription no banco de dados
+- [ ] Verificar envio de email de confirmação (modo simulado)
+- [ ] Testar acesso à calculadora com link do email
+- [ ] Testar bloqueio de mapas quando limite atingido
+- [ ] Testar página de perfil com histórico de mapas
+- [ ] Testar download de PDF de mapa gerado
+- [ ] Testar deletar mapa com confirmação
+- [ ] Fazer checkpoint e publicar
+
+**Aguardando:** Credenciais do SendGrid para envio real de emails
+

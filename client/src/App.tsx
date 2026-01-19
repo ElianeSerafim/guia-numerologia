@@ -14,6 +14,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
+import Profile from "./pages/Profile";
 
 /**
  * App Component - Bússola Numerológica 2026
@@ -29,6 +30,7 @@ function Router() {
     <Switch>
       <Route path="/" component={LandingPage} />
       <Route path="/app" component={Home} />
+      <Route path="/profile" component={Profile} />
       <Route path="/auth" component={Auth} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/dashboard-selector" component={DashboardSelector} />

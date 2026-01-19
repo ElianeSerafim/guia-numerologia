@@ -1,4 +1,4 @@
-import { eq, and, or } from "drizzle-orm";
+import { eq, and, or, desc } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { 
   InsertUser, 
@@ -23,7 +23,10 @@ import {
   InsertRenascimento,
   subscriptions,
   InsertSubscription,
-  Subscription
+  Subscription,
+  mapHistory,
+  InsertMapHistory,
+  MapHistory
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -562,4 +565,71 @@ export async function getAllSubscriptions(): Promise<Subscription[]> {
     console.error("[Database] Error getting all subscriptions:", error);
     return [];
   }
+}
+
+/**
+ * Map History Management
+ */
+export async function addMapToHistory(data: InsertMapHistory): Promise<MapHistory | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db.insert(mapHistory).values(data).returning();
+  return result[0] || null;
+}
+
+export async function getMapHistoryByCustomerId(customerId: number): Promise<MapHistory[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db
+    .select()
+    .from(mapHistory)
+    .where(eq(mapHistory.customerId, customerId))
+    .orderBy(desc(mapHistory.generatedAt));
+}
+
+export async function getMapHistoryBySubscriptionId(subscriptionId: number): Promise<MapHistory[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db
+    .select()
+    .from(mapHistory)
+    .where(eq(mapHistory.subscriptionId, subscriptionId))
+    .orderBy(desc(mapHistory.generatedAt));
+}
+
+export async function getMapById(mapId: number): Promise<MapHistory | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db
+    .select()
+    .from(mapHistory)
+    .where(eq(mapHistory.id, mapId))
+    .limit(1);
+  
+  return result[0] || null;
+}
+
+export async function updateMapPdfUrl(mapId: number, pdfUrl: string, pdfKey: string): Promise<MapHistory | null> {
+  const db = await getDb();
+  if (!db) return null;
+  
+  const result = await db
+    .update(mapHistory)
+    .set({ pdfUrl, pdfKey, updatedAt: new Date() })
+    .where(eq(mapHistory.id, mapId))
+    .returning();
+  
+  return result[0] || null;
+}
+
+export async function deleteMapHistory(mapId: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  
+  await db.delete(mapHistory).where(eq(mapHistory.id, mapId));
+  return true;
 }

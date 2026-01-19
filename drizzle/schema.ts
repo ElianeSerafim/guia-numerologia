@@ -285,3 +285,38 @@ export const subscriptionsRelations = relations(subscriptions, ({ one }) => ({
     references: [customers.id],
   }),
 }));
+
+
+/**
+ * Map History Table - Stores all generated numerology maps
+ */
+export const mapHistory = pgTable("map_history", {
+  id: serial("id").primaryKey(),
+  subscriptionId: integer("subscriptionId").notNull(), // Reference to subscription
+  customerId: integer("customerId").notNull(), // Reference to customer
+  name: varchar("name", { length: 255 }).notNull(), // Full name used for calculation
+  birthDate: date("birthDate").notNull(), // Birth date used for calculation
+  mapData: jsonb("mapData").notNull(), // Full numerology chart data (CD, MO, DM, ME, EU, R1-R4, CV, etc)
+  pdfUrl: varchar("pdfUrl", { length: 1024 }), // URL to generated PDF in S3
+  pdfKey: varchar("pdfKey", { length: 1024 }), // S3 key for the PDF
+  generatedAt: timestamp("generatedAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type MapHistory = typeof mapHistory.$inferSelect;
+export type InsertMapHistory = typeof mapHistory.$inferInsert;
+
+/**
+ * Relations for Map History
+ */
+export const mapHistoryRelations = relations(mapHistory, ({ one }) => ({
+  subscription: one(subscriptions, {
+    fields: [mapHistory.subscriptionId],
+    references: [subscriptions.id],
+  }),
+  customer: one(customers, {
+    fields: [mapHistory.customerId],
+    references: [customers.id],
+  }),
+}));
