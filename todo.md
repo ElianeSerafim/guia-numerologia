@@ -234,3 +234,15 @@
 - [x] Adicionar validação obrigatória antes do cálculo - CONCLUÍDO
 - [x] Testar fluxo de confirmação - CONCLUÍDO (dev server OK)
 - [ ] Fazer checkpoint e publicar
+
+
+## Passo 13: Integração Completa de Pagamento Infinetepay
+
+- [ ] Implementar webhook endpoint para receber confirmação de pagamento
+- [ ] Implementar envio automático de email com link de acesso
+- [ ] Atualizar Home.tsx para verificar subscription ativa
+- [ ] Integrar DeepLink do Infinetepay com Home.tsx
+- [ ] Testar fluxo completo de pagamento
+- [ ] Fazer checkpoint e publicar
+
+**Aguardando:** Credenciais do painel Infinetepay (handle, estrutura de webhook, formato de resposta)
