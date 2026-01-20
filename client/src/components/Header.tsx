@@ -35,7 +35,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/80 backdrop-blur-md border-b border-slate-200/50'
+          ? 'bg-[#190825]/90 backdrop-blur-md border-b border-[#4A2A6A]/50'
           : 'bg-transparent'
       }`}
     >
@@ -48,7 +48,7 @@ export default function Header() {
           <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg flex items-center justify-center">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <span className="font-bold text-lg text-white hidden sm:inline">
+          <span className="font-bold text-lg text-[#D4AF37] hidden sm:inline">
             Bússola
           </span>
         </button>
@@ -59,7 +59,7 @@ export default function Header() {
             <button
               key={item.label}
               onClick={() => setLocation(item.href)}
-              className="text-slate-700 hover:text-indigo-600 transition-colors font-medium"
+              className="text-[#D4AF37] hover:text-[#FFD700] transition-colors font-medium"
             >
               {item.label}
             </button>
@@ -70,13 +70,13 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={() => setLocation('/app')}
-            className="px-6 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-colors"
+            className="px-6 py-2 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold hover:bg-[#D4AF37]/10 transition-colors"
           >
             Entrar
           </button>
           <button
             onClick={() => setLocation('/pricing')}
-            className="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-shadow"
+            className="px-6 py-2 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-lg shadow-[#D4AF37]/30 transition-shadow"
           >
             Começar Agora
           </button>
@@ -85,7 +85,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white"
+          className="md:hidden text-[#D4AF37]"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -93,7 +93,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="md:hidden bg-white border-b border-slate-200">
+        <nav className="md:hidden bg-[#190825] border-b border-[#4A2A6A]">
           <div className="container py-4 space-y-3">
             {navItems.map((item) => (
               <button
@@ -102,7 +102,7 @@ export default function Header() {
                   setLocation(item.href);
                   setIsOpen(false);
                 }}
-                className="block w-full text-left px-4 py-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+                className="block w-full text-left px-4 py-2 text-[#D4AF37] hover:bg-[#2A1240] rounded-lg transition-colors"
               >
                 {item.label}
               </button>
@@ -112,7 +112,7 @@ export default function Header() {
                 setLocation('/app');
                 setIsOpen(false);
               }}
-              className="w-full px-4 py-2 border-2 border-indigo-600 text-indigo-600 rounded-lg font-semibold"
+              className="w-full px-4 py-2 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold"
             >
               Entrar
             </button>
@@ -121,7 +121,7 @@ export default function Header() {
                 setLocation('/pricing');
                 setIsOpen(false);
               }}
-              className="w-full px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-lg font-semibold"
+              className="w-full px-4 py-2 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold"
             >
               Começar Agora
             </button>
