@@ -7,6 +7,7 @@ import FAQ from "@/pages/FAQ";
 import History from "@/pages/History";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Compatibility from "@/pages/Compatibility";
+import About from "@/pages/About";
 import DashboardSelector from "./pages/DashboardSelector";
 import ForgotPassword from "./pages/ForgotPassword";
 import { Route, Switch } from "wouter";
@@ -38,6 +39,7 @@ function Router() {
       <Route path="/faq" component={FAQ} />
       <Route path="/history" component={History} />
       <Route path="/compatibility" component={Compatibility} />
+      <Route path="/about" component={About} />
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
