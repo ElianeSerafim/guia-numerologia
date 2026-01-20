@@ -140,7 +140,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-purple-900">
       {/* Header Navigation */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="container flex items-center justify-between py-4">
