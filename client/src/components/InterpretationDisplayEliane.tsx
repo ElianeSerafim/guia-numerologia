@@ -1,4 +1,4 @@
-import { getInterpretation } from '@/lib/interpretationsEliane';
+import { getInterpretation, isRealizacaoLegado, getLegadoInterpretation, getLegadoType } from '@/lib/interpretationsEliane';
 import { NumerologyChart } from '@/types';
 import { BookOpen, Lightbulb, Heart, Users, Brain, Zap, Compass } from 'lucide-react';
 
@@ -164,23 +164,50 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
             { key: 'r3', label: 'Realização 3 (57-84 anos)', desc: 'Ciclo de Plenitude' },
             { key: 'r4', label: 'Realização 4 (85+ anos)', desc: 'Ciclo Final' }
           ].map((cycle) => {
-            const interpretation = getInterpretation(chart.cd);
+            const realizacaoNumber = cycle.key === 'r1' ? chart.r1 : cycle.key === 'r2' ? chart.r2 : cycle.key === 'r3' ? chart.r3 : chart.r4;
+            const interpretation = getInterpretation(realizacaoNumber);
             const cycleText = interpretation?.positions[cycle.key as keyof typeof interpretation.positions];
+            
+            // Detectar se eh uma Realizacao de Legado
+            const isLegado = isRealizacaoLegado(realizacaoNumber, chart.mo, chart.cd, chart.merito);
+            const legadoType = getLegadoType(realizacaoNumber, chart.mo, chart.cd, chart.merito);
+            const legadoText = getLegadoInterpretation(realizacaoNumber);
 
             return (
               <div
                 key={cycle.key}
-                className="card-mystical space-y-3 border-l-4 border-purple-600"
+                className={`card-mystical space-y-3 border-l-4 ${isLegado ? 'border-yellow-500 bg-yellow-500/5' : 'border-purple-600'}`}
               >
                 <div>
-                  <h4 className="text-lg font-bold text-white">{cycle.label}</h4>
-                  <p className="text-xs text-slate-400">{cycle.desc}</p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold text-white">{cycle.label}</h4>
+                      <p className="text-xs text-slate-400">{cycle.desc}</p>
+                    </div>
+                    <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">
+                      {realizacaoNumber}
+                    </div>
+                  </div>
+                  
+                  {isLegado && (
+                    <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-500/50 rounded text-yellow-300 text-xs font-semibold">
+                      ⭐ Realizacao de Legado ({legadoType})
+                    </div>
+                  )}
                 </div>
 
                 {cycleText && (
                   <p className="text-slate-300 text-sm leading-relaxed">
                     {cycleText}
                   </p>
+                )}
+                
+                {isLegado && legadoText && (
+                  <div className="bg-yellow-500/10 rounded-lg p-4 border border-yellow-500/30 mt-3">
+                    <p className="text-yellow-200 text-sm leading-relaxed italic">
+                      <span className="font-semibold">Legado:</span> {legadoText}
+                    </p>
+                  </div>
                 )}
               </div>
             );

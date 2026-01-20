@@ -33,6 +33,7 @@ export interface NumberInterpretationEliane {
   name: string;
   essence: string;
   positions: NumberPosition;
+  legado?: string; // Interpretação especial quando Rn = MO/CD/ME
 }
 
 export const INTERPRETATIONS_ELIANE: Record<number | string, NumberInterpretationEliane> = {
@@ -40,6 +41,7 @@ export const INTERPRETATIONS_ELIANE: Record<number | string, NumberInterpretatio
     number: 1,
     name: 'Liderança e Brilho',
     essence: 'O número 1 vibra a energia do renascimento, da abertura de novos caminhos e da possibilidade. É o início absoluto, o primeiro passo, a coragem de começar.',
+    legado: 'Esta realização representa a construção de um legado de liderança. Suas escolhas reverberam além de você, deixando marcas conscientes de coragem, inovação e iniciativa na história de outras pessoas. Você não apenas lidera para si, mas para inspirar e transformar o mundo ao seu redor.',
     positions: {
       cd: 'Você veio ao mundo para ser líder, para iniciar novos caminhos e para deixar sua marca através da coragem e da ousadia. Sua missão é aprender a usar seu brilho de forma construtiva, desenvolvendo independência autêntica, determinação e capacidade de inovar.',
       mo: 'Desde cedo, existe em você uma força que busca liderança, inovação e brilho. Você não nasceu para seguir — sua motivação vem da necessidade de liderar, de iniciar, de deixar sua marca através da coragem e da ousadia.',
@@ -262,4 +264,45 @@ export function getInterpretation(number: number | string): NumberInterpretation
 export function getPosition(number: number | string, position: keyof NumberPosition): string | undefined {
   const interpretation = getInterpretation(number);
   return interpretation?.positions[position];
+}
+
+/**
+ * Detecta se uma Realização é uma Realização de Legado
+ * Legado ocorre quando: Rn = MO ou Rn = CD ou Rn = ME
+ */
+export function isRealizacaoLegado(
+  realizacaoNumber: number | string,
+  moNumber: number | string,
+  cdNumber: number | string,
+  meNumber: number | string
+): boolean {
+  return (
+    realizacaoNumber === moNumber ||
+    realizacaoNumber === cdNumber ||
+    realizacaoNumber === meNumber
+  );
+}
+
+/**
+ * Retorna a interpretação de legado para um número
+ * Se não houver legado específico, retorna undefined
+ */
+export function getLegadoInterpretation(number: number | string): string | undefined {
+  const interpretation = getInterpretation(number);
+  return interpretation?.legado;
+}
+
+/**
+ * Retorna o tipo de legado (MO, CD ou ME)
+ */
+export function getLegadoType(
+  realizacaoNumber: number | string,
+  moNumber: number | string,
+  cdNumber: number | string,
+  meNumber: number | string
+): 'MO' | 'CD' | 'ME' | null {
+  if (realizacaoNumber === moNumber) return 'MO';
+  if (realizacaoNumber === cdNumber) return 'CD';
+  if (realizacaoNumber === meNumber) return 'ME';
+  return null;
 }
