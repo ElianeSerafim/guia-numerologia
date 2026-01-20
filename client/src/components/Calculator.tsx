@@ -74,10 +74,11 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
 
   return (
     <>
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-gradient-to-br from-[#4A148C]/10 via-[#2A0845]/10 to-[#1A0820] rounded-2xl p-8 border border-[#8A2BE2]/20 backdrop-blur-sm">
       {/* Name Input */}
       <div className="space-y-2">
-        <label htmlFor="name" className="block text-sm font-semibold text-white">
+        <label htmlFor="name" className="block text-sm font-semibold text-white flex items-center gap-2">
+          <span className="text-[#D4AF37]">✨</span>
           Nome Completo
         </label>
         <input
@@ -107,7 +108,8 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
 
       {/* Birth Date Input */}
       <div className="space-y-2">
-        <label htmlFor="birthDate" className="block text-sm font-semibold text-white">
+        <label htmlFor="birthDate" className="block text-sm font-semibold text-white flex items-center gap-2">
+          <span className="text-[#D4AF37]">✨</span>
           Data de Nascimento
         </label>
         <input
@@ -154,7 +156,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
       <button
         type="submit"
         disabled={disabled}
-        className="w-full btn-mystical flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] hover:from-[#A040FF] hover:to-[#FFD700] text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-[#8A2BE2]/50"
       >
         <span>{disabled ? 'Limite de Mapas Atingido' : 'Gerar Mapa Numerológico'}</span>
         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
@@ -162,17 +164,18 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
 
       {/* Upgrade Message */}
       {disabled && (
-        <div className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/30 rounded-lg">
+        <div className="p-4 bg-gradient-to-r from-[#8A2BE2]/20 to-[#D4AF37]/20 border border-[#D4AF37]/50 rounded-lg">
           <p className="text-sm text-white/80 text-center">
             Você atingiu o limite de mapas do seu plano atual. 
             <br />
-            <span className="text-purple-300 font-semibold">Faça upgrade para continuar sua jornada numerológica.</span>
+            <span className="text-[#D4AF37] font-semibold">Faça upgrade para continuar sua jornada numerológica.</span>
           </p>
         </div>
       )}
 
       {/* Info Text */}
-      <p className="text-xs text-white/70 text-center">
+      <p className="text-xs text-white/70 text-center flex items-center justify-center gap-1">
+        <span className="text-[#D4AF37]">🔒</span>
         Seus dados são processados localmente e não são armazenados em nossos servidores.
       </p>
     </form>
@@ -180,34 +183,34 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
     {/* Confirmation Modal */}
     {showConfirmation && (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6 animate-in fade-in zoom-in duration-300">
+        <div className="bg-gradient-to-br from-[#2A0845] to-[#1A0820] rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6 animate-in fade-in zoom-in duration-300 border border-[#8A2BE2]/30">
           {/* Header */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center">
-              <CheckCircle2 className="text-purple-600" size={24} />
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] flex items-center justify-center">
+              <CheckCircle2 className="text-white" size={24} />
             </div>
             <div>
-              <h3 className="text-xl font-bold text-slate-900">Confirme seus dados</h3>
-              <p className="text-sm text-slate-600">Verifique se as informações estão corretas</p>
+              <h3 className="text-xl font-bold text-white">Confirme seus dados</h3>
+              <p className="text-sm text-white/70">Verifique se as informações estão corretas</p>
             </div>
           </div>
 
           {/* Data Review */}
-          <div className="space-y-4 bg-slate-50 rounded-lg p-4">
+          <div className="space-y-4 bg-[#1A0820]/50 rounded-lg p-4 border border-[#8A2BE2]/20">
             <div>
-              <p className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Nome de Solteiro</p>
-              <p className="text-lg font-semibold text-slate-900 mt-1">{pendingName}</p>
+              <p className="text-xs font-semibold text-[#D4AF37] uppercase tracking-wide">Nome de Solteiro</p>
+              <p className="text-lg font-semibold text-white mt-1">{pendingName}</p>
             </div>
-            <div className="border-t border-slate-200 pt-4">
-              <p className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Data de Nascimento</p>
-              <p className="text-lg font-semibold text-slate-900 mt-1">{pendingBirthDate}</p>
+            <div className="border-t border-[#8A2BE2]/30 pt-4">
+              <p className="text-xs font-semibold text-[#D4AF37] uppercase tracking-wide">Data de Nascimento</p>
+              <p className="text-lg font-semibold text-white mt-1">{pendingBirthDate}</p>
             </div>
           </div>
 
           {/* Warning Message */}
-          <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
-            <p className="text-sm text-amber-900">
-              <span className="font-semibold">⚠️ Atenção:</span> Você tem direito a apenas <span className="font-bold">1 cálculo</span> com este plano. Certifique-se de que os dados estão corretos antes de prosseguir.
+          <div className="bg-[#8A2BE2]/10 border border-[#D4AF37]/50 rounded-lg p-4">
+            <p className="text-sm text-white/90">
+              <span className="font-semibold text-[#D4AF37]">Atenção:</span> Você tem direito a apenas <span className="font-bold text-[#D4AF37]">1 cálculo</span> com este plano. Certifique-se de que os dados estão corretos antes de prosseguir.
             </p>
           </div>
 
@@ -215,13 +218,13 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           <div className="flex gap-3 pt-4">
             <button
               onClick={handleCancel}
-              className="flex-1 px-4 py-3 rounded-lg border-2 border-slate-300 text-slate-900 font-semibold hover:bg-slate-50 transition-colors"
+              className="flex-1 px-4 py-3 rounded-lg border-2 border-[#8A2BE2] text-white font-semibold hover:bg-[#8A2BE2]/20 transition-colors"
             >
               Corrigir Dados
             </button>
             <button
               onClick={handleConfirm}
-              className="flex-1 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold hover:shadow-lg transition-all"
+              className="flex-1 px-4 py-3 rounded-lg bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white font-semibold hover:shadow-lg hover:shadow-[#8A2BE2]/50 transition-all"
             >
               Confirmar e Calcular
             </button>
