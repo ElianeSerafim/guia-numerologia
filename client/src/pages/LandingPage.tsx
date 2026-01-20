@@ -111,6 +111,15 @@ export default function LandingPage() {
               Explore a numerologia pitagórica e desbloqueie insights profundos sobre sua vida,
               personalidade e futuro através de cálculos precisos e interpretações detalhadas.
             </p>
+            <button
+              onClick={() => {
+                const element = document.getElementById('teste-gratuitamente');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-[#D4AF37] hover:text-[#FFD700] font-semibold transition-colors text-lg underline"
+            >
+              Teste Gratuitamente →
+            </button>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -241,7 +250,7 @@ export default function LandingPage() {
       </section>
 
       {/* Life Path Calculator Section */}
-      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
+      <section id="teste-gratuitamente" className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Teste Gratuitamente</h2>
