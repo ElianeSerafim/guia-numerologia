@@ -371,6 +371,54 @@ export default function Pricing() {
         </div>
       )}
 
+      {/* Premium CTA Section */}
+      <section className="container py-20 my-16">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#D4AF37]/10 via-[#8A2BE2]/10 to-[#D4AF37]/10 border-2 border-[#D4AF37]/50 p-12 md:p-16">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37]/5 rounded-full blur-3xl -mr-20 -mt-20" />
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#8A2BE2]/5 rounded-full blur-3xl -ml-20 -mb-20" />
+
+            <div className="relative z-10 text-center space-y-6">
+              <div className="flex justify-center mb-4">
+                <div className="bg-gradient-to-r from-[#D4AF37] to-[#FFC700] p-4 rounded-full">
+                  <MessageCircle className="text-[#190825]" size={32} />
+                </div>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl font-bold text-white">
+                Quer um <span className="text-[#D4AF37]">Atendimento Personalizado?</span>
+              </h2>
+
+              <p className="text-xl text-gray-200 max-w-2xl mx-auto">
+                Nossos especialistas em numerologia estão prontos para criar uma análise profunda e personalizada do seu mapa numerológico, com interpretações exclusivas e recomendações específicas para sua vida e caminho espiritual.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
+                <button
+                  onClick={() => window.open('https://wa.me/5511999999999?text=Olá! Gostaria de agendar um atendimento personalizado com numerologia.', '_blank')}
+                  className="bg-gradient-to-r from-[#D4AF37] to-[#FFC700] hover:from-[#FFC700] hover:to-[#FFD700] text-[#190825] px-8 py-6 text-lg font-bold rounded-lg shadow-lg shadow-[#D4AF37]/30 transition-all hover:shadow-[#D4AF37]/50 flex items-center justify-center gap-2"
+                >
+                  <MessageCircle size={20} />
+                  Agendar Atendimento Agora
+                </button>
+
+                <button
+                  onClick={() => window.open('mailto:contato@bussola-numerologica.com', '_blank')}
+                  className="border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 px-8 py-6 text-lg font-bold rounded-lg transition-all"
+                >
+                  Enviar Email
+                </button>
+              </div>
+
+              <p className="text-sm text-gray-400 pt-4">
+                ✨ Resposta em até 24 horas | 🎯 Análise profunda e personalizada | 💎 Recomendações exclusivas
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <footer className="border-t border-[#4A2A6A] bg-[#1A0820] mt-16">
         <div className="container py-8 text-center text-white text-sm font-light space-y-2">

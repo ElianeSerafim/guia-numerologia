@@ -1,0 +1,9 @@
+{
+  "query": "UPDATE subscriptions SET maps_limit = 2147483647 WHERE email = 'eliane@artwebcreative.com.br';",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3CzvXe7TNQM217h.285ae8e8654a --database DDDSdpbSdmbb2LJ2vD6g8U --execute UPDATE subscriptions SET maps_limit = 2147483647 WHERE email = 'eliane@artwebcreative.com.br';",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 94
+}
