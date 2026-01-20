@@ -179,23 +179,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Life Path Calculator Section */}
-      <section className="py-20 bg-gradient-to-b from-[#2A1240] to-[#190825]">
-        <div className="container">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Teste Gratuitamente</h2>
-            <p className="text-xl text-white max-w-2xl mx-auto">
-              Descubra seu Numero do Caminho de Vida com nossa calculadora gratuita. Uma amostra
-              do poder da numerologia pitagorica.
-            </p>
-          </div>
-
-          <div className="flex justify-center">
-            <LifePathCalculator />
-          </div>
-        </div>
-      </section>
-
       {/* Delivery Section */}
       <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
         <div className="container max-w-4xl">
@@ -253,6 +236,23 @@ export default function LandingPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Life Path Calculator Section */}
+      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
+        <div className="container">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Teste Gratuitamente</h2>
+            <p className="text-xl text-white max-w-2xl mx-auto">
+              Descubra seu Numero do Caminho de Vida com nossa calculadora gratuita. Uma amostra
+              do poder da numerologia pitagorica.
+            </p>
+          </div>
+
+          <div className="flex justify-center">
+            <LifePathCalculator />
           </div>
         </div>
       </section>
