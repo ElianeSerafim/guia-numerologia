@@ -1,4 +1,4 @@
-import { getInterpretation, isRealizacaoLegado, getLegadoInterpretation, getLegadoType } from '@/lib/interpretationsEliane';
+import { getInterpretation, isRealizacaoLegado, getLegadoType, getLegadoInterpretation, isGrandeAmorPresente, calcularGrandeAmor, getGrandeAmorInterpretation, getGrandeAmorRenascimentoNota } from '@/lib/interpretationsEliane';
 import { NumerologyChart } from '@/types';
 import { BookOpen, Lightbulb, Heart, Users, Brain, Zap, Compass } from 'lucide-react';
 
@@ -172,11 +172,19 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
             const isLegado = isRealizacaoLegado(realizacaoNumber, chart.mo, chart.cd, chart.merito);
             const legadoType = getLegadoType(realizacaoNumber, chart.mo, chart.cd, chart.merito);
             const legadoText = getLegadoInterpretation(realizacaoNumber);
+            
+            // Detectar Grande Amor (quando R = 6)
+            const isGrandeAmor = realizacaoNumber === 6;
+            const grandeAmorInfo = isGrandeAmor ? calcularGrandeAmor(chart.r1, chart.r2, chart.r3, chart.r4) : null;
+            const grandeAmorText = grandeAmorInfo ? getGrandeAmorInterpretation(grandeAmorInfo) : '';
+            const grandeAmorRenascimentoNota = grandeAmorInfo ? getGrandeAmorRenascimentoNota(chart.r1, chart.r2, chart.r3, chart.r4) : '';
 
             return (
               <div
                 key={cycle.key}
-                className={`card-mystical space-y-3 border-l-4 ${isLegado ? 'border-yellow-500 bg-yellow-500/5' : 'border-purple-600'}`}
+                className={`card-mystical space-y-3 border-l-4 ${
+                  isGrandeAmor ? 'border-pink-500 bg-pink-500/5' : isLegado ? 'border-yellow-500 bg-yellow-500/5' : 'border-purple-600'
+                }`}
               >
                 <div>
                   <div className="flex items-center justify-between">
@@ -189,6 +197,12 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
                     </div>
                   </div>
                   
+                  {isGrandeAmor && (
+                    <div className="mt-2 px-3 py-1 bg-pink-500/20 border border-pink-500/50 rounded text-pink-300 text-xs font-semibold">
+                      💕 Grande Amor - Duração: {grandeAmorInfo?.duracao} anos {grandeAmorInfo?.ehDefinitivo ? '(Possível permanência definitiva)' : ''}
+                    </div>
+                  )}
+                  
                   {isLegado && (
                     <div className="mt-2 px-3 py-1 bg-yellow-500/20 border border-yellow-500/50 rounded text-yellow-300 text-xs font-semibold">
                       ⭐ Realizacao de Legado ({legadoType})
@@ -200,6 +214,14 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
                   <p className="text-slate-300 text-sm leading-relaxed">
                     {cycleText}
                   </p>
+                )}
+                
+                {isGrandeAmor && grandeAmorText && (
+                  <div className="bg-pink-500/10 rounded-lg p-4 border border-pink-500/30 mt-3">
+                    <p className="text-pink-200 text-sm leading-relaxed">
+                      {grandeAmorText}
+                    </p>
+                  </div>
                 )}
                 
                 {isLegado && legadoText && (

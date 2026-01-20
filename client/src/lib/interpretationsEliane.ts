@@ -306,3 +306,135 @@ export function getLegadoType(
   if (realizacaoNumber === meNumber) return 'ME';
   return null;
 }
+
+
+// ============================================
+// GRANDE AMOR - Técnica quando R = 6
+// ============================================
+
+export interface GrandeAmorInfo {
+  isGrandeAmor: boolean;
+  realizacaoKey: 'r1' | 'r2' | 'r3' | 'r4' | null;
+  idadeInicio: number;
+  idadeFim: number;
+  duracao: number;
+  ehDefinitivo: boolean;
+  observacoes: string[];
+}
+
+/**
+ * Detecta se há Grande Amor (quando qualquer Realização = 6)
+ */
+export function isGrandeAmorPresente(r1: number, r2: number, r3: number, r4: number): boolean {
+  return r1 === 6 || r2 === 6 || r3 === 6 || r4 === 6;
+}
+
+/**
+ * Calcula informações detalhadas do Grande Amor
+ * R1: 0-28 anos
+ * R2: 29-56 anos
+ * R3: 57-84 anos
+ * R4: 85+ anos
+ */
+export function calcularGrandeAmor(r1: number, r2: number, r3: number, r4: number): GrandeAmorInfo {
+  const realizacoes = [
+    { numero: r1, key: 'r1' as const, inicio: 0, fim: 28 },
+    { numero: r2, key: 'r2' as const, inicio: 29, fim: 56 },
+    { numero: r3, key: 'r3' as const, inicio: 57, fim: 84 },
+    { numero: r4, key: 'r4' as const, inicio: 85, fim: 120 }
+  ];
+
+  const grandeAmorRealizacao = realizacoes.find(r => r.numero === 6);
+
+  if (!grandeAmorRealizacao) {
+    return {
+      isGrandeAmor: false,
+      realizacaoKey: null,
+      idadeInicio: 0,
+      idadeFim: 0,
+      duracao: 0,
+      ehDefinitivo: false,
+      observacoes: []
+    };
+  }
+
+  const duracao = grandeAmorRealizacao.fim - grandeAmorRealizacao.inicio + 1;
+  const ehDefinitivo = grandeAmorRealizacao.key === 'r4';
+
+  const observacoes: string[] = [];
+  observacoes.push(`Duração mínima estimada: ${duracao} anos`);
+  
+  if (ehDefinitivo) {
+    observacoes.push('Possibilidade de permanência DEFINITIVA (R4 = 6)');
+  }
+  
+  observacoes.push('Duração exata depende de como os envolvidos vivem seus números pessoais');
+  observacoes.push('Pode manifestar como relacionamento romântico, amizade profunda ou mentoria');
+
+  return {
+    isGrandeAmor: true,
+    realizacaoKey: grandeAmorRealizacao.key,
+    idadeInicio: grandeAmorRealizacao.inicio,
+    idadeFim: grandeAmorRealizacao.fim,
+    duracao,
+    ehDefinitivo,
+    observacoes
+  };
+}
+
+/**
+ * Retorna interpretação de Grande Amor baseada na técnica
+ */
+export function getGrandeAmorInterpretation(grandeAmorInfo: GrandeAmorInfo): string {
+  if (!grandeAmorInfo.isGrandeAmor) return '';
+
+  const realizacaoLabel = {
+    r1: 'Realização 1 (0-28 anos)',
+    r2: 'Realização 2 (29-56 anos)',
+    r3: 'Realização 3 (57-84 anos)',
+    r4: 'Realização 4 (85+ anos)'
+  }[grandeAmorInfo.realizacaoKey!];
+
+  let texto = `Este período marca a chegada do Grande Amor em sua vida. `;
+  texto += `Durante a ${realizacaoLabel}, você vivenciará uma conexão profunda e transformadora `;
+  texto += `com uma pessoa que despertará em você um amor incondicional. `;
+  texto += `\n\nDuração estimada: ${grandeAmorInfo.duracao} anos (mínimo), `;
+  texto += `dependendo de como ambos vivem seus números pessoais. `;
+  
+  if (grandeAmorInfo.ehDefinitivo) {
+    texto += `\n\nComo esta é sua Realização 4 (ciclo final), existe possibilidade de que este Grande Amor `;
+    texto += `permaneça de forma DEFINITIVA em sua vida. `;
+  }
+  
+  texto += `\n\nO Grande Amor não é obrigatoriamente um relacionamento romântico. `;
+  texto += `Pode manifestar-se como uma amizade profunda, um mentor, um grande amigo ou alguém `;
+  texto += `que desperta em você um sentimento de carinho, respeito e confiança incondicional. `;
+  texto += `\n\nA essência desta conexão é evolutiva: trocas mútuas, ajudas nos processos de crescimento `;
+  texto += `e transformação. Preservar esta essência é fundamental para que o Grande Amor cumpra seu propósito.`;
+
+  return texto;
+}
+
+/**
+ * Retorna observações sobre Renascimento e Grande Amor
+ */
+export function getGrandeAmorRenascimentoNota(r1: number, r2: number, r3: number, r4: number): string {
+  const grandeAmorInfo = calcularGrandeAmor(r1, r2, r3, r4);
+  
+  if (!grandeAmorInfo.isGrandeAmor) return '';
+
+  let nota = '';
+  
+  if (grandeAmorInfo.realizacaoKey === 'r1') {
+    nota = 'Após esta Realização, se houver Renascimento (R2 = 1), a relação com o Grande Amor terminará, ';
+    nota += 'exceto se o Grande Amor também tiver Renascimento com até 10 anos de diferença.';
+  } else if (grandeAmorInfo.realizacaoKey === 'r2') {
+    nota = 'Após esta Realização, se houver Renascimento (R3 = 1), a relação com o Grande Amor terminará, ';
+    nota += 'exceto se o Grande Amor também tiver Renascimento com até 10 anos de diferença.';
+  } else if (grandeAmorInfo.realizacaoKey === 'r3') {
+    nota = 'Após esta Realização, se houver Renascimento (R4 = 1), a relação com o Grande Amor terminará, ';
+    nota += 'exceto se o Grande Amor também tiver Renascimento com até 10 anos de diferença.';
+  }
+
+  return nota;
+}
