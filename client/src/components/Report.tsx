@@ -4,6 +4,7 @@ import { NumerologyChart } from '@/types';
 import { ArrowLeft, Download, Printer, Loader2, Save, History, BookOpen } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
+import InterpretationDisplayEliane from './InterpretationDisplayEliane';
 import AnnualPredictions from './AnnualPredictions';
 import PersonalYearProgress from './PersonalYearProgress';
 import { exportMapToPDF } from '@/lib/pdfExport';
@@ -202,7 +203,7 @@ export default function Report({ chart, onReset }: ReportProps) {
             {/* Interpretations - Melhorado */}
             <div>
               <h3 className="text-2xl font-bold text-white mb-8">Interpretação Detalhada</h3>
-              <InterpretationDisplay chart={chart} />
+              <InterpretationDisplayEliane chart={chart} />
             </div>
 
             {/* Divider */}

@@ -1,0 +1,9 @@
+{
+  "query": "INSERT INTO admins (email, name, role, isActive) VALUES ('eliane@artwebcreative.com.br', 'Eliane Serafim', 'admin', true) ON DUPLICATE KEY UPDATE role = 'admin', isActive = true;",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway02.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 3CzvXe7TNQM217h.285ae8e8654a --database DDDSdpbSdmbb2LJ2vD6g8U --execute INSERT INTO admins (email, name, role, isActive) VALUES ('eliane@artwebcreative.com.br', 'Eliane Serafim', 'admin', true) ON DUPLICATE KEY UPDATE role = 'admin', isActive = true;",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 71
+}
