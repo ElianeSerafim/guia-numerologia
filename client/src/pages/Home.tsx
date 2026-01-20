@@ -143,21 +143,21 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-purple-900">
       {/* Header Navigation */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
-        <div className="container flex items-center justify-between py-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700">
-              <Compass size={24} className="text-white" />
+        <div className="container flex items-center justify-between py-3 px-4 md:px-6">
+          <div className="flex items-center gap-2 md:gap-3 min-w-0">
+            <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700 flex-shrink-0">
+              <Compass size={20} className="text-white" />
             </div>
-            <h1 className="text-xl font-bold text-slate-900">Bússola Numerológica</h1>
+            <h1 className="text-lg md:text-xl font-bold text-slate-900 truncate">Bússola</h1>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <Link href="/faq">
               <a className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600" title="Aprenda">
-                <BookOpen size={20} />
+                <BookOpen size={18} />
               </a>
             </Link>
-            <div className="text-right">
-              <p className="text-sm text-slate-600">{user?.email}</p>
+            <div className="text-right hidden sm:block">
+              <p className="text-xs md:text-sm text-slate-600 truncate">{user?.email}</p>
               {subscription && (
                 <p className="text-xs font-semibold text-indigo-600">Plano Ativo</p>
               )}
@@ -170,7 +170,7 @@ export default function Home() {
               className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600"
               title="Sair"
             >
-              <LogOut size={20} />
+              <LogOut size={18} />
             </button>
           </div>
         </div>
@@ -179,15 +179,15 @@ export default function Home() {
       {/* Usage Bar */}
       {subscription && (
         <div className="bg-white border-b border-slate-200">
-          <div className="container py-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-semibold text-slate-900">
+          <div className="container py-3 md:py-4 px-4 md:px-6">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-2">
+              <span className="text-xs md:text-sm font-semibold text-slate-900">
                 Mapas Gerados: 0 / 1
               </span>
               {!canGenerate?.canGenerate && (
                 <button
                   onClick={() => setShowPlans(true)}
-                  className="text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
+                  className="text-xs md:text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 whitespace-nowrap"
                 >
                   <Zap size={14} />
                   Upgrade
@@ -206,14 +206,14 @@ export default function Home() {
 
       {/* Plans Section */}
       {showPlans && (
-        <section className="container py-16">
+        <section className="container py-8 md:py-16 px-4 md:px-6">
           <div className="max-w-5xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-slate-900 mb-4">Escolha Seu Plano</h2>
-              <p className="text-lg text-slate-600">Desvende os mistérios da numerologia com o plano perfeito para você</p>
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-slate-900 mb-3 md:mb-4">Escolha Seu Plano</h2>
+              <p className="text-sm md:text-lg text-slate-600">Desvende os mistérios da numerologia com o plano perfeito para você</p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
               {Object.entries(PLANS).map(([key, plan]) => (
                 <div
                   key={key}
@@ -273,18 +273,18 @@ export default function Home() {
       {/* Hero Section */}
       {!showPlans && (
         <>
-          <section className="container py-16 md:py-24">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
+          <section className="container py-8 md:py-24 px-4 md:px-6">
+            <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-200">
                 <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
                 <span className="text-sm font-medium text-indigo-700">Descubra seu destino numerológico</span>
               </div>
 
-              <h2 className="text-5xl md:text-6xl font-bold text-slate-900 leading-tight">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
                 Desvende os Mistérios da <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">Numerologia</span>
               </h2>
 
-              <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+              <p className="text-sm md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
                 Utilize o método pitagórico para calcular seu Caminho de Destino, Motivação, Expressão e muito mais. 
                 Receba interpretações personalizadas com inteligência artificial.
               </p>
@@ -308,11 +308,11 @@ export default function Home() {
           </section>
 
           {/* Calculator Section */}
-          <section className="container py-16">
+          <section className="container py-8 md:py-16 px-4 md:px-6">
             <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-12">
-                <h3 className="text-3xl font-bold text-slate-900 mb-2">Comece Agora</h3>
-                <p className="text-slate-600">
+              <div className="text-center mb-8 md:mb-12">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">Comece Agora</h3>
+                <p className="text-xs md:text-base text-slate-600">
                   {canGenerate?.canGenerate
                     ? `Você tem ${canGenerate?.mapsRemaining || 1} mapa${canGenerate?.mapsRemaining !== 1 ? 's' : ''} disponível${canGenerate?.mapsRemaining !== 1 ? 's' : ''}`
                     : 'Escolha um plano para começar'}
@@ -355,9 +355,9 @@ export default function Home() {
           </section>
 
           {/* Info Section */}
-          <section className="container py-16">
-            <div className="grid md:grid-cols-3 gap-8 py-12">
-              <div className="rounded-xl p-8 bg-white shadow-md hover:shadow-lg transition-all">
+          <section className="container py-8 md:py-16 px-4 md:px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 py-8 md:py-12">
+              <div className="rounded-xl p-6 md:p-8 bg-white shadow-md hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
                   <span className="text-2xl font-bold text-indigo-600">1</span>
                 </div>
@@ -367,7 +367,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="rounded-xl p-8 bg-white shadow-md hover:shadow-lg transition-all">
+              <div className="rounded-xl p-6 md:p-8 bg-white shadow-md hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
                   <span className="text-2xl font-bold text-indigo-600">2</span>
                 </div>
@@ -377,7 +377,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="rounded-xl p-8 bg-white shadow-md hover:shadow-lg transition-all">
+              <div className="rounded-xl p-6 md:p-8 bg-white shadow-md hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
                   <span className="text-2xl font-bold text-indigo-600">3</span>
                 </div>
