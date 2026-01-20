@@ -167,10 +167,13 @@ export default function Pricing() {
       </section>
 
       {/* Plans Grid */}
-      <section className="container py-12">
+      <section className="container py-12 px-4">
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {/* Navegador */}
-          <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow bg-[#2A1240] border border-[#4A2A6A]">
+          <div 
+            onClick={() => handleSelectPlan('navigator')}
+            className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#2A1240] border border-[#4A2A6A] cursor-pointer"
+          >
             <div className="flex items-center gap-2">
               <Zap className="text-[#D4AF37]" size={24} />
               <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.navigator.name}</h3>
@@ -179,83 +182,98 @@ export default function Pricing() {
               <p className="text-4xl font-bold text-[#8A2BE2]">
                 R$ {PLANS.navigator.price.toFixed(2).replace('.', ',')}
               </p>
-              <p className="text-white">{PLANS.navigator.description}</p>
+              <p className="text-white text-sm">{PLANS.navigator.description}</p>
             </div>
             <div className="space-y-3">
               {PLANS.navigator.features.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-white">{feature}</span>
+                  <Check className="text-green-500 flex-shrink-0 mt-1" size={18} />
+                  <span className="text-white text-sm">{feature}</span>
                 </div>
               ))}
             </div>
             <button
-              onClick={() => handleSelectPlan('navigator')}
-              className="w-full py-3 bg-[#8A2BE2] text-white rounded-lg hover:bg-[#D4AF37] transition-colors font-semibold flex items-center justify-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectPlan('navigator');
+              }}
+              className="w-full py-3 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg hover:from-[#D4AF37] hover:to-[#8A2BE2] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
             >
-              <MessageCircle size={18} />
-              Contratar via WhatsApp
+              <ArrowRight size={18} />
+              Escolher Plano
             </button>
           </div>
 
           {/* Visionário - Destaque */}
-          <div className="card-mystical space-y-6 border-2 border-purple-500 shadow-lg scale-105 hover:shadow-2xl transition-shadow relative">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-bold">
-              Mais Popular
+          <div 
+            onClick={() => handleSelectPlan('visionary')}
+            className="card-mystical space-y-6 border-2 border-[#D4AF37] shadow-2xl scale-105 hover:shadow-2xl hover:scale-110 transition-all duration-300 relative cursor-pointer bg-gradient-to-br from-[#2A1240] to-[#3A1A50]"
+          >
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#FFC700] text-[#190825] px-4 py-1 rounded-full text-sm font-bold">
+              ⭐ Mais Popular
             </div>
             <div className="flex items-center gap-2">
-              <Crown className="text-purple-600" size={24} />
-              <h3 className="text-2xl font-bold text-white">{PLANS.visionary.name}</h3>
+              <Crown className="text-[#D4AF37]" size={24} />
+              <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.visionary.name}</h3>
             </div>
             <div className="space-y-2">
-              <p className="text-4xl font-bold text-purple-600">
+              <p className="text-4xl font-bold text-[#D4AF37]">
                 R$ {PLANS.visionary.price.toFixed(2).replace('.', ',')}
               </p>
-              <p className="text-slate-600">{PLANS.visionary.description}</p>
+              <p className="text-white text-sm">{PLANS.visionary.description}</p>
             </div>
             <div className="space-y-3">
               {PLANS.visionary.features.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-700">{feature}</span>
+                  <Check className="text-green-500 flex-shrink-0 mt-1" size={18} />
+                  <span className="text-white text-sm">{feature}</span>
                 </div>
               ))}
             </div>
             <button
-              onClick={() => handleSelectPlan('visionary')}
-              className="w-full py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-semibold flex items-center justify-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectPlan('visionary');
+              }}
+              className="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFC700] text-[#190825] rounded-lg hover:from-[#FFC700] hover:to-[#FFD700] transition-all font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/50"
             >
-              <MessageCircle size={18} />
-              Contratar via WhatsApp
+              <ArrowRight size={18} />
+              Escolher Plano
             </button>
           </div>
 
           {/* Iluminado */}
-          <div className="card-mystical space-y-6 hover:shadow-xl transition-shadow">
+          <div 
+            onClick={() => handleSelectPlan('illuminated')}
+            className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#2A1240] border border-[#4A2A6A] cursor-pointer"
+          >
             <div className="flex items-center gap-2">
-              <Star className="text-yellow-500" size={24} />
-              <h3 className="text-2xl font-bold text-white">{PLANS.illuminated.name}</h3>
+              <Star className="text-[#D4AF37]" size={24} />
+              <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.illuminated.name}</h3>
             </div>
             <div className="space-y-2">
-              <p className="text-4xl font-bold text-amber-600">
+              <p className="text-4xl font-bold text-[#D4AF37]">
                 R$ {PLANS.illuminated.price.toFixed(2).replace('.', ',')}
               </p>
-              <p className="text-slate-600">{PLANS.illuminated.description}</p>
+              <p className="text-white text-sm">{PLANS.illuminated.description}</p>
             </div>
             <div className="space-y-3">
               {PLANS.illuminated.features.map((feature, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <Check className="text-green-600 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-slate-700">{feature}</span>
+                  <Check className="text-green-500 flex-shrink-0 mt-1" size={18} />
+                  <span className="text-white text-sm">{feature}</span>
                 </div>
               ))}
             </div>
             <button
-              onClick={() => handleSelectPlan('illuminated')}
-              className="w-full py-3 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-semibold flex items-center justify-center gap-2"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleSelectPlan('illuminated');
+              }}
+              className="w-full py-3 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg hover:from-[#D4AF37] hover:to-[#8A2BE2] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
             >
-              <MessageCircle size={18} />
-              Contratar via WhatsApp
+              <ArrowRight size={18} />
+              Escolher Plano
             </button>
           </div>
         </div>
@@ -371,53 +389,7 @@ export default function Pricing() {
         </div>
       )}
 
-      {/* Premium CTA Section */}
-      <section className="container py-20 my-16">
-        <div className="max-w-4xl mx-auto">
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#D4AF37]/10 via-[#8A2BE2]/10 to-[#D4AF37]/10 border-2 border-[#D4AF37]/50 p-12 md:p-16">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4AF37]/5 rounded-full blur-3xl -mr-20 -mt-20" />
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#8A2BE2]/5 rounded-full blur-3xl -ml-20 -mb-20" />
 
-            <div className="relative z-10 text-center space-y-6">
-              <div className="flex justify-center mb-4">
-                <div className="bg-gradient-to-r from-[#D4AF37] to-[#FFC700] p-4 rounded-full">
-                  <MessageCircle className="text-[#190825]" size={32} />
-                </div>
-              </div>
-
-              <h2 className="text-4xl md:text-5xl font-bold text-white">
-                Quer um <span className="text-[#D4AF37]">Atendimento Personalizado?</span>
-              </h2>
-
-              <p className="text-xl text-gray-200 max-w-2xl mx-auto">
-                Nossos especialistas em numerologia estão prontos para criar uma análise profunda e personalizada do seu mapa numerológico, com interpretações exclusivas e recomendações específicas para sua vida e caminho espiritual.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
-                <button
-                  onClick={() => window.open('https://wa.me/5511999999999?text=Olá! Gostaria de agendar um atendimento personalizado com numerologia.', '_blank')}
-                  className="bg-gradient-to-r from-[#D4AF37] to-[#FFC700] hover:from-[#FFC700] hover:to-[#FFD700] text-[#190825] px-8 py-6 text-lg font-bold rounded-lg shadow-lg shadow-[#D4AF37]/30 transition-all hover:shadow-[#D4AF37]/50 flex items-center justify-center gap-2"
-                >
-                  <MessageCircle size={20} />
-                  Agendar Atendimento Agora
-                </button>
-
-                <button
-                  onClick={() => window.open('mailto:contato@bussola-numerologica.com', '_blank')}
-                  className="border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37]/10 px-8 py-6 text-lg font-bold rounded-lg transition-all"
-                >
-                  Enviar Email
-                </button>
-              </div>
-
-              <p className="text-sm text-gray-400 pt-4">
-                ✨ Resposta em até 24 horas | 🎯 Análise profunda e personalizada | 💎 Recomendações exclusivas
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="border-t border-[#4A2A6A] bg-[#1A0820] mt-16">
