@@ -5,6 +5,7 @@ import { ArrowLeft, Download, Printer, Loader2, Save, History, BookOpen } from '
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
 import InterpretationDisplayEliane from './InterpretationDisplayEliane';
+import { CyclesAndChallengesDisplay } from './CyclesAndChallengesDisplay';
 import AnnualPredictions from './AnnualPredictions';
 import PersonalYearProgress from './PersonalYearProgress';
 import { exportMapToPDF } from '@/lib/pdfExport';
@@ -204,6 +205,15 @@ export default function Report({ chart, onReset }: ReportProps) {
             <div>
               <h3 className="text-2xl font-bold text-white mb-8">Interpretação Detalhada</h3>
               <InterpretationDisplayEliane chart={chart} />
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
+
+            {/* Cycles and Challenges */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-8">Ciclos, Desafios e Previsões 2026</h3>
+              <CyclesAndChallengesDisplay birthDate={chart.birthDate} />
             </div>
 
             {/* Divider */}
