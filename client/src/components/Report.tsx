@@ -200,7 +200,7 @@ export default function Report({ chart, onReset }: ReportProps) {
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Linha do Tempo</h3>
               <p className="text-slate-400 mb-6">Sua jornada pessoal através dos ciclos de vida e desafios - clique em cada caixa para ver a definição e interpretação resumida</p>
-              <TimelineInteractive birthDate={chart.birthDate} />
+              <TimelineInteractive birthDate={chart.birthDate} chart={chart} />
             </div>
 
             {/* Divider */}
