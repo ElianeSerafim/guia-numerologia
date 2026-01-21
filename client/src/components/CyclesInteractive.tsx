@@ -8,10 +8,28 @@ interface CyclesInteractiveProps {
 
 type CycleType = 'c1' | 'c2' | 'c3';
 
-const cycleInfo: Record<CycleType, { label: string; age: string; color: string; icon: string }> = {
-  c1: { label: 'C1 - Formativo', age: '0-28 anos', color: 'from-blue-600 to-blue-400', icon: '🌱' },
-  c2: { label: 'C2 - Produtivo', age: '29-56 anos', color: 'from-green-600 to-green-400', icon: '🌿' },
-  c3: { label: 'C3 - Colheita', age: '56+ anos', color: 'from-amber-600 to-amber-400', icon: '🌳' },
+const cycleInfo: Record<CycleType, { label: string; definition: string; age: string; color: string; icon: string }> = {
+  c1: { 
+    label: 'D1 - Primeiro Ciclo', 
+    definition: 'Formação e aprendizado inicial da vida',
+    age: '0-28 anos', 
+    color: 'from-blue-600 to-blue-400', 
+    icon: '🌱' 
+  },
+  c2: { 
+    label: 'D2 - Segundo Ciclo', 
+    definition: 'Produção, criação e realização pessoal',
+    age: '29-56 anos', 
+    color: 'from-green-600 to-green-400', 
+    icon: '🌿' 
+  },
+  c3: { 
+    label: 'D3 - Terceiro Ciclo', 
+    definition: 'Colheita, sabedoria e legado de vida',
+    age: '56+ anos', 
+    color: 'from-amber-600 to-amber-400', 
+    icon: '🌳' 
+  },
 };
 
 export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
@@ -85,14 +103,24 @@ export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
           </div>
         </div>
 
+        {/* Definition */}
+        <div className="mt-6 pt-6 border-t border-[#4A2A6A]">
+          <h4 className="text-sm font-bold text-[#D4AF37] uppercase tracking-wider mb-2">
+            Definição
+          </h4>
+          <p className="text-slate-300 leading-relaxed">
+            {cycleInfo[selectedCycle].definition}
+          </p>
+        </div>
+
         {/* Interpretation */}
         {interpretationText && (
           <div className="space-y-4 mt-6 pt-6 border-t border-[#4A2A6A]">
             <div>
-              <h4 className="text-sm font-bold text-[#D4AF37] uppercase tracking-wider mb-2">
-                Interpretação
+              <h4 className="text-sm font-bold text-green-400 uppercase tracking-wider mb-2">
+                ✓ Interpretação Resumida
               </h4>
-              <p className="text-slate-300 leading-relaxed">
+              <p className="text-slate-300 leading-relaxed text-sm">
                 {interpretationText}
               </p>
             </div>

@@ -195,10 +195,10 @@ export default function Report({ chart, onReset }: ReportProps) {
             {/* Divider */}
             <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
 
-            {/* Essential Numbers Interactive */}
+            {/* Timeline - Linha do Tempo */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Seus Números Essenciais</h3>
-              <p className="text-slate-400 mb-6">Clique em cada número para ver a interpretação completa</p>
+              <h3 className="text-2xl font-bold text-white mb-6">Linha do Tempo</h3>
+              <p className="text-slate-400 mb-6">Sua jornada pessoal através dos ciclos de vida</p>
               <EssentialNumbersInteractive chart={chart} />
             </div>
 
@@ -214,10 +214,10 @@ export default function Report({ chart, onReset }: ReportProps) {
             {/* Divider */}
             <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
 
-            {/* Cycles of Life */}
+            {/* Cycles of Life - D1, D2, D3 */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Ciclos de Vida</h3>
-              <p className="text-slate-400 mb-6">Clique em cada ciclo para ver a interpretação completa</p>
+              <h3 className="text-2xl font-bold text-white mb-6">Ciclos de Vida: D1, D2, D3</h3>
+              <p className="text-slate-400 mb-6">Clique em cada ciclo para ver a definição e interpretação resumida</p>
               <CyclesInteractive birthDate={chart.birthDate} />
             </div>
 
