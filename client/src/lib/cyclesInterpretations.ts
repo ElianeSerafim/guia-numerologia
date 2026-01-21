@@ -362,3 +362,20 @@ export function getChallengeInterpretation(
 export function getAnnualYear2026Interpretation(number: number) {
   return annualYear2026Interpretations[number] || null;
 }
+
+
+/**
+ * Retorna a essência de um ciclo
+ */
+export function getCycleEssence(cycleNumber: number): string {
+  const interpretation = lifeCycleInterpretations[cycleNumber];
+  return interpretation?.essence || 'Essência não disponível';
+}
+
+/**
+ * Retorna a essência de um desafio
+ */
+export function getChallengeEssence(challengeNumber: number): string {
+  const interpretation = challengeInterpretations[challengeNumber];
+  return interpretation?.essence || 'Essência não disponível';
+}

@@ -1,0 +1,104 @@
+import { useState } from 'react';
+import { getCycleNumber, getCurrentCycle } from '@/lib/cyclesAndChallenges';
+import { getLifeCycleInterpretation } from '@/lib/cyclesInterpretations';
+
+interface CyclesInteractiveProps {
+  birthDate: string;
+}
+
+type CycleType = 'c1' | 'c2' | 'c3';
+
+const cycleInfo: Record<CycleType, { label: string; age: string; color: string; icon: string }> = {
+  c1: { label: 'C1 - Formativo', age: '0-28 anos', color: 'from-blue-600 to-blue-400', icon: '🌱' },
+  c2: { label: 'C2 - Produtivo', age: '29-56 anos', color: 'from-green-600 to-green-400', icon: '🌿' },
+  c3: { label: 'C3 - Colheita', age: '56+ anos', color: 'from-amber-600 to-amber-400', icon: '🌳' },
+};
+
+export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
+  const [selectedCycle, setSelectedCycle] = useState<CycleType>('c1');
+
+  const cycles = {
+    c1: getCycleNumber(birthDate, 'c1'),
+    c2: getCycleNumber(birthDate, 'c2'),
+    c3: getCycleNumber(birthDate, 'c3'),
+  };
+
+  const currentCycle = getCurrentCycle(birthDate);
+  const selectedNumber = cycles[selectedCycle];
+  const cycleTypeMap: Record<CycleType, 'C1' | 'C2' | 'C3'> = { c1: 'C1', c2: 'C2', c3: 'C3' };
+  const interpretationText = getLifeCycleInterpretation(selectedNumber, cycleTypeMap[selectedCycle]);
+
+  return (
+    <div className="space-y-6">
+      {/* Tabs */}
+      <div className="grid grid-cols-3 gap-2 md:gap-3">
+        {(Object.keys(cycleInfo) as CycleType[]).map((cycle) => {
+          const info = cycleInfo[cycle];
+          const isSelected = selectedCycle === cycle;
+          const isCurrent = currentCycle === cycle;
+
+          return (
+            <button
+              key={cycle}
+              onClick={() => setSelectedCycle(cycle)}
+              className={`relative group transition-all duration-300`}
+            >
+              <div
+                className={`bg-gradient-to-br ${info.color} p-0.5 rounded-lg transition-all duration-300 ${
+                  isSelected ? 'shadow-lg' : 'shadow-md'
+                }`}
+              >
+                <div
+                  className={`bg-[#190825] rounded-md p-3 md:p-4 transition-all duration-300 ${
+                    isSelected ? 'ring-2 ring-[#D4AF37]' : ''
+                  }`}
+                >
+                  <div className="text-2xl mb-1">{info.icon}</div>
+                  <div className="text-sm md:text-base font-bold text-white">
+                    {info.label}
+                  </div>
+                  <div className="text-xs text-slate-400 mt-1">{info.age}</div>
+                  {isCurrent && (
+                    <div className="text-xs font-semibold text-[#D4AF37] mt-2 bg-[#4A2A6A] rounded px-2 py-1 inline-block">
+                      Atual
+                    </div>
+                  )}
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Content */}
+      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 md:p-8 space-y-4">
+        {/* Number */}
+        <div className="flex items-center gap-4">
+          <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
+            {selectedNumber}
+          </div>
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-white">
+              {cycleInfo[selectedCycle].label}
+            </h3>
+            <p className="text-slate-400">{cycleInfo[selectedCycle].age}</p>
+          </div>
+        </div>
+
+        {/* Interpretation */}
+        {interpretationText && (
+          <div className="space-y-4 mt-6 pt-6 border-t border-[#4A2A6A]">
+            <div>
+              <h4 className="text-sm font-bold text-[#D4AF37] uppercase tracking-wider mb-2">
+                Interpretação
+              </h4>
+              <p className="text-slate-300 leading-relaxed">
+                {interpretationText}
+              </p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

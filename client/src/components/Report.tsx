@@ -5,6 +5,9 @@ import { ArrowLeft, Download, Printer, Loader2, Save, History, BookOpen } from '
 import ChartDisplay from './ChartDisplay';
 import InterpretationDisplay from './InterpretationDisplay';
 import InterpretationDisplayEliane from './InterpretationDisplayEliane';
+import { EssentialNumbersInteractive } from './EssentialNumbersInteractive';
+import { CyclesInteractive } from './CyclesInteractive';
+import { ChallengesInteractive } from './ChallengesInteractive';
 import { CyclesAndChallengesDisplay } from './CyclesAndChallengesDisplay';
 import AnnualPredictions from './AnnualPredictions';
 import PersonalYearProgress from './PersonalYearProgress';
@@ -192,10 +195,11 @@ export default function Report({ chart, onReset }: ReportProps) {
             {/* Divider */}
             <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
 
-            {/* Chart Display */}
+            {/* Essential Numbers Interactive */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-6">Seus Números Principais</h3>
-              <ChartDisplay chart={chart} />
+              <h3 className="text-2xl font-bold text-white mb-6">Seus Números Essenciais</h3>
+              <p className="text-slate-400 mb-6">Clique em cada número para ver a interpretação completa</p>
+              <EssentialNumbersInteractive chart={chart} />
             </div>
 
             {/* Divider */}
@@ -210,10 +214,21 @@ export default function Report({ chart, onReset }: ReportProps) {
             {/* Divider */}
             <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
 
-            {/* Cycles and Challenges */}
+            {/* Cycles of Life */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-8">Ciclos, Desafios e Previsões 2026</h3>
-              <CyclesAndChallengesDisplay birthDate={chart.birthDate} />
+              <h3 className="text-2xl font-bold text-white mb-6">Ciclos de Vida</h3>
+              <p className="text-slate-400 mb-6">Clique em cada ciclo para ver a interpretação completa</p>
+              <CyclesInteractive birthDate={chart.birthDate} />
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-gradient-to-r from-transparent via-[#4A2A6A] to-transparent"></div>
+
+            {/* Challenges */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">Desafios de Vida</h3>
+              <p className="text-slate-400 mb-6">Clique em cada desafio para ver a interpretação completa</p>
+              <ChallengesInteractive birthDate={chart.birthDate} />
             </div>
 
             {/* Divider */}

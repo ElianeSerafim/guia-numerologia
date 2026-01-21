@@ -171,6 +171,36 @@ export interface FullNumerologyData {
 }
 
 /**
+ * Retorna o número do ciclo de vida
+ */
+export function getCycleNumber(
+  birthDate: string | Date,
+  cycleType: 'c1' | 'c2' | 'c3'
+): number {
+  const cycles = calculateLifeCycles(birthDate);
+  return cycles[cycleType];
+}
+
+/**
+ * Retorna o ciclo atual da pessoa
+ */
+export function getCurrentCycle(birthDate: string | Date): 'c1' | 'c2' | 'c3' {
+  const current = getCurrentLifeCycle(birthDate);
+  return current.toLowerCase() as 'c1' | 'c2' | 'c3';
+}
+
+/**
+ * Retorna o número do desafio
+ */
+export function getChallengeNumber(
+  birthDate: string | Date,
+  challengeType: 'd1' | 'd2' | 'dm'
+): number {
+  const challenges = calculateChallenges(birthDate);
+  return challenges[challengeType];
+}
+
+/**
  * Calcula todos os dados de ciclos, desafios e ano pessoal
  */
 export function calculateFullCyclesAndChallenges(
