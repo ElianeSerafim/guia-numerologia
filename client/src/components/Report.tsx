@@ -217,7 +217,7 @@ export default function Report({ chart, onReset }: ReportProps) {
 
             {/* Annual Predictions */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-8">Previsões para 2026</h3>
+              <h3 className="text-2xl font-bold text-white mb-8">Previsões</h3>
               <AnnualPredictions chart={chart} year={2026} />
             </div>
           </div>
