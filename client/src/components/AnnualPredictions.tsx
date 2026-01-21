@@ -220,6 +220,16 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                   if (!ct) return null;
 
                   const ctNumber = chart.ciclosTrimestrais?.ano2026?.[`ct${trimestre}` as keyof typeof chart.ciclosTrimestrais.ano2026];
+                  
+                  // Obter mês de realização correspondente ao trimestre
+                  const realizationMonths = chart.ciclosTrimestrais?.realizationMonths;
+                  let realizationMonth = '';
+                  if (realizationMonths) {
+                    if (trimestre === 1) realizationMonth = `Mês ${realizationMonths.r1Start}`;
+                    else if (trimestre === 2) realizationMonth = `Mês ${realizationMonths.r2Start}`;
+                    else if (trimestre === 3) realizationMonth = `Mês ${realizationMonths.r3Start}`;
+                    else if (trimestre === 4) realizationMonth = `Mês ${realizationMonths.r4Start}`;
+                  }
 
                   return (
                     <div
@@ -229,8 +239,15 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                       {/* Header */}
                       <div className="space-y-2">
                         <h4 className="text-lg font-bold text-white">{ct.title}</h4>
-                        <div className="inline-block bg-[#4A2A6A] rounded-lg px-3 py-1">
-                          <p className="text-sm text-[#D4AF37] font-semibold">Vibração: {ctNumber}</p>
+                        <div className="flex flex-wrap gap-2">
+                          <div className="inline-block bg-[#4A2A6A] rounded-lg px-3 py-1">
+                            <p className="text-sm text-[#D4AF37] font-semibold">Vibração: {ctNumber}</p>
+                          </div>
+                          {realizationMonth && (
+                            <div className="inline-block bg-[#5A3A7A] rounded-lg px-3 py-1">
+                              <p className="text-sm text-[#FFD700] font-semibold">📅 {realizationMonth}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
 

@@ -172,21 +172,23 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const pm = reduceNumber(pyCurrentReduced + currentMonth);
 
   // Ciclos Trimestrais para o Ano Pessoal Atual
-  const ct1 = reduceNumber(pyCurrentReduced + monthReduced);
-  const ct2 = reduceNumber(pyCurrentReduced + dayReduced);
-  const ct3 = reduceNumber(pyCurrentReduced + yearReduced);
-  const pyNextYear = reduceNumber(dayReduced + monthReduced + reduceNumber(currentYear + 1));
-  const ct4 = reduceNumber(pyCurrentReduced + pyNextYear);
-
+  // CT1 = AP + Ciclo de Vida vigente (C1 = Mês)
+  const ct1 = reduceNumber(pyCurrentReduced + c1);
+  // CT2 = AP + Realização vigente (R1 = Mês)
+  const ct2 = reduceNumber(pyCurrentReduced + r1);
+  // CT3 = AP - DM
+  const ct3 = reduceNumber(Math.abs(pyCurrentReduced - dm));
+  // CT4 = Soma dos 3 primeiros trimestres
+  const ct4 = reduceNumber(ct1 + ct2 + ct3);
+  
   // Ciclos Trimestrais para 2026
-  const ct1_2026 = reduceNumber(py2026 + monthReduced);
-  const ct2_2026 = reduceNumber(py2026 + dayReduced);
-  const ct3_2026 = reduceNumber(py2026 + yearReduced);
-  const py2027 = reduceNumber(dayReduced + monthReduced + reduceNumber(2027));
-  const ct4_2026 = reduceNumber(py2026 + py2027);
-
+  const ct1_2026 = reduceNumber(py2026 + c1);
+  const ct2_2026 = reduceNumber(py2026 + r1);
+  const ct3_2026 = reduceNumber(Math.abs(py2026 - dm));
+  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026);
+  
   // ========================================
-  // 6. IDADE
+  // 5. IDADE
   // ========================================
   const age = currentYear - year - (today < new Date(currentYear, month - 1, day) ? 1 : 0);
 
@@ -227,6 +229,12 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     ciclosTrimestrais: {
       atual: { ct1, ct2, ct3, ct4 },
       ano2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 },
+      realizationMonths: {
+        r1Start: month,
+        r2Start: month + 9,
+        r3Start: month + 18,
+        r4Start: month + 27,
+      },
     },
   };
 };

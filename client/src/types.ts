@@ -29,6 +29,12 @@ export interface NumerologyChart {
   ciclosTrimestrais?: {
     atual: { ct1: number; ct2: number; ct3: number; ct4: number };
     ano2026: { ct1: number; ct2: number; ct3: number; ct4: number };
+    realizationMonths?: {
+      r1Start: number;
+      r2Start: number;
+      r3Start: number;
+      r4Start: number;
+    };
   };
   age: number;
   realizationAges: {
