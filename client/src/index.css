@@ -246,3 +246,65 @@
     animation: countUp 0.6s ease-out;
   }
 }
+
+  /* Neon Glow Animation */
+  @keyframes neonGlow {
+    0%, 100% {
+      text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #19E6FF;
+      box-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF, 0 0 30px #19E6FF, inset 0 0 10px rgba(0, 255, 255, 0.3);
+    }
+    50% {
+      text-shadow: 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #19E6FF, 0 0 50px #00D9E9;
+      box-shadow: 0 0 20px #00FFFF, 0 0 30px #00FFFF, 0 0 40px #19E6FF, 0 0 50px #00D9E9, inset 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+  }
+  
+  .neon-glow {
+    animation: neonGlow 2s ease-in-out infinite;
+  }
+  
+  /* Neon Pulse Animation */
+  @keyframes neonPulse {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+      box-shadow: 0 0 10px #00FFFF, 0 0 20px #19E6FF;
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00FFFF, 0 0 30px #19E6FF, 0 0 40px #00D9E9;
+    }
+  }
+  
+  .neon-pulse {
+    animation: neonPulse 1.5s ease-in-out infinite;
+  }
+  
+  /* Logo Glow */
+  @keyframes logoGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 5px #00FFFF) drop-shadow(0 0 10px #19E6FF);
+    }
+    50% {
+      filter: drop-shadow(0 0 10px #00FFFF) drop-shadow(0 0 20px #19E6FF) drop-shadow(0 0 30px #00D9E9);
+    }
+  }
+  
+  .logo-glow {
+    animation: logoGlow 2.5s ease-in-out infinite;
+  }
+  
+  /* Button Glow Hover */
+  @keyframes buttonGlowHover {
+    0%, 100% {
+      box-shadow: 0 0 10px #00FFFF, 0 0 20px #19E6FF;
+    }
+    50% {
+      box-shadow: 0 0 20px #00FFFF, 0 0 30px #19E6FF, 0 0 40px #00D9E9;
+    }
+  }
+  
+  .button-glow:hover {
+    animation: buttonGlowHover 1s ease-in-out infinite;
+  }

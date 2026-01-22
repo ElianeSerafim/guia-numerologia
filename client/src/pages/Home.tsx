@@ -145,8 +145,8 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-[#07131B]/80 backdrop-blur-md border-b border-[#19E6FF]/50">
         <div className="container flex items-center justify-between py-3 px-4 md:px-6">
           <div className="flex items-center gap-2 md:gap-3 min-w-0">
-            <img src="/logo-hexagon.png" alt="Portal" className="w-8 h-8 flex-shrink-0" />
-            <h1 className="text-lg md:text-xl font-bold text-[#00FFFF] truncate">Portal</h1>
+            <img src="/logo-hexagon.png" alt="Portal" className="w-8 h-8 flex-shrink-0 logo-glow" />
+            <h1 className="text-lg md:text-xl font-bold text-[#00FFFF] truncate neon-glow">Portal</h1>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <Link href="/faq">
@@ -339,7 +339,7 @@ export default function Home() {
                       </p>
                       <button
                         onClick={() => setShowPlans(true)}
-                        className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all"
+                        className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-[#07131B] px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all button-glow neon-pulse"
                       >
                         <span>Ver Planos Premium</span>
                         <ArrowRight size={18} />

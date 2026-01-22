@@ -45,8 +45,8 @@ export default function Header() {
           onClick={() => setLocation('/app')}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          <img src="/logo-hexagon.png" alt="Portal Numerologia" className="w-10 h-10" />
-          <span className="font-bold text-lg text-[#00FFFF] hidden sm:inline">
+          <img src="/logo-hexagon.png" alt="Portal Numerologia" className="w-10 h-10 logo-glow" />
+          <span className="font-bold text-lg text-[#00FFFF] hidden sm:inline neon-glow">
             Portal
           </span>
         </button>
@@ -68,13 +68,13 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={() => setLocation('/app')}
-            className="px-6 py-2 border-2 border-[#00FFFF] text-[#00FFFF] rounded-lg font-semibold hover:bg-[#00FFFF]/10 transition-colors"
+            className="px-6 py-2 border-2 border-[#00FFFF] text-[#00FFFF] rounded-lg font-semibold hover:bg-[#00FFFF]/10 transition-colors button-glow"
           >
             Entrar
           </button>
           <button
             onClick={() => setLocation('/pricing')}
-            className="px-6 py-2 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-[#07131B] rounded-lg font-semibold hover:shadow-lg shadow-[#00FFFF]/30 transition-shadow"
+            className="px-6 py-2 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-[#07131B] rounded-lg font-semibold hover:shadow-lg shadow-[#00FFFF]/30 transition-shadow button-glow neon-pulse"
           >
             Começar Agora
           </button>
