@@ -280,28 +280,27 @@ export default function Home() {
                 <span className="text-sm font-medium text-indigo-700">Descubra seu destino numerológico</span>
               </div>
 
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
-                Desvende os Mistérios da <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">Numerologia</span>
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#D4AF37] leading-tight">
+                Desvende os Mistérios da <span className="text-[#C8A2E0]">Numerologia</span>
               </h2>
 
-              <p className="text-sm md:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-                Utilize o método pitagórico para calcular seu Caminho de Destino, Motivação, Expressão e muito mais. 
-                Receba interpretações personalizadas com inteligência artificial.
+              <p className="text-sm md:text-lg text-[#C8A2E0] leading-relaxed max-w-2xl mx-auto">
+                Utilize o método pitagórico para calcular seu Caminho de Destino, Motivação, Expressão e muito mais.
               </p>
 
               <div className="flex flex-wrap gap-4 justify-center pt-4">
-                <div className="flex items-center gap-2 text-slate-700">
-                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <span className="text-sm font-bold text-indigo-600">✓</span>
+                <div className="flex items-center gap-2 text-[#C8A2E0]">
+                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
+                    <span className="text-sm font-bold text-[#D4AF37]">✓</span>
                   </div>
                   <span className="text-sm">Cálculos Automáticos</span>
                 </div>
 
-                <div className="flex items-center gap-2 text-slate-700">
-                  <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <span className="text-sm font-bold text-indigo-600">✓</span>
+                <div className="flex items-center gap-2 text-[#C8A2E0]">
+                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
+                    <span className="text-sm font-bold text-[#D4AF37]">✓</span>
                   </div>
-                  <span className="text-sm">Previsões para 2026</span>
+                  <span className="text-sm">Método Pitagórico</span>
                 </div>
               </div>
             </div>
