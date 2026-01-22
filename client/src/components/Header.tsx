@@ -26,7 +26,7 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    { label: 'Quem é', href: '/about' },
+    { label: 'A Numerológa', href: '/about' },
     { label: 'FAQ', href: '/faq' },
     { label: 'Planos', href: '/pricing' },
   ];
