@@ -78,9 +78,9 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
 
   // Cores baseadas no progresso
   const getProgressColor = () => {
-    if (progressPercentage < 33) return 'from-[#8A2BE2] to-[#D4AF37]';
-    if (progressPercentage < 66) return 'from-[#D4AF37] to-[#FFD700]';
-    return 'from-[#FFD700] to-[#8A2BE2]';
+    if (progressPercentage < 33) return 'from-[#00FFFF] to-[#19E6FF]';
+    if (progressPercentage < 66) return 'from-[#19E6FF] to-[#FFD700]';
+    return 'from-[#FFD700] to-[#00FFFF]';
   };
 
   // Interpretação do progresso
@@ -99,45 +99,45 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
       {/* Cabeçalho */}
       <div>
         <div className="flex items-center gap-3 mb-2">
-          <div className="p-2.5 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37]">
+          <div className="p-2.5 rounded-lg bg-gradient-to-br from-[#00FFFF] to-[#19E6FF]">
             <Calendar size={20} className="text-white" />
           </div>
           <h3 className="text-2xl font-bold text-white">Progresso do Ano Pessoal</h3>
         </div>
         <p className="text-[#B8A8D8] text-sm">
-          Seu ano pessoal número <span className="font-bold text-[#D4AF37]">{chart.personalYear}</span>
+          Seu ano pessoal número <span className="font-bold text-[#19E6FF]">{chart.personalYear}</span>
         </p>
       </div>
 
       {/* Card Principal */}
-      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-8">
+      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-8">
         {/* Barra de Progresso */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-3">
             <span className="text-white font-medium">Progresso do Ano</span>
-            <span className="text-[#D4AF37] font-bold text-lg">{Math.round(progressPercentage)}%</span>
+            <span className="text-[#19E6FF] font-bold text-lg">{Math.round(progressPercentage)}%</span>
           </div>
 
           {/* Barra com gradiente */}
-          <div className="relative w-full h-4 bg-[#1A0A2A] rounded-full overflow-hidden border border-[#4A2A6A]">
+          <div className="relative w-full h-4 bg-[#1A0A2A] rounded-full overflow-hidden border border-[#1A3A4A]">
             <div
-              className={`h-full bg-gradient-to-r ${getProgressColor()} transition-all duration-500 ease-out shadow-lg shadow-[#D4AF37]/50`}
+              className={`h-full bg-gradient-to-r ${getProgressColor()} transition-all duration-500 ease-out shadow-lg shadow-[#19E6FF]/50`}
               style={{ width: `${progressPercentage}%` }}
             />
           </div>
         </div>
 
         {/* Informações de Tempo */}
-        <div className="grid grid-cols-3 gap-4 mb-8 pb-8 border-b border-[#4A2A6A]">
+        <div className="grid grid-cols-3 gap-4 mb-8 pb-8 border-b border-[#1A3A4A]">
           {/* Meses Decorridos */}
           <div className="text-center">
-            <div className="text-3xl font-bold text-[#D4AF37] mb-1">{monthsElapsed}</div>
+            <div className="text-3xl font-bold text-[#19E6FF] mb-1">{monthsElapsed}</div>
             <div className="text-white text-sm">Meses Decorridos</div>
           </div>
 
           {/* Divisor */}
           <div className="flex items-center justify-center">
-            <div className="h-12 w-px bg-gradient-to-b from-transparent via-[#4A2A6A] to-transparent"></div>
+            <div className="h-12 w-px bg-gradient-to-b from-transparent via-[#1A3A4A] to-transparent"></div>
           </div>
 
           {/* Meses Restantes */}
@@ -149,11 +149,11 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
 
         {/* Fase Atual */}
         <div className="flex items-start gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-[#4A2A6A]">
-            <TrendingUp size={18} className="text-[#D4AF37]" />
+          <div className="p-2 rounded-lg bg-[#1A3A4A]">
+            <TrendingUp size={18} className="text-[#19E6FF]" />
           </div>
           <div>
-            <p className="text-[#D4AF37] font-semibold mb-1">Fase Atual</p>
+            <p className="text-[#19E6FF] font-semibold mb-1">Fase Atual</p>
             <p className="text-white">{getPhaseDescription()}</p>
           </div>
         </div>
@@ -164,10 +164,10 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
             <span className="text-white text-sm">Início do Ano Pessoal</span>
             <span className="text-white font-semibold">{formatDate(yearStartDate)}</span>
           </div>
-          <div className="h-px bg-[#4A2A6A]"></div>
+          <div className="h-px bg-[#1A3A4A]"></div>
           <div className="flex justify-between items-center">
             <span className="text-white text-sm">Próximo Aniversário</span>
-            <span className="text-[#D4AF37] font-semibold">{formatDate(yearEndDate)}</span>
+            <span className="text-[#19E6FF] font-semibold">{formatDate(yearEndDate)}</span>
           </div>
         </div>
       </div>
@@ -175,14 +175,14 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
       {/* Informações Adicionais */}
       <div className="grid md:grid-cols-2 gap-4">
         {/* Ano Pessoal 2026 */}
-        <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6">
+        <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6">
           <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 rounded-lg bg-[#4A2A6A]">
+            <div className="p-2 rounded-lg bg-[#1A3A4A]">
               <Zap size={16} className="text-[#FFD700]" />
             </div>
             <h4 className="font-semibold text-white">Ano Pessoal 2026</h4>
           </div>
-          <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
+          <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#19E6FF] to-[#FFD700]">
             {chart.personalYear2026}
           </div>
           <p className="text-white text-sm mt-2">
@@ -191,14 +191,14 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
         </div>
 
         {/* Mês Pessoal Atual */}
-        <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6">
+        <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6">
           <div className="flex items-center gap-3 mb-3">
-            <div className="p-2 rounded-lg bg-[#4A2A6A]">
-              <Calendar size={16} className="text-[#D4AF37]" />
+            <div className="p-2 rounded-lg bg-[#1A3A4A]">
+              <Calendar size={16} className="text-[#19E6FF]" />
             </div>
             <h4 className="font-semibold text-white">Mês Pessoal Atual</h4>
           </div>
-          <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37]">
+          <div className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00FFFF] to-[#19E6FF]">
             {chart.personalMonth}
           </div>
           <p className="text-white text-sm mt-2">
@@ -208,9 +208,9 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
       </div>
 
       {/* Dica */}
-      <div className="bg-[#2A1A4A]/50 border border-[#4A2A6A] rounded-lg p-4">
+      <div className="bg-[#2A1A4A]/50 border border-[#1A3A4A] rounded-lg p-4">
         <p className="text-white text-sm">
-          <span className="text-[#D4AF37] font-semibold">💡 Dica:</span> O progresso do seu ano pessoal reflete as energias em ação. Use este conhecimento para alinhar suas ações com as oportunidades do momento.
+          <span className="text-[#19E6FF] font-semibold">💡 Dica:</span> O progresso do seu ano pessoal reflete as energias em ação. Use este conhecimento para alinhar suas ações com as oportunidades do momento.
         </p>
       </div>
     </div>

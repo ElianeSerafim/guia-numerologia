@@ -114,7 +114,7 @@ export default function CouponManagement() {
 
       {/* Formulário de Criação */}
       {showForm && (
-        <div className="bg-[#1A0A2A] rounded-lg p-6 border border-[#4A2A6A]">
+        <div className="bg-[#1A0A2A] rounded-lg p-6 border border-[#1A3A4A]">
           <h3 className="text-lg font-bold text-white mb-4">Criar Novo Cupom</h3>
 
           {formError && (
@@ -136,7 +136,7 @@ export default function CouponManagement() {
                   setFormData({ ...formData, code: e.target.value.toUpperCase() })
                 }
                 placeholder="EX: DESCONTO20"
-                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                className="w-full px-3 py-2 border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
               />
             </div>
 
@@ -153,7 +153,7 @@ export default function CouponManagement() {
                     discountType: e.target.value as 'percentage' | 'fixed',
                   })
                 }
-                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                className="w-full px-3 py-2 border border-[#1A3A4A] bg-[#1A0A2A] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
               >
                 <option value="percentage">Percentual (%)</option>
                 <option value="fixed">Valor Fixo (R$)</option>
@@ -172,7 +172,7 @@ export default function CouponManagement() {
                   setFormData({ ...formData, discountValue: parseFloat(e.target.value) })
                 }
                 placeholder="0"
-                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                className="w-full px-3 py-2 border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
               />
             </div>
 
@@ -188,7 +188,7 @@ export default function CouponManagement() {
                   setFormData({ ...formData, maxUses: parseInt(e.target.value) })
                 }
                 placeholder="0"
-                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                className="w-full px-3 py-2 border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
               />
             </div>
 
@@ -201,7 +201,7 @@ export default function CouponManagement() {
                 type="date"
                 value={formData.expiryDate}
                 onChange={(e) => setFormData({ ...formData, expiryDate: e.target.value })}
-                className="w-full px-3 py-2 border border-[#4A2A6A] bg-[#1A0A2A] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                className="w-full px-3 py-2 border border-[#1A3A4A] bg-[#1A0A2A] text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
               />
             </div>
           </div>
@@ -218,7 +218,7 @@ export default function CouponManagement() {
                     type="checkbox"
                     checked={formData.applicablePlans.includes(plan)}
                     onChange={() => handleTogglePlan(plan)}
-                    className="w-4 h-4 rounded border-[#4A2A6A]"
+                    className="w-4 h-4 rounded border-[#1A3A4A]"
                   />
                   <span className="text-white">{getPlanLabel(plan)}</span>
                 </label>
@@ -230,7 +230,7 @@ export default function CouponManagement() {
           <div className="flex gap-3">
             <button
               onClick={handleCreateCoupon}
-              className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+              className="px-4 py-2 bg-cyan-400 text-white rounded-lg hover:bg-indigo-700 transition-colors"
             >
               Criar Cupom
             </button>

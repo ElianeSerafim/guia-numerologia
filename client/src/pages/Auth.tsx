@@ -101,22 +101,22 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#190825] via-[#2A1240] to-[#190825] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#07131B] via-[#0A1F2E] to-[#07131B] flex items-center justify-center p-4">
       <div className="w-full max-w-md space-y-8">
         {/* Logo */}
         <div className="text-center space-y-4">
           <div className="flex justify-center">
-            <div className="p-4 rounded-lg bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37]">
+            <div className="p-4 rounded-lg bg-gradient-to-br from-[#00FFFF] to-[#19E6FF]">
               <Compass size={32} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-[#D4AF37]">Portal Numerologia</h1>
+          <h1 className="text-3xl font-bold text-[#19E6FF]">Portal Numerologia</h1>
           <p className="text-white">Descubra os mistérios do seu destino</p>
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleLogin} className="card-mystical space-y-6 bg-[#2A1240] border-2 border-[#4A2A6A] rounded-xl p-6">
-          <h2 className="text-2xl font-bold text-[#D4AF37]">Bem-vindo</h2>
+        <form onSubmit={handleLogin} className="card-mystical space-y-6 bg-[#0A1F2E] border-2 border-[#1A3A4A] rounded-xl p-6">
+          <h2 className="text-2xl font-bold text-[#19E6FF]">Bem-vindo</h2>
 
           {/* Email Input */}
           <div className="space-y-2">
@@ -134,10 +134,10 @@ export default function Auth() {
               }}
               placeholder="seu@email.com"
               disabled={isLoading}
-              className="w-full px-4 py-3 rounded-lg border-2 border-[#8A2BE2] bg-[#1A0820] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37] transition-all disabled:opacity-50"
+              className="w-full px-4 py-3 rounded-lg border-2 border-[#00FFFF] bg-[#1A0820] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19E6FF]/50 focus:border-[#19E6FF] transition-all disabled:opacity-50"
             />
             {email.toLowerCase() === 'eliane@artwebcreative.com.br' && (
-              <div className="flex items-center gap-2 text-[#D4AF37] text-sm">
+              <div className="flex items-center gap-2 text-[#19E6FF] text-sm">
                 <CheckCircle size={16} />
                 <span>E-mail Premium Detectado! 👑</span>
               </div>
@@ -160,12 +160,12 @@ export default function Auth() {
                 }}
                 placeholder="Digite sua senha"
                 disabled={isLoading}
-                className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-[#8A2BE2] bg-[#1A0820] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37] transition-all disabled:opacity-50"
+                className="w-full px-4 py-3 pr-12 rounded-lg border-2 border-[#00FFFF] bg-[#1A0820] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#19E6FF]/50 focus:border-[#19E6FF] transition-all disabled:opacity-50"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#D4AF37] hover:text-[#8A2BE2] transition-colors"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-[#19E6FF] hover:text-[#00FFFF] transition-colors"
                 disabled={isLoading}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -174,7 +174,7 @@ export default function Auth() {
 
             <div className="flex justify-end">
               <Link href="/forgot-password">
-                <a className="text-sm text-[#D4AF37] hover:text-[#8A2BE2] font-semibold">
+                <a className="text-sm text-[#19E6FF] hover:text-[#00FFFF] font-semibold">
                   Esqueci minha senha
                 </a>
               </Link>
@@ -193,7 +193,7 @@ export default function Auth() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-[#8A2BE2]/50 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white font-semibold py-3 rounded-lg hover:shadow-lg hover:shadow-[#00FFFF]/50 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? (
               <>
@@ -210,9 +210,9 @@ export default function Auth() {
 
           {/* Pricing Hint */}
           {showPricingHint && (
-            <div className="space-y-4 pt-4 border-t border-[#4A2A6A]">
-              <div className="bg-[#8A2BE2]/20 rounded-lg p-4 space-y-2 border border-[#8A2BE2]/50">
-                <p className="text-sm font-semibold text-[#D4AF37]">
+            <div className="space-y-4 pt-4 border-t border-[#1A3A4A]">
+              <div className="bg-[#00FFFF]/20 rounded-lg p-4 space-y-2 border border-[#00FFFF]/50">
+                <p className="text-sm font-semibold text-[#19E6FF]">
                   Escolha seu plano para continuar
                 </p>
                 <p className="text-xs text-white">
@@ -222,7 +222,7 @@ export default function Auth() {
               <button
                 type="button"
                 onClick={handleChoosePlan}
-                className="w-full px-4 py-3 rounded-lg border-2 border-[#D4AF37] text-[#D4AF37] font-semibold hover:bg-[#D4AF37]/10 transition-colors"
+                className="w-full px-4 py-3 rounded-lg border-2 border-[#19E6FF] text-[#19E6FF] font-semibold hover:bg-[#19E6FF]/10 transition-colors"
               >
                 Ver Planos
               </button>
@@ -237,7 +237,7 @@ export default function Auth() {
             <div className="flex items-center justify-center gap-2 text-xs">
               <span className="text-gray-400">Novo na numerologia?</span>
               <Link href="/faq">
-                <a className="text-[#D4AF37] hover:text-[#8A2BE2] font-semibold">
+                <a className="text-[#19E6FF] hover:text-[#00FFFF] font-semibold">
                   Aprenda aqui
                 </a>
               </Link>
@@ -249,7 +249,7 @@ export default function Auth() {
         <div className="text-center space-y-2">
           <button
             onClick={() => setLocation('/')}
-            className="text-sm text-indigo-600 hover:text-indigo-700 font-semibold"
+            className="text-sm text-cyan-400 hover:text-indigo-700 font-semibold"
           >
             ← Voltar ao Início
           </button>

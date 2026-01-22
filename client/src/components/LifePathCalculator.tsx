@@ -382,14 +382,14 @@ export default function LifePathCalculator() {
       {!result ? (
         <div className="space-y-6 animate-fade-in">
           {/* Input Section */}
-          <div className="bg-gradient-to-br from-[#2A1240] to-[#3F1F5C] rounded-2xl border border-[#4A2A6A] p-8 shadow-2xl hover:border-[#D4AF37] transition-all duration-300">
+          <div className="bg-gradient-to-br from-[#0A1F2E] to-[#0A1F2E] rounded-2xl border border-[#1A3A4A] p-8 shadow-2xl hover:border-[#19E6FF] transition-all duration-300">
             {/* Header */}
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-14 h-14 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-xl flex items-center justify-center shadow-lg">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#00FFFF] to-[#19E6FF] rounded-xl flex items-center justify-center shadow-lg">
                 <Calendar className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-[#D4AF37]">
+                <h3 className="text-2xl font-bold text-[#19E6FF]">
                   Descubra Seu Número
                 </h3>
                 <p className="text-sm text-[#E5C158]">Caminho de Vida</p>
@@ -404,7 +404,7 @@ export default function LifePathCalculator() {
             {/* Input Group */}
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-[#D4AF37] mb-3">
+                <label className="block text-sm font-semibold text-[#19E6FF] mb-3">
                   Data de Nascimento
                 </label>
                 <div className="relative">
@@ -419,10 +419,10 @@ export default function LifePathCalculator() {
                     min={minDateStr}
                     max={today}
                     disabled={loading}
-                    className="w-full px-4 py-4 bg-[#190825] border-2 border-[#4A2A6A] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#D4AF37] focus:ring-2 focus:ring-[#D4AF37]/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-4 bg-[#07131B] border-2 border-[#1A3A4A] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#19E6FF] focus:ring-2 focus:ring-[#19E6FF]/20 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="Selecione sua data de nascimento"
                   />
-                  <Calendar className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#D4AF37] pointer-events-none" />
+                  <Calendar className="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#19E6FF] pointer-events-none" />
                 </div>
                 <p className="text-xs text-gray-400 mt-2">
                   Formato: DD/MM/AAAA
@@ -441,7 +441,7 @@ export default function LifePathCalculator() {
               <button
                 onClick={handleCalculate}
                 disabled={loading || !birthDate}
-                className="w-full px-6 py-4 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="w-full px-6 py-4 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {loading ? (
                   <>
@@ -466,13 +466,13 @@ export default function LifePathCalculator() {
       ) : (
         <div className={`space-y-6 ${isAnimating ? 'animate-fade-in' : ''}`}>
           {/* Result Section */}
-          <div className="bg-gradient-to-br from-[#2A1240] to-[#3F1F5C] rounded-2xl border border-[#D4AF37] p-8 shadow-2xl">
+          <div className="bg-gradient-to-br from-[#0A1F2E] to-[#0A1F2E] rounded-2xl border border-[#19E6FF] p-8 shadow-2xl">
             {/* Life Path Number - Destaque */}
             <div className="text-center mb-10">
-              <div className="inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-full mb-6 shadow-2xl animate-pulse-slow">
+              <div className="inline-flex items-center justify-center w-32 h-32 bg-gradient-to-br from-[#00FFFF] to-[#19E6FF] rounded-full mb-6 shadow-2xl animate-pulse-slow">
                 <span className="text-6xl font-bold text-white">{result.number}</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-[#D4AF37] mb-2">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#19E6FF] mb-2">
                 {result.meaning}
               </h2>
               <p className="text-[#E5C158] font-semibold">Seu Número do Caminho de Vida</p>
@@ -481,15 +481,15 @@ export default function LifePathCalculator() {
             {/* Characteristics & Strengths Grid */}
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               {/* Características */}
-              <div className="bg-[#190825]/50 rounded-xl p-6 border border-[#4A2A6A]">
-                <h4 className="font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
-                  <span className="w-3 h-3 bg-[#D4AF37] rounded-full"></span>
+              <div className="bg-[#07131B]/50 rounded-xl p-6 border border-[#1A3A4A]">
+                <h4 className="font-bold text-[#19E6FF] mb-4 flex items-center gap-2">
+                  <span className="w-3 h-3 bg-[#19E6FF] rounded-full"></span>
                   Características
                 </h4>
                 <ul className="space-y-3">
                   {result.characteristics.map((char, idx) => (
                     <li key={idx} className="text-white text-sm flex items-start gap-3">
-                      <span className="text-[#D4AF37] font-bold mt-0.5">•</span>
+                      <span className="text-[#19E6FF] font-bold mt-0.5">•</span>
                       <span>{char}</span>
                     </li>
                   ))}
@@ -497,8 +497,8 @@ export default function LifePathCalculator() {
               </div>
 
               {/* Forças */}
-              <div className="bg-[#190825]/50 rounded-xl p-6 border border-[#4A2A6A]">
-                <h4 className="font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
+              <div className="bg-[#07131B]/50 rounded-xl p-6 border border-[#1A3A4A]">
+                <h4 className="font-bold text-[#19E6FF] mb-4 flex items-center gap-2">
                   <span className="w-3 h-3 bg-green-500 rounded-full"></span>
                   Forças
                 </h4>
@@ -514,8 +514,8 @@ export default function LifePathCalculator() {
             </div>
 
             {/* Challenges */}
-            <div className="bg-[#190825]/50 rounded-xl p-6 border border-[#4A2A6A] mb-8">
-              <h4 className="font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
+            <div className="bg-[#07131B]/50 rounded-xl p-6 border border-[#1A3A4A] mb-8">
+              <h4 className="font-bold text-[#19E6FF] mb-4 flex items-center gap-2">
                 <span className="w-3 h-3 bg-orange-500 rounded-full"></span>
                 Desafios a Superar
               </h4>
@@ -530,14 +530,14 @@ export default function LifePathCalculator() {
             </div>
 
             {/* CTA - Upgrade */}
-            <div className="bg-gradient-to-r from-[#8A2BE2]/20 to-[#D4AF37]/20 rounded-xl p-6 border border-[#D4AF37]/50 mb-6">
-              <h4 className="text-[#D4AF37] font-bold mb-2">Quer explorar mais?</h4>
+            <div className="bg-gradient-to-r from-[#00FFFF]/20 to-[#19E6FF]/20 rounded-xl p-6 border border-[#19E6FF]/50 mb-6">
+              <h4 className="text-[#19E6FF] font-bold mb-2">Quer explorar mais?</h4>
               <p className="text-white text-sm mb-4">
                 Descubra seu mapa numerológico completo com números de Expressão, Motivação, Desafios Pessoais e muito mais!
               </p>
               <button
                 onClick={() => setLocation('/pricing')}
-                className="w-full px-6 py-3 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
+                className="w-full px-6 py-3 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 active:scale-95"
               >
                 Ver Planos Premium
                 <ArrowRight size={18} />
@@ -548,7 +548,7 @@ export default function LifePathCalculator() {
           {/* Reset Button */}
           <button
             onClick={handleReset}
-            className="w-full px-6 py-3 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold hover:bg-[#D4AF37]/10 transition-all duration-300 hover:scale-105 active:scale-95"
+            className="w-full px-6 py-3 border-2 border-[#19E6FF] text-[#19E6FF] rounded-lg font-semibold hover:bg-[#19E6FF]/10 transition-all duration-300 hover:scale-105 active:scale-95"
           >
             ← Calcular Outro Número
           </button>

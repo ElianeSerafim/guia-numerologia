@@ -44,7 +44,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
           return (
             <div
               key={item.label}
-              className="card-mystical space-y-4 border-l-4 border-indigo-600"
+              className="card-mystical space-y-4 border-l-4 border-cyan-400"
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
@@ -52,7 +52,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
                   <h3 className="text-xl font-bold text-white">{item.label}</h3>
                   <p className="text-sm text-slate-600">Vibração Numérica: {item.value}</p>
                 </div>
-                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">
+                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-500">
                   {item.value}
                 </div>
               </div>
@@ -60,7 +60,7 @@ export default function InterpretationDisplay({ chart }: InterpretationDisplayPr
               {/* Essência */}
               <div className="bg-indigo-50 rounded-lg p-4 border border-indigo-200">
                 <div className="flex items-start gap-2">
-                  <Lightbulb size={18} className="text-indigo-600 flex-shrink-0 mt-1" />
+                  <Lightbulb size={18} className="text-cyan-400 flex-shrink-0 mt-1" />
                   <div>
                     <p className="font-semibold text-indigo-900 text-sm">Essência</p>
                     <p className="text-indigo-800 text-sm mt-1">{interpretation.essence}</p>

@@ -26,8 +26,8 @@ export default function Navigation() {
       <div className="container flex items-center justify-between py-4">
         {/* Logo */}
         <Link href="/">
-          <a className="flex items-center gap-2 font-bold text-xl text-white hover:text-indigo-600 transition-colors">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center">
+          <a className="flex items-center gap-2 font-bold text-xl text-white hover:text-cyan-400 transition-colors">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-cyan-500 flex items-center justify-center">
               <span className="text-white font-bold">◯</span>
             </div>
             <span>Portal</span>
@@ -38,7 +38,7 @@ export default function Navigation() {
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link key={link.href} href={link.href}>
-              <a className="text-slate-700 hover:text-indigo-600 font-medium transition-colors">
+              <a className="text-slate-700 hover:text-cyan-400 font-medium transition-colors">
                 {link.label}
               </a>
             </Link>
@@ -48,7 +48,7 @@ export default function Navigation() {
         {/* CTA Button */}
         <div className="hidden md:block">
           <Link href="/auth">
-            <a className="px-6 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-medium hover:shadow-lg transition-all">
+            <a className="px-6 py-2 rounded-lg bg-gradient-to-r from-cyan-400 to-cyan-500 text-white font-medium hover:shadow-lg transition-all">
               Entrar
             </a>
           </Link>
@@ -71,7 +71,7 @@ export default function Navigation() {
               <Link key={link.href} href={link.href}>
                 <a
                   onClick={() => setIsOpen(false)}
-                  className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors"
+                  className="block px-4 py-2 text-slate-700 hover:bg-indigo-50 hover:text-cyan-400 rounded-lg transition-colors"
                 >
                   {link.label}
                 </a>
@@ -80,7 +80,7 @@ export default function Navigation() {
             <Link href="/auth">
               <a
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-medium text-center"
+                className="block px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-400 to-cyan-500 text-white font-medium text-center"
               >
                 Entrar
               </a>

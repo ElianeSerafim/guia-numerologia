@@ -67,8 +67,8 @@ export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
                 }`}
               >
                 <div
-                  className={`bg-[#190825] rounded-md p-3 md:p-4 transition-all duration-300 ${
-                    isSelected ? 'ring-2 ring-[#D4AF37]' : ''
+                  className={`bg-[#07131B] rounded-md p-3 md:p-4 transition-all duration-300 ${
+                    isSelected ? 'ring-2 ring-[#19E6FF]' : ''
                   }`}
                 >
                   <div className="text-2xl mb-1">{info.icon}</div>
@@ -77,7 +77,7 @@ export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
                   </div>
                   <div className="text-xs text-slate-400 mt-1">{info.age}</div>
                   {isCurrent && (
-                    <div className="text-xs font-semibold text-[#D4AF37] mt-2 bg-[#4A2A6A] rounded px-2 py-1 inline-block">
+                    <div className="text-xs font-semibold text-[#19E6FF] mt-2 bg-[#1A3A4A] rounded px-2 py-1 inline-block">
                       Atual
                     </div>
                   )}
@@ -89,10 +89,10 @@ export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
       </div>
 
       {/* Content */}
-      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 md:p-8 space-y-4">
+      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 md:p-8 space-y-4">
         {/* Number */}
         <div className="flex items-center gap-4">
-          <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
+          <div className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#19E6FF] to-[#FFD700]">
             {selectedNumber}
           </div>
           <div>
@@ -104,8 +104,8 @@ export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
         </div>
 
         {/* Definition */}
-        <div className="mt-6 pt-6 border-t border-[#4A2A6A]">
-          <h4 className="text-sm font-bold text-[#D4AF37] uppercase tracking-wider mb-2">
+        <div className="mt-6 pt-6 border-t border-[#1A3A4A]">
+          <h4 className="text-sm font-bold text-[#19E6FF] uppercase tracking-wider mb-2">
             Definição
           </h4>
           <p className="text-slate-300 leading-relaxed">
@@ -115,7 +115,7 @@ export function CyclesInteractive({ birthDate }: CyclesInteractiveProps) {
 
         {/* Interpretation */}
         {interpretationText && (
-          <div className="space-y-4 mt-6 pt-6 border-t border-[#4A2A6A]">
+          <div className="space-y-4 mt-6 pt-6 border-t border-[#1A3A4A]">
             <div>
               <h4 className="text-sm font-bold text-green-400 uppercase tracking-wider mb-2">
                 ✓ Interpretação Resumida

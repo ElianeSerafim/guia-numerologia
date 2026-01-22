@@ -139,17 +139,17 @@ export default function Pricing() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#190825] via-[#2A1240] to-[#190825]">
+    <div className="min-h-screen bg-gradient-to-br from-[#07131B] via-[#0A1F2E] to-[#07131B]">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-[#190825]/80 backdrop-blur-md border-b border-[#4A2A6A]">
+      <header className="sticky top-0 z-50 bg-[#07131B]/80 backdrop-blur-md border-b border-[#1A3A4A]">
         <div className="container flex items-center justify-between py-4">
           <button
             onClick={() => setLocation('/')}
-            className="text-lg font-bold text-[#D4AF37] hover:text-[#8A2BE2] transition-colors"
+            className="text-lg font-bold text-[#19E6FF] hover:text-[#00FFFF] transition-colors"
           >
             ← Voltar
           </button>
-          <h1 className="text-xl font-bold text-[#D4AF37]">Planos de Assinatura</h1>
+          <h1 className="text-xl font-bold text-[#19E6FF]">Planos de Assinatura</h1>
           <div className="w-20"></div>
         </div>
       </header>
@@ -157,8 +157,8 @@ export default function Pricing() {
       {/* Hero Section */}
       <section className="container py-16 text-center">
         <div className="max-w-3xl mx-auto space-y-4">
-          <h2 className="text-5xl font-bold text-[#D4AF37]">
-            Escolha Seu <span className="text-[#8A2BE2]">Caminho</span>
+          <h2 className="text-5xl font-bold text-[#19E6FF]">
+            Escolha Seu <span className="text-[#00FFFF]">Caminho</span>
           </h2>
           <p className="text-xl text-white">
             Desbloqueie o poder da numerologia com nossos planos flexíveis e acessíveis
@@ -172,14 +172,14 @@ export default function Pricing() {
           {/* Navegador */}
           <div 
             onClick={() => handleSelectPlan('navigator')}
-            className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#2A1240] border border-[#4A2A6A] cursor-pointer"
+            className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#0A1F2E] border border-[#1A3A4A] cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <Zap className="text-[#D4AF37]" size={24} />
-              <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.navigator.name}</h3>
+              <Zap className="text-[#19E6FF]" size={24} />
+              <h3 className="text-2xl font-bold text-[#19E6FF]">{PLANS.navigator.name}</h3>
             </div>
             <div className="space-y-2">
-              <p className="text-4xl font-bold text-[#8A2BE2]">
+              <p className="text-4xl font-bold text-[#00FFFF]">
                 R$ {PLANS.navigator.price.toFixed(2).replace('.', ',')}
               </p>
               <p className="text-white text-sm">{PLANS.navigator.description}</p>
@@ -197,7 +197,7 @@ export default function Pricing() {
                 e.stopPropagation();
                 handleSelectPlan('navigator');
               }}
-              className="w-full py-3 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg hover:from-[#D4AF37] hover:to-[#8A2BE2] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
+              className="w-full py-3 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg hover:from-[#19E6FF] hover:to-[#00FFFF] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
             >
               <ArrowRight size={18} />
               Escolher Plano
@@ -207,17 +207,17 @@ export default function Pricing() {
           {/* Visionário - Destaque */}
           <div 
             onClick={() => handleSelectPlan('visionary')}
-            className="card-mystical space-y-6 border-2 border-[#D4AF37] shadow-2xl scale-105 hover:shadow-2xl hover:scale-110 transition-all duration-300 relative cursor-pointer bg-gradient-to-br from-[#2A1240] to-[#3A1A50]"
+            className="card-mystical space-y-6 border-2 border-[#19E6FF] shadow-2xl scale-105 hover:shadow-2xl hover:scale-110 transition-all duration-300 relative cursor-pointer bg-gradient-to-br from-[#0A1F2E] to-[#3A1A50]"
           >
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#D4AF37] to-[#FFC700] text-[#190825] px-4 py-1 rounded-full text-sm font-bold">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#19E6FF] to-[#FFC700] text-[#07131B] px-4 py-1 rounded-full text-sm font-bold">
               ⭐ Mais Popular
             </div>
             <div className="flex items-center gap-2">
-              <Crown className="text-[#D4AF37]" size={24} />
-              <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.visionary.name}</h3>
+              <Crown className="text-[#19E6FF]" size={24} />
+              <h3 className="text-2xl font-bold text-[#19E6FF]">{PLANS.visionary.name}</h3>
             </div>
             <div className="space-y-2">
-              <p className="text-4xl font-bold text-[#D4AF37]">
+              <p className="text-4xl font-bold text-[#19E6FF]">
                 R$ {PLANS.visionary.price.toFixed(2).replace('.', ',')}
               </p>
               <p className="text-white text-sm">{PLANS.visionary.description}</p>
@@ -235,7 +235,7 @@ export default function Pricing() {
                 e.stopPropagation();
                 handleSelectPlan('visionary');
               }}
-              className="w-full py-3 bg-gradient-to-r from-[#D4AF37] to-[#FFC700] text-[#190825] rounded-lg hover:from-[#FFC700] hover:to-[#FFD700] transition-all font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#D4AF37]/50"
+              className="w-full py-3 bg-gradient-to-r from-[#19E6FF] to-[#FFC700] text-[#07131B] rounded-lg hover:from-[#FFC700] hover:to-[#FFD700] transition-all font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#19E6FF]/50"
             >
               <ArrowRight size={18} />
               Escolher Plano
@@ -245,14 +245,14 @@ export default function Pricing() {
           {/* Iluminado */}
           <div 
             onClick={() => handleSelectPlan('illuminated')}
-            className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#2A1240] border border-[#4A2A6A] cursor-pointer"
+            className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#0A1F2E] border border-[#1A3A4A] cursor-pointer"
           >
             <div className="flex items-center gap-2">
-              <Star className="text-[#D4AF37]" size={24} />
-              <h3 className="text-2xl font-bold text-[#D4AF37]">{PLANS.illuminated.name}</h3>
+              <Star className="text-[#19E6FF]" size={24} />
+              <h3 className="text-2xl font-bold text-[#19E6FF]">{PLANS.illuminated.name}</h3>
             </div>
             <div className="space-y-2">
-              <p className="text-4xl font-bold text-[#D4AF37]">
+              <p className="text-4xl font-bold text-[#19E6FF]">
                 R$ {PLANS.illuminated.price.toFixed(2).replace('.', ',')}
               </p>
               <p className="text-white text-sm">{PLANS.illuminated.description}</p>
@@ -270,7 +270,7 @@ export default function Pricing() {
                 e.stopPropagation();
                 handleSelectPlan('illuminated');
               }}
-              className="w-full py-3 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg hover:from-[#D4AF37] hover:to-[#8A2BE2] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
+              className="w-full py-3 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg hover:from-[#19E6FF] hover:to-[#00FFFF] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
             >
               <ArrowRight size={18} />
               Escolher Plano
@@ -317,7 +317,7 @@ export default function Pricing() {
                 <p className="font-bold text-slate-900">
                   {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].name}
                 </p>
-                <p className="text-lg font-bold text-indigo-600 mt-1">
+                <p className="text-lg font-bold text-cyan-400 mt-1">
                   R$ {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].price.toFixed(2).replace('.', ',')}
                 </p>
               </div>
@@ -379,7 +379,7 @@ export default function Pricing() {
               </button>
               <button
                 onClick={handleCheckout}
-                className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold flex items-center justify-center gap-2"
+                className="flex-1 px-4 py-2 bg-cyan-400 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold flex items-center justify-center gap-2"
               >
                 <MessageCircle size={18} />
                 Ir para WhatsApp
@@ -392,10 +392,10 @@ export default function Pricing() {
 
 
       {/* Footer */}
-      <footer className="border-t border-[#4A2A6A] bg-[#1A0820] mt-16">
+      <footer className="border-t border-[#1A3A4A] bg-[#1A0820] mt-16">
         <div className="container py-8 text-center text-white text-sm font-light space-y-2">
           <p>Portal Numerologia 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
-          <p className="text-xs text-[#D4AF37]">Desenvolvido por <span className="font-semibold">Artweb Creative</span></p>
+          <p className="text-xs text-[#19E6FF]">Desenvolvido por <span className="font-semibold">Artweb Creative</span></p>
         </div>
       </footer>
     </div>

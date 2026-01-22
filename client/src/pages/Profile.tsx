@@ -40,7 +40,7 @@ export default function Profile() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-16 h-16 rounded-full border-4 border-slate-200 border-t-indigo-600 animate-spin mx-auto"></div>
+          <div className="w-16 h-16 rounded-full border-4 border-slate-200 border-t-cyan-400 animate-spin mx-auto"></div>
           <p className="text-slate-600">Carregando perfil...</p>
         </div>
       </div>
@@ -86,7 +86,7 @@ export default function Profile() {
                 {subscription && (
                   <div>
                     <p className="text-sm text-slate-600 mb-1">Plano Ativo</p>
-                    <p className="text-lg font-semibold text-indigo-600 capitalize">
+                    <p className="text-lg font-semibold text-cyan-400 capitalize">
                       {subscription.plan === 'navegador' && '🔷 Navegador'}
                       {subscription.plan === 'visionario' && '🔮 Visionário'}
                       {subscription.plan === 'iluminado' && '✨ Iluminado'}
@@ -110,7 +110,7 @@ export default function Profile() {
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="bg-slate-50 p-4 rounded-lg">
                     <p className="text-sm text-slate-600 mb-1">Mapas Gerados</p>
-                    <p className="text-3xl font-bold text-indigo-600">{subscription.mapsGenerated}</p>
+                    <p className="text-3xl font-bold text-cyan-400">{subscription.mapsGenerated}</p>
                   </div>
                   <div className="bg-slate-50 p-4 rounded-lg">
                     <p className="text-sm text-slate-600 mb-1">Limite Total</p>
@@ -130,7 +130,7 @@ export default function Profile() {
                   </div>
                   <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
                     <div
-                      className="bg-gradient-to-r from-indigo-600 to-purple-700 h-full transition-all duration-300"
+                      className="bg-gradient-to-r from-cyan-400 to-cyan-500 h-full transition-all duration-300"
                       style={{ width: `${progressPercent}%` }}
                     ></div>
                   </div>
@@ -140,7 +140,7 @@ export default function Profile() {
                 {mapsRemaining === 0 && (
                   <Button
                     onClick={() => setLocation('/')}
-                    className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg flex items-center justify-center gap-2"
+                    className="w-full bg-cyan-400 hover:bg-indigo-700 text-white py-3 rounded-lg flex items-center justify-center gap-2"
                   >
                     <Zap size={18} />
                     Fazer Upgrade
@@ -162,14 +162,14 @@ export default function Profile() {
             <CardContent>
               {mapsLoading ? (
                 <div className="text-center py-8">
-                  <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-indigo-600 animate-spin mx-auto"></div>
+                  <div className="w-12 h-12 rounded-full border-4 border-slate-200 border-t-cyan-400 animate-spin mx-auto"></div>
                 </div>
               ) : maps.length === 0 ? (
                 <div className="text-center py-12 space-y-4">
                   <p className="text-slate-600">Nenhum mapa gerado ainda</p>
                   <Button
                     onClick={() => setLocation('/')}
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                    className="bg-cyan-400 hover:bg-indigo-700 text-white"
                   >
                     Gerar Primeiro Mapa
                   </Button>
@@ -196,7 +196,7 @@ export default function Profile() {
                           <a
                             href={map.pdfUrl}
                             download
-                            className="p-2 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-600 transition-colors"
+                            className="p-2 rounded-lg bg-indigo-100 hover:bg-indigo-200 text-cyan-400 transition-colors"
                             title="Baixar PDF"
                           >
                             <Download size={18} />
@@ -228,7 +228,7 @@ export default function Profile() {
 
           {/* Footer */}
           <div className="text-center text-sm text-slate-600">
-            <p>Precisa de ajuda? <a href="/faq" className="text-indigo-600 hover:text-indigo-700 font-semibold">Consulte nossas FAQs</a></p>
+            <p>Precisa de ajuda? <a href="/faq" className="text-cyan-400 hover:text-indigo-700 font-semibold">Consulte nossas FAQs</a></p>
           </div>
         </div>
       </div>

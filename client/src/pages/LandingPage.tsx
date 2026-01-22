@@ -94,16 +94,16 @@ export default function LandingPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <div className="dark min-h-screen bg-gradient-to-br from-[#190825] via-[#2A1240] to-[#3F1F5C]">
+    <div className="dark min-h-screen bg-gradient-to-br from-[#07131B] via-[#0A1F2E] to-[#0A1F2E]">
       <Header />
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4">
         <div className="container max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-[#D4AF37]">
+            <h1 className="text-5xl md:text-6xl font-bold text-[#19E6FF]">
               Descubra os Mistérios do Seu{' '}
-              <span className="text-[#8A2BE2]">
+              <span className="text-[#00FFFF]">
                 Destino
               </span>
             </h1>
@@ -116,7 +116,7 @@ export default function LandingPage() {
                 const element = document.getElementById('teste-gratuitamente');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="text-[#D4AF37] hover:text-[#FFD700] font-semibold transition-colors text-lg underline"
+              className="text-[#19E6FF] hover:text-[#FFD700] font-semibold transition-colors text-lg underline"
             >
               Teste Gratuitamente →
             </button>
@@ -125,13 +125,13 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button
               onClick={() => setLocation('/pricing')}
-              className="px-8 py-4 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg"
+              className="px-8 py-4 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg"
             >
               Ver Planos →
             </button>
             <button
               onClick={() => setLocation('/faq')}
-              className="px-8 py-4 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold hover:border-[#8A2BE2] hover:text-[#8A2BE2] transition-colors text-lg"
+              className="px-8 py-4 border-2 border-[#19E6FF] text-[#19E6FF] rounded-lg font-semibold hover:border-[#00FFFF] hover:text-[#00FFFF] transition-colors text-lg"
             >
               Saiba Mais
             </button>
@@ -156,10 +156,10 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
+      <section className="py-20 bg-gradient-to-b from-[#07131B] to-[#0A1F2E]">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">
+            <h2 className="text-4xl font-bold text-[#19E6FF] mb-4">
               Por Que Escolher Nossa Plataforma?
             </h2>
             <p className="text-xl text-white max-w-2xl mx-auto">
@@ -174,12 +174,12 @@ export default function LandingPage() {
               return (
                 <div
                   key={index}
-                  className="p-8 bg-[#2A1240] rounded-xl border border-[#4A2A6A] hover:border-[#D4AF37] hover:shadow-lg transition-all"
+                  className="p-8 bg-[#0A1F2E] rounded-xl border border-[#1A3A4A] hover:border-[#19E6FF] hover:shadow-lg transition-all"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#00FFFF] to-[#19E6FF] rounded-lg flex items-center justify-center mb-4">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">{benefit.title}</h3>
+                  <h3 className="text-xl font-semibold text-[#19E6FF] mb-2">{benefit.title}</h3>
                   <p className="text-white">{benefit.description}</p>
                 </div>
               );
@@ -189,10 +189,10 @@ export default function LandingPage() {
       </section>
 
       {/* Delivery Section */}
-      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
+      <section className="py-20 bg-gradient-to-b from-[#07131B] to-[#0A1F2E]">
         <div className="container max-w-4xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Como Funciona</h2>
+            <h2 className="text-4xl font-bold text-[#19E6FF] mb-4">Como Funciona</h2>
             <p className="text-xl text-white">
               Processo simples e rápido para começar sua jornada de autoconhecimento
             </p>
@@ -234,13 +234,13 @@ export default function LandingPage() {
             ].map((item, index) => (
                       <div key={item.step} className="flex gap-6">
                 <div className="flex flex-col items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#8A2BE2] to-[#D4AF37] rounded-full flex items-center justify-center text-white font-bold text-lg">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#00FFFF] to-[#19E6FF] rounded-full flex items-center justify-center text-white font-bold text-lg">
                     {item.step}
                   </div>
-                  {index < 5 && <div className="w-1 h-12 bg-gradient-to-b from-[#8A2BE2] to-transparent mt-2"></div>}
+                  {index < 5 && <div className="w-1 h-12 bg-gradient-to-b from-[#00FFFF] to-transparent mt-2"></div>}
                 </div>
                 <div className="pb-6">
-                  <h3 className="text-xl font-semibold text-[#D4AF37] mb-2">{item.title}</h3>
+                  <h3 className="text-xl font-semibold text-[#19E6FF] mb-2">{item.title}</h3>
                   <p className="text-white">{item.description}</p>
                 </div>
               </div>
@@ -250,10 +250,10 @@ export default function LandingPage() {
       </section>
 
       {/* Life Path Calculator Section */}
-      <section id="teste-gratuitamente" className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
+      <section id="teste-gratuitamente" className="py-20 bg-gradient-to-b from-[#07131B] to-[#0A1F2E]">
         <div className="container">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Teste Gratuitamente</h2>
+            <h2 className="text-4xl font-bold text-[#19E6FF] mb-4">Teste Gratuitamente</h2>
             <p className="text-xl text-white max-w-2xl mx-auto">
               Descubra seu Numero do Caminho de Vida com nossa calculadora gratuita. Uma amostra
               do poder da numerologia pitagorica.
@@ -267,10 +267,10 @@ export default function LandingPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gradient-to-b from-[#2A1240] to-[#190825]">
+      <section className="py-20 bg-gradient-to-b from-[#0A1F2E] to-[#07131B]">
         <div className="container max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#D4AF37] mb-4">Perguntas Frequentes</h2>
+            <h2 className="text-4xl font-bold text-[#19E6FF] mb-4">Perguntas Frequentes</h2>
             <p className="text-xl text-white">
               Encontre respostas para as dúvidas mais comuns sobre numerologia
             </p>
@@ -280,24 +280,24 @@ export default function LandingPage() {
             {faqItems.map((item, index) => (
               <div
                 key={index}
-                className="border border-[#4A2A6A] rounded-lg overflow-hidden hover:border-[#D4AF37] transition-colors"
+                className="border border-[#1A3A4A] rounded-lg overflow-hidden hover:border-[#19E6FF] transition-colors"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full px-6 py-4 flex items-center justify-between bg-[#2A1240] hover:bg-[#3F1F5C] transition-colors"
+                  className="w-full px-6 py-4 flex items-center justify-between bg-[#0A1F2E] hover:bg-[#0A1F2E] transition-colors"
                 >
-                  <span className="text-lg font-semibold text-[#D4AF37] text-left">
+                  <span className="text-lg font-semibold text-[#19E6FF] text-left">
                     {item.question}
                   </span>
                   <ChevronDown
                     size={20}
-                    className={`text-[#D4AF37] flex-shrink-0 transition-transform ${
+                    className={`text-[#19E6FF] flex-shrink-0 transition-transform ${
                       openFaq === index ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
                 {openFaq === index && (
-                  <div className="px-6 py-4 bg-[#3F1F5C] border-t border-[#4A2A6A]">
+                  <div className="px-6 py-4 bg-[#0A1F2E] border-t border-[#1A3A4A]">
                     <p className="text-white">{item.answer}</p>
                   </div>
                 )}
@@ -309,7 +309,7 @@ export default function LandingPage() {
             <p className="text-white mb-4">Ainda tem dúvidas?</p>
             <button
               onClick={() => setLocation('/faq')}
-              className="text-[#D4AF37] font-semibold hover:text-[#8A2BE2] transition-colors"
+              className="text-[#19E6FF] font-semibold hover:text-[#00FFFF] transition-colors"
             >
               Ver todas as perguntas →
             </button>
@@ -318,10 +318,10 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-[#190825] to-[#2A1240]">
+      <section className="py-20 bg-gradient-to-b from-[#07131B] to-[#0A1F2E]">
         <div className="container max-w-3xl text-center space-y-8">
           <div className="space-y-4">
-            <h2 className="text-4xl font-bold text-[#D4AF37]">
+            <h2 className="text-4xl font-bold text-[#19E6FF]">
               Pronto para Descobrir Seu Destino?
             </h2>
             <p className="text-xl text-white">
@@ -331,13 +331,13 @@ export default function LandingPage() {
 
           <button
             onClick={() => setLocation('/pricing')}
-            className="px-8 py-4 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg inline-block"
+            className="px-8 py-4 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg font-semibold hover:shadow-xl transition-shadow text-lg inline-block"
           >
             Ver Planos e Começar →
           </button>
 
           {/* Share Section */}
-          <div className="mt-12 pt-12 border-t border-[#4A2A6A]">
+          <div className="mt-12 pt-12 border-t border-[#1A3A4A]">
             <p className="text-white mb-6 font-medium">Compartilhe com seus amigos</p>
             <div className="flex justify-center">
               <ShareButtons

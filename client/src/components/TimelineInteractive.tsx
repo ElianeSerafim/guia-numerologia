@@ -97,7 +97,7 @@ const realizationItems: TimelineItem[] = [
     label: 'R2 - 2ª Realização', 
     definition: 'Ciclo de maturidade - período de construção e consolidação',
     age: '29-56 anos', 
-    color: 'from-indigo-600 to-indigo-400', 
+    color: 'from-cyan-400 to-indigo-400', 
     icon: '🏆',
     type: 'realization'
   },
@@ -224,7 +224,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
 
   const renderSection = (title: string, icon: string, items: TimelineItem[], gridCols: string = 'md:grid-cols-3') => (
     <div>
-      <h4 className="text-lg font-bold text-[#D4AF37] mb-4 flex items-center gap-2">
+      <h4 className="text-lg font-bold text-[#19E6FF] mb-4 flex items-center gap-2">
         <span className="text-2xl">{icon}</span>
         {title}
       </h4>
@@ -248,7 +248,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
                   isExpanded ? 'shadow-2xl' : 'shadow-lg hover:shadow-xl'
                 }`}
               >
-                <div className="bg-[#190825] rounded-lg p-4">
+                <div className="bg-[#07131B] rounded-lg p-4">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-2">
                     <div className="flex-1">
@@ -256,14 +256,14 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
                         <span className="text-xl">{item.icon}</span>
                         <span className="text-sm font-bold text-white">{item.label}</span>
                         {isMostImportant && (
-                          <span className="text-xs font-bold bg-[#D4AF37] text-[#190825] px-1.5 py-0.5 rounded">
+                          <span className="text-xs font-bold bg-[#19E6FF] text-[#07131B] px-1.5 py-0.5 rounded">
                             IMPORTANTE
                           </span>
                         )}
                       </div>
                       <p className="text-xs text-slate-400">{item.age}</p>
                       {isCurrentItem && !isMostImportant && (
-                        <span className="inline-block mt-2 text-xs font-semibold text-[#D4AF37] bg-[#4A2A6A] rounded px-2 py-0.5">
+                        <span className="inline-block mt-2 text-xs font-semibold text-[#19E6FF] bg-[#1A3A4A] rounded px-2 py-0.5">
                           Atual
                         </span>
                       )}
@@ -274,7 +274,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
                       )}
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
+                      <div className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#19E6FF] to-[#FFD700]">
                         {number}
                       </div>
                       <div className="text-slate-400">
@@ -290,9 +290,9 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
 
                   {/* Expanded Content */}
                   {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-[#4A2A6A] space-y-3 animate-in fade-in duration-300">
+                    <div className="mt-4 pt-4 border-t border-[#1A3A4A] space-y-3 animate-in fade-in duration-300">
                       <div>
-                        <h5 className="text-xs font-bold text-[#D4AF37] uppercase tracking-wider mb-1">
+                        <h5 className="text-xs font-bold text-[#19E6FF] uppercase tracking-wider mb-1">
                           Definição
                         </h5>
                         <p className="text-xs text-slate-300 leading-relaxed">

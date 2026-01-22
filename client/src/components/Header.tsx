@@ -35,7 +35,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#190825]/90 backdrop-blur-md border-b border-[#4A2A6A]/50'
+          ? 'bg-[#07131B]/90 backdrop-blur-md border-b border-[#19E6FF]/50'
           : 'bg-transparent'
       }`}
     >
@@ -45,10 +45,8 @@ export default function Header() {
           onClick={() => setLocation('/app')}
           className="flex items-center gap-2 hover:opacity-80 transition-opacity"
         >
-          <div className="w-10 h-10 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-white" />
-          </div>
-          <span className="font-bold text-lg text-[#D4AF37] hidden sm:inline">
+          <img src="/logo-hexagon.png" alt="Portal Numerologia" className="w-10 h-10" />
+          <span className="font-bold text-lg text-[#00FFFF] hidden sm:inline">
             Portal
           </span>
         </button>
@@ -59,7 +57,7 @@ export default function Header() {
             <button
               key={item.label}
               onClick={() => setLocation(item.href)}
-              className="text-[#D4AF37] hover:text-[#FFD700] transition-colors font-medium"
+              className="text-[#00FFFF] hover:text-[#19E6FF] transition-colors font-medium"
             >
               {item.label}
             </button>
@@ -70,13 +68,13 @@ export default function Header() {
         <div className="hidden md:flex items-center gap-4">
           <button
             onClick={() => setLocation('/app')}
-            className="px-6 py-2 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold hover:bg-[#D4AF37]/10 transition-colors"
+            className="px-6 py-2 border-2 border-[#00FFFF] text-[#00FFFF] rounded-lg font-semibold hover:bg-[#00FFFF]/10 transition-colors"
           >
             Entrar
           </button>
           <button
             onClick={() => setLocation('/pricing')}
-            className="px-6 py-2 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold hover:shadow-lg shadow-[#D4AF37]/30 transition-shadow"
+            className="px-6 py-2 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-[#07131B] rounded-lg font-semibold hover:shadow-lg shadow-[#00FFFF]/30 transition-shadow"
           >
             Começar Agora
           </button>
@@ -85,7 +83,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-[#D4AF37]"
+          className="md:hidden text-[#19E6FF]"
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -93,7 +91,7 @@ export default function Header() {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <nav className="md:hidden bg-[#190825] border-b border-[#4A2A6A]">
+        <nav className="md:hidden bg-[#07131B] border-b border-[#1A3A4A]">
           <div className="container py-4 space-y-3">
             {navItems.map((item) => (
               <button
@@ -102,7 +100,7 @@ export default function Header() {
                   setLocation(item.href);
                   setIsOpen(false);
                 }}
-                className="block w-full text-left px-4 py-2 text-[#D4AF37] hover:bg-[#2A1240] rounded-lg transition-colors"
+                className="block w-full text-left px-4 py-2 text-[#19E6FF] hover:bg-[#0A1F2E] rounded-lg transition-colors"
               >
                 {item.label}
               </button>
@@ -112,7 +110,7 @@ export default function Header() {
                 setLocation('/app');
                 setIsOpen(false);
               }}
-              className="w-full px-4 py-2 border-2 border-[#D4AF37] text-[#D4AF37] rounded-lg font-semibold"
+              className="w-full px-4 py-2 border-2 border-[#19E6FF] text-[#19E6FF] rounded-lg font-semibold"
             >
               Entrar
             </button>
@@ -121,7 +119,7 @@ export default function Header() {
                 setLocation('/pricing');
                 setIsOpen(false);
               }}
-              className="w-full px-4 py-2 bg-gradient-to-r from-[#8A2BE2] to-[#D4AF37] text-white rounded-lg font-semibold"
+              className="w-full px-4 py-2 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg font-semibold"
             >
               Começar Agora
             </button>

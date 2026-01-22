@@ -19,7 +19,7 @@ export default function MapComparison({ comparison }: MapComparisonProps) {
 
   const getCompatibilityColor = (score: number) => {
     if (score >= 80) return 'from-green-500 to-emerald-600';
-    if (score >= 60) return 'from-blue-500 to-indigo-600';
+    if (score >= 60) return 'from-blue-500 to-cyan-400';
     if (score >= 40) return 'from-yellow-500 to-amber-600';
     return 'from-red-500 to-rose-600';
   };
@@ -157,7 +157,7 @@ export default function MapComparison({ comparison }: MapComparisonProps) {
 
         {/* Mapa 2 */}
         <div className="card-mystical space-y-4 bg-purple-50 border-purple-200">
-          <h3 className="font-bold text-purple-900">{map2.chart.fullName}</h3>
+          <h3 className="font-bold text-blue-900">{map2.chart.fullName}</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-slate-700">Caminho de Destino</span>

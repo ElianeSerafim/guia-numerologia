@@ -44,13 +44,13 @@ export default function Favorites() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-black flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-black flex items-center justify-center p-4">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-white mb-4">Acesso Negado</h1>
           <p className="text-gray-300 mb-6">Você precisa estar logado para acessar seus favoritos.</p>
           <button
             onClick={() => setLocation('/app')}
-            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all"
+            className="px-6 py-3 bg-gradient-to-r from-purple-600 to-cyan-400 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-700 transition-all"
           >
             Voltar ao App
           </button>
@@ -60,7 +60,7 @@ export default function Favorites() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-indigo-900 to-black p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-indigo-900 to-black p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -83,11 +83,11 @@ export default function Favorites() {
             <p className="text-gray-400 mt-4">Carregando favoritos...</p>
           </div>
         ) : favorites.length === 0 ? (
-          <div className="text-center py-12 bg-purple-900/30 border border-purple-500/50 rounded-lg">
+          <div className="text-center py-12 bg-blue-900/30 border border-purple-500/50 rounded-lg">
             <p className="text-gray-400 mb-4">Você ainda não tem favoritos salvos.</p>
             <button
               onClick={() => setLocation('/app')}
-              className="px-6 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-lg hover:from-purple-700 hover:to-indigo-700 transition-all"
+              className="px-6 py-2 bg-gradient-to-r from-purple-600 to-cyan-400 text-white rounded-lg hover:from-cyan-500 hover:to-indigo-700 transition-all"
             >
               Ir para o App
             </button>
@@ -97,7 +97,7 @@ export default function Favorites() {
             {favorites.map((favorite) => (
               <div
                 key={favorite.id}
-                className="bg-purple-900/30 border border-purple-500/50 rounded-lg p-6 hover:bg-purple-900/40 transition-colors"
+                className="bg-blue-900/30 border border-purple-500/50 rounded-lg p-6 hover:bg-blue-900/40 transition-colors"
               >
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">

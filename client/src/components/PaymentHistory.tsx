@@ -129,7 +129,7 @@ export default function PaymentHistory() {
                 onClick={() => setFilter(f)}
                 className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                   filter === f
-                    ? 'bg-indigo-600 text-white'
+                    ? 'bg-cyan-400 text-white'
                     : 'bg-slate-200 text-white hover:bg-slate-300'
                 }`}
               >

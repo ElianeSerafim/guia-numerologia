@@ -59,11 +59,11 @@ export function EssentialNumbersInteractive({
                   isExpanded ? 'shadow-2xl' : 'shadow-lg hover:shadow-xl'
                 }`}
               >
-                <div className="bg-[#190825] rounded-lg p-4 md:p-6 h-full">
+                <div className="bg-[#07131B] rounded-lg p-4 md:p-6 h-full">
                   {/* Header */}
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex-1">
-                      <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700] mb-1">
+                      <div className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#19E6FF] to-[#FFD700] mb-1">
                         {number}
                       </div>
                       <div className="text-xs md:text-sm font-semibold text-[#B8A8D8] uppercase tracking-wider">
@@ -84,9 +84,9 @@ export function EssentialNumbersInteractive({
 
                   {/* Expanded Content */}
                   {isExpanded && interpretation && (
-                    <div className="mt-4 pt-4 border-t border-[#4A2A6A] space-y-3 animate-in fade-in duration-300">
+                    <div className="mt-4 pt-4 border-t border-[#1A3A4A] space-y-3 animate-in fade-in duration-300">
                       <div>
-                        <h4 className="text-sm font-bold text-[#D4AF37] mb-2">
+                        <h4 className="text-sm font-bold text-[#19E6FF] mb-2">
                           Essência
                         </h4>
                         <p className="text-sm text-slate-300 leading-relaxed">
@@ -164,7 +164,7 @@ export function EssentialNumbersInteractive({
 
                   {/* Hover hint */}
                   {!isExpanded && (
-                    <div className="text-xs text-slate-500 mt-2 group-hover:text-[#D4AF37] transition-colors">
+                    <div className="text-xs text-slate-500 mt-2 group-hover:text-[#19E6FF] transition-colors">
                       Clique para expandir
                     </div>
                   )}

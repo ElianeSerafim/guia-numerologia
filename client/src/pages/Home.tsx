@@ -94,7 +94,7 @@ export default function Home() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="w-16 h-16 rounded-full border-4 border-slate-200 border-t-indigo-600 animate-spin mx-auto"></div>
+          <div className="w-16 h-16 rounded-full border-4 border-slate-200 border-t-cyan-400 animate-spin mx-auto"></div>
           <p className="text-slate-600">Carregando...</p>
         </div>
       </div>
@@ -140,15 +140,13 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-purple-900">
+    <div className="min-h-screen bg-gradient-to-br from-[#07131B] via-[#0A1F2E] to-[#07131B]">
       {/* Header Navigation */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+      <header className="sticky top-0 z-50 bg-[#07131B]/80 backdrop-blur-md border-b border-[#19E6FF]/50">
         <div className="container flex items-center justify-between py-3 px-4 md:px-6">
           <div className="flex items-center gap-2 md:gap-3 min-w-0">
-            <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700 flex-shrink-0">
-              <Compass size={20} className="text-white" />
-            </div>
-            <h1 className="text-lg md:text-xl font-bold text-slate-900 truncate">Portal</h1>
+            <img src="/logo-hexagon.png" alt="Portal" className="w-8 h-8 flex-shrink-0" />
+            <h1 className="text-lg md:text-xl font-bold text-[#00FFFF] truncate">Portal</h1>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <Link href="/faq">
@@ -159,7 +157,7 @@ export default function Home() {
             <div className="text-right hidden sm:block">
               <p className="text-xs md:text-sm text-slate-600 truncate">{user?.email}</p>
               {subscription && (
-                <p className="text-xs font-semibold text-indigo-600">Plano Ativo</p>
+                <p className="text-xs font-semibold text-cyan-400">Plano Ativo</p>
               )}
             </div>
             <button
@@ -187,7 +185,7 @@ export default function Home() {
               {!canGenerate?.canGenerate && (
                 <button
                   onClick={() => setShowPlans(true)}
-                  className="text-xs md:text-sm font-semibold text-indigo-600 hover:text-indigo-700 flex items-center gap-1 whitespace-nowrap"
+                  className="text-xs md:text-sm font-semibold text-cyan-400 hover:text-indigo-700 flex items-center gap-1 whitespace-nowrap"
                 >
                   <Zap size={14} />
                   Upgrade
@@ -196,7 +194,7 @@ export default function Home() {
             </div>
             <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
               <div
-                className="bg-gradient-to-r from-indigo-600 to-purple-700 h-full transition-all duration-300"
+                className="bg-gradient-to-r from-cyan-400 to-cyan-500 h-full transition-all duration-300"
                 style={{ width: '0%' }}
               ></div>
             </div>
@@ -276,11 +274,11 @@ export default function Home() {
           <section className="container py-8 md:py-24 px-4 md:px-6">
             <div className="max-w-3xl mx-auto text-center space-y-4 md:space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-200">
-                <span className="w-2 h-2 rounded-full bg-indigo-600 animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
                 <span className="text-sm font-medium text-indigo-700">Descubra seu destino numerológico</span>
               </div>
 
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#D4AF37] leading-tight">
+              <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#19E6FF] leading-tight">
                 Desvende os Mistérios da <span className="text-[#C8A2E0]">Numerologia</span>
               </h2>
 
@@ -290,15 +288,15 @@ export default function Home() {
 
               <div className="flex flex-wrap gap-4 justify-center pt-4">
                 <div className="flex items-center gap-2 text-[#C8A2E0]">
-                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
-                    <span className="text-sm font-bold text-[#D4AF37]">✓</span>
+                  <div className="w-8 h-8 rounded-full bg-[#19E6FF]/20 flex items-center justify-center">
+                    <span className="text-sm font-bold text-[#19E6FF]">✓</span>
                   </div>
                   <span className="text-sm">Cálculos Automáticos</span>
                 </div>
 
                 <div className="flex items-center gap-2 text-[#C8A2E0]">
-                  <div className="w-8 h-8 rounded-full bg-[#D4AF37]/20 flex items-center justify-center">
-                    <span className="text-sm font-bold text-[#D4AF37]">✓</span>
+                  <div className="w-8 h-8 rounded-full bg-[#19E6FF]/20 flex items-center justify-center">
+                    <span className="text-sm font-bold text-[#19E6FF]">✓</span>
                   </div>
                   <span className="text-sm">Método Pitagórico</span>
                 </div>
@@ -322,7 +320,7 @@ export default function Home() {
                 <div className="flex flex-col items-center justify-center py-16 space-y-4">
                   <div className="relative w-16 h-16">
                     <div className="absolute inset-0 rounded-full border-4 border-slate-200"></div>
-                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-indigo-600 border-r-indigo-600 animate-spin"></div>
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-400 border-r-cyan-400 animate-spin"></div>
                   </div>
                   <p className="text-slate-600">Calculando seu mapa numerológico...</p>
                 </div>
@@ -358,7 +356,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 py-8 md:py-12">
               <div className="rounded-xl p-6 md:p-8 bg-white shadow-md hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-indigo-600">1</span>
+                  <span className="text-2xl font-bold text-cyan-400">1</span>
                 </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Caminho de Destino</h4>
                 <p className="text-slate-600 text-sm">
@@ -368,7 +366,7 @@ export default function Home() {
 
               <div className="rounded-xl p-6 md:p-8 bg-white shadow-md hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-indigo-600">2</span>
+                  <span className="text-2xl font-bold text-cyan-400">2</span>
                 </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Números Pessoais</h4>
                 <p className="text-slate-600 text-sm">
@@ -378,7 +376,7 @@ export default function Home() {
 
               <div className="rounded-xl p-6 md:p-8 bg-white shadow-md hover:shadow-lg transition-all">
                 <div className="w-12 h-12 rounded-lg bg-indigo-100 flex items-center justify-center mb-4">
-                  <span className="text-2xl font-bold text-indigo-600">3</span>
+                  <span className="text-2xl font-bold text-cyan-400">3</span>
                 </div>
                 <h4 className="text-lg font-bold text-slate-900 mb-2">Previsões 2026</h4>
                 <p className="text-slate-600 text-sm">

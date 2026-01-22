@@ -188,7 +188,7 @@ export default function Compatibility() {
                 {/* Person 1 */}
                 <div className="space-y-4">
                   <h3 className="text-xl font-semibold text-white flex items-center gap-2">
-                    <Users size={20} className="text-indigo-600" />
+                    <Users size={20} className="text-cyan-400" />
                     Primeira Pessoa
                   </h3>
 
@@ -201,7 +201,7 @@ export default function Compatibility() {
                       value={person1.name}
                       onChange={(e) => setPerson1({ ...person1, name: e.target.value })}
                       placeholder="Digite o nome completo"
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
                     />
                   </div>
 
@@ -213,7 +213,7 @@ export default function Compatibility() {
                       type="date"
                       value={person1.birthDate}
                       onChange={(e) => setPerson1({ ...person1, birthDate: e.target.value })}
-                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-600"
+                      className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-400"
                     />
                   </div>
                 </div>
@@ -262,7 +262,7 @@ export default function Compatibility() {
               <button
                 onClick={handleCalculate}
                 disabled={loading}
-                className="w-full px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-shadow disabled:opacity-50 flex items-center justify-center gap-2"
+                className="w-full px-6 py-3 bg-gradient-to-r from-cyan-400 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg transition-shadow disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 <Flame size={18} />
                 {loading ? 'Calculando...' : 'Calcular Compatibilidade'}
@@ -367,7 +367,7 @@ export default function Compatibility() {
                 <ul className="space-y-3">
                   {result.recommendations.map((rec, idx) => (
                     <li key={idx} className="text-slate-700 flex items-start gap-3">
-                      <span className="text-indigo-600 font-bold mt-1">→</span>
+                      <span className="text-cyan-400 font-bold mt-1">→</span>
                       <span>{rec}</span>
                     </li>
                   ))}
@@ -378,13 +378,13 @@ export default function Compatibility() {
               <div className="flex gap-4">
                 <button
                   onClick={handleReset}
-                  className="flex-1 px-6 py-3 border-2 border-slate-300 text-white rounded-lg font-semibold hover:border-indigo-600 hover:text-indigo-600 transition-colors"
+                  className="flex-1 px-6 py-3 border-2 border-slate-300 text-white rounded-lg font-semibold hover:border-cyan-400 hover:text-cyan-400 transition-colors"
                 >
                   Calcular Outra Compatibilidade
                 </button>
                 <button
                   onClick={() => setLocation('/pricing')}
-                  className="flex-1 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-700 text-white rounded-lg font-semibold hover:shadow-lg transition-shadow"
+                  className="flex-1 px-6 py-3 bg-gradient-to-r from-cyan-400 to-cyan-500 text-white rounded-lg font-semibold hover:shadow-lg transition-shadow"
                 >
                   Ver Análise Completa
                 </button>

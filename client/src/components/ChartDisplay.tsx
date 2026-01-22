@@ -89,7 +89,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
             
             return (
               <>
-                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR1Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
                   <div className="flex items-start justify-between">
@@ -102,7 +102,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r1}</span>
                   </div>
                 </div>
-                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR2Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
                   <div className="flex items-start justify-between">
@@ -115,7 +115,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r2}</span>
                   </div>
                 </div>
-                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR3Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
                   <div className="flex items-start justify-between">
@@ -128,7 +128,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r3}</span>
                   </div>
                 </div>
-                <div className={`bg-gradient-to-r from-purple-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
+                <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR4Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
                   <div className="flex items-start justify-between">
@@ -235,10 +235,10 @@ function CycleCard({ label, value, description, ageRange }: CycleCardProps) {
     <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-50 to-purple-50 border border-indigo-200">
       <p className="text-xs font-semibold text-indigo-700 uppercase tracking-wide mb-2">{label}</p>
       <div className="flex items-baseline gap-3 mb-2">
-        <span className="number-mystical text-3xl text-indigo-600">{value}</span>
+        <span className="number-mystical text-3xl text-cyan-400">{value}</span>
       </div>
       <p className="text-sm text-indigo-700">{description}</p>
-      {ageRange && <p className="text-xs text-indigo-600 font-semibold mt-2 pt-2 border-t border-indigo-200">{ageRange}</p>}
+      {ageRange && <p className="text-xs text-cyan-400 font-semibold mt-2 pt-2 border-t border-indigo-200">{ageRange}</p>}
     </div>
   );
 }

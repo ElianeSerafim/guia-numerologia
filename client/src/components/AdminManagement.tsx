@@ -98,7 +98,7 @@ export default function AdminManagement() {
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white">
+            <Button className="bg-cyan-400 hover:bg-indigo-700 text-white">
               <Plus className="w-4 h-4 mr-2" />
               Adicionar Admin
             </Button>
@@ -188,7 +188,7 @@ export default function AdminManagement() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white"
+                  className="flex-1 bg-cyan-400 hover:bg-indigo-700 text-white"
                 >
                   {isSubmitting ? (
                     <>
@@ -217,7 +217,7 @@ export default function AdminManagement() {
                       <h3 className="font-semibold text-slate-900">{admin.name}</h3>
                       <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
                         admin.role === 'super_admin'
-                          ? 'bg-purple-100 text-purple-700'
+                          ? 'bg-purple-100 text-cyan-500'
                           : 'bg-blue-100 text-blue-700'
                       }`}>
                         <Shield className="w-3 h-3" />

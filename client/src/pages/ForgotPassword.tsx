@@ -62,7 +62,7 @@ export default function ForgotPassword() {
         {/* Logo */}
         <div className="text-center space-y-4">
           <div className="flex justify-center">
-            <div className="p-4 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700">
+            <div className="p-4 rounded-lg bg-gradient-to-br from-cyan-400 to-cyan-500">
               <Compass size={32} className="text-white" />
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function ForgotPassword() {
             {/* Back to Login */}
             <div className="text-center">
               <Link href="/auth">
-                <a className="text-sm text-indigo-600 hover:text-indigo-700 font-semibold">
+                <a className="text-sm text-cyan-400 hover:text-indigo-700 font-semibold">
                   ← Voltar ao Login
                 </a>
               </Link>
@@ -149,7 +149,7 @@ export default function ForgotPassword() {
             <div className="text-center space-y-2">
               <h2 className="text-2xl font-bold text-white">E-mail Enviado!</h2>
               <p className="text-slate-600">
-                Verifique seu e-mail <span className="font-semibold text-indigo-600">{email}</span> para o link de recuperação de senha.
+                Verifique seu e-mail <span className="font-semibold text-cyan-400">{email}</span> para o link de recuperação de senha.
               </p>
             </div>
 
@@ -167,7 +167,7 @@ export default function ForgotPassword() {
             </p>
 
             <Link href="/auth">
-              <a className="block text-center text-sm text-indigo-600 hover:text-indigo-700 font-semibold">
+              <a className="block text-center text-sm text-cyan-400 hover:text-indigo-700 font-semibold">
                 Clique aqui se não for redirecionado
               </a>
             </Link>
@@ -178,7 +178,7 @@ export default function ForgotPassword() {
         <div className="text-center">
           <button
             onClick={() => setLocation('/')}
-            className="text-sm text-indigo-600 hover:text-indigo-700 font-semibold"
+            className="text-sm text-cyan-400 hover:text-indigo-700 font-semibold"
           >
             ← Voltar ao Início
           </button>

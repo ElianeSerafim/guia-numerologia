@@ -64,7 +64,7 @@ export function ChallengesInteractive({ birthDate }: ChallengesInteractiveProps)
                 isExpanded ? 'shadow-2xl' : 'shadow-lg hover:shadow-xl'
               }`}
             >
-              <div className="bg-[#190825] rounded-lg p-4 md:p-6">
+              <div className="bg-[#07131B] rounded-lg p-4 md:p-6">
                 {/* Header */}
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -73,7 +73,7 @@ export function ChallengesInteractive({ birthDate }: ChallengesInteractiveProps)
                         {info.label}
                       </h3>
                       {isMostImportant && (
-                        <span className="text-xs font-bold bg-[#D4AF37] text-[#190825] px-2 py-1 rounded">
+                        <span className="text-xs font-bold bg-[#19E6FF] text-[#07131B] px-2 py-1 rounded">
                           ⭐ IMPORTANTE
                         </span>
                       )}
@@ -84,7 +84,7 @@ export function ChallengesInteractive({ birthDate }: ChallengesInteractiveProps)
                     <p className="text-xs text-slate-500">{info.description}</p>
                   </div>
                   <div className="ml-4">
-                    <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] to-[#FFD700]">
+                    <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#19E6FF] to-[#FFD700]">
                       {number}
                     </div>
                   </div>
@@ -99,9 +99,9 @@ export function ChallengesInteractive({ birthDate }: ChallengesInteractiveProps)
 
                 {/* Expanded Content */}
                 {isExpanded && interpretationText && (
-                  <div className="mt-4 pt-4 border-t border-[#4A2A6A] space-y-4 animate-in fade-in duration-300">
+                  <div className="mt-4 pt-4 border-t border-[#1A3A4A] space-y-4 animate-in fade-in duration-300">
                     <div>
-                      <h4 className="text-sm font-bold text-[#D4AF37] uppercase tracking-wider mb-2">
+                      <h4 className="text-sm font-bold text-[#19E6FF] uppercase tracking-wider mb-2">
                         Interpretação
                       </h4>
                       <p className="text-sm text-slate-300 leading-relaxed">
@@ -113,7 +113,7 @@ export function ChallengesInteractive({ birthDate }: ChallengesInteractiveProps)
 
                 {/* Hover hint */}
                 {!isExpanded && (
-                  <div className="text-xs text-slate-500 mt-3 group-hover:text-[#D4AF37] transition-colors">
+                  <div className="text-xs text-slate-500 mt-3 group-hover:text-[#19E6FF] transition-colors">
                     Clique para expandir
                   </div>
                 )}

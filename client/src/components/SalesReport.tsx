@@ -27,7 +27,7 @@ export default function SalesReport() {
         <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg p-6 border border-indigo-200">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold text-indigo-600">Receita Total</p>
+              <p className="text-sm font-semibold text-cyan-400">Receita Total</p>
               <p className="text-3xl font-bold text-indigo-900 mt-2">
                 R$ {report.totalRevenue.toFixed(2)}
               </p>
@@ -41,7 +41,7 @@ export default function SalesReport() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-purple-600">Total de Vendas</p>
-              <p className="text-3xl font-bold text-purple-900 mt-2">
+              <p className="text-3xl font-bold text-blue-900 mt-2">
                 {report.totalSales}
               </p>
             </div>

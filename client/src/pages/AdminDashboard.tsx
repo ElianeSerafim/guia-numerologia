@@ -198,8 +198,8 @@ export default function AdminDashboard() {
   // Se não for super admin, mostrar página de acesso restrito com botão de voltar
   if (!isSuperAdminByEmail) {
     return (
-      <div className="min-h-screen bg-[#190825] flex items-center justify-center p-4">
-        <div className="text-center bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-lg p-8 max-w-md">
+      <div className="min-h-screen bg-[#07131B] flex items-center justify-center p-4">
+        <div className="text-center bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-lg p-8 max-w-md">
           <Lock className="w-16 h-16 mx-auto mb-4 text-red-500" />
           <h1 className="text-2xl font-bold text-white mb-2">Acesso Restrito</h1>
           <p className="text-[#B8A8D8] mb-6">Você não tem permissão para acessar o painel administrativo.</p>
@@ -208,7 +208,7 @@ export default function AdminDashboard() {
               console.log('Botão voltar clicado');
               setLocation('/');
             }}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium w-full"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-cyan-400 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium w-full"
           >
             ← Voltar para Página Inicial
           </button>
@@ -218,13 +218,13 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-[#190825]">
+    <div className="min-h-screen bg-[#07131B]">
       {/* Back Button */}
-      <div className="bg-[#2A1A4A] border-b border-[#4A2A6A]">
+      <div className="bg-[#2A1A4A] border-b border-[#1A3A4A]">
         <div className="container py-3">
           <button
             onClick={() => setLocation('/')}
-            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#D4AF37] hover:text-[#FFD700] transition-colors rounded-lg hover:bg-[#4A2A6A]"
+            className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-[#19E6FF] hover:text-[#FFD700] transition-colors rounded-lg hover:bg-[#1A3A4A]"
             title="Voltar para página inicial"
           >
             ← Voltar
@@ -233,7 +233,7 @@ export default function AdminDashboard() {
       </div>
 
       {/* Header */}
-      <div className="bg-[#2A1A4A] border-b border-[#4A2A6A] sticky top-0 z-40">
+      <div className="bg-[#2A1A4A] border-b border-[#1A3A4A] sticky top-0 z-40">
         <div className="container py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
             <div>
@@ -245,7 +245,7 @@ export default function AdminDashboard() {
             {isSuperAdmin && (
               <button
                 onClick={() => setShowAdminManagement(!showAdminManagement)}
-                className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
+                className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-[#00FFFF] text-white rounded-lg hover:bg-[#A040FF] transition-colors"
               >
                 <Users size={18} />
                 <span className="hidden sm:inline">Admins ({admins.length})</span>
@@ -254,7 +254,7 @@ export default function AdminDashboard() {
             )}
             <button
               onClick={() => setShowSettings(!showSettings)}
-              className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-[#D4AF37] text-[#190825] rounded-lg hover:bg-[#FFD700] transition-colors font-semibold"
+              className="flex items-center gap-2 px-3 md:px-4 py-2 text-sm md:text-base bg-[#19E6FF] text-[#07131B] rounded-lg hover:bg-[#FFD700] transition-colors font-semibold"
             >
               <Settings size={18} />
               <span className="hidden sm:inline">Configurações</span>
@@ -281,11 +281,11 @@ export default function AdminDashboard() {
       <div className="container py-4 md:py-8 px-2 md:px-0">
         {/* Admin Management Section */}
         {showAdminManagement && isSuperAdmin && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-4 md:p-6 mb-8">
+          <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-4 md:p-6 mb-8">
             <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Gerenciar Usuários Admin</h2>
             
             {/* Add New Admin */}
-            <div className="bg-[#1A0A2A] p-3 md:p-4 rounded-lg mb-6 border border-[#4A2A6A]">
+            <div className="bg-[#1A0A2A] p-3 md:p-4 rounded-lg mb-6 border border-[#1A3A4A]">
               <h3 className="font-semibold text-white mb-3 text-sm md:text-base">Adicionar Novo Admin</h3>
               {adminError && (
                 <div className="bg-red-900/30 border border-red-700 text-red-300 px-3 py-2 rounded mb-3 text-sm">
@@ -298,14 +298,14 @@ export default function AdminDashboard() {
                   placeholder="Email do novo admin"
                   value={newAdminEmail}
                   onChange={(e) => setNewAdminEmail(e.target.value)}
-                  className="flex-1 px-3 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                  className="flex-1 px-3 py-2 text-sm md:text-base border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
                 />
                 <input
                   type="text"
                   placeholder="Nome completo"
                   value={newAdminName}
                   onChange={(e) => setNewAdminName(e.target.value)}
-                  className="flex-1 px-3 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                  className="flex-1 px-3 py-2 text-sm md:text-base border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
                 />
                 <button
                   onClick={handleAddAdmin}
@@ -388,7 +388,7 @@ export default function AdminDashboard() {
         {/* Settings Section */}
         {showSettings && (
           <div className="container py-4 md:py-8 px-2 md:px-0">
-            <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-4 md:p-6 mb-8">
+            <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-4 md:p-6 mb-8">
               <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Configurações</h2>
               <div className="space-y-4">
                 <div>
@@ -400,16 +400,16 @@ export default function AdminDashboard() {
                     value={newWhatsappLink}
                     onChange={(e) => setNewWhatsappLink(e.target.value)}
                     placeholder="https://wa.me/5511999999999"
-                    className="w-full px-3 md:px-4 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+                    className="w-full px-3 md:px-4 py-2 text-sm md:text-base border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
                   />
                   <p className="text-xs md:text-sm text-[#B8A8D8] mt-1">Formato: https://wa.me/5511999999999</p>
                 </div>
-                <div className="border-t border-[#4A2A6A] pt-4 mt-4">
+                <div className="border-t border-[#1A3A4A] pt-4 mt-4">
                   <h3 className="text-lg font-bold text-white mb-4">Gerenciar Renascimento</h3>
                   <p className="text-sm text-[#B8A8D8] mb-3">Registre Fatos Graves para clientes em Renascimento (R2, R3, R4)</p>
                   <div className="space-y-3 max-h-64 overflow-y-auto">
                     {customers.filter(c => c.status === 'approved').map(customer => (
-                      <div key={customer.id} className="bg-[#1A0A2A] p-3 rounded-lg border border-[#4A2A6A]">
+                      <div key={customer.id} className="bg-[#1A0A2A] p-3 rounded-lg border border-[#1A3A4A]">
                         <p className="text-sm font-semibold text-white mb-2">{customer.email}</p>
                         <label className="flex items-center gap-2 text-sm text-[#B8A8D8] mb-2">
                           <input
@@ -437,7 +437,7 @@ export default function AdminDashboard() {
                                   factoGraveType: e.target.value
                                 }
                               })}
-                              className="w-full px-2 py-1 text-xs border border-[#4A2A6A] bg-[#0A0A1A] text-white rounded mb-2"
+                              className="w-full px-2 py-1 text-xs border border-[#1A3A4A] bg-[#0A0A1A] text-white rounded mb-2"
                             >
                               <option value="">Selecione o tipo...</option>
                               <option value="enfermidade">Enfermidade Física Grave</option>
@@ -455,7 +455,7 @@ export default function AdminDashboard() {
                                 }
                               })}
                               placeholder="Notas sobre o Renascimento..."
-                              className="w-full px-2 py-1 text-xs border border-[#4A2A6A] bg-[#0A0A1A] text-white rounded"
+                              className="w-full px-2 py-1 text-xs border border-[#1A3A4A] bg-[#0A0A1A] text-white rounded"
                               rows={2}
                             />
                           </>
@@ -469,7 +469,7 @@ export default function AdminDashboard() {
                     handleSaveWhatsapp();
                     handleSaveRenascimento();
                   }}
-                  className="w-full md:w-auto px-4 md:px-6 py-2 text-sm md:text-base bg-[#8A2BE2] text-white rounded-lg hover:bg-[#A040FF] transition-colors font-semibold mt-4"
+                  className="w-full md:w-auto px-4 md:px-6 py-2 text-sm md:text-base bg-[#00FFFF] text-white rounded-lg hover:bg-[#A040FF] transition-colors font-semibold mt-4"
                 >
                   Salvar Configurações
                 </button>
@@ -479,13 +479,13 @@ export default function AdminDashboard() {
         )}
 
         {/* Tabs */}
-        <div className="bg-[#2A1A4A] rounded-lg shadow-md mb-6 border-b border-[#4A2A6A] overflow-x-auto">
+        <div className="bg-[#2A1A4A] rounded-lg shadow-md mb-6 border-b border-[#1A3A4A] overflow-x-auto">
           <div className="flex gap-0 min-w-max md:min-w-0">
             <button
               onClick={() => setActiveTab('customers')}
               className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'customers'
-                  ? 'border-indigo-600 text-indigo-600'
+                  ? 'border-cyan-400 text-cyan-400'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
@@ -496,7 +496,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('reports')}
               className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'reports'
-                  ? 'border-indigo-600 text-indigo-600'
+                  ? 'border-cyan-400 text-cyan-400'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
@@ -507,7 +507,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('coupons')}
               className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'coupons'
-                  ? 'border-indigo-600 text-indigo-600'
+                  ? 'border-cyan-400 text-cyan-400'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
@@ -518,7 +518,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('history')}
               className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'history'
-                  ? 'border-indigo-600 text-indigo-600'
+                  ? 'border-cyan-400 text-cyan-400'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
@@ -529,7 +529,7 @@ export default function AdminDashboard() {
               onClick={() => setActiveTab('admins')}
               className={`flex items-center gap-2 px-3 md:px-6 py-3 md:py-4 text-sm md:text-base font-semibold border-b-2 transition-colors ${
                 activeTab === 'admins'
-                  ? 'border-indigo-600 text-indigo-600'
+                  ? 'border-cyan-400 text-cyan-400'
                   : 'border-transparent text-slate-600 hover:text-white'
               }`}
             >
@@ -541,14 +541,14 @@ export default function AdminDashboard() {
 
         {/* Filters */}
         {activeTab === 'customers' && (
-        <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-4 md:p-6 mb-6">
+        <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-4 md:p-6 mb-6">
           <div className="flex flex-col md:flex-row gap-2 md:gap-4 flex-wrap">
             <input
               type="text"
               placeholder="Buscar por email ou nome..."
               value={searchEmail}
               onChange={(e) => setSearchEmail(e.target.value)}
-              className="flex-1 min-w-0 md:min-w-64 px-3 md:px-4 py-2 text-sm md:text-base border border-[#4A2A6A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8A2BE2]"
+              className="flex-1 min-w-0 md:min-w-64 px-3 md:px-4 py-2 text-sm md:text-base border border-[#1A3A4A] bg-[#1A0A2A] text-white placeholder-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00FFFF]"
             />
             <div className="flex gap-1 md:gap-2 flex-wrap">
               {(['pending', 'approved', 'rejected', 'all'] as const).map((f) => (
@@ -557,8 +557,8 @@ export default function AdminDashboard() {
                   onClick={() => setFilter(f)}
                   className={`px-2 md:px-4 py-2 text-xs md:text-sm rounded-lg font-semibold transition-colors whitespace-nowrap ${
                     filter === f
-                      ? 'bg-[#8A2BE2] text-white'
-                      : 'bg-[#4A2A6A] text-white hover:bg-[#6A3A8A]'
+                      ? 'bg-[#00FFFF] text-white'
+                      : 'bg-[#1A3A4A] text-white hover:bg-[#6A3A8A]'
                   }`}
                 >
                   {f === 'pending' ? 'Pendentes' : f === 'approved' ? 'Aprovados' : f === 'rejected' ? 'Rejeitados' : 'Todos'}
@@ -579,35 +579,35 @@ export default function AdminDashboard() {
 
         {/* Relatórios Tab */}
         {activeTab === 'reports' && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-6">
             <SalesReport />
           </div>
         )}
 
         {/* Cupons Tab */}
         {activeTab === 'coupons' && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-6">
             <CouponManagement />
           </div>
         )}
 
         {/* Histórico Tab */}
         {activeTab === 'history' && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-6">
             <PaymentHistory />
           </div>
         )}
 
         {/* Admins Tab */}
         {activeTab === 'admins' && (
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md p-6">
+          <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md p-6">
             <AdminManagement />
           </div>
         )}
 
         {/* Customers Table */}
         {activeTab === 'customers' && (
-        <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-md overflow-hidden">
+        <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-md overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -697,7 +697,7 @@ export default function AdminDashboard() {
       {/* Modal para Aprovar/Rejeitar */}
       {selectedCustomer && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#2A1A4A] border border-[#4A2A6A] rounded-lg shadow-lg max-w-md w-full p-6">
+          <div className="bg-[#2A1A4A] border border-[#1A3A4A] rounded-lg shadow-lg max-w-md w-full p-6">
             <h3 className="text-xl font-bold text-white mb-4">
               {selectedCustomer.status === 'pending' ? 'Aprovar Cliente' : 'Rejeitar Cliente'}
             </h3>

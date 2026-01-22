@@ -49,7 +49,7 @@ const positionConfig = [
     key: 'ex',
     label: 'Expressão',
     icon: Users,
-    color: 'from-purple-600 to-purple-700',
+    color: 'from-purple-600 to-cyan-500',
     description: 'Como o mundo te vê'
   },
   {
@@ -104,7 +104,7 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
           return (
             <div
               key={item.key}
-              className="card-mystical space-y-4 border-l-4 border-indigo-600 hover:shadow-lg transition-shadow"
+              className="card-mystical space-y-4 border-l-4 border-cyan-400 hover:shadow-lg transition-shadow"
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-4">
@@ -117,7 +117,7 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
                     <p className="text-sm text-slate-400">{config.description}</p>
                   </div>
                 </div>
-                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-700">
+                <div className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-500">
                   {item.value}
                 </div>
               </div>
@@ -144,14 +144,14 @@ export default function InterpretationDisplayEliane({ chart }: InterpretationDis
               )}
 
               {/* Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-indigo-600 to-transparent"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
             </div>
           );
         })}
       </div>
 
       {/* Nota Final */}
-      <div className="bg-gradient-to-r from-indigo-600/10 to-purple-600/10 rounded-lg p-6 border border-indigo-500/20">
+      <div className="bg-gradient-to-r from-cyan-400/10 to-purple-600/10 rounded-lg p-6 border border-indigo-500/20">
         <p className="text-slate-300 text-sm leading-relaxed">
           <span className="font-semibold text-indigo-300">Lembre-se:</span> A Numerologia é uma ferramenta de autoconhecimento e clareza, não de previsão mística. 
           Use essas interpretações para compreender melhor seus ciclos, potenciais e desafios, e para tomar decisões mais conscientes e alinhadas com seu propósito.

@@ -83,7 +83,7 @@ export default function History() {
         <div className="container flex items-center justify-between py-4">
           <button
             onClick={() => setLocation('/')}
-            className="flex items-center gap-2 text-indigo-600 hover:text-indigo-700 font-semibold transition-colors"
+            className="flex items-center gap-2 text-cyan-400 hover:text-indigo-700 font-semibold transition-colors"
           >
             <ArrowLeft size={20} />
             <span>Voltar</span>
@@ -105,7 +105,7 @@ export default function History() {
         <div className="grid md:grid-cols-3 gap-4 mb-8">
           <div className="card-mystical text-center">
             <p className="text-slate-600 text-sm mb-1">Mapas Salvos</p>
-            <p className="text-4xl font-bold text-indigo-600">{userMaps.length}</p>
+            <p className="text-4xl font-bold text-cyan-400">{userMaps.length}</p>
           </div>
           <div className="card-mystical text-center">
             <p className="text-slate-600 text-sm mb-1">Mais Recente</p>
@@ -175,26 +175,26 @@ export default function History() {
                     checked={selectedMaps.includes(map.id)}
                     onChange={() => handleSelectMap(map.id)}
                     onClick={(e) => e.stopPropagation()}
-                    className="w-5 h-5 rounded border-slate-300 text-indigo-600 cursor-pointer"
+                    className="w-5 h-5 rounded border-slate-300 text-cyan-400 cursor-pointer"
                   />
                 </div>
 
                 {/* Key Numbers */}
                 <div className="grid grid-cols-2 gap-3 bg-indigo-50 rounded-lg p-3">
                   <div className="text-center">
-                    <p className="text-xs text-indigo-600 font-semibold">CD</p>
+                    <p className="text-xs text-cyan-400 font-semibold">CD</p>
                     <p className="number-mystical text-2xl">{map.chart.cd}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs text-indigo-600 font-semibold">MO</p>
+                    <p className="text-xs text-cyan-400 font-semibold">MO</p>
                     <p className="number-mystical text-2xl">{map.chart.mo}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs text-indigo-600 font-semibold">EX</p>
+                    <p className="text-xs text-cyan-400 font-semibold">EX</p>
                     <p className="number-mystical text-2xl">{map.chart.ex}</p>
                   </div>
                   <div className="text-center">
-                    <p className="text-xs text-indigo-600 font-semibold">AP2026</p>
+                    <p className="text-xs text-cyan-400 font-semibold">AP2026</p>
                     <p className="number-mystical text-2xl">{map.chart.personalYear2026}</p>
                   </div>
                 </div>
@@ -227,7 +227,7 @@ export default function History() {
                       e.stopPropagation();
                       handleViewMap(map);
                     }}
-                    className="flex-1 flex items-center justify-center gap-2 text-sm text-indigo-600 hover:bg-indigo-50 py-2 rounded transition-colors"
+                    className="flex-1 flex items-center justify-center gap-2 text-sm text-cyan-400 hover:bg-indigo-50 py-2 rounded transition-colors"
                   >
                     <Eye size={16} />
                     Ver
@@ -286,7 +286,7 @@ export default function History() {
                 <h3 className="font-bold text-white mb-3">Números Principais</h3>
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center bg-indigo-50 rounded-lg p-4">
-                    <p className="text-xs text-indigo-600 font-semibold mb-1">Caminho de Destino</p>
+                    <p className="text-xs text-cyan-400 font-semibold mb-1">Caminho de Destino</p>
                     <p className="number-mystical text-3xl">{viewingMap.chart.cd}</p>
                   </div>
                   <div className="text-center bg-purple-50 rounded-lg p-4">

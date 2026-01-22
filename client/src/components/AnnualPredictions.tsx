@@ -50,16 +50,16 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
   return (
     <div className="space-y-8">
       {/* Ano Pessoal - Destaque Principal */}
-      <div className="bg-gradient-to-r from-[#8A2BE2] to-[#6A1BB2] rounded-xl p-8 text-center space-y-3 border border-[#D4AF37]/30">
-        <p className="text-[#D4AF37] text-sm font-semibold uppercase tracking-wider">Seu Ano Pessoal</p>
+      <div className="bg-gradient-to-r from-[#00FFFF] to-[#6A1BB2] rounded-xl p-8 text-center space-y-3 border border-[#19E6FF]/30">
+        <p className="text-[#19E6FF] text-sm font-semibold uppercase tracking-wider">Seu Ano Pessoal</p>
         <div className="text-6xl font-bold text-white">{yearNumber}</div>
-        <p className="text-[#D4AF37] text-lg font-semibold">{getYearDescription(yearNumber)}</p>
+        <p className="text-[#19E6FF] text-lg font-semibold">{getYearDescription(yearNumber)}</p>
       </div>
 
       {/* Sistema de Filtros */}
       <div className="space-y-4">
         <div className="flex items-center gap-2 mb-4">
-          <Filter size={20} className="text-[#D4AF37]" />
+          <Filter size={20} className="text-[#19E6FF]" />
           <h3 className="text-lg font-bold text-white">Filtros de Visualização</h3>
         </div>
 
@@ -76,8 +76,8 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
               }}
               className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 flex items-center gap-2 ${
                 filterType === filter.value
-                  ? 'bg-[#D4AF37] text-[#190825] shadow-lg'
-                  : 'bg-[#3A1A5A] text-white border border-[#4A2A6A] hover:border-[#D4AF37]'
+                  ? 'bg-[#19E6FF] text-[#07131B] shadow-lg'
+                  : 'bg-[#3A1A5A] text-white border border-[#1A3A4A] hover:border-[#19E6FF]'
               }`}
             >
               <span>{filter.icon}</span>
@@ -88,13 +88,13 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
         {/* Filtros de Trimestre (aparece quando selecionado) */}
         {filterType === 'trimestral' && (
-          <div className="flex flex-wrap gap-2 pl-4 border-l-2 border-[#D4AF37]">
+          <div className="flex flex-wrap gap-2 pl-4 border-l-2 border-[#19E6FF]">
             <button
               onClick={() => setTrimestreFilter('all')}
               className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
                 trimestreFilter === 'all'
-                  ? 'bg-[#D4AF37] text-[#190825]'
-                  : 'bg-[#3A1A5A] text-white border border-[#4A2A6A] hover:border-[#D4AF37]'
+                  ? 'bg-[#19E6FF] text-[#07131B]'
+                  : 'bg-[#3A1A5A] text-white border border-[#1A3A4A] hover:border-[#19E6FF]'
               }`}
             >
               Todos os Trimestres
@@ -105,8 +105,8 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                 onClick={() => setTrimestreFilter(t.toString() as TrimestreFilter)}
                 className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all duration-200 ${
                   trimestreFilter === t.toString()
-                    ? 'bg-[#D4AF37] text-[#190825]'
-                    : 'bg-[#3A1A5A] text-white border border-[#4A2A6A] hover:border-[#D4AF37]'
+                    ? 'bg-[#19E6FF] text-[#07131B]'
+                    : 'bg-[#3A1A5A] text-white border border-[#1A3A4A] hover:border-[#19E6FF]'
                 }`}
               >
                 T{t}
@@ -120,9 +120,9 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
       <div className="space-y-8">
         {/* Essência do Ano */}
         {(filterType === 'all' || filterType === 'essence') && (
-          <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300">
+          <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300">
             <div className="flex items-start gap-3">
-              <Lightbulb className="text-[#D4AF37] flex-shrink-0 mt-1" size={24} />
+              <Lightbulb className="text-[#19E6FF] flex-shrink-0 mt-1" size={24} />
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-white mb-3">Essência do Ano</h3>
                 <p className="text-slate-300 leading-relaxed text-base">{prediction.essence}</p>
@@ -133,9 +133,9 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
         {/* Foco Principal */}
         {(filterType === 'all' || filterType === 'focus') && (
-          <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300">
+          <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300">
             <div className="flex items-start gap-3">
-              <Target className="text-[#D4AF37] flex-shrink-0 mt-1" size={24} />
+              <Target className="text-[#19E6FF] flex-shrink-0 mt-1" size={24} />
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-white mb-3">Foco Principal</h3>
                 <p className="text-slate-300 leading-relaxed text-base">{prediction.focus}</p>
@@ -148,7 +148,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
         {(filterType === 'all' || filterType === 'manifestations') && (
           <div className="space-y-4 animate-in fade-in duration-300">
             <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <TrendingUp size={24} className="text-[#D4AF37]" />
+              <TrendingUp size={24} className="text-[#19E6FF]" />
               Como Este Ano Pode Se Manifestar
             </h3>
 
@@ -206,7 +206,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
           <div className="space-y-6 animate-in fade-in duration-300">
             <div>
               <h3 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
-                <Zap size={24} className="text-[#D4AF37]" />
+                <Zap size={24} className="text-[#19E6FF]" />
                 Ciclos Trimestrais
               </h3>
               <p className="text-slate-400 text-sm">O ano é dividido em 4 trimestres, cada um com sua vibração específica</p>
@@ -234,14 +234,14 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                   return (
                     <div
                       key={trimestre}
-                      className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300"
+                      className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300"
                     >
                       {/* Header */}
                       <div className="space-y-2">
                         <h4 className="text-lg font-bold text-white">{ct.title}</h4>
                         <div className="flex flex-wrap gap-2">
-                          <div className="inline-block bg-[#4A2A6A] rounded-lg px-3 py-1">
-                            <p className="text-sm text-[#D4AF37] font-semibold">Vibração: {ctNumber}</p>
+                          <div className="inline-block bg-[#1A3A4A] rounded-lg px-3 py-1">
+                            <p className="text-sm text-[#19E6FF] font-semibold">Vibração: {ctNumber}</p>
                           </div>
                           {realizationMonth && (
                             <div className="inline-block bg-[#5A3A7A] rounded-lg px-3 py-1">
@@ -252,17 +252,17 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                       </div>
 
                       {/* Essência */}
-                      <div className="bg-[#3A1A5A]/50 rounded-lg p-4 border border-[#4A2A6A]">
+                      <div className="bg-[#3A1A5A]/50 rounded-lg p-4 border border-[#1A3A4A]">
                         <p className="text-sm text-slate-300 leading-relaxed">{ct.essence}</p>
                       </div>
 
                       {/* Atividades Recomendadas */}
                       <div>
-                        <h5 className="font-semibold text-[#D4AF37] mb-3 text-sm uppercase tracking-wider">✓ Atividades Recomendadas</h5>
+                        <h5 className="font-semibold text-[#19E6FF] mb-3 text-sm uppercase tracking-wider">✓ Atividades Recomendadas</h5>
                         <ul className="space-y-2">
                           {ct.activities.slice(0, 3).map((activity, idx) => (
                             <li key={idx} className="flex items-start gap-2 text-sm text-slate-300">
-                              <span className="text-[#D4AF37] font-bold mt-0.5 flex-shrink-0">▸</span>
+                              <span className="text-[#19E6FF] font-bold mt-0.5 flex-shrink-0">▸</span>
                               <span>{activity}</span>
                             </li>
                           ))}
@@ -295,13 +295,13 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
         {(filterType === 'all' || filterType === 'recommendations') && (
           <div className="space-y-4 animate-in fade-in duration-300">
             <h3 className="text-xl font-bold text-white flex items-center gap-2">
-              <Shield size={24} className="text-[#D4AF37]" />
+              <Shield size={24} className="text-[#19E6FF]" />
               Recomendações
             </h3>
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* O Que Fazer */}
-              <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 space-y-4">
+              <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4">
                 <h4 className="font-bold text-green-400 flex items-center gap-2 text-base">
                   <span className="w-3 h-3 bg-green-500 rounded-full"></span>
                   O Que Fazer
@@ -317,7 +317,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
               </div>
 
               {/* Desafios a Evitar */}
-              <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#4A2A6A] rounded-xl p-6 space-y-4">
+              <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4">
                 <h4 className="font-bold text-red-400 flex items-center gap-2 text-base">
                   <span className="w-3 h-3 bg-red-500 rounded-full"></span>
                   Desafios a Evitar
@@ -337,16 +337,16 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
         {/* Oportunidades Principais */}
         {(filterType === 'all' || filterType === 'opportunities') && (
-          <div className="bg-gradient-to-r from-[#8A2BE2] to-[#6A1BB2] rounded-xl p-6 space-y-4 border border-[#D4AF37]/30 animate-in fade-in duration-300">
+          <div className="bg-gradient-to-r from-[#00FFFF] to-[#6A1BB2] rounded-xl p-6 space-y-4 border border-[#19E6FF]/30 animate-in fade-in duration-300">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <Lightbulb size={20} className="text-[#D4AF37]" />
+              <Lightbulb size={20} className="text-[#19E6FF]" />
               Oportunidades Principais
             </h3>
             <div className="grid md:grid-cols-2 gap-3">
               {prediction.opportunities.map((opp, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/10 rounded-lg p-4 border border-[#D4AF37]/20 backdrop-blur-sm"
+                  className="bg-white/10 rounded-lg p-4 border border-[#19E6FF]/20 backdrop-blur-sm"
                 >
                   <p className="text-sm text-white font-medium">{opp}</p>
                 </div>

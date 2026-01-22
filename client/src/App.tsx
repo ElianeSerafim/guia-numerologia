@@ -22,7 +22,7 @@ import Profile from "./pages/Profile";
  * 
  * Design Philosophy: Modernismo Minimalista com Acentos Místicos
  * - Clean, professional interface
- * - Indigo (#4C1D95) and gold (#D4AF37) accents
+ * - Indigo (#4C1D95) and gold (#19E6FF) accents
  * - Smooth transitions and subtle feedback
  */
 function Router() {

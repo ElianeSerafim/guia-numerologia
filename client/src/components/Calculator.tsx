@@ -74,7 +74,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
 
   return (
     <>
-    <form onSubmit={handleSubmit} className="space-y-6 bg-gradient-to-br from-purple-950/30 via-purple-900/20 to-black rounded-2xl p-8 border border-purple-600/30 backdrop-blur-sm">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-gradient-to-br from-blue-950/30 via-blue-900/20 to-black rounded-2xl p-8 border border-purple-600/30 backdrop-blur-sm">
       {/* Name Input */}
       <div className="space-y-2">
         <label htmlFor="name" className="block text-sm font-semibold text-white flex items-center gap-2">
@@ -94,7 +94,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           maxLength={100}
           className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed text-white placeholder-gray-400
             ${errors.name
-              ? 'border-red-500 bg-purple-950 focus:outline-none focus:ring-2 focus:ring-red-500/50'
+              ? 'border-red-500 bg-blue-950 focus:outline-none focus:ring-2 focus:ring-red-500/50'
               : 'border-purple-600 bg-black hover:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-yellow-500'
             }`}
         />
@@ -137,7 +137,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           disabled={disabled}
           className={`w-full px-4 py-3 rounded-lg border-2 transition-all duration-200 font-sans disabled:opacity-50 disabled:cursor-not-allowed text-white
             ${errors.birthDate
-              ? 'border-red-500 bg-purple-950 focus:outline-none focus:ring-2 focus:ring-red-500/50'
+              ? 'border-red-500 bg-blue-950 focus:outline-none focus:ring-2 focus:ring-red-500/50'
               : 'border-purple-600 bg-black hover:border-yellow-500 focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-yellow-500'
             }`}
         />
@@ -183,7 +183,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
     {/* Confirmation Modal */}
     {showConfirmation && (
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div className="bg-gradient-to-br from-purple-950 to-black rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6 animate-in fade-in zoom-in duration-300 border border-purple-600/30">
+        <div className="bg-gradient-to-br from-blue-950 to-black rounded-2xl shadow-2xl max-w-md w-full p-8 space-y-6 animate-in fade-in zoom-in duration-300 border border-purple-600/30">
           {/* Header */}
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-600 to-yellow-500 flex items-center justify-center">
@@ -196,7 +196,7 @@ export default function Calculator({ onSubmit, disabled = false }: CalculatorPro
           </div>
 
           {/* Data Review */}
-          <div className="space-y-4 bg-purple-950/50 rounded-lg p-4 border border-purple-600/20">
+          <div className="space-y-4 bg-blue-950/50 rounded-lg p-4 border border-purple-600/20">
             <div>
               <p className="text-xs font-semibold text-yellow-500 uppercase tracking-wide">Nome de Solteiro</p>
               <p className="text-lg font-semibold text-white mt-1">{pendingName}</p>

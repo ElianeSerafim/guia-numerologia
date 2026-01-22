@@ -105,7 +105,7 @@ export const ShareButtons: React.FC<ShareButtonsProps> = ({
       {/* Copy Link */}
       <button
         onClick={handleCopyLink}
-        className={`${buttonBaseClass} bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900 dark:text-purple-200`}
+        className={`${buttonBaseClass} bg-purple-100 text-cyan-500 hover:bg-purple-200 dark:bg-blue-900 dark:text-purple-200`}
         title="Copiar link"
       >
         {copied ? (
