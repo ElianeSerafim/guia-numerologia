@@ -234,7 +234,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                   return (
                     <div
                       key={trimestre}
-                      className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300"
+                      className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-6 space-y-4 animate-in fade-in duration-300 prediction-card-hover"
                     >
                       {/* Header */}
                       <div className="space-y-2">

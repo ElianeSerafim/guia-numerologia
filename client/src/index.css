@@ -308,3 +308,67 @@
   .button-glow:hover {
     animation: buttonGlowHover 1s ease-in-out infinite;
   }
+
+  /* Card Hover Effects */
+  @keyframes cardHoverLift {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+  
+  @keyframes cardHoverGlow {
+    0%, 100% {
+      box-shadow: 0 4px 6px rgba(0, 255, 255, 0.1), 0 0 20px rgba(0, 255, 255, 0.05);
+      border-color: rgba(0, 255, 255, 0.3);
+    }
+    50% {
+      box-shadow: 0 8px 12px rgba(0, 255, 255, 0.2), 0 0 30px rgba(0, 255, 255, 0.1);
+      border-color: rgba(0, 255, 255, 0.5);
+    }
+  }
+  
+  .card-hover-interactive {
+    transition: all 0.3s ease-in-out;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+  }
+  
+  .card-hover-interactive:hover {
+    animation: cardHoverLift 0.6s ease-in-out forwards, cardHoverGlow 1.5s ease-in-out infinite;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(25, 230, 255, 0.05));
+  }
+  
+  /* Timeline Card Hover */
+  .timeline-card-hover {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .timeline-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 255, 255, 0.15), 0 0 30px rgba(0, 255, 255, 0.1);
+    border-color: #00FFFF;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(25, 230, 255, 0.08));
+  }
+  
+  /* Prediction Card Hover */
+  .prediction-card-hover {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .prediction-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 255, 255, 0.12), 0 0 25px rgba(25, 230, 255, 0.08);
+    border-color: #19E6FF;
+    background: linear-gradient(135deg, rgba(25, 230, 255, 0.06), rgba(0, 217, 233, 0.06));
+  }
+  
+  /* Subtle Scale Hover */
+  .card-scale-hover {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card-scale-hover:hover {
+    transform: scale(1.02);
+  }

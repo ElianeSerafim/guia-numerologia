@@ -241,7 +241,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
             <button
               key={item.id}
               onClick={() => toggleExpand(item.id)}
-              className="w-full text-left transition-all duration-300"
+              className="w-full text-left transition-all duration-300 timeline-card-hover"
             >
               <div
                 className={`bg-gradient-to-br ${item.color} p-0.5 rounded-xl transition-all duration-300 ${
