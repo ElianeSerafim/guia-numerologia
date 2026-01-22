@@ -110,7 +110,7 @@ export default function Auth() {
               <Compass size={32} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-[#D4AF37]">Bússola Numerológica</h1>
+          <h1 className="text-3xl font-bold text-[#D4AF37]">Portal Numerologia</h1>
           <p className="text-white">Descubra os mistérios do seu destino</p>
         </div>
 

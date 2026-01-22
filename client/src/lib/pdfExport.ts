@@ -85,7 +85,7 @@ function generatePDFContent(chart: NumerologyChart, userEmail: string): string {
       <!-- Header -->
       <div style="text-align: center; margin-bottom: 40px; border-bottom: 3px solid #4C1D95; padding-bottom: 20px;">
         <h1 style="font-size: 36px; margin: 0 0 10px 0; color: #4C1D95;">Mapa Numerológico</h1>
-        <p style="font-size: 14px; color: #64748b; margin: 0;">Bússola Numerológica 2026 - Método Pitagórico</p>
+        <p style="font-size: 14px; color: #64748b; margin: 0;">Portal Numerologia 2026 - Método Pitagórico</p>
         <p style="font-size: 12px; color: #94a3b8; margin: 5px 0 0 0;">Gerado em ${today}</p>
       </div>
 
@@ -156,7 +156,7 @@ function generatePDFContent(chart: NumerologyChart, userEmail: string): string {
 
       <!-- Footer -->
       <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e2e8f0; text-align: center; font-size: 12px; color: #94a3b8;">
-        <p style="margin: 0;">Bússola Numerológica 2026 © ${new Date().getFullYear()} - Método Pitagórico</p>
+        <p style="margin: 0;">Portal Numerologia 2026 © ${new Date().getFullYear()} - Método Pitagórico</p>
         <p style="margin: 5px 0 0 0;">Este relatório é baseado nas técnicas avançadas de numerologia pitagórica.</p>
       </div>
     </div>

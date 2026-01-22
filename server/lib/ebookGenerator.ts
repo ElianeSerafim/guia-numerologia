@@ -336,7 +336,7 @@ export function exportarEbookHTML(chart: NumerologyChart): string {
 <body>
   <!-- CAPA -->
   <div class="page capa">
-    <h1>Bússola Numerológica</h1>
+    <h1>Portal Numerologia</h1>
     <div class="subtitulo">Seu Guia Pessoal de Numerologia Pitagórica</div>
     <div class="nome">${fullName}</div>
     <div class="assinatura">Beijo no seu coração; Eli.<br/>Lili Numerologia</div>

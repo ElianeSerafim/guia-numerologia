@@ -341,7 +341,7 @@ export default function LandingPage() {
             <p className="text-white mb-6 font-medium">Compartilhe com seus amigos</p>
             <div className="flex justify-center">
               <ShareButtons
-                title="Bússola Numerológica 2026"
+                title="Portal Numerologia 2026"
                 description="Descubra os mistérios do seu destino com a numerologia pitagórica. Cálculos precisos e interpretações detalhadas."
                 showLabel={true}
                 variant="horizontal"

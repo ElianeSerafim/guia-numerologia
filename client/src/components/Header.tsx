@@ -49,7 +49,7 @@ export default function Header() {
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           <span className="font-bold text-lg text-[#D4AF37] hidden sm:inline">
-            Bússola
+            Portal
           </span>
         </button>
 

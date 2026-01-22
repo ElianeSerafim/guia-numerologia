@@ -18,7 +18,7 @@ import LandingPage from "./pages/LandingPage";
 import Profile from "./pages/Profile";
 
 /**
- * App Component - Bússola Numerológica 2026
+ * App Component - Portal Numerologia 2026
  * 
  * Design Philosophy: Modernismo Minimalista com Acentos Místicos
  * - Clean, professional interface

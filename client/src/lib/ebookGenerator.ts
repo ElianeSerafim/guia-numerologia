@@ -59,7 +59,7 @@ const getEbookHTML = (content: string): string => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bússola Numerológica 2026</title>
+<title>Portal Numerologia 2026</title>
 <style>
 @page {
   size: A4;

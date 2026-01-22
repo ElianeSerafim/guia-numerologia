@@ -66,7 +66,7 @@ export default function ForgotPassword() {
               <Compass size={32} className="text-white" />
             </div>
           </div>
-          <h1 className="text-3xl font-bold text-white">Bússola Numerológica</h1>
+          <h1 className="text-3xl font-bold text-white">Portal Numerologia</h1>
           <p className="text-slate-600">Recupere seu acesso</p>
         </div>
 

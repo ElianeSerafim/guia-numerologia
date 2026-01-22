@@ -10,7 +10,7 @@ interface ShareButtonsProps {
 }
 
 export const ShareButtons: React.FC<ShareButtonsProps> = ({
-  title = 'Bússola Numerológica 2026',
+  title = 'Portal Numerologia 2026',
   description = 'Descubra os mistérios do seu destino com a numerologia pitagórica. Cálculos precisos e interpretações detalhadas.',
   url = typeof window !== 'undefined' ? window.location.href : '',
   showLabel = true,

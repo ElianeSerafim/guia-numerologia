@@ -30,7 +30,7 @@ export default function Navigation() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700 flex items-center justify-center">
               <span className="text-white font-bold">◯</span>
             </div>
-            <span>Bússola</span>
+            <span>Portal</span>
           </a>
         </Link>
 

@@ -28,7 +28,7 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg"></div>
-              <span className="font-bold text-white">Bússola Numerológica</span>
+              <span className="font-bold text-white">Portal Numerologia</span>
             </div>
             <p className="text-sm text-slate-400">
               Descubra os mistérios do seu destino através da numerologia pitagórica.
@@ -135,7 +135,7 @@ export default function Footer() {
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row items-center justify-between text-sm text-slate-400">
           <p>
-            © {currentYear} Bússola Numerológica. Todos os direitos reservados.
+            © {currentYear} Portal Numerologia. Todos os direitos reservados.
           </p>
           <div className="flex items-center gap-1 mt-4 md:mt-0">
             Feito com <Heart size={14} className="text-red-500" /> para sua evolução

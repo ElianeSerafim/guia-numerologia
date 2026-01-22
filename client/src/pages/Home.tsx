@@ -10,7 +10,7 @@ import Calculator from '@/components/Calculator';
 import Report from '@/components/Report';
 
 /**
- * Home Page - Bússola Numerológica 2026
+ * Home Page - Portal Numerologia 2026
  * 
  * Design Philosophy: Modernismo Minimalista com Acentos Místicos
  * - Integração com sistema de autenticação e planos
@@ -148,7 +148,7 @@ export default function Home() {
             <div className="p-2 rounded-lg bg-gradient-to-br from-indigo-600 to-purple-700 flex-shrink-0">
               <Compass size={20} className="text-white" />
             </div>
-            <h1 className="text-lg md:text-xl font-bold text-slate-900 truncate">Bússola</h1>
+            <h1 className="text-lg md:text-xl font-bold text-slate-900 truncate">Portal</h1>
           </div>
           <div className="flex items-center gap-2 md:gap-4">
             <Link href="/faq">
@@ -392,7 +392,7 @@ export default function Home() {
           {/* Footer */}
           <footer className="border-t border-slate-200 bg-slate-50">
             <div className="container py-8 text-center text-slate-600 text-sm">
-              <p>Bússola Numerológica 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
+              <p>Portal Numerologia 2026 © {new Date().getFullYear()} - Método Pitagórico</p>
             </div>
           </footer>
         </>

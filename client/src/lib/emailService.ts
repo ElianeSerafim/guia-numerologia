@@ -1,5 +1,5 @@
 /**
- * Email Service - Bússola Numerológica 2026
+ * Email Service - Portal Numerologia 2026
  * 
  * Serviço para envio de e-mails de confirmação de compra e liberação de acesso.
  * Utiliza templates HTML elegantes e místicos.
@@ -144,7 +144,7 @@ export function generatePurchaseConfirmationEmail(
     <body>
       <div class="container">
         <div class="header">
-          <h1>🧿 Bússola Numerológica</h1>
+          <h1>🧿 Portal Numerologia</h1>
           <p>Confirmação de Compra</p>
         </div>
         
@@ -190,7 +190,7 @@ export function generatePurchaseConfirmationEmail(
         </div>
         
         <div class="footer">
-          <p>© 2026 Bússola Numerológica. Todos os direitos reservados.</p>
+          <p>© 2026 Portal Numerologia. Todos os direitos reservados.</p>
           <p>
             <a href="#" class="footer-link">Termos de Serviço</a> | 
             <a href="#" class="footer-link">Política de Privacidade</a>
@@ -354,7 +354,7 @@ export function generateAccessApprovedEmail(
     <body>
       <div class="container">
         <div class="header">
-          <h1>🧿 Bússola Numerológica</h1>
+          <h1>🧿 Portal Numerologia</h1>
           <p>Acesso Liberado!</p>
         </div>
         
@@ -414,7 +414,7 @@ export function generateAccessApprovedEmail(
         </div>
         
         <div class="footer">
-          <p>© 2026 Bússola Numerológica. Todos os direitos reservados.</p>
+          <p>© 2026 Portal Numerologia. Todos os direitos reservados.</p>
           <p>
             <a href="#" class="footer-link">Termos de Serviço</a> | 
             <a href="#" class="footer-link">Política de Privacidade</a>
@@ -537,7 +537,7 @@ export function generateAccessRejectedEmail(
     <body>
       <div class="container">
         <div class="header">
-          <h1>🧿 Bússola Numerológica</h1>
+          <h1>🧿 Portal Numerologia</h1>
           <p>Solicitação Revisada</p>
         </div>
         
@@ -563,7 +563,7 @@ export function generateAccessRejectedEmail(
         </div>
         
         <div class="footer">
-          <p>© 2026 Bússola Numerológica. Todos os direitos reservados.</p>
+          <p>© 2026 Portal Numerologia. Todos os direitos reservados.</p>
           <p>
             <a href="#" class="footer-link">Termos de Serviço</a> | 
             <a href="#" class="footer-link">Política de Privacidade</a>
@@ -624,7 +624,7 @@ export async function sendPurchaseConfirmation(
 
   return sendEmail({
     to: email,
-    subject: `✓ Compra Confirmada - Bússola Numerológica 2026`,
+    subject: `✓ Compra Confirmada - Portal Numerologia 2026`,
     html
   });
 }
@@ -642,7 +642,7 @@ export async function sendAccessApprovedEmail(
 
   return sendEmail({
     to: email,
-    subject: `✨ Seu Acesso Foi Liberado! - Bússola Numerológica 2026`,
+    subject: `✨ Seu Acesso Foi Liberado! - Portal Numerologia 2026`,
     html
   });
 }
@@ -659,7 +659,7 @@ export async function sendAccessRejectedEmail(
 
   return sendEmail({
     to: email,
-    subject: `Solicitação Revisada - Bússola Numerológica 2026`,
+    subject: `Solicitação Revisada - Portal Numerologia 2026`,
     html
   });
 }
@@ -774,7 +774,7 @@ export function generatePasswordResetEmail(
       <div class="container">
         <div class="header">
           <h1>🔐 Recuperação de Senha</h1>
-          <p>Bússola Numerológica 2026</p>
+          <p>Portal Numerologia 2026</p>
         </div>
         
         <div class="content">
@@ -803,7 +803,7 @@ export function generatePasswordResetEmail(
         </div>
         
         <div class="footer">
-          <p>© 2026 Bússola Numerológica. Todos os direitos reservados.</p>
+          <p>© 2026 Portal Numerologia. Todos os direitos reservados.</p>
           <p>
             <a href="#" class="footer-link">Termos de Serviço</a> | 
             <a href="#" class="footer-link">Política de Privacidade</a>
@@ -832,7 +832,7 @@ export async function sendPasswordResetEmail(
 
   return sendEmail({
     to: email,
-    subject: `🔐 Recuperação de Senha - Bússola Numerológica 2026`,
+    subject: `🔐 Recuperação de Senha - Portal Numerologia 2026`,
     html
   });
 }

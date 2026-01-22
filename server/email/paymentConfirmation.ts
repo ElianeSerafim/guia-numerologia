@@ -76,7 +76,7 @@ export async function sendPaymentConfirmationEmail(params: PaymentConfirmationEm
               <p style="word-break: break-all; background: #f0f0f0; padding: 10px; border-radius: 4px; font-size: 12px;">${accessLink}</p>
 
               <p>Se tiver qualquer dúvida, entre em contato conosco.</p>
-              <p>Namastê,<br>Equipe Bússola Numerológica</p>
+              <p>Namastê,<br>Equipe Portal Numerologia</p>
             </div>
             <div class="footer">
               <p>Este é um email automático. Por favor, não responda.</p>
