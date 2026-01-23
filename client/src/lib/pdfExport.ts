@@ -26,12 +26,12 @@ export async function exportMapToPDF(
   } = options;
 
   try {
-    // Criar container temporário para renderizar o PDF
+    // Criar container temporário para renderizar o PDF com design neon premium
     const container = document.createElement('div');
     container.style.position = 'absolute';
     container.style.left = '-9999px';
     container.style.width = '1200px';
-    container.style.backgroundColor = 'white';
+    container.style.backgroundColor = '#07131B';
     container.style.padding = '40px';
     container.style.fontFamily = 'Inter, sans-serif';
     
@@ -43,7 +43,7 @@ export async function exportMapToPDF(
       scale: quality,
       useCORS: true,
       logging: false,
-      backgroundColor: '#ffffff',
+      backgroundColor: '#07131B',
     });
 
     // Remover container temporário
@@ -63,9 +63,20 @@ export async function exportMapToPDF(
     const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
     let yPosition = 10;
+    let pageCount = 1;
 
-    // Adicionar imagem ao PDF
+    // Adicionar primeira página
     pdf.addImage(imgData, 'PNG', 10, yPosition, imgWidth, imgHeight);
+    
+    // Adicionar páginas adicionais se necessário
+    let heightLeft = imgHeight - pdfHeight;
+    while (heightLeft > 0) {
+      yPosition = heightLeft - imgHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', 10, yPosition, imgWidth, imgHeight);
+      heightLeft -= pdfHeight;
+      pageCount++;
+    }
 
     // Salvar PDF
     pdf.save(filename);
