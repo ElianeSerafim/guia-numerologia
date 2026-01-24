@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { NumerologyChart } from '@/types';
 import { ArrowLeft, Download, Printer, Loader2, Save, History, BookOpen } from 'lucide-react';
 import ChartDisplay from './ChartDisplay';
