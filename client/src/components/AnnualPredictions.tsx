@@ -221,14 +221,14 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
                   const ctNumber = chart.ciclosTrimestrais?.ano2026?.[`ct${trimestre}` as keyof typeof chart.ciclosTrimestrais.ano2026];
                   
-                  // Obter mês de realização correspondente ao trimestre
-                  const realizationMonths = chart.ciclosTrimestrais?.realizationMonths;
-                  let realizationMonth = '';
-                  if (realizationMonths) {
-                    if (trimestre === 1) realizationMonth = `Mês ${realizationMonths.r1Start}`;
-                    else if (trimestre === 2) realizationMonth = `Mês ${realizationMonths.r2Start}`;
-                    else if (trimestre === 3) realizationMonth = `Mês ${realizationMonths.r3Start}`;
-                    else if (trimestre === 4) realizationMonth = `Mês ${realizationMonths.r4Start}`;
+                  const trimestreMeses = chart.ciclosTrimestrais?.meses;
+                  let trimestreMonthsStr = '';
+                  if (trimestreMeses) {
+                    const mesesKey = `ct${trimestre}` as keyof typeof trimestreMeses;
+                    const meses = trimestreMeses[mesesKey];
+                    if (meses && Array.isArray(meses)) {
+                      trimestreMonthsStr = meses.join(', ');
+                    }
                   }
 
                   return (
@@ -243,9 +243,9 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                           <div className="inline-block bg-[#1A3A4A] rounded-lg px-3 py-1">
                             <p className="text-sm text-[#19E6FF] font-semibold">Vibração: {ctNumber}</p>
                           </div>
-                          {realizationMonth && (
+                          {trimestreMonthsStr && (
                             <div className="inline-block bg-[#5A3A7A] rounded-lg px-3 py-1">
-                              <p className="text-sm text-[#FFD700] font-semibold">📅 {realizationMonth}</p>
+                              <p className="text-sm text-[#FFD700] font-semibold">📅 {trimestreMonthsStr}</p>
                             </div>
                           )}
                         </div>

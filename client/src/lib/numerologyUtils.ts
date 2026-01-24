@@ -70,6 +70,8 @@ export const calculateNameNumber = (name: string, filter: 'all' | 'vowels' | 'co
  * - Ano: 1966 → 1+9+6+6 = 22 → 2+2 = 4
  * - CD: 2 + 5 + 4 = 11
  */
+import { calcularMesesTrimestrais } from './trimestreMeses';
+
 export const calculateChart = (fullName: string, birthDate: string): any => {
   // Aceitar ambos os formatos: YYYY-MM-DD e DD/MM/YYYY
   let year: number, month: number, day: number;
@@ -229,6 +231,7 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
     ciclosTrimestrais: {
       atual: { ct1, ct2, ct3, ct4 },
       ano2026: { ct1: ct1_2026, ct2: ct2_2026, ct3: ct3_2026, ct4: ct4_2026 },
+      meses: calcularMesesTrimestrais(month),
       realizationMonths: {
         r1Start: month,
         r2Start: month + 9,
