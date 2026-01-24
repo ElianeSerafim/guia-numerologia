@@ -5,8 +5,13 @@
 
 import axios from 'axios';
 
-const PAGSEGURO_API_URL = 'https://api.pagseguro.com/orders';
-const PAGSEGURO_TOKEN = process.env.PAGSEGURO_TOKEN || '909061';
+const PAGSEGURO_API_URL = process.env.PAGSEGURO_API_URL || 'https://api.pagseguro.com/orders';
+const PAGSEGURO_TOKEN = process.env.PAGSEGURO_TOKEN;
+const APP_URL = process.env.APP_URL || 'https://seu-dominio.manus.space';
+
+if (!PAGSEGURO_TOKEN) {
+  console.warn('[PagSeguro] Token não configurado. Configure PAGSEGURO_TOKEN nas variáveis de ambiente.');
+}
 
 interface PaymentRequest {
   email: string;
@@ -76,9 +81,13 @@ export async function createPaymentOrder(paymentData: PaymentRequest): Promise<P
         },
       ],
       notification_urls: [
-        `${process.env.APP_URL}/api/webhooks/pagseguro`,
+        `${APP_URL}/api/webhooks/pagseguro`,
       ],
     };
+
+    if (!PAGSEGURO_TOKEN) {
+      throw new Error('PAGSEGURO_TOKEN não configurado. Verifique as variáveis de ambiente.');
+    }
 
     const response = await axios.post(PAGSEGURO_API_URL, orderData, {
       headers: {
@@ -145,6 +154,10 @@ export async function handleWebhookNotification(payload: any): Promise<void> {
  */
 export async function getPaymentStatus(orderId: string): Promise<PaymentResponse> {
   try {
+    if (!PAGSEGURO_TOKEN) {
+      throw new Error('PAGSEGURO_TOKEN não configurado. Verifique as variáveis de ambiente.');
+    }
+
     const response = await axios.get(`${PAGSEGURO_API_URL}/${orderId}`, {
       headers: {
         'Authorization': `Bearer ${PAGSEGURO_TOKEN}`,
