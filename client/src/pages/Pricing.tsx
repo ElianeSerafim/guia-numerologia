@@ -5,6 +5,7 @@ import { useSalesManagement } from '@/hooks/useSalesManagement';
 import { useLocation } from 'wouter';
 import { sendPurchaseConfirmation } from '@/lib/emailService';
 import CheckoutPagSeguro from '@/components/CheckoutPagSeguro';
+import { Zap, Check, Star } from 'lucide-react';
 
 /**
  * Pricing Page - Página de Vendas
