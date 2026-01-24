@@ -43,6 +43,11 @@ export default function Report({ chart, onReset }: ReportProps) {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [isGeneratingEbook, setIsGeneratingEbook] = useState(false);
   const [notes, setNotes] = useState('');
+  const predictionsRef = useRef<HTMLDivElement>(null);
+
+  const scrollToPredictions = () => {
+    predictionsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   const handleExportPDF = async () => {
     if (!user) return;

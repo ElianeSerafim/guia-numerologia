@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { getAnnualPrediction, getTrimestreInterpretation, getYearDescription } from '@/lib/annualPredictions';
 import { Calendar, TrendingUp, AlertCircle, Lightbulb, Target, Zap, Shield, Filter, X } from 'lucide-react';
 import MonthlyPrediction from './MonthlyPrediction';
+import type { NumerologyChart } from '@/types';
 
 interface AnnualPredictionsProps {
   chart: NumerologyChart;
