@@ -14,6 +14,7 @@ export default function Footer() {
 
   const footerLinks = [
     { label: 'Início', href: '/app' },
+    { label: 'A Numerológa', href: '/about' },
     { label: 'FAQ', href: '/faq' },
     { label: 'Planos', href: '/pricing' },
     { label: 'Histórico', href: '/history' },
