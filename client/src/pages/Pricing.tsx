@@ -295,7 +295,45 @@ export default function Pricing() {
       {showCheckout && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-8 space-y-6 max-h-[90vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-slate-900">Confirmar Dados</h2>
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">Resumo do Plano</h2>
+              <p className="text-sm text-slate-600">Revise os detalhes antes de continuar</p>
+            </div>
+            
+            {/* Resumo do Plano */}
+            <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-6 text-white space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-semibold text-[#19E6FF]">Plano Selecionado</span>
+                <span className="text-2xl font-bold text-[#00FFFF]">
+                  {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].name}
+                </span>
+              </div>
+              
+              <div className="border-t border-[#1A3A4A] pt-4 space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-[#19E6FF]">Mapas Inclusos:</span>
+                  <span className="font-bold text-white">{selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].mapsLimit}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-[#19E6FF]">Preço:</span>
+                  <span className="text-xl font-bold text-[#00FFFF]">
+                    R$ {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].price.toFixed(2).replace('.', ',')}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="border-t border-[#1A3A4A] pt-4">
+                <p className="text-xs text-[#19E6FF] mb-2 font-semibold">Recursos Inclusos:</p>
+                <ul className="space-y-1">
+                  {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].features.map((feature, idx) => (
+                    <li key={idx} className="text-xs text-white flex items-start gap-2">
+                      <span className="text-[#00FFFF] mt-0.5">✓</span>
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
             
             <div className="space-y-4">
               <div>
@@ -322,16 +360,6 @@ export default function Pricing() {
                   placeholder="seu@email.com"
                   className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
                 />
-              </div>
-
-              <div className="bg-indigo-50 rounded-lg p-4">
-                <p className="text-sm text-slate-600 mb-2">Plano Selecionado:</p>
-                <p className="font-bold text-slate-900">
-                  {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].name}
-                </p>
-                <p className="text-lg font-bold text-cyan-400 mt-1">
-                  R$ {selectedPlan && PLANS[selectedPlan as keyof typeof PLANS].price.toFixed(2).replace('.', ',')}
-                </p>
               </div>
 
               {/* Cupom de Desconto */}
