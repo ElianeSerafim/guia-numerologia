@@ -7,7 +7,8 @@ import FAQ from "@/pages/FAQ";
 import History from "@/pages/History";
 import AdminDashboard from "@/pages/AdminDashboard";
 import Compatibility from "@/pages/Compatibility";
-import About from "@/pages/About";
+import About from "./pages/About";
+import CheckoutPagSeguro from "./pages/CheckoutPagSeguro";
 import DashboardSelector from "./pages/DashboardSelector";
 import ForgotPassword from "./pages/ForgotPassword";
 import { Route, Switch } from "wouter";
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/dashboard-selector" component={DashboardSelector} />
       <Route path="/pricing" component={Pricing} />
+      <Route path="/checkout-pagseguro" component={CheckoutPagSeguro} />
       <Route path="/faq" component={FAQ} />
       <Route path="/history" component={History} />
       <Route path="/compatibility" component={Compatibility} />

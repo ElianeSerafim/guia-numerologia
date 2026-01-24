@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Check, Zap, Crown, Star, ArrowRight, MessageCircle } from 'lucide-react';
 import { PLANS } from '@/types/payment';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
 import { useSalesManagement } from '@/hooks/useSalesManagement';
 import { useLocation } from 'wouter';
 import { sendPurchaseConfirmation } from '@/lib/emailService';
+import CheckoutPagSeguro from '@/components/CheckoutPagSeguro';
 
 /**
  * Pricing Page - Página de Vendas
@@ -28,6 +28,8 @@ export default function Pricing() {
   const [couponError, setCouponError] = useState('');
   const [showCheckout, setShowCheckout] = useState(false);
   const [error, setError] = useState('');
+  const [paymentMethod, setPaymentMethod] = useState<'whatsapp' | 'pagseguro'>('whatsapp');
+  const [showPagSeguroCheckout, setShowPagSeguroCheckout] = useState(false);
 
   const handleSelectPlan = (planId: string) => {
     setSelectedPlan(planId);

@@ -414,6 +414,71 @@ export const appRouter = router({
   }),
 
   /**
+   * Payment Router - PagSeguro Integration
+   */
+  payment: router({
+    // Initiate payment with PagSeguro
+    initiatePagSeguro: publicProcedure
+      .input(z.object({
+        email: z.string().email(),
+        name: z.string().min(1),
+        planId: z.enum(['navegador', 'visionario', 'iluminado']),
+        planName: z.string(),
+        amount: z.number().positive(),
+        paymentMethod: z.enum(['pix', 'credit_card', 'boleto']),
+      }))
+      .mutation(async ({ input }) => {
+        try {
+          // Import PagSeguro functions
+          const { createPaymentOrder } = await import('./pagseguro');
+          
+          // Create payment order
+          const paymentResponse = await createPaymentOrder({
+            email: input.email,
+            name: input.name,
+            planId: input.planId,
+            planName: input.planName,
+            amount: input.amount,
+            paymentMethod: input.paymentMethod as 'pix' | 'credit_card' | 'boleto',
+          });
+          
+          // Extract payment link from response
+          const paymentLink = paymentResponse.links?.find(link => link.rel === 'PAYMENT')?.href;
+          
+          return {
+            success: true,
+            orderId: paymentResponse.id,
+            paymentLink: paymentLink || '',
+            status: paymentResponse.status,
+          };
+        } catch (error) {
+          console.error('Error initiating PagSeguro payment:', error);
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Failed to initiate payment',
+          });
+        }
+      }),
+
+    // Get payment status
+    getStatus: publicProcedure
+      .input(z.object({ orderId: z.string() }))
+      .query(async ({ input }) => {
+        try {
+          const { getPaymentStatus } = await import('./pagseguro');
+          const status = await getPaymentStatus(input.orderId);
+          return status;
+        } catch (error) {
+          console.error('Error fetching payment status:', error);
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Failed to fetch payment status',
+          });
+        }
+      }),
+  }),
+
+  /**
    * Map History Router
    */
   mapHistory: {
