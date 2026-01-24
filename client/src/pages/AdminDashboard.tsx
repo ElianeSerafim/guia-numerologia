@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '@/_core/hooks/useAuth';
 import { useLocation } from 'wouter';
 import { trpc } from '@/lib/trpc';
 import { usePaymentManagement } from '@/hooks/usePaymentManagement';
@@ -25,7 +26,8 @@ import AdminManagement from '@/components/AdminManagement';
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
-  const userEmail = localStorage.getItem('numerology_user_email');
+  const { user, loading } = useAuth();
+  const userEmail = user?.email;
   const { isAdmin, isSuperAdmin, admins, addAdmin, removeAdmin, toggleAdminStatus } = useAdminManagement(userEmail);
   
   const {
@@ -63,20 +65,26 @@ export default function AdminDashboard() {
 
   // Verificar autenticação (apenas admin)
   useEffect(() => {
-    const userEmail = localStorage.getItem('numerology_user_email');
-    console.log('[AdminDashboard] Acesso:', { checkingAdmin, adminStatus, queryError, userEmail });
+    console.log('[AdminDashboard] Acesso:', { loading, user, adminStatus, checkingAdmin });
 
-    if (checkingAdmin) return;
+    if (loading || checkingAdmin) return;
 
-    // Permitir acesso se for Eliane OU se for admin no banco
-    if (userEmail === 'eliane@artwebcreative.com.br' || adminStatus?.isAdmin) {
-      console.log('[AdminDashboard] Acesso permitido');
+    // Se não está autenticado, redirecionar para login
+    if (!user) {
+      console.log('[AdminDashboard] Não autenticado, redirecionando para login');
+      setLocation('/auth');
       return;
     }
 
-    console.log('[AdminDashboard] Acesso negado');
+    // Permitir acesso se for Eliane OU se for admin no banco
+    if (user.email === 'eliane@artwebcreative.com.br' || adminStatus?.isAdmin) {
+      console.log('[AdminDashboard] Acesso permitido para:', user.email);
+      return;
+    }
+
+    console.log('[AdminDashboard] Acesso negado para:', user.email);
     setLocation('/');
-  }, [checkingAdmin, adminStatus, queryError, setLocation]);
+  }, [loading, user, checkingAdmin, adminStatus, setLocation]);
 
   // Sincronizar newWhatsappLink quando config muda
   useEffect(() => {
@@ -191,9 +199,21 @@ export default function AdminDashboard() {
 
   const filteredCustomers = getFilteredCustomers();
 
+  // Mostrar loading enquanto verifica autenticação
+  if (loading || checkingAdmin) {
+    return (
+      <div className="min-h-screen bg-[#07131B] flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 rounded-full border-4 border-[#00FFFF] border-t-[#A040FF] animate-spin mx-auto mb-4"></div>
+          <p className="text-[#B8A8D8]">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
   // Permitir acesso se for super admin por email
-  const isSuperAdminByEmail = userEmail === 'eliane@artwebcreative.com.br';
-  console.log('AdminDashboard - isSuperAdminByEmail:', isSuperAdminByEmail, 'userEmail:', userEmail);
+  const isSuperAdminByEmail = user?.email === 'eliane@artwebcreative.com.br';
+  console.log('AdminDashboard - isSuperAdminByEmail:', isSuperAdminByEmail, 'userEmail:', user?.email);
   
   // Se não for super admin, mostrar página de acesso restrito com botão de voltar
   if (!isSuperAdminByEmail) {
