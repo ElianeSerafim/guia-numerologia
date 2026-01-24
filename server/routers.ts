@@ -479,6 +479,39 @@ export const appRouter = router({
   }),
 
   /**
+   * Order History Router - PagSeguro Orders
+   */
+  orders: router({
+    // Get order history by email (protected)
+    getByEmail: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (!ctx.user?.email) {
+          throw new TRPCError({ code: 'UNAUTHORIZED' });
+        }
+        return await db.getOrdersByEmail(ctx.user.email);
+      }),
+
+    // Get single order by ID (protected)
+    getById: protectedProcedure
+      .input(z.object({ orderId: z.string() }))
+      .query(async ({ input, ctx }) => {
+        if (!ctx.user?.email) {
+          throw new TRPCError({ code: 'UNAUTHORIZED' });
+        }
+        const order = await db.getOrderById(input.orderId);
+        if (!order || order.email !== ctx.user.email) {
+          throw new TRPCError({ code: 'FORBIDDEN' });
+        }
+        return order;
+      }),
+
+    // Get all orders (admin only)
+    getAll: adminProcedure.query(async () => {
+      return await db.getAllOrders();
+    }),
+  }),
+
+  /**
    * Map History Router
    */
   mapHistory: {

@@ -633,3 +633,91 @@ export async function deleteMapHistory(mapId: number): Promise<boolean> {
   await db.delete(mapHistory).where(eq(mapHistory.id, mapId));
   return true;
 }
+
+
+/**
+ * PagSeguro Orders Management
+ */
+import { pagSeguroOrders, PagSeguroOrder } from "../drizzle/schema";
+import { desc } from "drizzle-orm";
+
+export async function getOrdersByEmail(email: string): Promise<PagSeguroOrder[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(pagSeguroOrders)
+      .where(eq(pagSeguroOrders.email, email))
+      .orderBy(desc(pagSeguroOrders.createdAt));
+  } catch (error) {
+    console.error("[Database] Error getting orders by email:", error);
+    return [];
+  }
+}
+
+export async function getOrderById(orderId: string): Promise<PagSeguroOrder | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db
+      .select()
+      .from(pagSeguroOrders)
+      .where(eq(pagSeguroOrders.orderId, orderId))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error getting order by ID:", error);
+    return null;
+  }
+}
+
+export async function getAllOrders(): Promise<PagSeguroOrder[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(pagSeguroOrders)
+      .orderBy(desc(pagSeguroOrders.createdAt));
+  } catch (error) {
+    console.error("[Database] Error getting all orders:", error);
+    return [];
+  }
+}
+
+export async function getOrdersByStatus(status: string): Promise<PagSeguroOrder[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(pagSeguroOrders)
+      .where(eq(pagSeguroOrders.status, status as any))
+      .orderBy(desc(pagSeguroOrders.createdAt));
+  } catch (error) {
+    console.error("[Database] Error getting orders by status:", error);
+    return [];
+  }
+}
+
+export async function updateOrderStatus(orderId: string, status: 'pending' | 'confirmed' | 'failed' | 'refunded'): Promise<PagSeguroOrder | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db
+      .update(pagSeguroOrders)
+      .set({ status, updatedAt: new Date() })
+      .where(eq(pagSeguroOrders.orderId, orderId))
+      .returning();
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Error updating order status:", error);
+    return null;
+  }
+}

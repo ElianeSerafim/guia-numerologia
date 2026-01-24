@@ -5,6 +5,7 @@ import { useLocation } from 'wouter';
 import { Download, Trash2, LogOut, ArrowRight, Calendar, Zap, User, Loader2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import OrderHistory from '@/components/OrderHistory';
 
 export default function Profile() {
   const { user, logout, loading } = useAuth();
@@ -225,6 +226,9 @@ export default function Profile() {
               )}
             </CardContent>
           </Card>
+
+          {/* Order History */}
+          <OrderHistory />
 
           {/* Footer */}
           <div className="text-center text-sm text-slate-600">
