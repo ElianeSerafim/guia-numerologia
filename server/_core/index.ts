@@ -10,6 +10,7 @@ import { serveStatic, setupVite } from "./vite";
 import ebookRouter from "../routes/ebook";
 import favoritesRouter from "../routes/favorites";
 import webhookRouter from "../webhooks/infinitepay";
+import pagseguroRouter from "../webhooks/pagseguro";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -44,6 +45,8 @@ async function startServer() {
   app.use("/api/favorites", favoritesRouter);
   // Webhook routes
   app.use("/api/webhooks", webhookRouter);
+  // PagSeguro webhook routes
+  app.use("/api/webhooks/pagseguro", pagseguroRouter);
   // tRPC API
   app.use(
     "/api/trpc",
