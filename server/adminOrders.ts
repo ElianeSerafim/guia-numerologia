@@ -39,11 +39,12 @@ export const adminOrdersRouter = router({
       }
       
       // Update order status to refunded
-      const updated = await db.updateOrderStatus(input.orderId, 'refunded');
+      const updated = await db.updatePagSeguroOrder(input.orderId, { status: 'refunded' });
       
       // Send refund email
       const { sendRefundEmail } = await import('./email/emailService');
       await sendRefundEmail(order.email, {
+        email: order.email,
         orderId: order.orderId,
         amount: order.amount,
         plan: order.plan,
@@ -55,7 +56,7 @@ export const adminOrdersRouter = router({
 
   // Get payment statistics (admin only)
   getStatistics: adminProcedure.query(async () => {
-    const orders = await db.getAllOrders();
+    const orders = await db.getAllPagSeguroOrders();
     
     const stats = {
       totalOrders: orders.length,
@@ -96,7 +97,7 @@ export const adminOrdersRouter = router({
   getTopCustomers: adminProcedure
     .input(z.object({ limit: z.number().default(10) }))
     .query(async ({ input }) => {
-      const orders = await db.getAllOrders();
+      const orders = await db.getAllPagSeguroOrders();
       
       const customerSpending = orders.reduce((acc, order) => {
         if (order.status === 'confirmed') {
@@ -124,7 +125,7 @@ export const adminOrdersRouter = router({
   exportOrders: adminProcedure
     .input(z.object({ status: z.enum(['confirmed', 'pending', 'failed', 'refunded']).optional() }))
     .query(async ({ input }) => {
-      let orders = await db.getAllOrders();
+      let orders = await db.getAllPagSeguroOrders();
       
       if (input.status) {
         orders = orders.filter(o => o.status === input.status);

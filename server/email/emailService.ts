@@ -299,3 +299,76 @@ export async function testSMTPConnection(): Promise<{ success: boolean; error?: 
     };
   }
 }
+
+/**
+ * Enviar email de reembolso
+ */
+export interface RefundEmailParams {
+  email: string;
+  orderId: string;
+  amount: string;
+  plan: string;
+  reason?: string;
+}
+
+export async function sendRefundEmail(email: string, params: RefundEmailParams): Promise<boolean> {
+  const transporter = getTransporter();
+
+  if (!transporter) {
+    console.log(`[Email] Refund email sent to: ${email} (simulated mode)`);
+    return true;
+  }
+
+  try {
+    const htmlContent = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0;">
+          <h1 style="margin: 0; font-size: 24px;">Reembolso Processado</h1>
+        </div>
+        
+        <div style="background: #f9fafb; padding: 30px; border-radius: 0 0 8px 8px;">
+          <p style="color: #374151; font-size: 16px; margin-bottom: 20px;">
+            Olá,
+          </p>
+          
+          <p style="color: #374151; font-size: 16px; margin-bottom: 20px;">
+            Seu reembolso foi processado com sucesso. Aqui estão os detalhes:
+          </p>
+          
+          <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+            <p style="color: #6b7280; font-size: 14px; margin: 0 0 10px 0;">
+              <strong>ID do Pedido:</strong> ${params.orderId}
+            </p>
+            <p style="color: #6b7280; font-size: 14px; margin: 0 0 10px 0;">
+              <strong>Plano:</strong> ${params.plan}
+            </p>
+            <p style="color: #6b7280; font-size: 14px; margin: 0 0 10px 0;">
+              <strong>Valor Reembolsado:</strong> R$ ${params.amount}
+            </p>
+          </div>
+          
+          <p style="color: #374151; font-size: 16px; margin-bottom: 20px;">
+            O reembolso será creditado em sua conta em até 5-7 dias úteis.
+          </p>
+          
+          <p style="color: #6b7280; font-size: 14px; margin-top: 30px; border-top: 1px solid #e5e7eb; padding-top: 20px;">
+            © 2026 Bússola Numerológica. Todos os direitos reservados.
+          </p>
+        </div>
+      </div>
+    `;
+    
+    const info = await transporter.sendMail({
+      from: SMTP_FROM_EMAIL,
+      to: email,
+      subject: `Reembolso Processado - Pedido ${params.orderId}`,
+      html: htmlContent,
+    });
+    
+    console.log(`[Email] Refund email sent to ${email}:`, info.messageId);
+    return true;
+  } catch (error) {
+    console.error(`[Email] Failed to send refund email to ${email}:`, error);
+    return false;
+  }
+}

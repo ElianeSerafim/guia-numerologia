@@ -14,7 +14,7 @@ interface OrderDetails {
   orderId: string;
   email: string;
   name: string;
-  planId: 'navegador' | 'visionario' | 'iluminado';
+  planId: 'navigator' | 'visionary' | 'illuminated';
   planName: string;
   amount: number;
   paymentMethod: string;
@@ -33,7 +33,7 @@ export default function PaymentSuccess() {
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get('orderId');
     const email = params.get('email');
-    const planId = params.get('plan') as 'navegador' | 'visionario' | 'iluminado';
+    const planId = params.get('plan') as 'navigator' | 'visionary' | 'illuminated';
 
     if (orderId && email && planId) {
       // Get stored order details from localStorage
@@ -252,7 +252,7 @@ Obrigado por escolher a Bússola Numerológica!
             <div className="bg-white rounded-lg p-4 border border-slate-200">
               <p className="text-sm text-slate-600 mb-3 font-semibold">Recursos Inclusos:</p>
               <ul className="space-y-2">
-                {PLANS[orderDetails.planId].features.map((feature, idx) => (
+                {PLANS[orderDetails.planId].features.map((feature: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2 text-slate-700">
                     <span className="text-green-600 font-bold mt-0.5">✓</span>
                     <span>{feature}</span>

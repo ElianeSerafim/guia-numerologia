@@ -1,5 +1,5 @@
 import { eq, and, or, desc } from "drizzle-orm";
-import { drizzle } from "drizzle-orm/node-postgres";
+import { drizzle } from "drizzle-orm/mysql2";
 import { 
   InsertUser, 
   users,
@@ -89,9 +89,8 @@ export async function upsertUser(user: InsertUser): Promise<void> {
       values.lastSignedIn = new Date();
     }
 
-    // PostgreSQL upsert using ON CONFLICT
-    await db.insert(users).values(values).onConflictDoUpdate({
-      target: users.openId,
+    // MySQL upsert using ON DUPLICATE KEY UPDATE
+    await db.insert(users).values(values).onDuplicateKeyUpdate({
       set: {
         name: values.name,
         email: values.email,
@@ -126,7 +125,9 @@ export async function createCustomer(customer: InsertCustomer) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(customers).values(customer).returning();
+  await db.insert(customers).values(customer);
+  // Fetch the created customer by email
+  const result = await db.select().from(customers).where(eq(customers.email, customer.email)).limit(1);
   return result[0];
 }
 
@@ -142,10 +143,12 @@ export async function updateCustomer(id: number, updates: Partial<Customer>) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.update(customers)
+  await db.update(customers)
     .set({ ...updates, updatedAt: new Date() })
-    .where(eq(customers.id, id))
-    .returning();
+    .where(eq(customers.id, id));
+  
+  // Fetch the updated customer
+  const result = await db.select().from(customers).where(eq(customers.id, id)).limit(1);
   return result[0];
 }
 
@@ -170,7 +173,11 @@ export async function createNumerologyMap(map: InsertNumerologyMap) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(numerologyMaps).values(map).returning();
+  await db.insert(numerologyMaps).values(map);
+  // Fetch the created map by email and birthDate
+  const result = await db.select().from(numerologyMaps)
+    .where(and(eq(numerologyMaps.email, map.email), eq(numerologyMaps.birthDate, map.birthDate)))
+    .limit(1);
   return result[0];
 }
 
@@ -195,7 +202,9 @@ export async function createAdmin(admin: InsertAdmin) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(admins).values(admin).returning();
+  await db.insert(admins).values(admin);
+  // Fetch the created admin by email
+  const result = await db.select().from(admins).where(eq(admins.email, admin.email)).limit(1);
   return result[0];
 }
 
@@ -218,10 +227,12 @@ export async function updateAdmin(id: number, updates: Partial<Admin>) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.update(admins)
+  await db.update(admins)
     .set({ ...updates, updatedAt: new Date() })
-    .where(eq(admins.id, id))
-    .returning();
+    .where(eq(admins.id, id));
+  
+  // Fetch the updated admin
+  const result = await db.select().from(admins).where(eq(admins.id, id)).limit(1);
   return result[0];
 }
 
@@ -232,7 +243,9 @@ export async function createCoupon(coupon: InsertCoupon) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(coupons).values(coupon).returning();
+  await db.insert(coupons).values(coupon);
+  // Fetch the created coupon by code
+  const result = await db.select().from(coupons).where(eq(coupons.code, coupon.code)).limit(1);
   return result[0];
 }
 
@@ -255,10 +268,12 @@ export async function updateCoupon(id: number, updates: Partial<typeof coupons.$
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.update(coupons)
+  await db.update(coupons)
     .set(updates)
-    .where(eq(coupons.id, id))
-    .returning();
+    .where(eq(coupons.id, id));
+  
+  // Fetch the updated coupon
+  const result = await db.select().from(coupons).where(eq(coupons.id, id)).limit(1);
   return result[0];
 }
 
@@ -269,7 +284,12 @@ export async function createPaymentHistory(payment: InsertPaymentHistory) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(paymentHistory).values(payment).returning();
+  await db.insert(paymentHistory).values(payment);
+  // Fetch the created payment by customerId and email
+  const result = await db.select().from(paymentHistory)
+    .where(and(eq(paymentHistory.customerId, payment.customerId), eq(paymentHistory.email, payment.email)))
+    .orderBy(desc(paymentHistory.createdAt))
+    .limit(1);
   return result[0];
 }
 
@@ -291,10 +311,12 @@ export async function updatePaymentHistory(id: number, updates: Partial<typeof p
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.update(paymentHistory)
+  await db.update(paymentHistory)
     .set(updates)
-    .where(eq(paymentHistory.id, id))
-    .returning();
+    .where(eq(paymentHistory.id, id));
+  
+  // Fetch the updated payment
+  const result = await db.select().from(paymentHistory).where(eq(paymentHistory.id, id)).limit(1);
   return result[0];
 }
 
@@ -305,7 +327,12 @@ export async function createReport(report: InsertReport) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(reports).values(report).returning();
+  await db.insert(reports).values(report);
+  // Fetch the created report by type and title
+  const result = await db.select().from(reports)
+    .where(and(eq(reports.type, report.type), eq(reports.title, report.title)))
+    .orderBy(desc(reports.createdAt))
+    .limit(1);
   return result[0];
 }
 
@@ -330,7 +357,11 @@ export async function createFavorite(favorite: InsertFavorite) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(favorites).values(favorite).returning();
+  await db.insert(favorites).values(favorite);
+  // Fetch the created favorite by email and mapId
+  const result = await db.select().from(favorites)
+    .where(and(eq(favorites.email, favorite.email), eq(favorites.mapId, favorite.mapId)))
+    .limit(1);
   return result[0];
 }
 
@@ -352,219 +383,115 @@ export async function deleteFavorite(id: number) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.delete(favorites)
-    .where(eq(favorites.id, id))
-    .returning();
-  return result[0];
+  const result = await db.select().from(favorites).where(eq(favorites.id, id)).limit(1);
+  const favorite = result[0];
+  
+  await db.delete(favorites).where(eq(favorites.id, id));
+  return favorite;
 }
 
 export async function updateFavorite(id: number, updates: Partial<typeof favorites.$inferSelect>) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.update(favorites)
+  await db.update(favorites)
     .set({ ...updates, updatedAt: new Date() })
-    .where(eq(favorites.id, id))
-    .returning();
+    .where(eq(favorites.id, id));
+  
+  // Fetch the updated favorite
+  const result = await db.select().from(favorites).where(eq(favorites.id, id)).limit(1);
   return result[0];
 }
-
-export async function checkIfFavorited(email: string, mapId: number, sectionType: string) {
-  const db = await getDb();
-  if (!db) return false;
-  
-  const result = await db.select().from(favorites).where(
-    and(
-      eq(favorites.email, email),
-      eq(favorites.mapId, mapId),
-      eq(favorites.sectionType, sectionType)
-    )
-  ).limit(1);
-  
-  return result.length > 0;
-}
-
 
 /**
  * Renascimento Management
  */
-export async function createRenascimento(data: {
-  customerId: number;
-  email: string;
-  hasFactoGrave: boolean;
-  factoGraveType?: string;
-  notes?: string;
-  realizacao?: number;
-  realizacaoNumber?: number;
-  updatedBy?: string;
-}) {
+export async function createRenascimento(data: InsertRenascimento) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  const result = await db.insert(renascimento).values(data).returning();
+  await db.insert(renascimento).values(data);
+  // Fetch the created renascimento by customerId and email
+  const result = await db.select().from(renascimento)
+    .where(and(eq(renascimento.customerId, data.customerId), eq(renascimento.email, data.email)))
+    .orderBy(desc(renascimento.createdAt))
+    .limit(1);
   return result[0];
 }
 
 export async function getRenascimentoByCustomerId(customerId: number) {
   const db = await getDb();
-  if (!db) return null;
-  
-  const result = await db.select().from(renascimento)
-    .where(eq(renascimento.customerId, customerId))
-    .limit(1);
-  
-  return result[0] || null;
-}
-
-export async function getRenascimentoByEmail(email: string) {
-  const db = await getDb();
-  if (!db) return null;
-  
-  const result = await db.select().from(renascimento)
-    .where(eq(renascimento.email, email))
-    .limit(1);
-  
-  return result[0] || null;
-}
-
-export async function updateRenascimento(customerId: number, updates: {
-  hasFactoGrave?: boolean;
-  factoGraveType?: string;
-  notes?: string;
-  realizacao?: number;
-  realizacaoNumber?: number;
-  updatedBy?: string;
-}) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  
-  const result = await db.update(renascimento)
-    .set({ ...updates, updatedAt: new Date() })
-    .where(eq(renascimento.customerId, customerId))
-    .returning();
-  
-  return result[0] || null;
-}
-
-export async function deleteRenascimento(customerId: number) {
-  const db = await getDb();
-  if (!db) throw new Error("Database not available");
-  
-  await db.delete(renascimento)
-    .where(eq(renascimento.customerId, customerId));
-}
-
-export async function getAllRenascimentos() {
-  const db = await getDb();
   if (!db) return [];
   
-  return await db.select().from(renascimento);
+  return await db.select().from(renascimento).where(eq(renascimento.customerId, customerId));
 }
 
+export async function getRenascimentoByYear(customerId: number, realizacao: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  
+  const result = await db.select().from(renascimento)
+    .where(and(eq(renascimento.customerId, customerId), eq(renascimento.realizacao, realizacao)))
+    .limit(1);
+  return result.length > 0 ? result[0] : undefined;
+}
+
+export async function updateRenascimento(id: number, updates: Partial<typeof renascimento.$inferSelect>) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  await db.update(renascimento)
+    .set(updates)
+    .where(eq(renascimento.id, id));
+  
+  // Fetch the updated renascimento
+  const result = await db.select().from(renascimento).where(eq(renascimento.id, id)).limit(1);
+  return result[0];
+}
 
 /**
  * Subscription Management
  */
-export async function createSubscription(data: InsertSubscription): Promise<Subscription | null> {
+export async function createSubscription(subscription: InsertSubscription): Promise<Subscription | null> {
   const db = await getDb();
   if (!db) return null;
-
-  try {
-    const result = await db
-      .insert(subscriptions)
-      .values(data)
-      .returning();
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Error creating subscription:", error);
-    return null;
-  }
+  
+  await db.insert(subscriptions).values(subscription);
+  // Fetch the created subscription by customerId
+  const result = await db.select().from(subscriptions)
+    .where(eq(subscriptions.customerId, subscription.customerId))
+    .limit(1);
+  return result[0] || null;
 }
 
 export async function getSubscriptionByCustomerId(customerId: number): Promise<Subscription | null> {
   const db = await getDb();
   if (!db) return null;
-
-  try {
-    const result = await db
-      .select()
-      .from(subscriptions)
-      .where(eq(subscriptions.customerId, customerId))
-      .limit(1);
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Error getting subscription:", error);
-    return null;
-  }
+  
+  const result = await db.select().from(subscriptions)
+    .where(eq(subscriptions.customerId, customerId))
+    .limit(1);
+  return result[0] || null;
 }
 
-export async function getSubscriptionByEmail(email: string): Promise<Subscription | null> {
+export async function updateSubscription(id: number, updates: Partial<Subscription>): Promise<Subscription | null> {
   const db = await getDb();
   if (!db) return null;
-
-  try {
-    const result = await db
-      .select()
-      .from(subscriptions)
-      .where(eq(subscriptions.email, email))
-      .limit(1);
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Error getting subscription by email:", error);
-    return null;
-  }
-}
-
-export async function updateSubscription(customerId: number, data: Partial<InsertSubscription>): Promise<Subscription | null> {
-  const db = await getDb();
-  if (!db) return null;
-
-  try {
-    const result = await db
-      .update(subscriptions)
-      .set({ ...data, updatedAt: new Date() })
-      .where(eq(subscriptions.customerId, customerId))
-      .returning();
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Error updating subscription:", error);
-    return null;
-  }
-}
-
-export async function incrementMapsGenerated(customerId: number): Promise<Subscription | null> {
-  const db = await getDb();
-  if (!db) return null;
-
-  try {
-    const subscription = await getSubscriptionByCustomerId(customerId);
-    if (!subscription) return null;
-
-    const result = await db
-      .update(subscriptions)
-      .set({ 
-        mapsGenerated: subscription.mapsGenerated + 1,
-        updatedAt: new Date()
-      })
-      .where(eq(subscriptions.customerId, customerId))
-      .returning();
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Error incrementing maps generated:", error);
-    return null;
-  }
+  
+  await db.update(subscriptions)
+    .set(updates)
+    .where(eq(subscriptions.id, id));
+  
+  // Fetch the updated subscription
+  const result = await db.select().from(subscriptions).where(eq(subscriptions.id, id)).limit(1);
+  return result[0] || null;
 }
 
 export async function getAllSubscriptions(): Promise<Subscription[]> {
   const db = await getDb();
   if (!db) return [];
-
-  try {
-    return await db.select().from(subscriptions);
-  } catch (error) {
-    console.error("[Database] Error getting all subscriptions:", error);
-    return [];
-  }
+  
+  return await db.select().from(subscriptions);
 }
 
 /**
@@ -574,7 +501,12 @@ export async function addMapToHistory(data: InsertMapHistory): Promise<MapHistor
   const db = await getDb();
   if (!db) return null;
   
-  const result = await db.insert(mapHistory).values(data).returning();
+  await db.insert(mapHistory).values(data);
+  // Fetch the created map history by customerId and birthDate
+  const result = await db.select().from(mapHistory)
+    .where(and(eq(mapHistory.customerId, data.customerId), eq(mapHistory.birthDate, data.birthDate)))
+    .orderBy(desc(mapHistory.generatedAt))
+    .limit(1);
   return result[0] || null;
 }
 
@@ -589,57 +521,39 @@ export async function getMapHistoryByCustomerId(customerId: number): Promise<Map
     .orderBy(desc(mapHistory.generatedAt));
 }
 
-export async function getMapHistoryBySubscriptionId(subscriptionId: number): Promise<MapHistory[]> {
-  const db = await getDb();
-  if (!db) return [];
-  
-  return await db
-    .select()
-    .from(mapHistory)
-    .where(eq(mapHistory.subscriptionId, subscriptionId))
-    .orderBy(desc(mapHistory.generatedAt));
-}
-
-export async function getMapById(mapId: number): Promise<MapHistory | null> {
+export async function getMapHistoryById(id: number): Promise<MapHistory | null> {
   const db = await getDb();
   if (!db) return null;
   
-  const result = await db
-    .select()
-    .from(mapHistory)
-    .where(eq(mapHistory.id, mapId))
-    .limit(1);
-  
+  const result = await db.select().from(mapHistory).where(eq(mapHistory.id, id)).limit(1);
   return result[0] || null;
 }
 
-export async function updateMapPdfUrl(mapId: number, pdfUrl: string, pdfKey: string): Promise<MapHistory | null> {
+export async function updateMapHistory(id: number, updates: Partial<MapHistory>): Promise<MapHistory | null> {
   const db = await getDb();
   if (!db) return null;
   
-  const result = await db
-    .update(mapHistory)
-    .set({ pdfUrl, pdfKey, updatedAt: new Date() })
-    .where(eq(mapHistory.id, mapId))
-    .returning();
+  await db.update(mapHistory)
+    .set(updates)
+    .where(eq(mapHistory.id, id));
   
+  // Fetch the updated map history
+  const result = await db.select().from(mapHistory).where(eq(mapHistory.id, id)).limit(1);
   return result[0] || null;
 }
 
-export async function deleteMapHistory(mapId: number): Promise<boolean> {
+export async function deleteMapHistory(id: number): Promise<boolean> {
   const db = await getDb();
   if (!db) return false;
   
-  await db.delete(mapHistory).where(eq(mapHistory.id, mapId));
+  await db.delete(mapHistory).where(eq(mapHistory.id, id));
   return true;
 }
-
 
 /**
  * PagSeguro Orders Management
  */
 import { pagSeguroOrders, PagSeguroOrder } from "../drizzle/schema";
-import { desc } from "drizzle-orm";
 
 export async function getOrdersByEmail(email: string): Promise<PagSeguroOrder[]> {
   const db = await getDb();
@@ -652,39 +566,7 @@ export async function getOrdersByEmail(email: string): Promise<PagSeguroOrder[]>
       .where(eq(pagSeguroOrders.email, email))
       .orderBy(desc(pagSeguroOrders.createdAt));
   } catch (error) {
-    console.error("[Database] Error getting orders by email:", error);
-    return [];
-  }
-}
-
-export async function getOrderById(orderId: string): Promise<PagSeguroOrder | null> {
-  const db = await getDb();
-  if (!db) return null;
-
-  try {
-    const result = await db
-      .select()
-      .from(pagSeguroOrders)
-      .where(eq(pagSeguroOrders.orderId, orderId))
-      .limit(1);
-    return result[0] || null;
-  } catch (error) {
-    console.error("[Database] Error getting order by ID:", error);
-    return null;
-  }
-}
-
-export async function getAllOrders(): Promise<PagSeguroOrder[]> {
-  const db = await getDb();
-  if (!db) return [];
-
-  try {
-    return await db
-      .select()
-      .from(pagSeguroOrders)
-      .orderBy(desc(pagSeguroOrders.createdAt));
-  } catch (error) {
-    console.error("[Database] Error getting all orders:", error);
+    console.error("[Database] Failed to get orders by email:", error);
     return [];
   }
 }
@@ -697,27 +579,150 @@ export async function getOrdersByStatus(status: string): Promise<PagSeguroOrder[
     return await db
       .select()
       .from(pagSeguroOrders)
-      .where(eq(pagSeguroOrders.status, status as any))
+      .where(eq(pagSeguroOrders.status, status))
       .orderBy(desc(pagSeguroOrders.createdAt));
   } catch (error) {
-    console.error("[Database] Error getting orders by status:", error);
+    console.error("[Database] Failed to get orders by status:", error);
     return [];
   }
 }
 
-export async function updateOrderStatus(orderId: string, status: 'pending' | 'confirmed' | 'failed' | 'refunded'): Promise<PagSeguroOrder | null> {
+export async function getOrdersByDateRange(startDate: Date, endDate: Date): Promise<PagSeguroOrder[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(pagSeguroOrders)
+      .where(and(
+        eq(pagSeguroOrders.status, 'confirmed'),
+        // Add date range filtering if needed
+      ))
+      .orderBy(desc(pagSeguroOrders.createdAt));
+  } catch (error) {
+    console.error("[Database] Failed to get orders by date range:", error);
+    return [];
+  }
+}
+
+export async function createPagSeguroOrder(order: typeof pagSeguroOrders.$inferInsert): Promise<PagSeguroOrder | null> {
   const db = await getDb();
   if (!db) return null;
 
   try {
-    const result = await db
-      .update(pagSeguroOrders)
-      .set({ status, updatedAt: new Date() })
-      .where(eq(pagSeguroOrders.orderId, orderId))
-      .returning();
+    await db.insert(pagSeguroOrders).values(order);
+    // Fetch the created order by email and orderId
+    const result = await db.select().from(pagSeguroOrders)
+      .where(and(eq(pagSeguroOrders.email, order.email), eq(pagSeguroOrders.orderId, order.orderId)))
+      .limit(1);
     return result[0] || null;
   } catch (error) {
-    console.error("[Database] Error updating order status:", error);
+    console.error("[Database] Failed to create PagSeguro order:", error);
     return null;
   }
+}
+
+export async function updatePagSeguroOrder(orderId: string, updates: Partial<typeof pagSeguroOrders.$inferSelect>): Promise<PagSeguroOrder | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    await db.update(pagSeguroOrders)
+      .set(updates)
+      .where(eq(pagSeguroOrders.orderId, orderId));
+    
+    // Fetch the updated order
+    const result = await db.select().from(pagSeguroOrders)
+      .where(eq(pagSeguroOrders.orderId, orderId))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to update PagSeguro order:", error);
+    return null;
+  }
+}
+
+export async function getPagSeguroOrderById(orderId: string): Promise<PagSeguroOrder | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(pagSeguroOrders)
+      .where(eq(pagSeguroOrders.orderId, orderId))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get PagSeguro order:", error);
+    return null;
+  }
+}
+
+export async function getAllPagSeguroOrders(): Promise<PagSeguroOrder[]> {
+  const db = await getDb();
+  if (!db) return [];
+
+  try {
+    return await db
+      .select()
+      .from(pagSeguroOrders)
+      .orderBy(desc(pagSeguroOrders.createdAt));
+  } catch (error) {
+    console.error("[Database] Failed to get all PagSeguro orders:", error);
+    return [];
+  }
+}
+
+export async function getAllRenascimentos(): Promise<typeof renascimento.$inferSelect[]> {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db.select().from(renascimento);
+}
+
+export async function deleteRenascimento(id: number): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  
+  await db.delete(renascimento).where(eq(renascimento.id, id));
+  return true;
+}
+
+export async function getOrderById(orderId: string): Promise<PagSeguroOrder | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(pagSeguroOrders)
+      .where(eq(pagSeguroOrders.orderId, orderId))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get order by ID:", error);
+    return null;
+  }
+}
+
+export async function checkIfFavorited(email: string, mapId: number, sectionType?: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+  
+  if (sectionType) {
+    const result = await db.select().from(favorites)
+      .where(and(eq(favorites.email, email), eq(favorites.mapId, mapId)))
+      .limit(1);
+    return result.length > 0;
+  }
+  
+  const result = await db.select().from(favorites)
+    .where(and(eq(favorites.email, email), eq(favorites.mapId, mapId)))
+    .limit(1);
+  return result.length > 0;
+}
+
+export async function getRenascimentoByEmail(email: string) {
+  const db = await getDb();
+  if (!db) return [];
+  
+  return await db.select().from(renascimento).where(eq(renascimento.email, email));
 }

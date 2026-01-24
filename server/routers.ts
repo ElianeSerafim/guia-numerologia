@@ -4,7 +4,7 @@ import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
 import { z } from "zod";
 import * as db from "./db";
-import { getCustomerByEmail, getMapById, getMapHistoryByCustomerId, deleteMapHistory } from "./db";
+import { getCustomerByEmail, getMapHistoryById, getMapHistoryByCustomerId, deleteMapHistory } from "./db";
 import { TRPCError } from "@trpc/server";
 
 // Helper to check if user is admin
@@ -507,7 +507,7 @@ export const appRouter = router({
 
     // Get all orders (admin only)
     getAll: adminProcedure.query(async () => {
-      return await db.getAllOrders();
+      return await db.getAllPagSeguroOrders();
     }),
   }),
 
@@ -539,7 +539,7 @@ export const appRouter = router({
           throw new TRPCError({ code: 'UNAUTHORIZED' });
         }
         
-        const map = await getMapById(input.mapId);
+        const map = await getMapHistoryById(input.mapId);
         if (!map) {
           throw new TRPCError({ code: 'NOT_FOUND' });
         }
@@ -560,7 +560,7 @@ export const appRouter = router({
           throw new TRPCError({ code: 'UNAUTHORIZED' });
         }
         
-        const map = await getMapById(input.mapId);
+        const map = await getMapHistoryById(input.mapId);
         if (!map) {
           throw new TRPCError({ code: 'NOT_FOUND' });
         }
