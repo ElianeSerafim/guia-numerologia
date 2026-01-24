@@ -48,12 +48,12 @@ export const PLANS: Record<SubscriptionPlan, PlanDetails> = {
   },
   visionary: {
     id: 'visionary',
-    name: 'Visionário',
+    name: 'Geração de 3 mapas',
     price: 59.90,
-    mapsLimit: 6,
+    mapsLimit: 3,
     description: 'Para explorar profundamente a numerologia',
     features: [
-      'Geração de 6 mapas numerológicos',
+      'Geração de 3 mapas numerológicos',
       'Interpretações detalhadas',
       'Exportação em PDF',
       'Histórico de mapas',
