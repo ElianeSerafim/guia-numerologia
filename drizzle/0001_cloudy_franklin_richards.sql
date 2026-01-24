@@ -1,0 +1,20 @@
+CREATE TABLE `pagseguro_orders` (
+	`id` serial AUTO_INCREMENT NOT NULL,
+	`orderId` varchar(255) NOT NULL,
+	`customerId` int,
+	`email` varchar(320) NOT NULL,
+	`name` varchar(255) NOT NULL,
+	`plan` varchar(50) NOT NULL,
+	`amount` decimal(10,2) NOT NULL,
+	`paymentMethod` varchar(50) NOT NULL,
+	`status` varchar(50) NOT NULL,
+	`pagseguroReference` varchar(255),
+	`pagseguroCode` varchar(255),
+	`pagseguroStatus` varchar(50),
+	`webhookData` json,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`confirmedAt` timestamp,
+	`updatedAt` timestamp NOT NULL DEFAULT (now()),
+	CONSTRAINT `pagseguro_orders_id` PRIMARY KEY(`id`),
+	CONSTRAINT `pagseguro_orders_orderId_unique` UNIQUE(`orderId`)
+);

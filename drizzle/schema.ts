@@ -319,3 +319,39 @@ export const mapHistoryRelations = relations(mapHistory, ({ one }) => ({
     references: [customers.id],
   }),
 }));
+
+
+/**
+ * PagSeguro Orders Table - Stores all PagSeguro payment orders
+ */
+export const pagSeguroOrders = mysqlTable("pagseguro_orders", {
+  id: serial("id").primaryKey(),
+  orderId: varchar("orderId", { length: 255 }).notNull().unique(),
+  customerId: int("customerId"),
+  email: varchar("email", { length: 320 }).notNull(),
+  name: varchar("name", { length: 255 }).notNull(),
+  plan: varchar("plan", { length: 50 }).notNull(),
+  amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
+  paymentMethod: varchar("paymentMethod", { length: 50 }).notNull(),
+  status: varchar("status", { length: 50 }).notNull(),
+  pagseguroReference: varchar("pagseguroReference", { length: 255 }),
+  pagseguroCode: varchar("pagseguroCode", { length: 255 }),
+  pagseguroStatus: varchar("pagseguroStatus", { length: 50 }),
+  webhookData: json("webhookData"),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  confirmedAt: timestamp("confirmedAt"),
+  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+});
+
+export type PagSeguroOrder = typeof pagSeguroOrders.$inferSelect;
+export type InsertPagSeguroOrder = typeof pagSeguroOrders.$inferInsert;
+
+/**
+ * Relations for PagSeguro Orders
+ */
+export const pagSeguroOrdersRelations = relations(pagSeguroOrders, ({ one }) => ({
+  customer: one(customers, {
+    fields: [pagSeguroOrders.customerId],
+    references: [customers.id],
+  }),
+}));

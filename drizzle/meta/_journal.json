@@ -8,6 +8,13 @@
       "when": 1768852137445,
       "tag": "0000_bored_zuras",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1769275397528,
+      "tag": "0001_cloudy_franklin_richards",
+      "breakpoints": true
     }
   ]
 }
