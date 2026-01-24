@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getAnnualPrediction, getTrimestreInterpretation, getYearDescription } from '@/lib/annualPredictions';
 import { Calendar, TrendingUp, AlertCircle, Lightbulb, Target, Zap, Shield, Filter, X } from 'lucide-react';
+import MonthlyPrediction from './MonthlyPrediction';
 
 interface AnnualPredictionsProps {
   chart: NumerologyChart;
@@ -22,6 +23,7 @@ type TrimestreFilter = 'all' | '1' | '2' | '3' | '4';
 export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredictionsProps) {
   const [filterType, setFilterType] = useState<FilterType>('all');
   const [trimestreFilter, setTrimestreFilter] = useState<TrimestreFilter>('all');
+  const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
 
   const yearNumber = year === 2026 ? chart.personalYear2026 : chart.personalYear;
   const prediction = getAnnualPrediction(yearNumber);
@@ -244,7 +246,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                             <p className="text-sm text-[#19E6FF] font-semibold">Vibração: {ctNumber}</p>
                           </div>
                           {trimestreMonthsStr && (
-                            <div className="inline-block bg-[#5A3A7A] rounded-lg px-3 py-1">
+                            <div className="inline-block bg-[#5A3A7A] rounded-lg px-3 py-1 cursor-pointer hover:bg-[#6A4A8A] transition-colors">
                               <p className="text-sm text-[#FFD700] font-semibold">📅 {trimestreMonthsStr}</p>
                             </div>
                           )}
@@ -268,6 +270,27 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                           ))}
                         </ul>
                       </div>
+
+                      {/* Botão para Ver Previsões Mensais */}
+                      {trimestreMeses && (
+                        <div className="pt-4 border-t border-[#1A3A4A]">
+                          <p className="text-xs text-slate-400 mb-3">Clique em um mês para ver previsão mensal:</p>
+                          <div className="flex flex-wrap gap-2">
+                            {trimestreMeses[`ct${trimestre}` as keyof typeof trimestreMeses]?.map((month, idx) => {
+                              const monthNum = new Date(`${month} 1`).getMonth() + 1;
+                              return (
+                                <button
+                                  key={idx}
+                                  onClick={() => setSelectedMonth(monthNum)}
+                                  className="px-3 py-1 bg-[#00FFFF]/20 hover:bg-[#00FFFF]/40 border border-[#00FFFF] text-[#00FFFF] text-xs rounded-lg transition-all"
+                                >
+                                  {month}
+                                </button>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
 
                       {/* Cautelas */}
                       <div className="bg-[#4A2A2A]/50 rounded-lg p-4 border border-[#6A3A3A]">
@@ -355,6 +378,15 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
           </div>
         )}
       </div>
+
+      {/* Modal de Previsão Mensal */}
+      {selectedMonth !== null && (
+        <MonthlyPrediction
+          chart={chart}
+          month={selectedMonth}
+          onClose={() => setSelectedMonth(null)}
+        />
+      )}
     </div>
   );
 }

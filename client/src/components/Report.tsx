@@ -190,7 +190,7 @@ export default function Report({ chart, onReset }: ReportProps) {
 
             {/* Personal Year Progress - NOVO */}
             <div>
-              <PersonalYearProgress chart={chart} />
+              <PersonalYearProgress chart={chart} onScrollToPredictions={scrollToPredictions} />
             </div>
 
             {/* Divider */}
@@ -216,7 +216,7 @@ export default function Report({ chart, onReset }: ReportProps) {
             <div className="h-px bg-gradient-to-r from-transparent via-[#1A3A4A] to-transparent"></div>
 
             {/* Annual Predictions */}
-            <div>
+            <div ref={predictionsRef}>
               <h3 className="text-2xl font-bold text-white mb-8">Previsões</h3>
               <AnnualPredictions chart={chart} year={2026} />
             </div>

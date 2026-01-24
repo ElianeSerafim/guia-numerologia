@@ -3,6 +3,7 @@ import { Calendar, Zap, TrendingUp } from 'lucide-react';
 
 interface PersonalYearProgressProps {
   chart: NumerologyChart;
+  onScrollToPredictions?: () => void;
 }
 
 /**
@@ -14,7 +15,7 @@ interface PersonalYearProgressProps {
  * - Número do ano pessoal
  * - Próximas datas importantes
  */
-export default function PersonalYearProgress({ chart }: PersonalYearProgressProps) {
+export default function PersonalYearProgress({ chart, onScrollToPredictions }: PersonalYearProgressProps) {
   // Calcular progresso do ano pessoal
   const today = new Date();
   const currentYear = today.getFullYear();
@@ -110,7 +111,7 @@ export default function PersonalYearProgress({ chart }: PersonalYearProgressProp
       </div>
 
       {/* Card Principal */}
-      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-8">
+      <div className="bg-gradient-to-br from-[#2A1A4A] to-[#1A0A2A] border border-[#1A3A4A] rounded-xl p-8 cursor-pointer hover:border-[#00FFFF]/50 transition-all hover:shadow-lg hover:shadow-[#00FFFF]/20" onClick={onScrollToPredictions}>
         {/* Barra de Progresso */}
         <div className="mb-8">
           <div className="flex justify-between items-center mb-3">
