@@ -6,6 +6,7 @@
 import { getDb } from '../db';
 import { pagSeguroOrders, customers, subscriptions, PagSeguroOrder } from '../../drizzle/schema';
 import { eq } from 'drizzle-orm';
+import { sendPaymentConfirmationEmail, sendPaymentFailureEmail } from '../email/emailService';
 
 export interface PagSeguroWebhookPayload {
   id: string;
@@ -220,7 +221,18 @@ async function activateSubscription(db: any, order: PagSeguroOrder): Promise<voi
       mapsLimit: mapsLimit,
     });
 
-    // TODO: Send confirmation email to customer
+    // Enviar email de confirmação
+    try {
+      await sendPaymentConfirmationEmail({
+        email: order.email,
+        planType: order.plan,
+        mapsLimit: mapsLimit,
+        accessLink: `https://portaldenumerologia.manus.space/dashboard`,
+        orderId: order.orderId,
+      });
+    } catch (emailError) {
+      console.error('[PagSeguro Webhook] Error sending confirmation email:', emailError);
+    }
   } catch (error) {
     console.error('[PagSeguro Webhook] Error activating subscription:', error);
     throw error;
@@ -272,7 +284,16 @@ async function handleFailedPayment(db: any, order: PagSeguroOrder): Promise<void
       email: order.email,
     });
 
-    // TODO: Send failure notification email to customer
+    // Enviar email de falha
+    try {
+      await sendPaymentFailureEmail(
+        order.email,
+        order.plan,
+        'Seu pagamento foi recusado. Por favor, tente novamente com outro método de pagamento.'
+      );
+    } catch (emailError) {
+      console.error('[PagSeguro Webhook] Error sending failure email:', emailError);
+    }
   } catch (error) {
     console.error('[PagSeguro Webhook] Error handling failed payment:', error);
     throw error;
