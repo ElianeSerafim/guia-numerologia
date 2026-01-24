@@ -35,12 +35,12 @@ export interface PlanDetails {
 export const PLANS: Record<SubscriptionPlan, PlanDetails> = {
   navigator: {
     id: 'navigator',
-    name: 'Navegador',
+    name: 'Geração de 1 mapa',
     price: 29.90,
-    mapsLimit: 2,
+    mapsLimit: 1,
     description: 'Perfeito para começar sua jornada numerológica',
     features: [
-      'Geração de 2 mapas numerológicos',
+      'Geração de 1 mapa numerológico',
       'Interpretações detalhadas',
       'Exportação em PDF',
       'Histórico de mapas'
