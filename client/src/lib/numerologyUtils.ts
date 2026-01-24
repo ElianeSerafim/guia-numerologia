@@ -173,26 +173,45 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   // Mês Pessoal Atual
   const pm = reduceNumber(pyCurrentReduced + currentMonth);
 
-  // Ciclos Trimestrais para o Ano Pessoal Atual
-  // CT1 = AP + Ciclo de Vida vigente (C1 = Mês)
-  const ct1 = reduceNumber(pyCurrentReduced + c1);
-  // CT2 = AP + Realização vigente (R1 = Mês)
-  const ct2 = reduceNumber(pyCurrentReduced + r1);
-  // CT3 = AP - DM
-  const ct3 = reduceNumber(Math.abs(pyCurrentReduced - dm));
-  // CT4 = Soma dos 3 primeiros trimestres
-  const ct4 = reduceNumber(ct1 + ct2 + ct3);
-  
-  // Ciclos Trimestrais para 2026
-  const ct1_2026 = reduceNumber(py2026 + c1);
-  const ct2_2026 = reduceNumber(py2026 + r1);
-  const ct3_2026 = reduceNumber(Math.abs(py2026 - dm));
-  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026);
-  
   // ========================================
   // 5. IDADE
   // ========================================
   const age = currentYear - year - (today < new Date(currentYear, month - 1, day) ? 1 : 0);
+
+  // Função para obter ciclo de vida vigente conforme idade
+  const getVigentLifeCycle = (ageVal: number) => {
+    if (ageVal < 29) return c1;
+    if (ageVal < 57) return c2;
+    return c3;
+  };
+
+  // Função para obter realização vigente conforme idade
+  const getVigentRealization = (ageVal: number) => {
+    if (ageVal <= r1EndAge) return r1;
+    if (ageVal <= r2EndAge) return r2;
+    if (ageVal <= r3EndAge) return r3;
+    return r4;
+  };
+
+  const vigentC = getVigentLifeCycle(age);
+  const vigentR = getVigentRealization(age);
+
+  // Ciclos Trimestrais para o Ano Pessoal Atual
+  const ct1 = reduceNumber(pyCurrentReduced + vigentC);
+  const ct2 = reduceNumber(pyCurrentReduced + vigentR);
+  const ct3 = reduceNumber(Math.abs(pyCurrentReduced - dm));
+  const ct4 = reduceNumber(ct1 + ct2 + ct3);
+  
+  // Para 2026, calcular idade em 2026
+  const ageIn2026 = 2026 - year - (new Date(2026, month - 1, day) > new Date(2026, 0, 1) ? 1 : 0);
+  const vigentC2026 = getVigentLifeCycle(ageIn2026);
+  const vigentR2026 = getVigentRealization(ageIn2026);
+
+  // Ciclos Trimestrais para 2026
+  const ct1_2026 = reduceNumber(py2026 + vigentC2026);
+  const ct2_2026 = reduceNumber(py2026 + vigentR2026);
+  const ct3_2026 = reduceNumber(Math.abs(py2026 - dm));
+  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026);
 
   return {
     fullName,
