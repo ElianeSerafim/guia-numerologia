@@ -86,7 +86,7 @@ const realizationItems: TimelineItem[] = [
   { 
     id: 'r1',
     label: 'R1 - 1ª Realização', 
-    definition: 'Ciclo formativo - período de aprendizado e descoberta',
+    definition: 'Ciclo formativo (0-28 anos). Período de aprendizado, descoberta e construção de identidade. Você está conhecendo o mundo, desenvolvendo suas habilidades e formando suas primeiras experiências significativas. Este ciclo estabelece as fundações para toda a sua jornada.',
     age: '0-28 anos', 
     color: 'from-purple-600 to-purple-400', 
     icon: '🎯',
@@ -95,7 +95,7 @@ const realizationItems: TimelineItem[] = [
   { 
     id: 'r2',
     label: 'R2 - 2ª Realização', 
-    definition: 'Ciclo de maturidade - período de construção e consolidação',
+    definition: 'Ciclo de maturidade (29-56 anos). Período de construção, consolidação e realização de potencial. Você está aplicando o aprendizado anterior, criando seu legado e deixando sua marca no mundo. Este é o ciclo de maior produtividade e impacto.',
     age: '29-56 anos', 
     color: 'from-cyan-400 to-indigo-400', 
     icon: '🏆',
@@ -104,7 +104,7 @@ const realizationItems: TimelineItem[] = [
   { 
     id: 'r3',
     label: 'R3 - 3ª Realização', 
-    definition: 'Ciclo de plenitude - período de colheita e sabedoria',
+    definition: 'Ciclo de plenitude (57-84 anos). Período de colheita, sabedoria e integração. Você está colhendo os frutos de suas ações anteriores, compartilhando sua sabedoria e consolidando seu legado. Este ciclo traz compreensão profunda e paz interior.',
     age: '57-84 anos', 
     color: 'from-violet-600 to-violet-400', 
     icon: '👑',
@@ -113,7 +113,7 @@ const realizationItems: TimelineItem[] = [
   { 
     id: 'r4',
     label: 'R4 - 4ª Realização', 
-    definition: 'Ciclo final - período de legado e transcendência',
+    definition: 'Ciclo final (85+ anos). Período de legado, transcendência e síntese. Você está refletindo sobre toda a jornada, sendo mentor e guia, e deixando um legado espiritual e material. Este ciclo representa a integração de toda a vida vivida.',
     age: '85+ anos', 
     color: 'from-fuchsia-600 to-fuchsia-400', 
     icon: '✨',
@@ -290,28 +290,35 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
 
                   {/* Expanded Content */}
                   {isExpanded && (
-                    <div className="mt-4 pt-4 border-t border-[#1A3A4A] space-y-3 animate-in fade-in duration-300">
-                      <div>
-                        <h5 className="text-xs font-bold text-[#19E6FF] uppercase tracking-wider mb-1">
-                          Definição
+                    <div className="mt-4 pt-4 border-t border-[#1A3A4A] space-y-4 animate-in fade-in duration-300">
+                      {/* Definição */}
+                      <div className="bg-[#1A3A4A]/50 rounded-lg p-3 border border-[#1A3A4A]">
+                        <h5 className="text-xs font-bold text-[#19E6FF] uppercase tracking-wider mb-2">
+                          📖 Definição
                         </h5>
                         <p className="text-xs text-slate-300 leading-relaxed">
                           {item.definition}
                         </p>
                       </div>
+
+                      {/* Interpretação do Número */}
                       {interpretation && (
-                        <div>
-                          <h5 className={`text-xs font-bold uppercase tracking-wider mb-1 ${
+                        <div className={`rounded-lg p-3 border ${
+                          item.type === 'challenge' ? 'bg-red-500/10 border-red-500/30' : 
+                          item.type === 'realization' ? 'bg-purple-500/10 border-purple-500/30' : 'bg-green-500/10 border-green-500/30'
+                        }`}>
+                          <h5 className={`text-xs font-bold uppercase tracking-wider mb-2 ${
                             item.type === 'challenge' ? 'text-red-400' : 
                             item.type === 'realization' ? 'text-purple-400' : 'text-green-400'
                           }`}>
-                            {item.type === 'challenge' ? '⚠️' : item.type === 'realization' ? '🎯' : '✓'} Interpretação Resumida
+                            {item.type === 'challenge' ? '⚠️' : item.type === 'realization' ? '💡' : '✓'} Interpretação do Número {number}
                           </h5>
                           <p className="text-xs text-slate-300 leading-relaxed">
                             {interpretation}
                           </p>
                         </div>
                       )}
+
                       {/* Legado extra info */}
                       {specialBadge?.type === 'legado' && chart && (
                         <div className="bg-yellow-500/10 rounded-lg p-3 border border-yellow-500/30">
@@ -320,6 +327,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
                           </p>
                         </div>
                       )}
+
                       {/* Grande Amor extra info */}
                       {specialBadge?.type === 'grandeAmor' && chart && (
                         <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/30">
@@ -348,7 +356,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
       {chart && renderSection('Ciclos de Realização', '🏆', realizationItems, 'md:grid-cols-4')}
 
       {/* Desafios */}
-      {renderSection('Desafios de Vida', '🎯', challengeItems)}
+      {renderSection('Desafios de Vida', '⚔️', challengeItems)}
     </div>
   );
 }
