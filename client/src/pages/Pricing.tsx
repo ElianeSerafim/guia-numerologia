@@ -202,6 +202,10 @@ export default function Pricing() {
               <ArrowRight size={18} />
               Escolher Plano
             </button>
+            <div className="flex items-center justify-center gap-2 pt-4 border-t border-[#1A3A4A]">
+              <span className="text-2xl">✓</span>
+              <span className="text-sm text-white font-semibold">Garantia de Satisfação de 7 dias</span>
+            </div>
           </div>
 
           {/* Visionário - Destaque */}
@@ -240,6 +244,10 @@ export default function Pricing() {
               <ArrowRight size={18} />
               Escolher Plano
             </button>
+            <div className="flex items-center justify-center gap-2 pt-4 border-t border-[#1A3A4A]">
+              <span className="text-2xl">✓</span>
+              <span className="text-sm text-[#07131B] font-semibold">Garantia de Satisfação de 7 dias</span>
+            </div>
           </div>
 
           {/* Iluminado */}
@@ -275,6 +283,10 @@ export default function Pricing() {
               <ArrowRight size={18} />
               Escolher Plano
             </button>
+            <div className="flex items-center justify-center gap-2 pt-4 border-t border-[#1A3A4A]">
+              <span className="text-2xl">✓</span>
+              <span className="text-sm text-white font-semibold">Garantia de Satisfação de 7 dias</span>
+            </div>
           </div>
         </div>
       </section>
