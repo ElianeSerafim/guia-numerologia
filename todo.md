@@ -294,3 +294,40 @@
 - [x] Mudar texto do WhatsApp para "Dúvidas? Entre em contato" - CONCLUÍDO
 - [ ] Testar fluxo completo de checkout - PRÓXIMO
 - [ ] Fazer checkpoint com melhorias
+
+
+## Passo 18: Reorganização do Fluxo de Vendas (Nova Sessão)
+
+- [ ] Remover cards de planos da página de vendas (Pricing.tsx)
+- [ ] Criar página de Degustação com Caminho do Destino e Ciclo Atual
+- [ ] Implementar botão "Veja seu mapa completo" que mostra planos
+- [ ] Integrar fluxo de pagamento PagSeguro após seleção de plano
+- [ ] Testar fluxo completo: home → degustação → planos → pagamento
+- [ ] Fazer checkpoint com novo fluxo
+
+
+## Passo 18: Implementação Fluxo Astrolink (Nova Sessão - Créditos Chegando à Meia-Noite)
+
+### Componentes Criados:
+- [x] `SignupModal.tsx` - Modal de cadastro (E-mail + Data de Nascimento)
+- [x] `Tasting.tsx` - Componente de Degustação (CD + Ciclo Atual)
+- [x] `PlansWithPayment.tsx` - Componente de Planos com PagSeguro
+- [x] `PAGSEGURO_INTEGRATION.md` - Documentação completa de integração
+
+### Tarefas Pendentes (Aguardando 300 Créditos):
+- [ ] Corrigir arquivo `routers_new.ts` (remover ou integrar)
+- [ ] Remover duplicatas em `db.ts` (createPagSeguroOrder, getPagSeguroOrderById)
+- [ ] Implementar tRPC procedure `customer.createCustomer`
+- [ ] Integrar `SignupModal` no Home.tsx
+- [ ] Integrar `Tasting` após cadastro bem-sucedido
+- [ ] Integrar `PlansWithPayment` após degustação
+- [ ] Testar fluxo completo: Cadastro → Degustação → Planos → PagSeguro
+- [ ] Fazer checkpoint final e publicar
+
+### Fluxo Implementado:
+1. Home → Botão "Teste Gratuitamente"
+2. Modal de Cadastro (E-mail + Data de Nascimento)
+3. Após cadastro → Degustação (CD + Ciclo Atual)
+4. Botão "Veja seu mapa completo" → Planos
+5. Selecionar plano → Ir para PagSeguro
+6. Webhook aprova → E-mail com acesso
