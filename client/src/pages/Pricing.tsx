@@ -410,23 +410,48 @@ export default function Pricing() {
               </div>
             )}
 
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  setShowCheckout(false);
-                  setError('');
-                }}
-                className="flex-1 px-4 py-2 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors font-semibold"
-              >
-                Cancelar
-              </button>
-              <button
-                onClick={handleCheckout}
-                className="flex-1 px-4 py-2 bg-cyan-400 text-white rounded-lg hover:bg-indigo-700 transition-colors font-semibold flex items-center justify-center gap-2"
-              >
-                <MessageCircle size={18} />
-                Ir para WhatsApp
-              </button>
+            <div className="space-y-3">
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    setShowCheckout(false);
+                    setError('');
+                  }}
+                  className="flex-1 px-4 py-2 border border-slate-200 rounded-lg text-slate-700 hover:bg-slate-50 transition-colors font-semibold"
+                >
+                  Cancelar
+                </button>
+                <button
+                  onClick={() => {
+                    if (!fullName.trim() || !email.trim()) {
+                      setError('Por favor, preencha nome e e-mail');
+                      return;
+                    }
+                    setPaymentMethod('pagseguro');
+                    setShowPagSeguroCheckout(true);
+                  }}
+                  className="flex-1 px-4 py-2 bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white rounded-lg hover:from-[#19E6FF] hover:to-[#00FFFF] transition-all font-semibold flex items-center justify-center gap-2 shadow-lg"
+                >
+                  <Zap size={18} />
+                  Ir para PagSeguro
+                </button>
+              </div>
+              
+              <div className="border-t border-slate-200 pt-4">
+                <button
+                  onClick={() => {
+                    if (!fullName.trim() || !email.trim()) {
+                      setError('Por favor, preencha nome e e-mail');
+                      return;
+                    }
+                    handleCheckout();
+                  }}
+                  className="w-full px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold flex items-center justify-center gap-2"
+                >
+                  <MessageCircle size={18} />
+                  Dúvidas? Entre em contato
+                </button>
+              </div>
             </div>
           </div>
         </div>

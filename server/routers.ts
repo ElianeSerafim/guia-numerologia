@@ -6,6 +6,8 @@ import { z } from "zod";
 import * as db from "./db";
 import { getCustomerByEmail, getMapHistoryById, getMapHistoryByCustomerId, deleteMapHistory } from "./db";
 import { TRPCError } from "@trpc/server";
+import { customers, pagSeguroOrders } from "../drizzle/schema";
+import { getDb } from "./db";
 
 // Helper to check if user is admin
 const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
@@ -429,10 +431,31 @@ export const appRouter = router({
       }))
       .mutation(async ({ input }) => {
         try {
-          // Import PagSeguro functions
           const { createPaymentOrder } = await import('./pagseguro');
+          const { sendPaymentProcessingEmail } = await import('./email/emailService');
+          const dbConnection = await getDb();
           
-          // Create payment order
+          // 1. Save or update customer in database
+          const existingCustomer = await dbConnection.query.customers.findFirst({
+            where: (customers, { eq }) => eq(customers.email, input.email),
+          });
+          
+          let customerId: number;
+          if (existingCustomer) {
+            customerId = existingCustomer.id;
+          } else {
+            // Create new customer
+            const result = await dbConnection.insert(customers).values({
+              email: input.email,
+              name: input.name,
+              plan: 'pending',
+              status: 'pending',
+              mapsGenerated: 0,
+            });
+            customerId = result.insertId as unknown as number;
+          }
+          
+          // 2. Create payment order with PagSeguro
           const paymentResponse = await createPaymentOrder({
             email: input.email,
             name: input.name,
@@ -440,6 +463,31 @@ export const appRouter = router({
             planName: input.planName,
             amount: input.amount,
             paymentMethod: input.paymentMethod as 'pix' | 'credit_card' | 'boleto',
+          });
+          
+          // 3. Save order in database with status 'pending'
+          await dbConnection.insert(pagSeguroOrders).values({
+            orderId: paymentResponse.id,
+            customerId: customerId,
+            email: input.email,
+            name: input.name,
+            plan: input.planId,
+            amount: input.amount.toString(),
+            paymentMethod: input.paymentMethod,
+            status: 'pending',
+            pagseguroReference: paymentResponse.id,
+            pagseguroCode: paymentResponse.id,
+            pagseguroStatus: paymentResponse.status,
+          });
+          
+          // 4. Send "payment processing" email
+          await sendPaymentProcessingEmail({
+            email: input.email,
+            name: input.name,
+            planName: input.planName,
+            amount: input.amount,
+            orderId: paymentResponse.id,
+            paymentMethod: input.paymentMethod,
           });
           
           // Extract payment link from response

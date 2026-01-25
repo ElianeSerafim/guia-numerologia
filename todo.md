@@ -272,3 +272,25 @@
 
 **Aguardando:** Credenciais do SendGrid para envio real de emails
 
+
+## Passo 16: Fluxo de Vendas com Gravação de Dados e PagSeguro
+
+- [ ] Implementar salvamento de dados do cliente (nome, email) no banco de dados
+- [ ] Criar ordem/pedido com status "pending" ao clicar em "Pagar com PagSeguro"
+- [ ] Enviar e-mail de "Pagamento em processamento" assim que cliente tenta pagar
+- [ ] Redirecionar para PagSeguro com link de pagamento
+- [ ] Manter botão WhatsApp apenas para tirar dúvidas (não para vender)
+- [ ] Webhook recebe confirmação de PagSeguro e ativa plano automaticamente
+- [ ] Enviar e-mail com acesso + quantidade de mapas quando pagamento aprovado
+- [ ] Implementar monitoramento de pedidos no AdminDashboard
+- [ ] Testar fluxo completo: dados → ordem → pagamento → ativação → e-mail
+- [ ] Fazer checkpoint e publicar
+
+
+## Passo 17: Melhorias no Modal de Checkout (Nova Sessão)
+
+- [x] Adicionar botão "Ir para PagSeguro" no modal de checkout - CONCLUÍDO
+- [x] Reorganizar layout: campos de cadastro → botão PagSeguro → WhatsApp no final - CONCLUÍDO
+- [x] Mudar texto do WhatsApp para "Dúvidas? Entre em contato" - CONCLUÍDO
+- [ ] Testar fluxo completo de checkout - PRÓXIMO
+- [ ] Fazer checkpoint com melhorias

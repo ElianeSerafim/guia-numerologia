@@ -735,3 +735,4 @@ export async function getRenascimentoByEmail(email: string) {
   
   return await db.select().from(renascimento).where(eq(renascimento.email, email));
 }
+
