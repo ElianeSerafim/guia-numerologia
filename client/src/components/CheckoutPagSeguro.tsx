@@ -12,14 +12,19 @@ import { Loader2, AlertCircle, CheckCircle, CreditCard, Smartphone, FileText } f
 import { PLANS } from '@/types/payment';
 
 interface CheckoutPagSeguroProps {
-  planId: 'navegador' | 'visionario' | 'iluminado';
+  planId: 'navigator' | 'visionary' | 'illuminated';
+  planName: string;
+  amount: number;
+  email: string;
+  name: string;
+  onClose: () => void;
   onSuccess?: (orderId: string) => void;
   onError?: (error: string) => void;
 }
 
-export default function CheckoutPagSeguro({ planId, onSuccess, onError }: CheckoutPagSeguroProps) {
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
+export default function CheckoutPagSeguro({ planId, planName, amount, email: initialEmail, name: initialName, onClose, onSuccess, onError }: CheckoutPagSeguroProps) {
+  const [email, setEmail] = useState(initialEmail);
+  const [name, setName] = useState(initialName);
   const [paymentMethod, setPaymentMethod] = useState<'pix' | 'credit_card' | 'boleto'>('pix');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');

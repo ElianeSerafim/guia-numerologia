@@ -457,7 +457,26 @@ export default function Pricing() {
         </div>
       )}
 
-
+      {/* PagSeguro Checkout */}
+      {showPagSeguroCheckout && selectedPlan && (
+        <CheckoutPagSeguro
+          planId={selectedPlan as 'navigator' | 'visionary' | 'illuminated'}
+          planName={PLANS[selectedPlan as keyof typeof PLANS].name}
+          amount={selectedPlan && (PLANS[selectedPlan as keyof typeof PLANS].price - couponDiscount)}
+          email={email}
+          name={fullName}
+          onClose={() => {
+            setShowPagSeguroCheckout(false);
+            setShowCheckout(false);
+          }}
+          onSuccess={() => {
+            setShowPagSeguroCheckout(false);
+            setShowCheckout(false);
+            // Mostrar mensagem de sucesso
+            alert('Pagamento iniciado! Você receberá um e-mail com as instruções.');
+          }}
+        />
+      )}
 
       {/* Footer */}
       <footer className="border-t border-[#1A3A4A] bg-[#1A0820] mt-16">
