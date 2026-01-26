@@ -10,7 +10,17 @@ import { ArrowLeft } from 'lucide-react';
 
 export default function CheckoutPagSeguroPage() {
   const [, setLocation] = useLocation();
-  const planId = new URLSearchParams(window.location.search).get('plan') as 'navegador' | 'visionario' | 'iluminado' || 'navegador';
+  // Map Portuguese plan names to English
+  const planParam = new URLSearchParams(window.location.search).get('plan') || 'navigator';
+  const planMap: Record<string, 'navigator' | 'visionary' | 'illuminated'> = {
+    'navegador': 'navigator',
+    'visionario': 'visionary',
+    'iluminado': 'illuminated',
+    'navigator': 'navigator',
+    'visionary': 'visionary',
+    'illuminated': 'illuminated'
+  };
+  const planId = (planMap[planParam] || 'navigator') as 'navigator' | 'visionary' | 'illuminated';
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 py-12 px-4">

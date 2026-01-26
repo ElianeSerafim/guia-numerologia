@@ -1,4 +1,4 @@
-import { COOKIE_NAME } from "@shared/const";
+import { COOKIE_NAME } from "../shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
@@ -424,39 +424,43 @@ export const appRouter = router({
       .input(z.object({
         email: z.string().email(),
         name: z.string().min(1),
-        planId: z.enum(['navegador', 'visionario', 'iluminado']),
+        planId: z.enum(['navigator', 'visionary', 'illuminated']),
         planName: z.string(),
         amount: z.number().positive(),
         paymentMethod: z.enum(['pix', 'credit_card', 'boleto']),
       }))
       .mutation(async ({ input }) => {
         try {
-          const { createPaymentOrder } = await import('./pagseguro');
-          const { sendPaymentProcessingEmail } = await import('./email/emailService');
-          const dbConnection = await getDb();
+          if (!getDb) {
+            throw new TRPCError({
+              code: 'INTERNAL_SERVER_ERROR',
+              message: 'Database connection failed'
+            });
+          }
+          
+          const { createPaymentOrder: createPaymentOrderFn } = await import('./pagseguro');
+          const { createCustomer: createCustomerFn, getCustomerByEmail: getCustomerByEmailFn } = await import('./db');
+          const { sendPaymentConfirmationEmail } = await import('./email/emailService');
           
           // 1. Save or update customer in database
-          const existingCustomer = await dbConnection.query.customers.findFirst({
-            where: (customers, { eq }) => eq(customers.email, input.email),
-          });
+          const existingCustomer = await getCustomerByEmailFn(input.email);
           
           let customerId: number;
           if (existingCustomer) {
             customerId = existingCustomer.id;
           } else {
             // Create new customer
-            const result = await dbConnection.insert(customers).values({
+            const newCustomer = await createCustomerFn({
               email: input.email,
               name: input.name,
               plan: 'pending',
-              status: 'pending',
-              mapsGenerated: 0,
+              status: 'pending'
             });
-            customerId = result.insertId as unknown as number;
+            customerId = newCustomer?.id || 0;
           }
           
           // 2. Create payment order with PagSeguro
-          const paymentResponse = await createPaymentOrder({
+          const paymentResponse = await createPaymentOrderFn({
             email: input.email,
             name: input.name,
             planId: input.planId,
@@ -466,9 +470,9 @@ export const appRouter = router({
           });
           
           // 3. Save order in database with status 'pending'
-          await dbConnection.insert(pagSeguroOrders).values({
+          const { createPagSeguroOrder: createPagSeguroOrderFn } = await import('./db');
+          await createPagSeguroOrderFn({
             orderId: paymentResponse.id,
-            customerId: customerId,
             email: input.email,
             name: input.name,
             plan: input.planId,
@@ -481,13 +485,12 @@ export const appRouter = router({
           });
           
           // 4. Send "payment processing" email
-          await sendPaymentProcessingEmail({
+          await sendPaymentConfirmationEmail({
             email: input.email,
-            name: input.name,
-            planName: input.planName,
-            amount: input.amount,
+            planType: input.planName,
+            mapsLimit: 10, // Default limit, will be updated based on plan
+            accessLink: `${process.env.APP_URL || 'https://guia-numerologia.manus.space'}/dashboard`,
             orderId: paymentResponse.id,
-            paymentMethod: input.paymentMethod,
           });
           
           // Extract payment link from response

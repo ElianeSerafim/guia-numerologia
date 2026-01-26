@@ -44,7 +44,7 @@ export default function Tasting({ chart, onViewFullMap }: TastingProps) {
       name: '3º Ciclo (Colheita)',
       description: 'Período de colheita e sabedoria. Você colhe os frutos do que plantou e compartilha sua experiência.',
       ageRange: `Acima de 56 anos (Você tem ${age} anos)`,
-      vibration: chart.me // Mérito = 3º Ciclo
+      vibration: chart.merito // Mérito = 3º Ciclo
     };
   }
 

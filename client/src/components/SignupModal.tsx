@@ -21,7 +21,7 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const createCustomer = trpc.customer.createCustomer.useMutation();
+  const createCustomer = trpc.customers.create.useMutation();
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -74,14 +74,14 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
       // Chamar tRPC para criar cliente
       await createCustomer.mutateAsync({
         email: email.trim(),
-        birthDate: birthDate.trim()
+        name: email.split('@')[0] // Use email prefix as name
       });
 
       setSuccess(true);
 
       // Aguardar 1 segundo e fechar modal
       setTimeout(() => {
-        onSuccess(email.trim(), birthDate.trim());
+        onSuccess(email.trim(), birthDate.trim()); // birthDate is still passed to parent for Tasting component
         setEmail('');
         setBirthDate('');
         setAcceptTerms(false);

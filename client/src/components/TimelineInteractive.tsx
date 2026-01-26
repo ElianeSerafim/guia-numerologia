@@ -139,10 +139,10 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
 
   // Números das realizações (se chart disponível)
   const realizationNumbers: Record<'r1' | 'r2' | 'r3' | 'r4', number> = {
-    r1: chart?.r1 || 0,
-    r2: chart?.r2 || 0,
-    r3: chart?.r3 || 0,
-    r4: chart?.r4 || 0,
+    r1: chart?.realizacoes?.r1 || 0,
+    r2: chart?.realizacoes?.r2 || 0,
+    r3: chart?.realizacoes?.r3 || 0,
+    r4: chart?.realizacoes?.r4 || 0,
   };
 
   const currentCycle = getCurrentCycle(birthDate);
@@ -199,7 +199,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
     
     // Grande Amor (R = 6)
     if (number === 6) {
-      const grandeAmorInfo = calcularGrandeAmor(chart.r1, chart.r2, chart.r3, chart.r4);
+      const grandeAmorInfo = calcularGrandeAmor(chart.realizacoes.r1, chart.realizacoes.r2, chart.realizacoes.r3, chart.realizacoes.r4);
       if (grandeAmorInfo) {
         return {
           type: 'grandeAmor',
@@ -332,7 +332,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
                       {specialBadge?.type === 'grandeAmor' && chart && (
                         <div className="bg-pink-500/10 rounded-lg p-3 border border-pink-500/30">
                           <p className="text-pink-200 text-xs leading-relaxed">
-                            {getGrandeAmorInterpretation(calcularGrandeAmor(chart.r1, chart.r2, chart.r3, chart.r4))}
+                            {getGrandeAmorInterpretation(calcularGrandeAmor(chart.realizacoes.r1, chart.realizacoes.r2, chart.realizacoes.r3, chart.realizacoes.r4))}
                           </p>
                         </div>
                       )}

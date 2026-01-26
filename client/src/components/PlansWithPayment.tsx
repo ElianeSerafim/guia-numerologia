@@ -98,21 +98,29 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
       }
 
       // Chamar tRPC para iniciar pagamento
+      // Map Portuguese plan names to English
+      const planMap: Record<string, 'navigator' | 'visionary' | 'illuminated'> = {
+        'navegador': 'navigator',
+        'visionario': 'visionary',
+        'iluminado': 'illuminated',
+        'navigator': 'navigator',
+        'visionary': 'visionary',
+        'illuminated': 'illuminated'
+      };
+      const mappedPlanId = (planMap[selectedPlan as string] || 'navigator') as 'navigator' | 'visionary' | 'illuminated';
+
       const response = await initiatePagSeguro.mutateAsync({
         email: email.trim(),
         name: name.trim(),
-        planId: planId as 'navigator' | 'visionary' | 'illuminated',
+        planId: mappedPlanId,
         planName: plan.name,
         amount: Math.round(plan.price * 100), // Converter para centavos
-        paymentMethod: 'pix',
-        chartData: JSON.stringify(chart)
+        paymentMethod: 'pix'
       });
 
       // Redirecionar para PagSeguro
-      if (response.checkoutUrl) {
-        window.location.href = response.checkoutUrl;
-      } else if (response.redirectUrl) {
-        window.location.href = response.redirectUrl;
+      if (response.paymentLink) {
+        window.location.href = response.paymentLink;
       } else {
         throw new Error('Não foi possível iniciar o pagamento');
       }

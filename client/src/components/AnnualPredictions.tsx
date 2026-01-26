@@ -277,7 +277,7 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                         <div className="pt-4 border-t border-[#1A3A4A]">
                           <p className="text-xs text-slate-400 mb-3">Clique em um mês para ver previsão mensal:</p>
                           <div className="flex flex-wrap gap-2">
-                            {trimestreMeses[`ct${trimestre}` as keyof typeof trimestreMeses]?.map((month, idx) => {
+                            {trimestreMeses[`ct${trimestre}` as keyof typeof trimestreMeses]?.map((month: string, idx: number) => {
                               const monthNum = new Date(`${month} 1`).getMonth() + 1;
                               return (
                                 <button

@@ -24,12 +24,12 @@ export function EssentialNumbersInteractive({
   const [expandedNumber, setExpandedNumber] = useState<NumberKey | null>(null);
 
   const numbers: Record<NumberKey, number> = {
-    cd: chart.destinyNumber,
-    mo: chart.motivationNumber,
-    eu: chart.intimateNumber,
-    ex: chart.expressionNumber,
-    dm: chart.majorChallenge,
-    me: chart.merit,
+    cd: chart.cd,
+    mo: chart.mo,
+    eu: chart.eu,
+    ex: chart.ex,
+    dm: chart.desafios.dm,
+    me: chart.merito,
   };
 
   const toggleExpand = (key: NumberKey) => {
@@ -43,7 +43,7 @@ export function EssentialNumbersInteractive({
           const number = numbers[key];
           const label = numberLabels[key];
           const isExpanded = expandedNumber === key;
-          const interpretation = getInterpretation(number, key);
+          const interpretation = getInterpretation(number);
 
           return (
             <button
@@ -94,71 +94,17 @@ export function EssentialNumbersInteractive({
                         </p>
                       </div>
 
-                      {interpretation.cd && (
-                        <div>
-                          <h4 className="text-sm font-bold text-blue-400 mb-2">
-                            Caminho do Destino
-                          </h4>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {interpretation.cd}
-                          </p>
-                        </div>
-                      )}
 
-                      {interpretation.mo && (
-                        <div>
-                          <h4 className="text-sm font-bold text-purple-400 mb-2">
-                            Motivação
-                          </h4>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {interpretation.mo}
-                          </p>
-                        </div>
-                      )}
 
-                      {interpretation.eu && (
-                        <div>
-                          <h4 className="text-sm font-bold text-pink-400 mb-2">
-                            Eu Íntimo
-                          </h4>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {interpretation.eu}
-                          </p>
-                        </div>
-                      )}
 
-                      {interpretation.ex && (
-                        <div>
-                          <h4 className="text-sm font-bold text-green-400 mb-2">
-                            Expressão
-                          </h4>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {interpretation.ex}
-                          </p>
-                        </div>
-                      )}
 
-                      {interpretation.dm && (
-                        <div>
-                          <h4 className="text-sm font-bold text-red-400 mb-2">
-                            Desafio Maior
-                          </h4>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {interpretation.dm}
-                          </p>
-                        </div>
-                      )}
 
-                      {interpretation.me && (
-                        <div>
-                          <h4 className="text-sm font-bold text-yellow-400 mb-2">
-                            Mérito
-                          </h4>
-                          <p className="text-sm text-slate-300 leading-relaxed">
-                            {interpretation.me}
-                          </p>
-                        </div>
-                      )}
+
+
+
+
+
+
                     </div>
                   )}
 

@@ -27,7 +27,7 @@ import AdminManagement from '@/components/AdminManagement';
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   const { user, loading } = useAuth();
-  const userEmail = user?.email;
+  const userEmail = user?.email ?? null;
   const { isAdmin, isSuperAdmin, admins, addAdmin, removeAdmin, toggleAdminStatus } = useAdminManagement(userEmail);
   
   const {

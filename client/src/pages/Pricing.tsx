@@ -462,7 +462,7 @@ export default function Pricing() {
         <CheckoutPagSeguro
           planId={selectedPlan as 'navigator' | 'visionary' | 'illuminated'}
           planName={PLANS[selectedPlan as keyof typeof PLANS].name}
-          amount={selectedPlan && (PLANS[selectedPlan as keyof typeof PLANS].price - couponDiscount)}
+          amount={selectedPlan ? (PLANS[selectedPlan as keyof typeof PLANS].price - couponDiscount) : 0}
           email={email}
           name={fullName}
           onClose={() => {

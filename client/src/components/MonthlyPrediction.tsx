@@ -19,7 +19,7 @@ export default function MonthlyPrediction({ chart, month, onClose }: MonthlyPred
   const monthName = MONTH_NAMES[month - 1];
   
   // Calcular Previsão Mensal (PM) = AP + Mês
-  const pm = reduceNumber(chart.anoP + month);
+  const pm = reduceNumber(chart.personalYear + month);
   
   // Obter interpretação da previsão mensal
   const interpretation = getMonthlyPredictionInterpretation(pm, monthName);
@@ -34,7 +34,7 @@ export default function MonthlyPrediction({ chart, month, onClose }: MonthlyPred
               Previsão de {monthName}
             </h2>
             <p className="text-[#19E6FF]">
-              Previsão Mensal (PM) = {chart.anoP} + {month} = <span className="font-bold text-[#00FFFF]">{pm}</span>
+              Previsão Mensal (PM) = {chart.personalYear} + {month} = <span className="font-bold text-[#00FFFF]">{pm}</span>
             </p>
           </div>
           <button

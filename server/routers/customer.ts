@@ -1,6 +1,6 @@
 import { router, publicProcedure } from '../_core/trpc';
 import { z } from 'zod';
-import { db } from '../db';
+import { getCustomerByEmail, createCustomer, updateCustomer } from '../db';
 import { TRPCError } from '@trpc/server';
 
 export const customerRouter = router({
@@ -19,7 +19,7 @@ export const customerRouter = router({
     .mutation(async ({ input }) => {
       try {
         // Validar se cliente já existe
-        const existingCustomer = await db.getCustomerByEmail(input.email);
+        const existingCustomer = await getCustomerByEmail(input.email);
         if (existingCustomer) {
           throw new TRPCError({
             code: 'CONFLICT',
@@ -47,18 +47,16 @@ export const customerRouter = router({
         }
 
         // Criar cliente
-        const customer = await db.createCustomer({
+        const customer = await createCustomer({
           email: input.email,
-          birthDate: input.birthDate,
-          plan: 'free', // Plano gratuito por padrão
-          createdAt: new Date(),
-          updatedAt: new Date()
+          name: input.email.split('@')[0], // Usar parte do email como nome temporário
+          plan: 'basic', // Plano básico por padrão
+          status: 'pending'
         });
 
         return {
           id: customer.id,
           email: customer.email,
-          birthDate: customer.birthDate,
           plan: customer.plan,
           message: 'Cadastro realizado com sucesso!'
         };
@@ -83,7 +81,7 @@ export const customerRouter = router({
     .input(z.object({ email: z.string().email() }))
     .query(async ({ input }) => {
       try {
-        const customer = await db.getCustomerByEmail(input.email);
+        const customer = await getCustomerByEmail(input.email);
         return customer || null;
       } catch (error) {
         console.error('Erro ao buscar cliente:', error);
@@ -108,7 +106,7 @@ export const customerRouter = router({
     )
     .mutation(async ({ input }) => {
       try {
-        const customer = await db.getCustomerByEmail(input.email);
+        const customer = await getCustomerByEmail(input.email);
         if (!customer) {
           throw new TRPCError({
             code: 'NOT_FOUND',
@@ -117,10 +115,10 @@ export const customerRouter = router({
         }
 
         // Atualizar plano
-        await db.updateCustomer(customer.id, {
+        await updateCustomer(customer.id, {
           plan: input.plan,
-          planActivatedAt: new Date(),
-          lastOrderId: input.orderId
+          status: 'active',
+          approvedAt: new Date()
         });
 
         return {
