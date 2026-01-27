@@ -62,10 +62,14 @@ export default function PersonalYearProgress({ chart, onScrollToPredictions }: P
     100
   );
 
-  // Calcular meses
-  const monthsElapsed = Math.floor(
-    (currentMonth - birthMonth + (currentDay >= birthDay ? 0 : -1) + 12) % 12
-  );
+  // Calcular meses decorridos desde o aniversário
+  let monthsElapsed = currentMonth - birthMonth;
+  if (currentDay < birthDay) {
+    monthsElapsed--;
+  }
+  if (monthsElapsed < 0) {
+    monthsElapsed += 12;
+  }
   const monthsRemaining = 12 - monthsElapsed;
 
   // Formatar datas

@@ -494,12 +494,33 @@ export const appRouter = router({
           });
           
           // Extract payment link from response
-          const paymentLink = paymentResponse.links?.find(link => link.rel === 'PAYMENT')?.href;
+          // PagSeguro returns payment link in different formats depending on payment method
+          let paymentLink = '';
+          
+          if (paymentResponse.links && Array.isArray(paymentResponse.links)) {
+            const paymentLinkObj = paymentResponse.links.find(
+              (link: any) => link.rel === 'PAYMENT' || link.rel === 'payment'
+            );
+            paymentLink = paymentLinkObj?.href || '';
+          }
+          
+          // If no link found, construct it from order ID
+          if (!paymentLink && paymentResponse.id) {
+            paymentLink = `https://checkout.pagseguro.com/checkout/payment/${paymentResponse.id}`;
+          }
+          
+          if (!paymentLink) {
+            console.warn('No payment link found in PagSeguro response:', paymentResponse);
+            throw new TRPCError({
+              code: 'INTERNAL_SERVER_ERROR',
+              message: 'Não foi possível gerar o link de pagamento'
+            });
+          }
           
           return {
             success: true,
             orderId: paymentResponse.id,
-            paymentLink: paymentLink || '',
+            paymentLink: paymentLink,
             status: paymentResponse.status,
           };
         } catch (error) {

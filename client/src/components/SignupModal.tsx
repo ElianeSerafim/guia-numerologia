@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { X, Mail, Calendar, Loader2, AlertCircle, Check } from 'lucide-react';
+import { X, Mail, Calendar, Loader2, AlertCircle, Check, Lock } from 'lucide-react';
 import { trpc } from '@/lib/trpc';
 
 interface SignupModalProps {
@@ -16,6 +16,8 @@ interface SignupModalProps {
 export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalProps) {
   const [email, setEmail] = useState('');
   const [birthDate, setBirthDate] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -67,6 +69,18 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
         throw new Error('Data de nascimento inválida (use DD/MM/YYYY)');
       }
 
+      if (!password.trim()) {
+        throw new Error('Por favor, preencha sua senha');
+      }
+
+      if (password.length < 6) {
+        throw new Error('Senha deve ter pelo menos 6 caracteres');
+      }
+
+      if (password !== passwordConfirm) {
+        throw new Error('As senhas não coincidem');
+      }
+
       if (!acceptTerms) {
         throw new Error('Você precisa aceitar os termos de uso');
       }
@@ -77,6 +91,8 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
         name: email.split('@')[0] // Use email prefix as name
       });
 
+      // TODO: Salvar senha no banco de dados (implementar no servidor)
+
       setSuccess(true);
 
       // Aguardar 1 segundo e fechar modal
@@ -84,6 +100,8 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
         onSuccess(email.trim(), birthDate.trim()); // birthDate is still passed to parent for Tasting component
         setEmail('');
         setBirthDate('');
+        setPassword('');
+        setPasswordConfirm('');
         setAcceptTerms(false);
         setSuccess(false);
         onClose();
@@ -156,6 +174,42 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
                 />
               </div>
               <p className="text-slate-400 text-xs mt-1">Formato: DD/MM/YYYY</p>
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <label className="block text-[#C8A2E0] font-semibold mb-2 text-sm">
+                Senha
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 text-[#C8A2E0]" size={18} />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Minimo 6 caracteres"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Password Confirm Field */}
+            <div>
+              <label className="block text-[#C8A2E0] font-semibold mb-2 text-sm">
+                Confirmar Senha
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 text-[#C8A2E0]" size={18} />
+                <input
+                  type="password"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  placeholder="Confirme sua senha"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-all"
+                  disabled={isLoading}
+                />
+              </div>
             </div>
 
             {/* Error Message */}

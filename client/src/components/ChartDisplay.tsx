@@ -2,6 +2,7 @@ import { NumerologyChart } from '@/types';
 import FavoriteButton from './FavoriteButton';
 import { calcularIdadesRealizacoes } from '@/lib/numerologyUtils';
 import { useUserSubscription } from '@/hooks/useUserSubscription';
+import { getInterpretation } from '@/lib/interpretations';
 
 /**
  * ChartDisplay Component
@@ -16,6 +17,11 @@ import { useUserSubscription } from '@/hooks/useUserSubscription';
 interface ChartDisplayProps {
   chart: NumerologyChart;
 }
+
+const getRealizationInterpretation = (number: number): string => {
+  const interpretation = getInterpretation(number);
+  return interpretation?.essence || 'Interpretação não disponível';
+};
 
 export default function ChartDisplay({ chart }: ChartDisplayProps) {
   const { user } = useUserSubscription();
@@ -92,7 +98,7 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                 <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR1Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="text-lg font-bold text-yellow-400">
                         1ª Realização {isR1Active && <span className="text-sm">(ATIVA)</span>}
@@ -101,11 +107,14 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r1}</span>
                   </div>
+                  <p className="text-sm text-slate-300 border-t border-purple-500/30 pt-3 mt-3">
+                    {getRealizationInterpretation(chart.realizacoes.r1)}
+                  </p>
                 </div>
                 <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR2Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="text-lg font-bold text-yellow-400">
                         2ª Realização {isR2Active && <span className="text-sm">(ATIVA)</span>}
@@ -114,11 +123,14 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r2}</span>
                   </div>
+                  <p className="text-sm text-slate-300 border-t border-purple-500/30 pt-3 mt-3">
+                    {getRealizationInterpretation(chart.realizacoes.r2)}
+                  </p>
                 </div>
                 <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR3Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="text-lg font-bold text-yellow-400">
                         3ª Realização {isR3Active && <span className="text-sm">(ATIVA)</span>}
@@ -127,11 +139,14 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r3}</span>
                   </div>
+                  <p className="text-sm text-slate-300 border-t border-purple-500/30 pt-3 mt-3">
+                    {getRealizationInterpretation(chart.realizacoes.r3)}
+                  </p>
                 </div>
                 <div className={`bg-gradient-to-r from-blue-900/30 to-indigo-900/30 border rounded-lg p-4 transition-all ${
                   isR4Active ? 'border-yellow-400 shadow-lg shadow-yellow-400/50' : 'border-purple-500/50'
                 }`}>
-                  <div className="flex items-start justify-between">
+                  <div className="flex items-start justify-between mb-3">
                     <div>
                       <h4 className="text-lg font-bold text-yellow-400">
                         4ª Realização {isR4Active && <span className="text-sm">(ATIVA)</span>}
@@ -140,6 +155,9 @@ export default function ChartDisplay({ chart }: ChartDisplayProps) {
                     </div>
                     <span className="text-3xl font-bold text-yellow-400">{chart.realizacoes.r4}</span>
                   </div>
+                  <p className="text-sm text-slate-300 border-t border-purple-500/30 pt-3 mt-3">
+                    {getRealizationInterpretation(chart.realizacoes.r4)}
+                  </p>
                 </div>
               </>
             );
