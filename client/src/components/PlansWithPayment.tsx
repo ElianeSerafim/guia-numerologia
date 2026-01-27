@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NumerologyChart } from '@/types';
-import { Check, Loader2, AlertCircle } from 'lucide-react';
+import { Check, Loader2, AlertCircle, Lock } from 'lucide-react';
 import { trpc } from '@/lib/trpc';
 
 interface PlansWithPaymentProps {
@@ -72,6 +72,8 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -90,6 +92,18 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
       // Validar campos
       if (!name.trim() || !email.trim()) {
         throw new Error('Por favor, preencha seu nome e e-mail');
+      }
+
+      if (!password.trim()) {
+        throw new Error('Por favor, preencha sua senha');
+      }
+
+      if (password.length < 6) {
+        throw new Error('Senha deve ter pelo menos 6 caracteres');
+      }
+
+      if (password !== passwordConfirm) {
+        throw new Error('As senhas não coincidem');
       }
 
       const plan = PLANS[planId as keyof typeof PLANS];
@@ -241,6 +255,38 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
                 className="w-full px-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400"
               />
             </div>
+
+            <div>
+              <label className="block text-[#C8A2E0] font-semibold mb-2">
+                Senha
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 text-[#C8A2E0]" size={18} />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Mínimo 6 caracteres"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[#C8A2E0] font-semibold mb-2">
+                Confirmar Senha
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-3 text-[#C8A2E0]" size={18} />
+                <input
+                  type="password"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  placeholder="Confirme sua senha"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-slate-700 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:border-cyan-400"
+                />
+              </div>
+            </div>
           </div>
 
           {/* Resumo */}
@@ -260,7 +306,7 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
           {/* Botão de Pagamento */}
           <button
             onClick={() => handleInitiatePayment(selectedPlan)}
-            disabled={isLoading || !name.trim() || !email.trim()}
+            disabled={isLoading || !name.trim() || !email.trim() || !password.trim() || !passwordConfirm.trim() || password !== passwordConfirm || password.length < 6}
             className="w-full bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-[#07131B] px-6 py-4 rounded-lg font-bold text-lg hover:shadow-lg transition-all button-glow neon-pulse disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isLoading ? (
