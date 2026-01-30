@@ -25,6 +25,8 @@ interface CheckoutPagSeguroProps {
 export default function CheckoutPagSeguro({ planId, planName, amount, email: initialEmail, name: initialName, onClose, onSuccess, onError }: CheckoutPagSeguroProps) {
   const [email, setEmail] = useState(initialEmail);
   const [name, setName] = useState(initialName);
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<'pix' | 'credit_card' | 'boleto'>('pix');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -43,6 +45,14 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
       // Validate inputs
       if (!email || !name) {
         throw new Error('Por favor, preencha todos os campos');
+      }
+
+      if (!password || password.length < 6) {
+        throw new Error('Senha deve ter pelo menos 6 caracteres');
+      }
+
+      if (password !== passwordConfirm) {
+        throw new Error('As senhas não coincidem');
       }
 
       // Call tRPC mutation to initiate payment
@@ -169,6 +179,34 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
+                disabled={isLoading}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                Senha
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Mínimo 6 caracteres"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
+                disabled={isLoading}
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">
+                Confirmar Senha
+              </label>
+              <input
+                type="password"
+                value={passwordConfirm}
+                onChange={(e) => setPasswordConfirm(e.target.value)}
+                placeholder="Confirme sua senha"
                 className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
                 disabled={isLoading}
               />

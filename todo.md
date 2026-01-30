@@ -339,3 +339,12 @@
 - [x] Implementar lógica de ano pessoal com data de aniversário - CONCLUÍDO
 - [x] Adicionar campo de senha no cadastro antes do pagamento - CONCLUÍDO
 - [x] Debugar e corrigir botão PagSeguro - CONCLUÍDO
+
+## Passo 20: Sistema de Autenticação com Senha (28/01/2026)
+
+- [x] Identificar componente correto do modal de checkout - CONCLUÍDO (CheckoutPagSeguro.tsx)
+- [x] Adicionar campos de senha no modal de checkout - CONCLUÍDO
+- [ ] Implementar hash de senha no backend (bcrypt)
+- [ ] Criar sistema de autenticação com email/senha
+- [ ] Criar página de login para clientes
+- [ ] Testar fluxo completo: cadastro → pagamento → login → dashboard
