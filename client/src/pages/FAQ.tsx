@@ -188,6 +188,15 @@ export default function FAQ() {
       {/* Header */}
       <header className="bg-gradient-to-r from-[#00FFFF] to-[#19E6FF] text-white py-16">
         <div className="container text-center space-y-4">
+          {/* Imagem do Pitágoras */}
+          <div className="flex justify-center mb-6">
+            <img 
+              src="/pitagoras.png" 
+              alt="Pitágoras - Pai da Numerologia" 
+              className="w-40 h-40 object-contain rounded-full shadow-2xl" 
+            />
+          </div>
+          
           <div className="flex items-center justify-center gap-3 mb-4">
             <BookOpen size={32} />
             <h1 className="text-4xl font-bold text-white">Centro de Aprendizado</h1>

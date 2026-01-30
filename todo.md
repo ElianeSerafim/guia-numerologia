@@ -359,3 +359,11 @@
 - [ ] Integrar envio de email com link de reset
 - [ ] Testar fluxo completo: solicitar → receber email → redefinir senha
 - [ ] Fazer checkpoint e publicar
+
+## Passo 22: Adicionar Imagem do Pitágoras (30/01/2026)
+
+- [x] Copiar imagem do Pitágoras para client/public - CONCLUÍDO
+- [x] Adicionar imagem no primeiro card da página de vendas (Pricing.tsx) - CONCLUÍDO
+- [x] Adicionar imagem na página Aprenda (FAQ.tsx) - CONCLUÍDO
+- [x] Testar responsividade da imagem - CONCLUÍDO
+- [ ] Fazer checkpoint e publicar

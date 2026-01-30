@@ -177,6 +177,15 @@ export default function Pricing() {
             onClick={() => handleSelectPlan('navigator')}
             className="card-mystical space-y-6 hover:shadow-2xl hover:scale-105 transition-all duration-300 bg-[#0A1F2E] border border-[#1A3A4A] cursor-pointer"
           >
+            {/* Imagem do Pitágoras */}
+            <div className="flex justify-center mb-4">
+              <img 
+                src="/pitagoras.png" 
+                alt="Pitágoras" 
+                className="w-32 h-32 object-contain rounded-full" 
+              />
+            </div>
+            
             <div className="flex items-center gap-2">
               <Zap className="text-[#19E6FF]" size={24} />
               <h3 className="text-2xl font-bold text-[#19E6FF]">{PLANS.navigator.name}</h3>
