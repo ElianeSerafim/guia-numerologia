@@ -648,6 +648,128 @@ export const appRouter = router({
       }),
   },
 
+  /**
+   * Password Reset Router
+   */
+  passwordReset: router({
+    // Request password reset
+    request: publicProcedure
+      .input(z.object({ email: z.string().email() }))
+      .mutation(async ({ input }) => {
+        const bcrypt = await import('bcrypt');
+        const crypto = await import('crypto');
+        
+        // Check if customer exists
+        const customer = await db.getCustomerByEmail(input.email);
+        if (!customer) {
+          // Don't reveal if email exists or not for security
+          return { success: true, message: 'Se o email existir, você receberá um link de redefinição' };
+        }
+        
+        // Generate reset token
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+        
+        // Save token to database
+        await db.createPasswordResetToken({
+          email: input.email,
+          token,
+          expiresAt,
+        });
+        
+        // Send email with reset link
+        const resetLink = `${process.env.APP_URL || 'http://localhost:3000'}/reset-password?token=${token}`;
+        
+        try {
+          const { sendPasswordResetEmail } = await import('./email/emailService');
+          await sendPasswordResetEmail(input.email, customer.name, resetLink);
+        } catch (error) {
+          console.error('Error sending password reset email:', error);
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Erro ao enviar email de redefinição',
+          });
+        }
+        
+        return { success: true, message: 'Email de redefinição enviado com sucesso' };
+      }),
+
+    // Validate reset token
+    validateToken: publicProcedure
+      .input(z.object({ token: z.string() }))
+      .query(async ({ input }) => {
+        const tokenData = await db.getPasswordResetToken(input.token);
+        
+        if (!tokenData) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Token inválido',
+          });
+        }
+        
+        if (tokenData.used) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Token já foi utilizado',
+          });
+        }
+        
+        if (new Date() > new Date(tokenData.expiresAt)) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Token expirado',
+          });
+        }
+        
+        return { valid: true, email: tokenData.email };
+      }),
+
+    // Reset password
+    reset: publicProcedure
+      .input(z.object({
+        token: z.string(),
+        newPassword: z.string().min(6),
+      }))
+      .mutation(async ({ input }) => {
+        const bcrypt = await import('bcrypt');
+        
+        // Validate token
+        const tokenData = await db.getPasswordResetToken(input.token);
+        
+        if (!tokenData) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Token inválido',
+          });
+        }
+        
+        if (tokenData.used) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Token já foi utilizado',
+          });
+        }
+        
+        if (new Date() > new Date(tokenData.expiresAt)) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: 'Token expirado',
+          });
+        }
+        
+        // Hash new password
+        const hashedPassword = await bcrypt.hash(input.newPassword, 10);
+        
+        // Update customer password
+        await db.updateCustomerPassword(tokenData.email, hashedPassword);
+        
+        // Mark token as used
+        await db.markPasswordResetTokenAsUsed(input.token);
+        
+        return { success: true, message: 'Senha redefinida com sucesso' };
+      }),
+  }),
+
 });
 
 export type AppRouter = typeof appRouter;

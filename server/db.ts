@@ -26,7 +26,10 @@ import {
   Subscription,
   mapHistory,
   InsertMapHistory,
-  MapHistory
+  MapHistory,
+  passwordResetTokens,
+  InsertPasswordResetToken,
+  PasswordResetToken
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
@@ -736,3 +739,74 @@ export async function getRenascimentoByEmail(email: string) {
   return await db.select().from(renascimento).where(eq(renascimento.email, email));
 }
 
+
+/**
+ * Password Reset Token Functions
+ */
+
+export async function createPasswordResetToken(data: {
+  email: string;
+  token: string;
+  expiresAt: Date;
+}): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  try {
+    await db.insert(passwordResetTokens).values({
+      email: data.email,
+      token: data.token,
+      expiresAt: data.expiresAt,
+      used: false,
+    });
+    return true;
+  } catch (error) {
+    console.error("[Database] Failed to create password reset token:", error);
+    return false;
+  }
+}
+
+export async function getPasswordResetToken(token: string): Promise<typeof passwordResetTokens.$inferSelect | null> {
+  const db = await getDb();
+  if (!db) return null;
+
+  try {
+    const result = await db.select().from(passwordResetTokens)
+      .where(eq(passwordResetTokens.token, token))
+      .limit(1);
+    return result[0] || null;
+  } catch (error) {
+    console.error("[Database] Failed to get password reset token:", error);
+    return null;
+  }
+}
+
+export async function markPasswordResetTokenAsUsed(token: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  try {
+    await db.update(passwordResetTokens)
+      .set({ used: true })
+      .where(eq(passwordResetTokens.token, token));
+    return true;
+  } catch (error) {
+    console.error("[Database] Failed to mark password reset token as used:", error);
+    return false;
+  }
+}
+
+export async function updateCustomerPassword(email: string, hashedPassword: string): Promise<boolean> {
+  const db = await getDb();
+  if (!db) return false;
+
+  try {
+    await db.update(customers)
+      .set({ password: hashedPassword })
+      .where(eq(customers.email, email));
+    return true;
+  } catch (error) {
+    console.error("[Database] Failed to update customer password:", error);
+    return false;
+  }
+}

@@ -59,6 +59,7 @@ export const customers = mysqlTable("customers", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
+  password: varchar("password", { length: 255 }), // Hashed password (bcrypt)
   plan: varchar("plan", { length: 20 }).default("basic").notNull(),
   status: varchar("status", { length: 20 }).default("pending").notNull(),
   mapsGenerated: int("mapsGenerated").default(0).notNull(),
@@ -355,3 +356,19 @@ export const pagSeguroOrdersRelations = relations(pagSeguroOrders, ({ one }) => 
     references: [customers.id],
   }),
 }));
+
+
+/**
+ * Password Reset Tokens Table - Stores tokens for password reset requests
+ */
+export const passwordResetTokens = mysqlTable("password_reset_tokens", {
+  id: serial("id").primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  token: varchar("token", { length: 255 }).notNull().unique(),
+  expiresAt: timestamp("expiresAt").notNull(),
+  used: boolean("used").default(false).notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PasswordResetToken = typeof passwordResetTokens.$inferSelect;
+export type InsertPasswordResetToken = typeof passwordResetTokens.$inferInsert;

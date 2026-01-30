@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useLocation, Link } from 'wouter';
 import { Compass, ArrowRight, AlertCircle, CheckCircle, Mail } from 'lucide-react';
-import { sendPasswordResetEmail } from '@/lib/emailService';
+import { trpc } from '@/lib/trpc';
 
 /**
  * ForgotPassword Page - Página de Recuperação de Senha
@@ -18,6 +18,8 @@ export default function ForgotPassword() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  
+  const requestReset = trpc.passwordReset.request.useMutation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,16 +44,17 @@ export default function ForgotPassword() {
 
     // Enviar e-mail de recuperação
     try {
-      await sendPasswordResetEmail(email);
+      await requestReset.mutateAsync({ email });
       setSuccess(true);
       setEmail('');
+      setIsLoading(false);
       
       // Redirecionar para login após 3 segundos
       setTimeout(() => {
         setLocation('/auth');
       }, 3000);
-    } catch (err) {
-      setError('Erro ao enviar e-mail. Tente novamente.');
+    } catch (err: any) {
+      setError(err.message || 'Erro ao enviar e-mail. Tente novamente.');
       setIsLoading(false);
     }
   };

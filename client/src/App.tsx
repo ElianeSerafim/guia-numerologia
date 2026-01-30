@@ -12,6 +12,7 @@ import CheckoutPagSeguro from "./pages/CheckoutPagSeguro";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import DashboardSelector from "./pages/DashboardSelector";
 import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/profile" component={Profile} />
       <Route path="/auth" component={Auth} />
       <Route path="/forgot-password" component={ForgotPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
       <Route path="/dashboard-selector" component={DashboardSelector} />
       <Route path="/pricing" component={Pricing} />
       <Route path="/checkout-pagseguro" component={CheckoutPagSeguro} />

@@ -372,3 +372,115 @@ export async function sendRefundEmail(email: string, params: RefundEmailParams):
     return false;
   }
 }
+
+
+/**
+ * Enviar email de redefinição de senha
+ */
+export async function sendPasswordResetEmail(
+  email: string,
+  name: string,
+  resetLink: string
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  const transporter = getTransporter();
+
+  if (!transporter) {
+    console.log(`[Email] Password reset email sent to: ${email} (simulated mode)`);
+    return { success: true };
+  }
+
+  try {
+    const htmlContent = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #00FFFF 0%, #0099FF 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+            .header h1 { margin: 0; font-size: 28px; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
+            .alert { background: #FFF3CD; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #FFC107; }
+            .cta-button { display: inline-block; background: linear-gradient(135deg, #00FFFF 0%, #0099FF 100%); color: white; padding: 15px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; margin: 20px 0; }
+            .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #999; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1>🔐 Redefinição de Senha</h1>
+            </div>
+            <div class="content">
+              <p>Olá ${name},</p>
+              <p>Recebemos uma solicitação para redefinir a senha da sua conta na <strong>Bússola Numerológica</strong>.</p>
+              
+              <div class="alert">
+                <p><strong>⚠️ Atenção:</strong> Este link expira em 1 hora por questões de segurança.</p>
+              </div>
+
+              <p>Clique no botão abaixo para criar uma nova senha:</p>
+              
+              <center>
+                <a href="${resetLink}" class="cta-button">Redefinir Minha Senha →</a>
+              </center>
+
+              <p style="font-size: 12px; color: #666; margin-top: 20px;">
+                Ou copie e cole este link no seu navegador:<br>
+                <a href="${resetLink}" style="color: #0099FF; word-break: break-all;">${resetLink}</a>
+              </p>
+
+              <p style="margin-top: 30px;">Se você não solicitou esta redefinição de senha, ignore este email. Sua senha permanecerá inalterada.</p>
+              
+              <p>Abraços,<br><strong>Equipe Bússola Numerológica</strong></p>
+
+              <div class="footer">
+                <p>Este é um email automático. Por favor, não responda.</p>
+                <p>© 2026 Bússola Numerológica. Todos os direitos reservados.</p>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+
+    const textContent = `
+Redefinição de Senha
+
+Olá ${name},
+
+Recebemos uma solicitação para redefinir a senha da sua conta na Bússola Numerológica.
+
+⚠️ Atenção: Este link expira em 1 hora por questões de segurança.
+
+Clique no link abaixo para criar uma nova senha:
+${resetLink}
+
+Se você não solicitou esta redefinição de senha, ignore este email. Sua senha permanecerá inalterada.
+
+Abraços,
+Equipe Bússola Numerológica
+
+---
+Este é um email automático. Por favor, não responda.
+© 2026 Bússola Numerológica. Todos os direitos reservados.
+    `;
+
+    const info = await transporter.sendMail({
+      from: SMTP_FROM_EMAIL,
+      to: email,
+      subject: '🔐 Redefinição de Senha - Bússola Numerológica',
+      text: textContent,
+      html: htmlContent,
+    });
+
+    console.log(`[Email] Password reset email sent to: ${email} (ID: ${info.messageId})`);
+    return { success: true, messageId: info.messageId };
+  } catch (error) {
+    console.error('[Email Error]', error);
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Erro ao enviar email',
+    };
+  }
+}

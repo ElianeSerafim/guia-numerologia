@@ -348,3 +348,14 @@
 - [ ] Criar sistema de autenticação com email/senha
 - [ ] Criar página de login para clientes
 - [ ] Testar fluxo completo: cadastro → pagamento → login → dashboard
+
+## Passo 21: Funci## Passo 21: Funcionalidade "Esqueci minha senha" (28/01/2026)
+
+- [x] Criar tabela de tokens de reset de senha no banco de dados - CONCLUÍDO
+- [x] Implementar tRPC procedures para solicitar e validar reset de senha - CONCLUÍDO
+- [x] Criar página de solicitação de reset (ForgotPassword.tsx) - CONCLUÍDO
+- [x] Criar página de redefinição de senha (ResetPassword.tsx) - CONCLUÍDO
+- [x] Adicionar rotas no App.tsx - CONCLUÍDOord.tsx)
+- [ ] Integrar envio de email com link de reset
+- [ ] Testar fluxo completo: solicitar → receber email → redefinir senha
+- [ ] Fazer checkpoint e publicar

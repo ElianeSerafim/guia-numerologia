@@ -47,8 +47,14 @@ export default function CheckoutPagSeguroPage() {
         {/* Checkout Component */}
         <CheckoutPagSeguro
           planId={planId}
+          planName={''}
+          amount={0}
+          email={''}
+          name={''}
+          onClose={() => setLocation('/pricing')}
           onSuccess={(orderId) => {
             console.log('Payment initiated:', orderId);
+            setLocation(`/payment-success?orderId=${orderId}`);
           }}
           onError={(error) => {
             console.error('Payment error:', error);
