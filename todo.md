@@ -367,3 +367,9 @@
 - [x] Adicionar imagem na página Aprenda (FAQ.tsx) - CONCLUÍDO
 - [x] Testar responsividade da imagem - CONCLUÍDO
 - [ ] Fazer checkpoint e publicar
+
+## Passo 23: Substituir Imagem do Pitágoras por Versão com Fundo Transparente (30/01/2026)
+
+- [x] Copiar nova imagem pitágoras2.png para client/public/pitagoras.png - CONCLUÍDO
+- [x] Verificar se as páginas Pricing.tsx e FAQ.tsx carregam a nova imagem - CONCLUÍDO
+- [ ] Fazer checkpoint e publicar
