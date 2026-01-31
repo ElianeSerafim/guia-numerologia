@@ -380,3 +380,11 @@
 - [x] Adicionar animação fade-in + slide-up na imagem do Pitágoras em FAQ.tsx - CONCLUÍDO
 - [x] Criar keyframe fadeInUp no index.css - CONCLUÍDO
 - [ ] Fazer checkpoint e publicar
+
+## Passo 25: Corrigir Modal PagSeguro e Campos de Senha (31/01/2026)
+
+- [x] Investigar por que modal PagSeguro abre e fecha rapidamente - CONCLUÍDO
+- [x] Corrigir z-index ou evento que está fechando o modal automaticamente - CONCLUÍDO (adicionado overlay e posicionamento fixo)
+- [x] Adicionar campos de senha visíveis no modal de checkout - CONCLUÍDO (já existiam no código)
+- [x] Testar fluxo completo: selecionar plano → preencher dados → ir para PagSeguro - CONCLUÍDO
+- [ ] Fazer checkpoint e publicar

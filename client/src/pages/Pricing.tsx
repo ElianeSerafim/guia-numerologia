@@ -468,23 +468,27 @@ export default function Pricing() {
 
       {/* PagSeguro Checkout */}
       {showPagSeguroCheckout && selectedPlan && (
-        <CheckoutPagSeguro
-          planId={selectedPlan as 'navigator' | 'visionary' | 'illuminated'}
-          planName={PLANS[selectedPlan as keyof typeof PLANS].name}
-          amount={selectedPlan ? (PLANS[selectedPlan as keyof typeof PLANS].price - couponDiscount) : 0}
-          email={email}
-          name={fullName}
-          onClose={() => {
-            setShowPagSeguroCheckout(false);
-            setShowCheckout(false);
-          }}
-          onSuccess={() => {
-            setShowPagSeguroCheckout(false);
-            setShowCheckout(false);
-            // Mostrar mensagem de sucesso
-            alert('Pagamento iniciado! Você receberá um e-mail com as instruções.');
-          }}
-        />
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="relative w-full max-w-2xl my-8">
+            <CheckoutPagSeguro
+              planId={selectedPlan as 'navigator' | 'visionary' | 'illuminated'}
+              planName={PLANS[selectedPlan as keyof typeof PLANS].name}
+              amount={selectedPlan ? (PLANS[selectedPlan as keyof typeof PLANS].price - couponDiscount) : 0}
+              email={email}
+              name={fullName}
+              onClose={() => {
+                setShowPagSeguroCheckout(false);
+                setShowCheckout(false);
+              }}
+              onSuccess={() => {
+                setShowPagSeguroCheckout(false);
+                setShowCheckout(false);
+                // Mostrar mensagem de sucesso
+                alert('Pagamento iniciado! Você receberá um e-mail com as instruções.');
+              }}
+            />
+          </div>
+        </div>
       )}
 
       {/* Footer */}
