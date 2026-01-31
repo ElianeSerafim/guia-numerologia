@@ -97,8 +97,8 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
             </div>
           </div>
 
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Pagamento Iniciado!</h2>
-          <p className="text-slate-600 mb-4">
+          <h2 className="text-2xl font-bold text-white mb-2">Pagamento Iniciado!</h2>
+          <p className="text-white/80 mb-4">
             Você será redirecionado para completar o pagamento em breve...
           </p>
 
@@ -157,7 +157,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
           {/* Personal Information */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Nome Completo
               </label>
               <input
@@ -165,13 +165,13 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Seu nome completo"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 E-mail
               </label>
               <input
@@ -179,13 +179,13 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Senha
               </label>
               <input
@@ -193,13 +193,13 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mínimo 6 caracteres"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">
+              <label className="block text-sm font-semibold text-white mb-2">
                 Confirmar Senha
               </label>
               <input
@@ -207,7 +207,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 placeholder="Confirme sua senha"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-900"
+                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
                 disabled={isLoading}
               />
             </div>
@@ -215,7 +215,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
 
           {/* Payment Method Selection */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-3">
+            <label className="block text-sm font-semibold text-white mb-3">
               Método de Pagamento
             </label>
 
@@ -237,8 +237,8 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 />
                 <Smartphone size={20} className="ml-3 text-indigo-600" />
                 <div className="ml-3">
-                  <p className="font-semibold text-slate-900">Pix</p>
-                  <p className="text-xs text-slate-600">Instantâneo</p>
+                  <p className="font-semibold text-white">Pix</p>
+                  <p className="text-xs text-white/80">Instantâneo</p>
                 </div>
               </label>
 
@@ -259,8 +259,8 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 />
                 <CreditCard size={20} className="ml-3 text-indigo-600" />
                 <div className="ml-3">
-                  <p className="font-semibold text-slate-900">Cartão de Crédito/Débito</p>
-                  <p className="text-xs text-slate-600">Visa, Mastercard, Elo</p>
+                  <p className="font-semibold text-white">Cartão de Crédito/Débito</p>
+                  <p className="text-xs text-white/80">Visa, Mastercard, Elo</p>
                 </div>
               </label>
 
@@ -281,8 +281,8 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 />
                 <FileText size={20} className="ml-3 text-indigo-600" />
                 <div className="ml-3">
-                  <p className="font-semibold text-slate-900">Boleto Bancário</p>
-                  <p className="text-xs text-slate-600">Vencimento em 3 dias</p>
+                  <p className="font-semibold text-white">Boleto Bancário</p>
+                  <p className="text-xs text-white/80">Vencimento em 3 dias</p>
                 </div>
               </label>
             </div>
@@ -317,7 +317,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
 
           {/* Guarantee Badge */}
           <div className="text-center pt-4 border-t border-slate-200">
-            <p className="text-xs text-slate-600">
+            <p className="text-xs text-white/80">
               ✓ Garantia de Satisfação de 7 dias
             </p>
           </div>

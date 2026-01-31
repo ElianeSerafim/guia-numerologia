@@ -388,3 +388,8 @@
 - [x] Adicionar campos de senha visíveis no modal de checkout - CONCLUÍDO (já existiam no código)
 - [x] Testar fluxo completo: selecionar plano → preencher dados → ir para PagSeguro - CONCLUÍDO
 - [ ] Fazer checkpoint e publicar
+
+## Passo 26: Corrigir Cor das Letras do Modal PagSeguro (31/01/2026)
+
+- [x] Alterar cor das letras (labels, títulos, textos) para #ffffff no CheckoutPagSeguro.tsx - CONCLUÍDO
+- [ ] Fazer checkpoint e publicar
