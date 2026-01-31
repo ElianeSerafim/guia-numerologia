@@ -182,7 +182,7 @@ export default function Pricing() {
               <img 
                 src="/pitagoras.png" 
                 alt="Pitágoras" 
-                className="w-32 h-32 object-contain rounded-full" 
+                className="w-32 h-32 object-contain rounded-full animate-[fadeInUp_0.8s_ease-out]" 
               />
             </div>
             

@@ -372,3 +372,15 @@
   .card-scale-hover:hover {
     transform: scale(1.02);
   }
+
+  /* Fade In Up Animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

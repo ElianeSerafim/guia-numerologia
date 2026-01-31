@@ -373,3 +373,10 @@
 - [x] Copiar nova imagem pitágoras2.png para client/public/pitagoras.png - CONCLUÍDO
 - [x] Verificar se as páginas Pricing.tsx e FAQ.tsx carregam a nova imagem - CONCLUÍDO
 - [ ] Fazer checkpoint e publicar
+
+## Passo 24: Adicionar Animações de Entrada para Imagem do Pitágoras (30/01/2026)
+
+- [x] Adicionar animação fade-in + slide-up na imagem do Pitágoras em Pricing.tsx - CONCLUÍDO
+- [x] Adicionar animação fade-in + slide-up na imagem do Pitágoras em FAQ.tsx - CONCLUÍDO
+- [x] Criar keyframe fadeInUp no index.css - CONCLUÍDO
+- [ ] Fazer checkpoint e publicar

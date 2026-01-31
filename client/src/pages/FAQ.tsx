@@ -193,7 +193,7 @@ export default function FAQ() {
             <img 
               src="/pitagoras.png" 
               alt="Pitágoras - Pai da Numerologia" 
-              className="w-40 h-40 object-contain rounded-full shadow-2xl" 
+              className="w-40 h-40 object-contain rounded-full shadow-2xl animate-[fadeInUp_0.8s_ease-out]" 
             />
           </div>
           
