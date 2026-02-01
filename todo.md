@@ -433,3 +433,13 @@
 - [x] Corrigir contraste na opção de pagamento selecionada (texto branco invisível no fundo claro) - CONCLUÍDO
 - [x] Reduzir tamanho do modal de checkout para melhor visualização em dispositivos móveis - CONCLUÍDO
 - [ ] Testar responsividade do modal em diferentes tamanhos de tela
+
+
+## Validação Visual em Tempo Real - Checkout
+
+### Nova Funcionalidade
+- [x] Adicionar estados de validação para cada campo (valid, invalid, pristine) - CONCLUÍDO
+- [x] Implementar funções de validação em tempo real (email, senha, confirmação) - CONCLUÍDO
+- [x] Adicionar ícones Check (verde) e X (vermelho) nos campos - CONCLUÍDO
+- [x] Mostrar mensagens de erro específicas abaixo de cada campo - CONCLUÍDO
+- [x] Aplicar bordas coloridas (verde/vermelho) conforme validação - CONCLUÍDO

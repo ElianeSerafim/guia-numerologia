@@ -4,11 +4,11 @@
  * Supports: Pix, Credit/Debit Card, Boleto
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, AlertCircle, CheckCircle, CreditCard, Smartphone, FileText } from 'lucide-react';
+import { Loader2, AlertCircle, CheckCircle, CreditCard, Smartphone, FileText, Check, X } from 'lucide-react';
 import { PLANS } from '@/types/payment';
 
 interface CheckoutPagSeguroProps {
@@ -33,8 +33,90 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
   const [success, setSuccess] = useState(false);
   const [orderId, setOrderId] = useState('');
 
+  // Validation states
+  const [touched, setTouched] = useState({
+    name: false,
+    email: false,
+    password: false,
+    passwordConfirm: false,
+  });
+
+  const [validation, setValidation] = useState({
+    name: { isValid: false, message: '' },
+    email: { isValid: false, message: '' },
+    password: { isValid: false, message: '' },
+    passwordConfirm: { isValid: false, message: '' },
+  });
+
   const plan = PLANS[planId as keyof typeof PLANS];
   const initiatePagSeguro = trpc.payment.initiatePagSeguro.useMutation();
+
+  // Validation functions
+  const validateName = (value: string) => {
+    if (!value.trim()) {
+      return { isValid: false, message: 'Nome é obrigatório' };
+    }
+    if (value.trim().length < 3) {
+      return { isValid: false, message: 'Nome deve ter pelo menos 3 caracteres' };
+    }
+    return { isValid: true, message: '' };
+  };
+
+  const validateEmail = (value: string) => {
+    if (!value.trim()) {
+      return { isValid: false, message: 'E-mail é obrigatório' };
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      return { isValid: false, message: 'E-mail inválido' };
+    }
+    return { isValid: true, message: '' };
+  };
+
+  const validatePassword = (value: string) => {
+    if (!value) {
+      return { isValid: false, message: 'Senha é obrigatória' };
+    }
+    if (value.length < 6) {
+      return { isValid: false, message: 'Mínimo 6 caracteres' };
+    }
+    return { isValid: true, message: '' };
+  };
+
+  const validatePasswordConfirm = (value: string) => {
+    if (!value) {
+      return { isValid: false, message: 'Confirmação é obrigatória' };
+    }
+    if (value !== password) {
+      return { isValid: false, message: 'Senhas não coincidem' };
+    }
+    return { isValid: true, message: '' };
+  };
+
+  // Real-time validation
+  useEffect(() => {
+    if (touched.name) {
+      setValidation(prev => ({ ...prev, name: validateName(name) }));
+    }
+  }, [name, touched.name]);
+
+  useEffect(() => {
+    if (touched.email) {
+      setValidation(prev => ({ ...prev, email: validateEmail(email) }));
+    }
+  }, [email, touched.email]);
+
+  useEffect(() => {
+    if (touched.password) {
+      setValidation(prev => ({ ...prev, password: validatePassword(password) }));
+    }
+  }, [password, touched.password]);
+
+  useEffect(() => {
+    if (touched.passwordConfirm) {
+      setValidation(prev => ({ ...prev, passwordConfirm: validatePasswordConfirm(passwordConfirm) }));
+    }
+  }, [passwordConfirm, password, touched.passwordConfirm]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -160,56 +242,140 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
               <label className="block text-sm font-semibold text-white mb-1.5">
                 Nome Completo
               </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Seu nome completo"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  onBlur={() => setTouched(prev => ({ ...prev, name: true }))}
+                  placeholder="Seu nome completo"
+                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                    touched.name
+                      ? validation.name.isValid
+                        ? 'border-green-500 focus:ring-green-500'
+                        : 'border-red-500 focus:ring-red-500'
+                      : 'border-slate-200 focus:ring-indigo-500'
+                  }`}
+                  disabled={isLoading}
+                />
+                {touched.name && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {validation.name.isValid ? (
+                      <Check size={18} className="text-green-500" />
+                    ) : (
+                      <X size={18} className="text-red-500" />
+                    )}
+                  </div>
+                )}
+              </div>
+              {touched.name && !validation.name.isValid && (
+                <p className="text-xs text-red-400 mt-1">{validation.name.message}</p>
+              )}
             </div>
 
             <div>
               <label className="block text-sm font-semibold text-white mb-1.5">
                 E-mail
               </label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="seu@email.com"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onBlur={() => setTouched(prev => ({ ...prev, email: true }))}
+                  placeholder="seu@email.com"
+                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                    touched.email
+                      ? validation.email.isValid
+                        ? 'border-green-500 focus:ring-green-500'
+                        : 'border-red-500 focus:ring-red-500'
+                      : 'border-slate-200 focus:ring-indigo-500'
+                  }`}
+                  disabled={isLoading}
+                />
+                {touched.email && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {validation.email.isValid ? (
+                      <Check size={18} className="text-green-500" />
+                    ) : (
+                      <X size={18} className="text-red-500" />
+                    )}
+                  </div>
+                )}
+              </div>
+              {touched.email && !validation.email.isValid && (
+                <p className="text-xs text-red-400 mt-1">{validation.email.message}</p>
+              )}
             </div>
 
             <div>
               <label className="block text-sm font-semibold text-white mb-1.5">
                 Senha
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Mínimo 6 caracteres"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onBlur={() => setTouched(prev => ({ ...prev, password: true }))}
+                  placeholder="Mínimo 6 caracteres"
+                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                    touched.password
+                      ? validation.password.isValid
+                        ? 'border-green-500 focus:ring-green-500'
+                        : 'border-red-500 focus:ring-red-500'
+                      : 'border-slate-200 focus:ring-indigo-500'
+                  }`}
+                  disabled={isLoading}
+                />
+                {touched.password && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {validation.password.isValid ? (
+                      <Check size={18} className="text-green-500" />
+                    ) : (
+                      <X size={18} className="text-red-500" />
+                    )}
+                  </div>
+                )}
+              </div>
+              {touched.password && !validation.password.isValid && (
+                <p className="text-xs text-red-400 mt-1">{validation.password.message}</p>
+              )}
             </div>
 
             <div>
               <label className="block text-sm font-semibold text-white mb-1.5">
                 Confirmar Senha
               </label>
-              <input
-                type="password"
-                value={passwordConfirm}
-                onChange={(e) => setPasswordConfirm(e.target.value)}
-                placeholder="Confirme sua senha"
-                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <input
+                  type="password"
+                  value={passwordConfirm}
+                  onChange={(e) => setPasswordConfirm(e.target.value)}
+                  onBlur={() => setTouched(prev => ({ ...prev, passwordConfirm: true }))}
+                  placeholder="Confirme sua senha"
+                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                    touched.passwordConfirm
+                      ? validation.passwordConfirm.isValid
+                        ? 'border-green-500 focus:ring-green-500'
+                        : 'border-red-500 focus:ring-red-500'
+                      : 'border-slate-200 focus:ring-indigo-500'
+                  }`}
+                  disabled={isLoading}
+                />
+                {touched.passwordConfirm && (
+                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                    {validation.passwordConfirm.isValid ? (
+                      <Check size={18} className="text-green-500" />
+                    ) : (
+                      <X size={18} className="text-red-500" />
+                    )}
+                  </div>
+                )}
+              </div>
+              {touched.passwordConfirm && !validation.passwordConfirm.isValid && (
+                <p className="text-xs text-red-400 mt-1">{validation.passwordConfirm.message}</p>
+              )}
             </div>
           </div>
 
