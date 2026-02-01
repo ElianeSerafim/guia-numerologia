@@ -33,6 +33,17 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
   const [success, setSuccess] = useState(false);
   const [orderId, setOrderId] = useState('');
 
+  // Address states
+  const [cep, setCep] = useState('');
+  const [street, setStreet] = useState('');
+  const [number, setNumber] = useState('');
+  const [complement, setComplement] = useState('');
+  const [neighborhood, setNeighborhood] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [loadingCep, setLoadingCep] = useState(false);
+  const [cepError, setCepError] = useState('');
+
   // Validation states
   const [touched, setTouched] = useState({
     name: false,
@@ -96,6 +107,51 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
     }
     return { isValid: true, message: '' };
   };
+
+  // CEP lookup function
+  const fetchAddressByCep = async (cepValue: string) => {
+    // Remove non-numeric characters
+    const cleanCep = cepValue.replace(/\D/g, '');
+    
+    // Validate CEP format (8 digits)
+    if (cleanCep.length !== 8) {
+      return;
+    }
+
+    setLoadingCep(true);
+    setCepError('');
+
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cleanCep}/json/`);
+      const data = await response.json();
+
+      if (data.erro) {
+        setCepError('CEP não encontrado');
+        return;
+      }
+
+      // Auto-fill address fields
+      setStreet(data.logradouro || '');
+      setNeighborhood(data.bairro || '');
+      setCity(data.localidade || '');
+      setState(data.uf || '');
+    } catch (error) {
+      setCepError('Erro ao buscar CEP');
+    } finally {
+      setLoadingCep(false);
+    }
+  };
+
+  // Debounced CEP lookup
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (cep) {
+        fetchAddressByCep(cep);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [cep]);
 
   // Real-time validation
   useEffect(() => {
@@ -400,6 +456,132 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
               {touched.passwordConfirm && !validation.passwordConfirm.isValid && (
                 <p className="text-xs text-red-400 mt-1">{validation.passwordConfirm.message}</p>
               )}
+            </div>
+          </div>
+
+          {/* Address Section */}
+          <div className="space-y-3">
+            <h3 className="text-sm font-bold text-white mb-2">Endereço de Cobrança</h3>
+            
+            <div className="grid grid-cols-2 gap-3">
+              {/* CEP */}
+              <div>
+                <label className="block text-sm font-semibold text-white mb-1.5">
+                  CEP
+                </label>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={cep}
+                    onChange={(e) => setCep(e.target.value)}
+                    placeholder="00000-000"
+                    maxLength={9}
+                    className="w-full px-3 py-2 pr-10 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                    disabled={isLoading}
+                  />
+                  {loadingCep && (
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                      <Loader2 size={18} className="text-indigo-500 animate-spin" />
+                    </div>
+                  )}
+                </div>
+                {cepError && (
+                  <p className="text-xs text-red-400 mt-1">{cepError}</p>
+                )}
+              </div>
+
+              {/* Número */}
+              <div>
+                <label className="block text-sm font-semibold text-white mb-1.5">
+                  Número
+                </label>
+                <input
+                  type="text"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
+                  placeholder="123"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Rua */}
+            <div>
+              <label className="block text-sm font-semibold text-white mb-1.5">
+                Rua
+              </label>
+              <input
+                type="text"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                placeholder="Nome da rua"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                disabled={isLoading}
+              />
+            </div>
+
+            {/* Complemento */}
+            <div>
+              <label className="block text-sm font-semibold text-white mb-1.5">
+                Complemento (Opcional)
+              </label>
+              <input
+                type="text"
+                value={complement}
+                onChange={(e) => setComplement(e.target.value)}
+                placeholder="Apto, bloco, etc."
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                disabled={isLoading}
+              />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {/* Bairro */}
+              <div>
+                <label className="block text-sm font-semibold text-white mb-1.5">
+                  Bairro
+                </label>
+                <input
+                  type="text"
+                  value={neighborhood}
+                  onChange={(e) => setNeighborhood(e.target.value)}
+                  placeholder="Bairro"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                  disabled={isLoading}
+                />
+              </div>
+
+              {/* Cidade */}
+              <div>
+                <label className="block text-sm font-semibold text-white mb-1.5">
+                  Cidade
+                </label>
+                <input
+                  type="text"
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
+                  placeholder="Cidade"
+                  className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Estado */}
+            <div>
+              <label className="block text-sm font-semibold text-white mb-1.5">
+                Estado
+              </label>
+              <input
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                placeholder="UF"
+                maxLength={2}
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
+                disabled={isLoading}
+              />
             </div>
           </div>
 

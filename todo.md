@@ -453,3 +453,16 @@
 - [x] Implementar ícone Eye/EyeOff do lucide-react - CONCLUÍDO
 - [x] Adicionar botão de toggle nos campos de senha - CONCLUÍDO
 - [x] Alternar type do input entre "password" e "text" - CONCLUÍDO
+
+
+## Preenchimento Automático de Endereço via CEP - Checkout
+
+### Nova Funcionalidade
+- [x] Adicionar campos de endereço ao formulário (CEP, rua, número, complemento, bairro, cidade, estado) - CONCLUÍDO
+- [x] Criar função de busca de CEP usando API ViaCEP - CONCLUÍDO
+- [x] Implementar debounce para evitar requisições excessivas - CONCLUÍDO
+- [x] Preencher automaticamente rua, bairro, cidade e estado - CONCLUÍDO
+- [x] Adicionar loading indicator durante busca - CONCLUÍDO
+- [x] Adicionar validação de CEP (formato e existência) - CONCLUÍDO
+- [x] Mostrar mensagem de erro se CEP não for encontrado - CONCLUÍDO
+- [x] Permitir edição manual dos campos preenchidos automaticamente - CONCLUÍDO
