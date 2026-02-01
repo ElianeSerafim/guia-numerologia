@@ -124,7 +124,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <Card className="w-full max-w-md mx-auto my-4">
       <CardHeader>
         <CardTitle>Checkout - {plan.name}</CardTitle>
         <CardDescription>
@@ -132,22 +132,22 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <CardContent className="p-4 sm:p-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/* Plan Summary */}
-          <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-4 text-white">
-            <div className="flex justify-between items-center mb-3">
+          <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-3 text-white">
+            <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-[#19E6FF]">Plano</span>
               <span className="font-bold text-[#00FFFF]">{plan.name}</span>
             </div>
-            <div className="flex justify-between items-center mb-3">
+            <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-[#19E6FF]">Mapas Inclusos</span>
               <span className="font-bold text-white">{plan.mapsLimit}</span>
             </div>
-            <div className="border-t border-[#1A3A4A] pt-3">
+            <div className="border-t border-[#1A3A4A] pt-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-[#19E6FF]">Valor Total</span>
-                <span className="text-2xl font-bold text-[#00FFFF]">
+                <span className="text-xl font-bold text-[#00FFFF]">
                   R$ {plan.price.toFixed(2).replace('.', ',')}
                 </span>
               </div>
@@ -155,9 +155,9 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
           </div>
 
           {/* Personal Information */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div>
-              <label className="block text-sm font-semibold text-white mb-2">
+              <label className="block text-sm font-semibold text-white mb-1.5">
                 Nome Completo
               </label>
               <input
@@ -165,13 +165,13 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Seu nome completo"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-white mb-2">
+              <label className="block text-sm font-semibold text-white mb-1.5">
                 E-mail
               </label>
               <input
@@ -179,13 +179,13 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="seu@email.com"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-white mb-2">
+              <label className="block text-sm font-semibold text-white mb-1.5">
                 Senha
               </label>
               <input
@@ -193,13 +193,13 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Mínimo 6 caracteres"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
                 disabled={isLoading}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-white mb-2">
+              <label className="block text-sm font-semibold text-white mb-1.5">
                 Confirmar Senha
               </label>
               <input
@@ -207,7 +207,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                 value={passwordConfirm}
                 onChange={(e) => setPasswordConfirm(e.target.value)}
                 placeholder="Confirme sua senha"
-                className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"
+                className="w-full px-3 py-2 text-sm border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white bg-slate-800"
                 disabled={isLoading}
               />
             </div>
@@ -215,16 +215,16 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
 
           {/* Payment Method Selection */}
           <div>
-            <label className="block text-sm font-semibold text-white mb-3">
+            <label className="block text-sm font-semibold text-white mb-2">
               Método de Pagamento
             </label>
 
             <div className="space-y-2">
               {/* Pix Option */}
-              <label className="flex items-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-500 transition-colors"
+              <label className="flex items-center p-3 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-500 transition-colors"
                 style={{
-                  borderColor: paymentMethod === 'pix' ? '#4F46E5' : '#E2E8F0',
-                  backgroundColor: paymentMethod === 'pix' ? '#EEF2FF' : 'transparent',
+                  borderColor: paymentMethod === 'pix' ? '#00FFFF' : '#E2E8F0',
+                  backgroundColor: paymentMethod === 'pix' ? '#0A1F2E' : 'transparent',
                 }}>
                 <input
                   type="radio"
@@ -235,18 +235,18 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   className="w-4 h-4"
                   disabled={isLoading}
                 />
-                <Smartphone size={20} className="ml-3 text-indigo-600" />
+                <Smartphone size={18} className="ml-3" style={{ color: paymentMethod === 'pix' ? '#00FFFF' : '#6366F1' }} />
                 <div className="ml-3">
-                  <p className="font-semibold text-white">Pix</p>
-                  <p className="text-xs text-white/80">Instantâneo</p>
+                  <p className="font-semibold" style={{ color: paymentMethod === 'pix' ? '#00FFFF' : '#FFFFFF' }}>Pix</p>
+                  <p className="text-xs" style={{ color: paymentMethod === 'pix' ? '#19E6FF' : 'rgba(255,255,255,0.8)' }}>Instantâneo</p>
                 </div>
               </label>
 
               {/* Credit Card Option */}
-              <label className="flex items-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-500 transition-colors"
+              <label className="flex items-center p-3 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-500 transition-colors"
                 style={{
-                  borderColor: paymentMethod === 'credit_card' ? '#4F46E5' : '#E2E8F0',
-                  backgroundColor: paymentMethod === 'credit_card' ? '#EEF2FF' : 'transparent',
+                  borderColor: paymentMethod === 'credit_card' ? '#00FFFF' : '#E2E8F0',
+                  backgroundColor: paymentMethod === 'credit_card' ? '#0A1F2E' : 'transparent',
                 }}>
                 <input
                   type="radio"
@@ -257,18 +257,18 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   className="w-4 h-4"
                   disabled={isLoading}
                 />
-                <CreditCard size={20} className="ml-3 text-indigo-600" />
+                <CreditCard size={18} className="ml-3" style={{ color: paymentMethod === 'credit_card' ? '#00FFFF' : '#6366F1' }} />
                 <div className="ml-3">
-                  <p className="font-semibold text-white">Cartão de Crédito/Débito</p>
-                  <p className="text-xs text-white/80">Visa, Mastercard, Elo</p>
+                  <p className="font-semibold" style={{ color: paymentMethod === 'credit_card' ? '#00FFFF' : '#FFFFFF' }}>Cartão de Crédito/Débito</p>
+                  <p className="text-xs" style={{ color: paymentMethod === 'credit_card' ? '#19E6FF' : 'rgba(255,255,255,0.8)' }}>Visa, Mastercard, Elo</p>
                 </div>
               </label>
 
               {/* Boleto Option */}
-              <label className="flex items-center p-4 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-500 transition-colors"
+              <label className="flex items-center p-3 border-2 border-slate-200 rounded-lg cursor-pointer hover:border-indigo-500 transition-colors"
                 style={{
-                  borderColor: paymentMethod === 'boleto' ? '#4F46E5' : '#E2E8F0',
-                  backgroundColor: paymentMethod === 'boleto' ? '#EEF2FF' : 'transparent',
+                  borderColor: paymentMethod === 'boleto' ? '#00FFFF' : '#E2E8F0',
+                  backgroundColor: paymentMethod === 'boleto' ? '#0A1F2E' : 'transparent',
                 }}>
                 <input
                   type="radio"
@@ -279,10 +279,10 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   className="w-4 h-4"
                   disabled={isLoading}
                 />
-                <FileText size={20} className="ml-3 text-indigo-600" />
+                <FileText size={18} className="ml-3" style={{ color: paymentMethod === 'boleto' ? '#00FFFF' : '#6366F1' }} />
                 <div className="ml-3">
-                  <p className="font-semibold text-white">Boleto Bancário</p>
-                  <p className="text-xs text-white/80">Vencimento em 3 dias</p>
+                  <p className="font-semibold" style={{ color: paymentMethod === 'boleto' ? '#00FFFF' : '#FFFFFF' }}>Boleto Bancário</p>
+                  <p className="text-xs" style={{ color: paymentMethod === 'boleto' ? '#19E6FF' : 'rgba(255,255,255,0.8)' }}>Vencimento em 3 dias</p>
                 </div>
               </label>
             </div>

@@ -426,3 +426,10 @@
 - [ ] Testar login com credenciais corretas e incorretas
 - [ ] Testar recuperação de senha
 - [ ] Fazer checkpoint final
+
+## Correções de UX - Modal de Checkout
+
+### Problema Reportado pelo Cliente
+- [x] Corrigir contraste na opção de pagamento selecionada (texto branco invisível no fundo claro) - CONCLUÍDO
+- [x] Reduzir tamanho do modal de checkout para melhor visualização em dispositivos móveis - CONCLUÍDO
+- [ ] Testar responsividade do modal em diferentes tamanhos de tela
