@@ -28,6 +28,28 @@ export const appRouter = router({
       ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
       return { success: true } as const;
     }),
+    login: publicProcedure
+      .input(z.object({
+        email: z.string().email(),
+        password: z.string().min(6)
+      }))
+      .mutation(async ({ input, ctx }) => {
+        // Get customer by email
+        const customer = await db.getCustomerByEmail(input.email);
+        if (!customer || !customer.password) {
+          throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Credenciais inválidas' });
+        }
+
+        // Compare password
+        const isValid = await db.comparePassword(input.password, customer.password);
+        if (!isValid) {
+          throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Credenciais inválidas' });
+        }
+
+        // Create session (TODO: implement session management)
+        // For now, return success
+        return { success: true, customer: { id: customer.id, email: customer.email, name: customer.name } };
+      }),
   }),
 
   /**

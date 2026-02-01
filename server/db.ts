@@ -32,6 +32,7 @@ import {
   PasswordResetToken
 } from "../drizzle/schema";
 import { ENV } from './_core/env';
+import bcrypt from 'bcrypt';
 
 let _db: ReturnType<typeof drizzle> | null = null;
 
@@ -137,7 +138,13 @@ export async function createCustomer(customer: InsertCustomer) {
   const db = await getDb();
   if (!db) throw new Error("Database not available");
   
-  await db.insert(customers).values(customer);
+  // Hash password if provided
+  const customerData = { ...customer };
+  if (customerData.password) {
+    customerData.password = await hashPassword(customerData.password);
+  }
+  
+  await db.insert(customers).values(customerData);
   // Fetch the created customer by email
   const result = await db.select().from(customers).where(eq(customers.email, customer.email)).limit(1);
   return result[0];
@@ -809,4 +816,15 @@ export async function updateCustomerPassword(email: string, hashedPassword: stri
     console.error("[Database] Failed to update customer password:", error);
     return false;
   }
+}
+
+// Password hashing utilities
+const SALT_ROUNDS = 10;
+
+export async function hashPassword(password: string): Promise<string> {
+  return bcrypt.hash(password, SALT_ROUNDS);
+}
+
+export async function comparePassword(password: string, hashedPassword: string): Promise<boolean> {
+  return bcrypt.compare(password, hashedPassword);
 }

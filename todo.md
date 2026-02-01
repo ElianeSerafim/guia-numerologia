@@ -393,3 +393,33 @@
 
 - [x] Alterar cor das letras (labels, títulos, textos) para #ffffff no CheckoutPagSeguro.tsx - CONCLUÍDO
 - [ ] Fazer checkpoint e publicar
+
+## Passo 27: Implementar Hash de Senha, Sistema de Login e Fluxo de Pagamento (31/01/2026)
+
+### Fase 1: Hash de Senha no Backend
+- [x] Adicionar função hashPassword e comparePassword em server/db.ts - CONCLUÍDO
+- [x] Atualizar createCustomer para fazer hash da senha antes de salvar - CONCLUÍDO
+- [x] Atualizar createPagSeguroOrder para fazer hash da senha antes de salvar - N/A (tabela não tem campo password)
+
+### Fase 2: Sistema de Login
+- [x] Criar página Login.tsx com formulário de email/senha - CONCLUÍDO
+- [x] Criar tRPC procedure auth.login para validar credenciais - CONCLUÍDO
+- [x] Adicionar rota /login no App.tsx - CONCLUÍDO
+- [ ] Adicionar link "Já tem conta? Faça login" no SignupModal
+
+### Fase 3: Integração ao Checkout
+- [ ] Verificar se cliente já está autenticado antes de mostrar checkout
+- [ ] Redirecionar para login se não autenticado
+- [ ] Salvar senha com hash ao criar pedido no checkout
+
+### Fase 4: Webhook PagSeguro
+- [ ] Criar endpoint /api/webhook/pagseguro para receber notificações
+- [ ] Atualizar status do pedido quando pagamento for aprovado
+- [ ] Enviar email de confirmação com acesso ao dashboard
+- [ ] Liberar mapas correspondentes ao plano adquirido
+
+### Fase 5: Testes
+- [ ] Testar fluxo: cadastro → degustação → checkout → pagamento → webhook → acesso
+- [ ] Testar login com credenciais corretas e incorretas
+- [ ] Testar recuperação de senha
+- [ ] Fazer checkpoint final
