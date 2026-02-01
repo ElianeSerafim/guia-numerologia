@@ -466,3 +466,19 @@
 - [x] Adicionar validação de CEP (formato e existência) - CONCLUÍDO
 - [x] Mostrar mensagem de erro se CEP não for encontrado - CONCLUÍDO
 - [x] Permitir edição manual dos campos preenchidos automaticamente - CONCLUÍDO
+
+
+## BUG: Erro ao Processar Pagamento no Checkout
+
+### Problema Reportado
+- [x] Erro "Failed to initiate payment" ao clicar em "Pagar" no checkout - CORRIGIDO
+- [x] Investigar se campos de endereço estão causando erro de validação - CONCLUÍDO
+- [x] Verificar se dados de endereço estão sendo enviados corretamente ao backend - CONCLUÍDO
+- [x] Validar schema do tRPC procedure payment.initiatePagSeguro - CONCLUÍDO
+- [x] Testar fluxo completo de pagamento após correção - CONCLUÍDO
+
+### Solução Implementada
+- Atualizado schema do procedure initiatePagSeguro para aceitar password e address como opcionais
+- Adicionada validação de campos de endereço no frontend antes de enviar
+- Implementado hash de senha ao criar/atualizar customer
+- Mantida compatibilidade com PlansWithPayment (sem endereço)

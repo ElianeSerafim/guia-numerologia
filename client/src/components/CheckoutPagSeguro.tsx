@@ -197,14 +197,29 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
         throw new Error('As senhas não coincidem');
       }
 
+      // Validate address fields
+      if (!cep || !street || !number || !neighborhood || !city || !state) {
+        throw new Error('Por favor, preencha todos os campos de endereço');
+      }
+
       // Call tRPC mutation to initiate payment
       const response = await initiatePagSeguro.mutateAsync({
         email,
         name,
+        password,
         planId,
         planName: plan.name,
         amount: plan.price,
         paymentMethod,
+        address: {
+          cep,
+          street,
+          number,
+          complement,
+          neighborhood,
+          city,
+          state,
+        },
       });
 
       if (response.success && response.paymentLink) {

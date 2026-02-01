@@ -8,6 +8,7 @@ import { getCustomerByEmail, getMapHistoryById, getMapHistoryByCustomerId, delet
 import { TRPCError } from "@trpc/server";
 import { customers, pagSeguroOrders } from "../drizzle/schema";
 import { getDb } from "./db";
+import { eq } from "drizzle-orm";
 
 // Helper to check if user is admin
 const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
@@ -446,10 +447,20 @@ export const appRouter = router({
       .input(z.object({
         email: z.string().email(),
         name: z.string().min(1),
+        password: z.string().min(6).optional(),
         planId: z.enum(['navigator', 'visionary', 'illuminated']),
         planName: z.string(),
         amount: z.number().positive(),
         paymentMethod: z.enum(['pix', 'credit_card', 'boleto']),
+        address: z.object({
+          cep: z.string(),
+          street: z.string(),
+          number: z.string(),
+          complement: z.string().optional(),
+          neighborhood: z.string(),
+          city: z.string(),
+          state: z.string(),
+        }).optional(),
       }))
       .mutation(async ({ input }) => {
         try {
@@ -464,17 +475,32 @@ export const appRouter = router({
           const { createCustomer: createCustomerFn, getCustomerByEmail: getCustomerByEmailFn } = await import('./db');
           const { sendPaymentConfirmationEmail } = await import('./email/emailService');
           
-          // 1. Save or update customer in database
+          // 1. Save or update customer in database with password and address
           const existingCustomer = await getCustomerByEmailFn(input.email);
+          const { hashPassword } = await import('./db');
           
           let customerId: number;
           if (existingCustomer) {
             customerId = existingCustomer.id;
+            // Update password if provided
+            if (input.password && !existingCustomer.password) {
+              const hashedPassword = await hashPassword(input.password);
+              const database = await getDb();
+              if (database) {
+                await database.update(customers)
+                  .set({ 
+                    password: hashedPassword
+                  })
+                  .where(eq(customers.id, existingCustomer.id));
+              }
+            }
           } else {
-            // Create new customer
+            // Create new customer with hashed password if provided
+            const hashedPassword = input.password ? await hashPassword(input.password) : null;
             const newCustomer = await createCustomerFn({
               email: input.email,
               name: input.name,
+              password: hashedPassword,
               plan: 'pending',
               status: 'pending'
             });
