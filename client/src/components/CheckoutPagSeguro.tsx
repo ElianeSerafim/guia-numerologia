@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { trpc } from '@/lib/trpc';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, AlertCircle, CheckCircle, CreditCard, Smartphone, FileText, Check, X } from 'lucide-react';
+import { Loader2, AlertCircle, CheckCircle, CreditCard, Smartphone, FileText, Check, X, Eye, EyeOff } from 'lucide-react';
 import { PLANS } from '@/types/payment';
 
 interface CheckoutPagSeguroProps {
@@ -47,6 +47,10 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
     password: { isValid: false, message: '' },
     passwordConfirm: { isValid: false, message: '' },
   });
+
+  // Password visibility states
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const plan = PLANS[planId as keyof typeof PLANS];
   const initiatePagSeguro = trpc.payment.initiatePagSeguro.useMutation();
@@ -314,12 +318,12 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
               </label>
               <div className="relative">
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onBlur={() => setTouched(prev => ({ ...prev, password: true }))}
                   placeholder="Mínimo 6 caracteres"
-                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                  className={`w-full px-3 py-2 pr-20 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
                     touched.password
                       ? validation.password.isValid
                         ? 'border-green-500 focus:ring-green-500'
@@ -328,15 +332,25 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   }`}
                   disabled={isLoading}
                 />
-                {touched.password && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    {validation.password.isValid ? (
-                      <Check size={18} className="text-green-500" />
-                    ) : (
-                      <X size={18} className="text-red-500" />
-                    )}
-                  </div>
-                )}
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-slate-400 hover:text-white transition-colors"
+                    disabled={isLoading}
+                  >
+                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                  {touched.password && (
+                    <div>
+                      {validation.password.isValid ? (
+                        <Check size={18} className="text-green-500" />
+                      ) : (
+                        <X size={18} className="text-red-500" />
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
               {touched.password && !validation.password.isValid && (
                 <p className="text-xs text-red-400 mt-1">{validation.password.message}</p>
@@ -349,12 +363,12 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
               </label>
               <div className="relative">
                 <input
-                  type="password"
+                  type={showPasswordConfirm ? 'text' : 'password'}
                   value={passwordConfirm}
                   onChange={(e) => setPasswordConfirm(e.target.value)}
                   onBlur={() => setTouched(prev => ({ ...prev, passwordConfirm: true }))}
                   placeholder="Confirme sua senha"
-                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                  className={`w-full px-3 py-2 pr-20 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
                     touched.passwordConfirm
                       ? validation.passwordConfirm.isValid
                         ? 'border-green-500 focus:ring-green-500'
@@ -363,15 +377,25 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   }`}
                   disabled={isLoading}
                 />
-                {touched.passwordConfirm && (
-                  <div className="absolute right-3 top-1/2 -translate-y-1/2">
-                    {validation.passwordConfirm.isValid ? (
-                      <Check size={18} className="text-green-500" />
-                    ) : (
-                      <X size={18} className="text-red-500" />
-                    )}
-                  </div>
-                )}
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setShowPasswordConfirm(!showPasswordConfirm)}
+                    className="text-slate-400 hover:text-white transition-colors"
+                    disabled={isLoading}
+                  >
+                    {showPasswordConfirm ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                  {touched.passwordConfirm && (
+                    <div>
+                      {validation.passwordConfirm.isValid ? (
+                        <Check size={18} className="text-green-500" />
+                      ) : (
+                        <X size={18} className="text-red-500" />
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
               {touched.passwordConfirm && !validation.passwordConfirm.isValid && (
                 <p className="text-xs text-red-400 mt-1">{validation.passwordConfirm.message}</p>

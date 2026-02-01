@@ -443,3 +443,13 @@
 - [x] Adicionar ícones Check (verde) e X (vermelho) nos campos - CONCLUÍDO
 - [x] Mostrar mensagens de erro específicas abaixo de cada campo - CONCLUÍDO
 - [x] Aplicar bordas coloridas (verde/vermelho) conforme validação - CONCLUÍDO
+
+
+## Botão Mostrar/Ocultar Senha - Checkout
+
+### Nova Funcionalidade
+- [x] Adicionar estado para controlar visibilidade da senha - CONCLUÍDO
+- [x] Adicionar estado para controlar visibilidade da confirmação de senha - CONCLUÍDO
+- [x] Implementar ícone Eye/EyeOff do lucide-react - CONCLUÍDO
+- [x] Adicionar botão de toggle nos campos de senha - CONCLUÍDO
+- [x] Alternar type do input entre "password" e "text" - CONCLUÍDO
