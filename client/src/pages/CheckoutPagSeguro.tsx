@@ -6,10 +6,13 @@
 import { useLocation } from 'wouter';
 import CheckoutPagSeguro from '@/components/CheckoutPagSeguro';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Loader2 } from 'lucide-react';
+import { useAuth } from '@/_core/hooks/useAuth';
 
 export default function CheckoutPagSeguroPage() {
   const [, setLocation] = useLocation();
+  const { user, loading, isAuthenticated } = useAuth();
+  
   // Map Portuguese plan names to English
   const planParam = new URLSearchParams(window.location.search).get('plan') || 'navigator';
   const planMap: Record<string, 'navigator' | 'visionary' | 'illuminated'> = {
@@ -21,6 +24,24 @@ export default function CheckoutPagSeguroPage() {
     'illuminated': 'illuminated'
   };
   const planId = (planMap[planParam] || 'navigator') as 'navigator' | 'visionary' | 'illuminated';
+
+  // Redirect to login if not authenticated
+  if (!loading && !isAuthenticated) {
+    setLocation('/login?redirect=/checkout-pagseguro?plan=' + planParam);
+    return null;
+  }
+
+  // Show loading while checking authentication
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <Loader2 className="w-16 h-16 animate-spin text-indigo-600 mx-auto" />
+          <p className="text-slate-600">Verificando autenticação...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 py-12 px-4">
@@ -49,8 +70,8 @@ export default function CheckoutPagSeguroPage() {
           planId={planId}
           planName={''}
           amount={0}
-          email={''}
-          name={''}
+          email={user?.email || ''}
+          name={user?.name || ''}
           onClose={() => setLocation('/pricing')}
           onSuccess={(orderId) => {
             console.log('Payment initiated:', orderId);

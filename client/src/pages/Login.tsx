@@ -17,9 +17,12 @@ export default function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // Get redirect URL from query params
+  const redirectUrl = new URLSearchParams(window.location.search).get('redirect') || '/dashboard-selector';
+
   const loginMutation = trpc.auth.login.useMutation({
     onSuccess: () => {
-      setLocation('/dashboard');
+      setLocation(redirectUrl);
     },
     onError: (error) => {
       setError(error.message);

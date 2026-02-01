@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, Mail, Calendar, Loader2, AlertCircle, Check, Lock } from 'lucide-react';
 import { trpc } from '@/lib/trpc';
+import { useLocation } from 'wouter';
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -292,7 +293,10 @@ export default function SignupModal({ isOpen, onClose, onSuccess }: SignupModalP
             Já tem cadastro?{' '}
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => {
+                onClose();
+                window.location.href = '/login';
+              }}
               className="text-purple-400 hover:text-purple-300 font-semibold"
             >
               Faça login
