@@ -1,0 +1,31 @@
+{
+  "exported_at": "2026-02-01T19:40:13.569Z",
+  "database": "TiDB Cloud (Manus)",
+  "tables": {
+    "admins": [
+      {
+        "id": 1,
+        "email": "eliane@artwebcreative.com.br",
+        "name": "Eliane Serafim",
+        "role": "admin",
+        "isActive": 1,
+        "createdAt": "2026-01-20T00:08:20.000Z",
+        "createdBy": "system",
+        "updatedAt": "2026-01-25T13:23:12.000Z"
+      }
+    ],
+    "subscriptions": [
+      {
+        "id": 1,
+        "email": "eliane@artwebcreative.com.br",
+        "plan": "iluminado",
+        "maps_limit": 2147483647,
+        "maps_generated": 0,
+        "status": "approved",
+        "expires_at": "2036-01-20T04:43:54.000Z",
+        "created_at": "2026-01-20T04:43:54.000Z",
+        "updated_at": "2026-01-20T04:57:55.000Z"
+      }
+    ]
+  }
+}

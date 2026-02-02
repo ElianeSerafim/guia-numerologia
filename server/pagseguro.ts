@@ -97,9 +97,27 @@ export async function createPaymentOrder(paymentData: PaymentRequest): Promise<P
     });
 
     return response.data;
-  } catch (error) {
+  } catch (error: any) {
     console.error('PagSeguro API Error:', error);
-    throw new Error('Failed to create payment order');
+    
+    // Log detailed error information
+    if (error.response) {
+      console.error('Response status:', error.response.status);
+      console.error('Response data:', JSON.stringify(error.response.data, null, 2));
+      
+      // Return more specific error message
+      const errorMessage = error.response.data?.error_messages?.[0]?.description 
+        || error.response.data?.message 
+        || 'Erro ao processar pagamento com PagSeguro';
+      
+      throw new Error(errorMessage);
+    } else if (error.request) {
+      console.error('No response received from PagSeguro');
+      throw new Error('Sem resposta do servidor de pagamento. Tente novamente.');
+    } else {
+      console.error('Error setting up request:', error.message);
+      throw new Error('Erro ao configurar pagamento: ' + error.message);
+    }
   }
 }
 

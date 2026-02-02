@@ -482,3 +482,36 @@
 - Adicionada validação de campos de endereço no frontend antes de enviar
 - Implementado hash de senha ao criar/atualizar customer
 - Mantida compatibilidade com PlansWithPayment (sem endereço)
+
+
+## Correção de Erro e Preparação para Oracle Cloud (01/02/2026)
+
+### Bug Reportado - Erro ao Processar Pagamento (Novo)
+- [x] Investigar erro "Failed to initiate payment" no checkout - CONCLUÍDO (falta PAGSEGURO_TOKEN)
+- [x] Verificar logs do servidor para identificar causa raiz - CONCLUÍDO
+- [x] Corrigir validação de campos obrigatórios no backend - CONCLUÍDO
+- [x] Identificar que erro é causado por falta de PAGSEGURO_TOKEN - CONCLUÍDO
+
+### Criação de Tabelas no Banco
+- [x] Executar pnpm db:push para criar todas as tabelas do schema - CONCLUÍDO
+- [x] Verificar se todas as 13 tabelas foram criadas corretamente - CONCLUÍDO (14 tabelas total)
+- [x] Validar estrutura das tabelas criadas - CONCLUÍDO
+
+### Geração de Build e Backup para Oracle Cloud
+- [x] Gerar novo build de produção otimizado - CONCLUÍDO
+- [x] Criar arquivo build-oracle-cloud-final.zip atualizado (9.3 MB) - CONCLUÍDO
+- [x] Gerar dump completo do banco com todas as tabelas - CONCLUÍDO
+- [x] Validar arquivos de backup (JSON e SQL) - CONCLUÍDO
+- [x] Criar documentação de migração para Oracle Cloud - CONCLUÍDO
+
+
+## BUG CRÍTICO: Erro de Pagamento Persistente (02/02/2026)
+
+### Problema
+- [x] Erro "Failed to initiate payment" continua ocorrendo no checkout - INVESTIGADO
+- [x] Verificar se PAGSEGURO_TOKEN está configurado corretamente - CONCLUÍDO (token configurado)
+- [x] Investigar logs do servidor para identificar erro específico - CONCLUÍDO
+- [x] Melhorar tratamento de erro para mostrar mensagem específica do PagSeguro - CONCLUÍDO
+- [ ] Aguardar teste do usuário para ver erro específico do PagSeguro
+- [ ] Corrigir erro baseado na mensagem específica
+- [ ] Gerar checkpoint para publicação após correção
