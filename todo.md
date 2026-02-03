@@ -515,3 +515,38 @@
 - [ ] Aguardar teste do usuário para ver erro específico do PagSeguro
 - [ ] Corrigir erro baseado na mensagem específica
 - [ ] Gerar checkpoint para publicação após correção
+
+
+## PROBLEMA: Build Oracle Cloud Zerado (02/02/2026)
+
+### Problema Reportado
+- [x] Arquivo build-oracle-cloud.zip veio zerado/corrompido - RESOLVIDO
+- [x] Limpar builds anteriores - CONCLUÍDO
+- [x] Gerar novo build de produção completo - CONCLUÍDO
+- [x] Verificar integridade dos arquivos gerados - CONCLUÍDO (12MB dist/)
+- [x] Criar arquivo zip corretamente com todos os arquivos - CONCLUÍDO (9.4MB)
+- [x] Gerar novo dump do banco de dados - CONCLUÍDO (14 tabelas)
+- [x] Validar tamanho e conteúdo dos arquivos antes de entregar - CONCLUÍDO
+
+
+## Script de Implantação Oracle Cloud (02/02/2026)
+
+### Nova Funcionalidade
+- [ ] Criar script principal de implantação automatizada (deploy.sh)
+- [ ] Criar script de configuração do Nginx
+- [ ] Criar script de configuração de variáveis de ambiente
+- [ ] Criar script de instalação de dependências
+- [ ] Adicionar validações e tratamento de erros
+- [ ] Criar documentação de uso dos scripts
+- [ ] Testar scripts em ambiente limpo
+
+
+## Logs Detalhados para Debug de Pagamento (02/02/2026)
+
+### Objetivo
+- [x] Adicionar sistema de logging detalhado no frontend - CONCLUÍDO
+- [x] Capturar erro completo da API do PagSeguro - CONCLUÍDO
+- [x] Exibir erro técnico na UI para debug - CONCLUÍDO
+- [x] Adicionar console.log com detalhes da requisição - CONCLUÍDO
+- [x] Mostrar stack trace completo do erro - CONCLUÍDO
+- [ ] Testar e validar logs funcionando - AGUARDANDO TESTE DO USUÁRIO

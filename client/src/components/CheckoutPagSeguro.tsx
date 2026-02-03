@@ -235,7 +235,40 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
         throw new Error('Falha ao iniciar pagamento');
       }
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Erro ao processar pagamento';
+      // Log detalhado do erro para debug
+      console.error('❌ ERRO DETALHADO NO CHECKOUT:', {
+        error: err,
+        message: err instanceof Error ? err.message : 'Erro desconhecido',
+        stack: err instanceof Error ? err.stack : undefined,
+        data: {
+          email,
+          name,
+          planId,
+          paymentMethod,
+          hasPassword: !!password,
+          hasAddress: !!(cep && street && number),
+        },
+      });
+
+      // Extrair mensagem de erro detalhada
+      let errorMessage = 'Erro ao processar pagamento';
+      
+      if (err instanceof Error) {
+        errorMessage = err.message;
+        
+        // Se for erro do tRPC, tentar extrair detalhes
+        if ('data' in err && err.data && typeof err.data === 'object') {
+          const trpcError = err.data as any;
+          if (trpcError.message) {
+            errorMessage = trpcError.message;
+          }
+          if (trpcError.code) {
+            errorMessage += ` (Código: ${trpcError.code})`;
+          }
+          console.error('🔍 Detalhes do erro tRPC:', trpcError);
+        }
+      }
+
       setError(errorMessage);
       onError?.(errorMessage);
     } finally {
@@ -677,11 +710,22 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4 flex items-start gap-3">
-              <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
-              <div>
-                <p className="font-semibold text-red-900">Erro</p>
-                <p className="text-sm text-red-700 mt-1">{error}</p>
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
+                <div className="flex-1">
+                  <p className="font-semibold text-red-900">Erro</p>
+                  <p className="text-sm text-red-700 mt-1">{error}</p>
+                  <details className="mt-3">
+                    <summary className="text-xs text-red-600 cursor-pointer hover:underline">
+                      Ver detalhes técnicos (para suporte)
+                    </summary>
+                    <div className="mt-2 p-3 bg-red-100 rounded text-xs font-mono text-red-900 overflow-auto max-h-40">
+                      <p><strong>Abra o Console do Navegador (F12)</strong> para ver logs detalhados</p>
+                      <p className="mt-1">Ou tire um print desta tela e envie para suporte</p>
+                    </div>
+                  </details>
+                </div>
               </div>
             </div>
           )}
