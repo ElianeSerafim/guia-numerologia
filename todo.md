@@ -661,3 +661,23 @@ PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser 
 - Link do WhatsApp: https://wa.me/5511999999999 → https://wa.me/5511978828967
 - E-mail atualizado: suporte@bussolanumerologica.com.br → contato@artwebcreative.com.br
 - Aplicado na seção "Precisa de ajuda?" das mensagens de erro
+
+
+## Substituição de URLs HTTP por HTTPS (03/02/2026)
+
+### Objetivo
+- [x] Encontrar todas as ocorrências de http:// no código - CONCLUÍDO
+- [x] Substituir por https:// para garantir segurança - CONCLUÍDO
+- [x] Verificar se não quebra nenhuma funcionalidade - OK
+
+### Arquivos Analisados
+- `server/_core/index.ts` - Log de desenvolvimento (mantido http://localhost)
+- `server/index.ts` - Log de desenvolvimento (mantido http://localhost)
+- `server/routers.ts` - Fallback do APP_URL atualizado
+
+### Alterações Implementadas
+- **server/routers.ts linha 729:** Fallback de `http://localhost:3000` → `https://localhost:3000`
+- Logs de desenvolvimento mantidos com http://localhost (apenas para console, não afeta segurança)
+
+### Observação
+A variável de ambiente `APP_URL` já deve estar configurada com https:// em produção, então o fallback raramente é usado.

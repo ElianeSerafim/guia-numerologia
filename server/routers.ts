@@ -726,7 +726,7 @@ export const appRouter = router({
         });
         
         // Send email with reset link
-        const resetLink = `${process.env.APP_URL || 'http://localhost:3000'}/reset-password?token=${token}`;
+        const resetLink = `${process.env.APP_URL || 'https://localhost:3000'}/reset-password?token=${token}`;
         
         try {
           const { sendPasswordResetEmail } = await import('./email/emailService');
