@@ -609,3 +609,22 @@ PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser 
 - Detalhes técnicos colapsáveis para debug
 - Instruções de como abrir o console do navegador
 - Visual profissional com cores e espaçamentos adequados
+
+
+## Ajuste Adicional de Responsividade Mobile - Checkout (03/02/2026)
+
+### Problema Reportado
+- [x] E-mail ainda aparece cortado no celular após primeiro ajuste - CORRIGIDO
+- [x] Reduzir ainda mais o tamanho da caixa - CONCLUÍDO
+- [x] Ajustar font-size dos inputs para mobile - CONCLUÍDO
+- [ ] Testar em diferentes resoluções de celular - AGUARDANDO TESTE DO USUÁRIO
+
+### Alterações Implementadas
+- Largura máxima reduzida de `max-w-sm` (384px) para `max-w-xs` (320px)
+- Padding do card reduzido: `px-2` → `px-1`
+- Padding do CardHeader: `pb-3` → `pb-2` e `px-3` adicionado
+- Padding do CardContent: `px-3 pb-4` → `px-2 pb-3`
+- Espaçamento entre elementos: `space-y-3` → `space-y-2`
+- Título ainda menor: `text-lg` → `text-base`
+- Font-size dos inputs: `text-sm` → `text-xs`
+- Padding dos inputs: `px-3 py-2` → `px-2 py-1.5`

@@ -314,15 +314,15 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
   }
 
   return (
-    <Card className="w-full max-w-sm mx-auto my-4 px-2">
-      <CardHeader className="pb-3">
-        <CardTitle className="text-lg">Checkout - {plan.name}</CardTitle>
+    <Card className="w-full max-w-xs mx-auto my-4 px-1">
+      <CardHeader className="pb-2 px-3">
+        <CardTitle className="text-base">Checkout - {plan.name}</CardTitle>
         <CardDescription>
           Escolha seu método de pagamento preferido
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-3 px-3 pb-4">
+      <CardContent className="space-y-2 px-2 pb-3">
         <form onSubmit={handleSubmit} className="space-y-3">
           {/* Plan Summary */}
           <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-3 text-white">
@@ -357,7 +357,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   onChange={(e) => setName(e.target.value)}
                   onBlur={() => setTouched(prev => ({ ...prev, name: true }))}
                   placeholder="Seu nome completo"
-                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                  className={`w-full px-2 py-1.5 pr-10 text-xs border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
                     touched.name
                       ? validation.name.isValid
                         ? 'border-green-500 focus:ring-green-500'
@@ -392,7 +392,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={() => setTouched(prev => ({ ...prev, email: true }))}
                   placeholder="seu@email.com"
-                  className={`w-full px-3 py-2 pr-10 text-sm border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
+                  className={`w-full px-2 py-1.5 pr-10 text-xs border rounded-lg focus:outline-none focus:ring-2 text-white bg-slate-800 ${
                     touched.email
                       ? validation.email.isValid
                         ? 'border-green-500 focus:ring-green-500'
