@@ -590,3 +590,22 @@ PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser 
 - Espaçamento entre elementos reduzido: `space-y-4` → `space-y-3`
 - Título menor: `text-lg` para economizar espaço vertical
 - CardHeader com padding inferior reduzido: `pb-3`
+
+
+## Melhoria de Mensagens de Erro de Pagamento (03/02/2026)
+
+### Objetivo
+- [x] Criar mensagens de erro mais claras e amigáveis - CONCLUÍDO
+- [x] Adicionar instruções de como resolver o problema - CONCLUÍDO
+- [x] Melhorar visual do erro (ícone, cores, layout) - CONCLUÍDO
+- [x] Incluir informações de contato para suporte - CONCLUÍDO
+- [ ] Testar diferentes cenários de erro - AGUARDANDO TESTE DO USUÁRIO
+
+### Melhorias Implementadas
+- Título claro: "Não foi possível processar o pagamento"
+- Lista de possíveis causas do erro
+- Box azul com instruções passo a passo do que fazer
+- Box verde com informações de contato (WhatsApp e e-mail)
+- Detalhes técnicos colapsáveis para debug
+- Instruções de como abrir o console do navegador
+- Visual profissional com cores e espaçamentos adequados

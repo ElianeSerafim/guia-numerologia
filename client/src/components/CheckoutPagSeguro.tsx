@@ -710,19 +710,52 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
 
           {/* Error Message */}
           {error && (
-            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+            <div className="bg-red-50 border-2 border-red-300 rounded-lg p-4 shadow-sm">
               <div className="flex items-start gap-3">
-                <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
+                <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={24} />
                 <div className="flex-1">
-                  <p className="font-semibold text-red-900">Erro</p>
-                  <p className="text-sm text-red-700 mt-1">{error}</p>
-                  <details className="mt-3">
-                    <summary className="text-xs text-red-600 cursor-pointer hover:underline">
-                      Ver detalhes técnicos (para suporte)
+                  <p className="font-bold text-red-900 text-lg">Não foi possível processar o pagamento</p>
+                  <p className="text-sm text-red-800 mt-2 leading-relaxed">
+                    Ocorreu um problema ao tentar processar seu pagamento. Isso pode acontecer por alguns motivos:
+                  </p>
+                  <ul className="text-sm text-red-800 mt-2 space-y-1 list-disc list-inside">
+                    <li>Dados de pagamento inválidos ou incompletos</li>
+                    <li>Problema temporário com o sistema de pagamento</li>
+                    <li>Conexão com a internet instavel</li>
+                  </ul>
+                  
+                  <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded">
+                    <p className="font-semibold text-blue-900 text-sm">O que fazer agora:</p>
+                    <ol className="text-sm text-blue-800 mt-2 space-y-1 list-decimal list-inside">
+                      <li>Verifique se todos os campos estão preenchidos corretamente</li>
+                      <li>Tente novamente em alguns minutos</li>
+                      <li>Se o problema persistir, entre em contato conosco</li>
+                    </ol>
+                  </div>
+
+                  <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded">
+                    <p className="font-semibold text-green-900 text-sm flex items-center gap-2">
+                      <Smartphone size={16} />
+                      Precisa de ajuda?
+                    </p>
+                    <p className="text-sm text-green-800 mt-1">
+                      Entre em contato pelo WhatsApp: <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="font-semibold underline hover:text-green-900">(11) 99999-9999</a>
+                    </p>
+                    <p className="text-xs text-green-700 mt-1">
+                      Ou envie um e-mail para: <a href="mailto:suporte@bussolanumerologica.com.br" className="font-semibold underline hover:text-green-900">suporte@bussolanumerologica.com.br</a>
+                    </p>
+                  </div>
+                  
+                  <details className="mt-4">
+                    <summary className="text-xs text-red-600 cursor-pointer hover:underline font-semibold">
+                      ▶ Ver detalhes técnicos (para suporte)
                     </summary>
                     <div className="mt-2 p-3 bg-red-100 rounded text-xs font-mono text-red-900 overflow-auto max-h-40">
-                      <p><strong>Abra o Console do Navegador (F12)</strong> para ver logs detalhados</p>
-                      <p className="mt-1">Ou tire um print desta tela e envie para suporte</p>
+                      <p><strong>Erro técnico:</strong> {error}</p>
+                      <p className="mt-2"><strong>Como obter mais informações:</strong></p>
+                      <p className="mt-1">1. Pressione F12 no teclado (ou clique com botão direito → Inspecionar)</p>
+                      <p>2. Vá na aba "Console"</p>
+                      <p>3. Tire um print da tela e envie para o suporte</p>
                     </div>
                   </details>
                 </div>
