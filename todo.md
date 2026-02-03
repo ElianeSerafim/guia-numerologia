@@ -550,3 +550,25 @@
 - [x] Adicionar console.log com detalhes da requisição - CONCLUÍDO
 - [x] Mostrar stack trace completo do erro - CONCLUÍDO
 - [ ] Testar e validar logs funcionando - AGUARDANDO TESTE DO USUÁRIO
+
+
+## Correção Erro 500 no Pagamento PagSeguro (03/02/2026)
+
+### Problema Identificado nos Logs
+- [x] Erro 500 no endpoint `api/trpc/payment.initiatePagSeguro` - IDENTIFICADO
+- [x] TRPCClientError: "Failed to initiate payment" - IDENTIFICADO
+- [x] Analisar código do backend para identificar causa raiz - CONCLUÍDO
+- [x] Verificar configuração do token PagSeguro - TOKEN CONFIGURADO
+- [x] Corrigir erro no backend - TOKEN ADICIONADO
+- [ ] Testar fluxo de pagamento completo - AGUARDANDO TESTE DO USUÁRIO
+
+### Causa Raiz
+Token do PagSeguro não estava configurado nas variáveis de ambiente.
+
+### Solução Aplicada
+- Token do PagSeguro configurado via `webdev_request_secrets`
+- Servidor reiniciado para aplicar configuração
+- Logs detalhados já implementados para debug
+
+### Observação
+PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser autorizado no painel PagSeguro ou usar ambiente Sandbox para testes.
