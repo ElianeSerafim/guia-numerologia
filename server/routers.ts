@@ -572,7 +572,48 @@ export const appRouter = router({
             status: paymentResponse.status,
           };
         } catch (error) {
+          // Log em arquivo para debug
+          const fs = await import('fs');
+          const path = await import('path');
+          const logPath = path.join(process.cwd(), 'pagseguro-error.log');
+          
+          const logData = {
+            timestamp: new Date().toISOString(),
+            error: error instanceof Error ? {
+              message: error.message,
+              stack: error.stack,
+            } : String(error),
+            response: (error && typeof error === 'object' && 'response' in error) ? {
+              status: (error as any).response?.status,
+              data: (error as any).response?.data,
+              headers: (error as any).response?.headers,
+            } : null,
+            input: input,
+          };
+          
+          fs.appendFileSync(logPath, JSON.stringify(logData, null, 2) + '\n\n');
+          
+          console.error('\n========== ERRO DETALHADO PAGSEGURO ==========');
           console.error('Error initiating PagSeguro payment:', error);
+          console.error('Log salvo em:', logPath);
+          
+          // Log detalhado do erro
+          if (error instanceof Error) {
+            console.error('Error message:', error.message);
+            console.error('Error stack:', error.stack);
+          }
+          
+          // Se for erro do axios/fetch, log da resposta
+          if (error && typeof error === 'object' && 'response' in error) {
+            const axiosError = error as any;
+            console.error('Response status:', axiosError.response?.status);
+            console.error('Response data:', JSON.stringify(axiosError.response?.data, null, 2));
+            console.error('Response headers:', axiosError.response?.headers);
+          }
+          
+          console.error('Input data:', JSON.stringify(input, null, 2));
+          console.error('============================================\n');
+          
           throw new TRPCError({
             code: 'INTERNAL_SERVER_ERROR',
             message: 'Failed to initiate payment',

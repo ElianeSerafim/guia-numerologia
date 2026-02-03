@@ -681,3 +681,34 @@ PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser 
 
 ### Observação
 A variável de ambiente `APP_URL` já deve estar configurada com https:// em produção, então o fallback raramente é usado.
+
+
+## Investigação Erro 500 no Pagamento (03/02/2026)
+
+### Problema
+- [x] Erro 500 persiste no endpoint payment.initiatePagSeguro - CONFIRMADO
+- [x] Verificar logs do servidor backend - LOGS INSUFICIENTES
+- [x] Identificar causa raiz (token, configuração, whitelist) - EM ANDAMENTO
+- [x] Adicionar logs detalhados para capturar erro exato - CONCLUÍDO
+
+### Alterações Implementadas
+- Logs detalhados adicionados no catch do procedure `initiatePagSeguro`
+- Captura de: error message, stack trace, response status, response data, headers
+- Log dos dados de input para debug
+- Formatação clara com separadores visuais
+
+### Próximos Passos
+- [x] Testar pagamento novamente e verificar logs no console do servidor - CONCLUÍDO
+- [x] Analisar erro específico retornado pelo PagSeguro - IDENTIFICADO
+- [x] Corrigir problema identificado - CONCLUÍDO
+
+### Problema Identificado
+**NÃO É ERRO DO PAGSEGURO!** É erro de banco de dados:
+```
+Error: Unknown column 'currency' in 'field list'
+```
+
+O schema do banco de dados está desatualizado. A tabela `customers` não tem a coluna `currency` que o código está tentando buscar.
+
+### Solução
+Executar `pnpm db:push` para sincronizar o schema com o banco de dados.
