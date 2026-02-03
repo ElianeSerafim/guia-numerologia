@@ -647,3 +647,17 @@ PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser 
 - CardContent: `space-y-2 px-2 pb-3` → `space-y-1.5 px-1.5 pb-2`
 - Formulário: `space-y-3` → `space-y-2`
 - Resumo do plano: `p-3` → `p-2`
+
+
+## Atualização de Contatos de Suporte (03/02/2026)
+
+### Solicitação
+- [x] Atualizar WhatsApp para (11) 97882-8967 - CONCLUÍDO
+- [x] Atualizar e-mail para contato@artwebcreative.com.br - CONCLUÍDO
+- [x] Aplicar em todas as mensagens de erro do checkout - CONCLUÍDO
+
+### Alterações Implementadas
+- WhatsApp atualizado: (11) 99999-9999 → (11) 97882-8967
+- Link do WhatsApp: https://wa.me/5511999999999 → https://wa.me/5511978828967
+- E-mail atualizado: suporte@bussolanumerologica.com.br → contato@artwebcreative.com.br
+- Aplicado na seção "Precisa de ajuda?" das mensagens de erro

@@ -739,10 +739,10 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
                       Precisa de ajuda?
                     </p>
                     <p className="text-sm text-green-800 mt-1">
-                      Entre em contato pelo WhatsApp: <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="font-semibold underline hover:text-green-900">(11) 99999-9999</a>
+                      Entre em contato pelo WhatsApp: <a href="https://wa.me/5511978828967" target="_blank" rel="noopener noreferrer" className="font-semibold underline hover:text-green-900">(11) 97882-8967</a>
                     </p>
                     <p className="text-xs text-green-700 mt-1">
-                      Ou envie um e-mail para: <a href="mailto:suporte@bussolanumerologica.com.br" className="font-semibold underline hover:text-green-900">suporte@bussolanumerologica.com.br</a>
+                      Ou envie um e-mail para: <a href="mailto:contato@artwebcreative.com.br" className="font-semibold underline hover:text-green-900">contato@artwebcreative.com.br</a>
                     </p>
                   </div>
                   
