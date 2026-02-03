@@ -278,7 +278,7 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
 
   if (success) {
     return (
-      <Card className="w-full max-w-md mx-auto">
+      <Card className="w-full max-w-sm mx-auto">
         <CardContent className="pt-8 pb-8 text-center">
           <div className="flex justify-center mb-6">
             <div className="relative">
@@ -314,16 +314,16 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
   }
 
   return (
-    <Card className="w-full max-w-md mx-auto my-4">
-      <CardHeader>
-        <CardTitle>Checkout - {plan.name}</CardTitle>
+    <Card className="w-full max-w-sm mx-auto my-4 px-2">
+      <CardHeader className="pb-3">
+        <CardTitle className="text-lg">Checkout - {plan.name}</CardTitle>
         <CardDescription>
           Escolha seu método de pagamento preferido
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="p-4 sm:p-6">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <CardContent className="space-y-3 px-3 pb-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           {/* Plan Summary */}
           <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-3 text-white">
             <div className="flex justify-between items-center mb-2">

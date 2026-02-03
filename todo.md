@@ -572,3 +572,21 @@ Token do PagSeguro não estava configurado nas variáveis de ambiente.
 
 ### Observação
 PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser autorizado no painel PagSeguro ou usar ambiente Sandbox para testes.
+
+
+## Ajuste de Responsividade - Modal de Checkout (03/02/2026)
+
+### Problema Reportado
+- [x] Caixa de pagamento muito grande no celular - CORRIGIDO
+- [x] E-mail fica cortado na tela de pagamento mobile - CORRIGIDO
+- [x] Reduzir tamanho geral do modal - max-w-md → max-w-sm
+- [x] Ajustar espaçamentos para mobile - padding reduzido
+- [ ] Testar em diferentes tamanhos de tela - AGUARDANDO TESTE DO USUÁRIO
+
+### Alterações Implementadas
+- Largura máxima do card reduzida de `max-w-md` (28rem/448px) para `max-w-sm` (24rem/384px)
+- Padding horizontal do card aumentado: `px-2`
+- Padding do CardContent reduzido: `px-3 pb-4`
+- Espaçamento entre elementos reduzido: `space-y-4` → `space-y-3`
+- Título menor: `text-lg` para economizar espaço vertical
+- CardHeader com padding inferior reduzido: `pb-3`
