@@ -628,3 +628,22 @@ PagSeguro retorna erro "whitelist access required" - IP do servidor precisa ser 
 - Título ainda menor: `text-lg` → `text-base`
 - Font-size dos inputs: `text-sm` → `text-xs`
 - Padding dos inputs: `px-3 py-2` → `px-2 py-1.5`
+
+
+## Redução Adicional do Modal de Checkout (03/02/2026)
+
+### Problema Reportado
+- [x] Tela de pagamento ainda muito grande no celular - CORRIGIDO
+- [x] Reduzir ainda mais largura e altura - CONCLUÍDO
+- [x] Ajustar espaçamentos entre campos - CONCLUÍDO
+- [x] Reduzir tamanho dos botões de método de pagamento - CONCLUÍDO
+- [ ] Testar em diferentes resoluções - AGUARDANDO TESTE DO USUÁRIO
+
+### Alterações Implementadas
+- Largura máxima reduzida de `max-w-xs` (320px) para `max-w-[280px]` (280px)
+- Margem vertical: `my-4` → `my-3`
+- CardHeader: `pb-2 px-3` → `pb-1 px-2`
+- Título: `text-base` → `text-sm`
+- CardContent: `space-y-2 px-2 pb-3` → `space-y-1.5 px-1.5 pb-2`
+- Formulário: `space-y-3` → `space-y-2`
+- Resumo do plano: `p-3` → `p-2`

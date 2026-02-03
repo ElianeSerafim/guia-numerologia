@@ -314,18 +314,18 @@ export default function CheckoutPagSeguro({ planId, planName, amount, email: ini
   }
 
   return (
-    <Card className="w-full max-w-xs mx-auto my-4 px-1">
-      <CardHeader className="pb-2 px-3">
-        <CardTitle className="text-base">Checkout - {plan.name}</CardTitle>
+    <Card className="w-full max-w-[280px] mx-auto my-3 px-1">
+      <CardHeader className="pb-1 px-2">
+        <CardTitle className="text-sm">Checkout - {plan.name}</CardTitle>
         <CardDescription>
           Escolha seu método de pagamento preferido
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-2 px-2 pb-3">
-        <form onSubmit={handleSubmit} className="space-y-3">
+      <CardContent className="space-y-1.5 px-1.5 pb-2">
+        <form onSubmit={handleSubmit} className="space-y-2">
           {/* Plan Summary */}
-          <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-3 text-white">
+          <div className="bg-gradient-to-br from-[#0A1F2E] to-[#1A3A4A] rounded-lg p-2 text-white">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-[#19E6FF]">Plano</span>
               <span className="font-bold text-[#00FFFF]">{plan.name}</span>
