@@ -802,3 +802,31 @@ Executar `pnpm db:push` para sincronizar o schema com o banco de dados.
 - Adicionada seção "Interpretação Detalhada" nos cards de trimestre
 - Seções "Atividades Recomendadas" e "Cautelas" agora usam dados detalhados
 - Interface `TrimestrePrediction` estendida com campo `description?`
+
+
+## Seção de Dicas Rápidas Diárias (04/02/2026)
+
+### Objetivo
+- [x] Criar função de cálculo do número do dia (data atual + Ano Pessoal) - CONCLUÍDO
+- [x] Criar base de dicas diárias para cada número (1-9) - CONCLUÍDO
+- [x] Criar componente visual de "Dica do Dia" com design místico - CONCLUÍDO
+- [x] Integrar ao componente de previsões anuais (AnnualPredictions.tsx) - CONCLUÍDO
+- [x] Adicionar atualização automática à meia-noite - CONCLUÍDO
+- [ ] Testar com diferentes datas e Anos Pessoais - EM ANDAMENTO
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+### Funcionalidades
+**Cálculo do Número do Dia:**
+- Fórmula: Dia atual + Mês atual + Ano atual + Ano Pessoal (reduzido)
+- Exemplo: 04/02/2026 + AP 5 = (4+2+2+0+2+6) + 5 = 16 + 5 = 21 → 3
+
+**Dicas Diárias:**
+- Dica prática e objetiva para cada número (1-9)
+- Foco em ação imediata e aproveitamento da energia
+- Linguagem acolhedora e motivadora
+
+**Design:**
+- Card destacado no topo da seção de previsões
+- Ícone de sol/estrela para representar o dia
+- Cor ciano neon (#00FFFF) para destaque
+- Atualização automática diária

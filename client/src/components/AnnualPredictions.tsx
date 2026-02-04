@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getAnnualPrediction, getTrimestreInterpretation, getYearDescription } from '@/lib/annualPredictions';
+import { calculateDailyNumber } from '@/lib/numerologyUtils';
+import { getDailyTip } from '@/lib/dailyTips';
 import { Calendar, TrendingUp, AlertCircle, Lightbulb, Target, Zap, Shield, Filter, X } from 'lucide-react';
 import MonthlyPrediction from './MonthlyPrediction';
+import DailyTipCard from './DailyTipCard';
 import type { NumerologyChart } from '@/types';
 
 interface AnnualPredictionsProps {
@@ -25,9 +28,39 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
   const [filterType, setFilterType] = useState<FilterType>('all');
   const [trimestreFilter, setTrimestreFilter] = useState<TrimestreFilter>('all');
   const [selectedMonth, setSelectedMonth] = useState<number | null>(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  // Atualizar data à meia-noite
+  useEffect(() => {
+    const updateDate = () => {
+      const now = new Date();
+      setCurrentDate(now);
+    };
+
+    // Calcular tempo até meia-noite
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    const msUntilMidnight = tomorrow.getTime() - now.getTime();
+
+    // Atualizar à meia-noite
+    const midnightTimer = setTimeout(() => {
+      updateDate();
+      // Depois da primeira atualização, atualizar a cada 24h
+      const dailyInterval = setInterval(updateDate, 24 * 60 * 60 * 1000);
+      return () => clearInterval(dailyInterval);
+    }, msUntilMidnight);
+
+    return () => clearTimeout(midnightTimer);
+  }, []);
 
   const yearNumber = year === 2026 ? chart.personalYear2026 : chart.personalYear;
   const prediction = getAnnualPrediction(yearNumber);
+
+  // Calcular dica do dia
+  const dailyNumber = calculateDailyNumber(currentDate, yearNumber);
+  const dailyTip = getDailyTip(dailyNumber);
 
   if (!prediction) {
     return (
@@ -52,6 +85,9 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
 
   return (
     <div className="space-y-8">
+      {/* Dica do Dia */}
+      <DailyTipCard tip={dailyTip} currentDate={currentDate} />
+
       {/* Ano Pessoal - Destaque Principal */}
       <div className="bg-gradient-to-r from-[#00FFFF] to-[#6A1BB2] rounded-xl p-8 text-center space-y-3 border border-[#19E6FF]/30">
         <p className="text-[#19E6FF] text-sm font-semibold uppercase tracking-wider">Seu Ano Pessoal</p>

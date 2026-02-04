@@ -353,3 +353,32 @@ export function detectGrandeLove(
   
   return moPositiva && harmonia && semBloqueio && momentoFavoravel;
 }
+
+/**
+ * Calcula o Número do Dia (energia diária)
+ * 
+ * Fórmula: Dia + Mês + Ano atual + Ano Pessoal (reduzido)
+ * 
+ * Exemplo: 04/02/2026 com Ano Pessoal 5
+ * - Dia: 4
+ * - Mês: 2
+ * - Ano: 2026 → 2+0+2+6 = 10 → 1+0 = 1
+ * - Ano Pessoal: 5
+ * - Número do Dia: 4 + 2 + 1 + 5 = 12 → 1+2 = 3
+ * 
+ * @param date Data atual (objeto Date)
+ * @param personalYear Ano Pessoal do usuário
+ * @returns Número do dia (1-9)
+ */
+export const calculateDailyNumber = (date: Date, personalYear: number): number => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // getMonth() retorna 0-11
+  const year = date.getFullYear();
+  
+  // Reduzir ano atual
+  const yearReduced = reduceNumber(year, false);
+  
+  // Somar tudo e reduzir
+  const sum = day + month + yearReduced + personalYear;
+  return reduceNumber(sum, false);
+};
