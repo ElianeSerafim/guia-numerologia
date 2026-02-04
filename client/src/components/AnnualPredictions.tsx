@@ -58,9 +58,25 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
   const yearNumber = year === 2026 ? chart.personalYear2026 : chart.personalYear;
   const prediction = getAnnualPrediction(yearNumber);
 
-  // Calcular dica do dia
+  // Calcular dica do dia com integração de 3 camadas
   const dailyNumber = calculateDailyNumber(currentDate, yearNumber);
-  const dailyTip = getDailyTip(dailyNumber);
+  
+  // Determinar trimestre vigente atual (baseado no mês)
+  const currentMonth = currentDate.getMonth() + 1; // 1-12
+  let currentTrimestreNumber = 1;
+  if (currentMonth >= 4 && currentMonth <= 6) currentTrimestreNumber = 2;
+  else if (currentMonth >= 7 && currentMonth <= 9) currentTrimestreNumber = 3;
+  else if (currentMonth >= 10) currentTrimestreNumber = 4;
+  
+  // Obter vibração do trimestre vigente
+  const trimestreVibration = chart.ciclosTrimestrais
+    ? (year === 2026 
+        ? chart.ciclosTrimestrais.ano2026[`ct${currentTrimestreNumber}` as 'ct1' | 'ct2' | 'ct3' | 'ct4']
+        : chart.ciclosTrimestrais.atual[`ct${currentTrimestreNumber}` as 'ct1' | 'ct2' | 'ct3' | 'ct4'])
+    : 1; // Fallback para 1 se não disponível
+  
+  // Obter dica do dia com contexto completo (3 camadas)
+  const dailyTip = getDailyTip(dailyNumber, yearNumber, trimestreVibration);
 
   if (!prediction) {
     return (
@@ -86,7 +102,12 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
   return (
     <div className="space-y-8">
       {/* Dica do Dia */}
-      <DailyTipCard tip={dailyTip} currentDate={currentDate} />
+      <DailyTipCard 
+        tip={dailyTip} 
+        currentDate={currentDate} 
+        personalYear={yearNumber}
+        trimestreVibration={trimestreVibration}
+      />
 
       {/* Ano Pessoal - Destaque Principal */}
       <div className="bg-gradient-to-r from-[#00FFFF] to-[#6A1BB2] rounded-xl p-8 text-center space-y-3 border border-[#19E6FF]/30">

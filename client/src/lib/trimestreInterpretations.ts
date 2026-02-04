@@ -507,3 +507,50 @@ export function getDetailedTrimestreInterpretation(
     whatToAvoid: yearData.whatToAvoid
   };
 }
+
+/**
+ * Interpretações de Números Mestres para Ciclos Trimestrais
+ * Baseado na metodologia oficial fornecida
+ */
+
+export interface MasterNumberInterpretation {
+  number: number;
+  title: string;
+  essence: string;
+  orientation: string;
+  caution: string;
+}
+
+export const MASTER_NUMBER_INTERPRETATIONS: Record<number, MasterNumberInterpretation> = {
+  11: {
+    number: 11,
+    title: "Inspiração e Intuição",
+    essence: "Visão, canal criativo-espiritual, mensagens claras.",
+    orientation: "Escreva insights, simplifique a rotina para ouvir a alma, transforme inspiração em ação pequena e constante.",
+    caution: "Ansiedade, excesso de estímulo, idealismo sem aterramento."
+  },
+  22: {
+    number: 22,
+    title: "Grande Construção",
+    essence: "Materializar algo robusto, impacto, legado.",
+    orientation: "Planeje em etapas, delegue, documente processos, construa algo que funcione sem você 24h.",
+    caution: "Sobrecarga, querer 'salvar tudo', perfeccionismo paralisante."
+  },
+  33: {
+    number: 33,
+    title: "Amor-Mestre e Cura",
+    essence: "Servir com amor, ensinar pelo exemplo, cura emocional.",
+    orientation: "Cuide do seu coração e do seu corpo, escolha limites amorosos, transforme cuidado em estrutura sustentável.",
+    caution: "Autoabandono, culpa, atração por relações de resgate."
+  }
+};
+
+/**
+ * Retorna interpretação de número mestre se aplicável
+ */
+export const getMasterNumberInterpretation = (number: number): MasterNumberInterpretation | null => {
+  if (number === 11 || number === 22 || number === 33) {
+    return MASTER_NUMBER_INTERPRETATIONS[number];
+  }
+  return null;
+};

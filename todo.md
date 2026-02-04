@@ -830,3 +830,52 @@ Executar `pnpm db:push` para sincronizar o schema com o banco de dados.
 - Ícone de sol/estrela para representar o dia
 - Cor ciano neon (#00FFFF) para destaque
 - Atualização automática diária
+
+
+## Integração de Metodologia Oficial - Ciclos Trimestrais e Previsões Diárias (04/02/2026)
+
+### Objetivo
+Integrar metodologia oficial fornecida em dois arquivos:
+1. **ciclos-trimestrais-metodo-realizacao-desafio.md** - Nova fórmula de ciclos trimestrais
+2. **previsoes-diarias-ano-trimestre-dia.md** - Previsões diárias em 3 camadas
+
+### Tarefas - Ciclos Trimestrais (Nova Metodologia)
+- [x] Atualizar cálculo de ciclos trimestrais com nova fórmula - CONCLUÍDO:
+  * T1 = AP + Realização Vigente (RV)
+  * T2 = AP + Realização Vigente (RV) [mesma fórmula do T1]
+  * T3 = |AP - Desafio Maior (DM)| [valor absoluto]
+  * T4 = T1 + T2 + T3
+- [x] Adicionar interpretações de números mestres (11, 22, 33) para trimestres - CONCLUÍDO
+- [x] Atualizar componente AnnualPredictions.tsx com nova metodologia - CONCLUÍDO
+- [ ] Adicionar checklist de atendimento (AP, RV, DM, T1-T4) - NÃO NECESSÁRIO (UI)
+
+### Tarefas - Previsões Diárias (3 Camadas)
+- [x] Implementar cálculo de Dia Universal (DU) e Dia Pessoal (DP) - CONCLUÍDO
+- [x] Atualizar dicas diárias com integração de 3 camadas - CONCLUÍDO:
+  * Camada 1: Ano Pessoal (macro)
+  * Camada 2: Trimestre vigente (meso)
+  * Camada 3: Dia Pessoal (micro)
+- [x] Adicionar ajuste fino: como Trimestre muda o tom do DP - CONCLUÍDO
+- [x] Adicionar ajuste fino: como Ano Pessoal muda o tom do DP - CONCLUÍDO
+- [x] Atualizar DailyTipCard com narrativa integrada - CONCLUÍDO
+
+### Observações Importantes
+**Fórmula Atual (A SER SUBSTITUÍDA):**
+- T1 = AP + Ciclo de Vida
+- T2 = AP + Realização
+- T3 = AP - Desafio Maior
+- T4 = T1 + T2 + T3
+
+**Nova Fórmula (METODOLOGIA OFICIAL):**
+- T1 = AP + Realização Vigente
+- T2 = AP + Realização Vigente [IGUAL ao T1]
+- T3 = |AP - Desafio Maior| [valor absoluto]
+- T4 = T1 + T2 + T3
+
+### Checklist de Entrega
+- [x] Cálculos atualizados com nova metodologia - CONCLUÍDO
+- [x] Números mestres (11, 22, 33) implementados - CONCLUÍDO
+- [x] Previsões diárias com 3 camadas funcionando - CONCLUÍDO
+- [x] Ajuste fino de Trimestre + AP implementado - CONCLUÍDO
+- [ ] Testar com exemplos práticos - EM ANDAMENTO
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO

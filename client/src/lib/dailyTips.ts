@@ -1,87 +1,182 @@
 /**
  * Dicas Rápidas Diárias para Aproveitar a Energia Numerológica
  * 
- * Cada número do dia (1-9) possui dicas práticas e objetivas
- * para aproveitar melhor a energia do dia.
+ * METODOLOGIA OFICIAL: Integração de 3 Camadas
+ * 1. Ano Pessoal (macro) - aprendizado/colheita inevitável do ano
+ * 2. Trimestre vigente (meso) - estratégia do período
+ * 3. Dia Pessoal (micro) - atitude/verbo do dia
  */
 
 export interface DailyTip {
   number: number;
   title: string;
-  tip: string;
-  action: string;
-  avoid: string;
+  focus: string;
+  aproveitamento: string[];
+  evite: string;
 }
 
+/**
+ * Interpretações Base por Dia Pessoal (1-9)
+ * Baseado no arquivo: previsoes-diarias-ano-trimestre-dia.md
+ */
 export const DAILY_TIPS: Record<number, DailyTip> = {
   1: {
     number: 1,
-    title: "Dia de Liderança e Iniciativa",
-    tip: "Hoje é o dia perfeito para começar aquele projeto que você vem adiando. A energia do número 1 favorece novos começos, coragem e autonomia. Confie em si mesmo e dê o primeiro passo!",
-    action: "Inicie algo novo, tome decisões importantes ou assuma a liderança em uma situação.",
-    avoid: "Evite depender excessivamente dos outros ou adiar decisões importantes."
+    title: "Ação e Decisão",
+    focus: "Iniciar, liderar, escolher.",
+    aproveitamento: [
+      "Faça uma ação inaugural (primeiro passo real)",
+      "Posicione-se com clareza (sem pedir aprovação)"
+    ],
+    evite: "Impulsividade e brigas por ego."
   },
   2: {
     number: 2,
-    title: "Dia de Cooperação e Diplomacia",
-    tip: "A energia do dia pede colaboração e sensibilidade. É um ótimo momento para fortalecer parcerias, ouvir com atenção e buscar harmonia nos relacionamentos. Sua empatia está em alta!",
-    action: "Trabalhe em equipe, resolva conflitos com diálogo ou fortaleça laços afetivos.",
-    avoid: "Evite confrontos diretos, impaciência ou tomar decisões sozinho sem consultar os envolvidos."
+    title: "Alinhamento e Sensibilidade",
+    focus: "Colaboração, diplomacia, bastidores.",
+    aproveitamento: [
+      "Tenha conversas de alinhamento; refine acordos",
+      "Pratique paciência ativa"
+    ],
+    evite: "Indecisão e dependência emocional."
   },
   3: {
     number: 3,
-    title: "Dia de Criatividade e Expressão",
-    tip: "Hoje sua criatividade está no auge! É o dia ideal para se expressar, seja através da arte, comunicação ou projetos criativos. Compartilhe suas ideias e deixe sua alegria contagiar os outros.",
-    action: "Crie algo novo, participe de eventos sociais ou expresse seus sentimentos de forma autêntica.",
-    avoid: "Evite dispersão, superficialidade ou falar demais sem ouvir."
+    title: "Comunicação e Criatividade",
+    focus: "Expressão, marketing, alegria.",
+    aproveitamento: [
+      "Produza conteúdo e socialize estrategicamente",
+      "Dê voz ao seu projeto (pitch, texto, vídeo)"
+    ],
+    evite: "Dispersão e promessas exageradas."
   },
   4: {
     number: 4,
-    title: "Dia de Organização e Disciplina",
-    tip: "A energia do número 4 traz foco e estabilidade. Hoje é perfeito para organizar sua vida, cumprir tarefas pendentes e construir bases sólidas para o futuro. Trabalhe com método e persistência!",
-    action: "Organize seu espaço, finalize tarefas práticas ou planeje seus próximos passos com cuidado.",
-    avoid: "Evite rigidez excessiva, resistência a mudanças ou sobrecarga de trabalho."
+    title: "Organização e Execução",
+    focus: "Estrutura, rotina, método.",
+    aproveitamento: [
+      "Resolva pendências práticas; organize agenda/finanças",
+      "Faça o feijão com arroz muito bem-feito"
+    ],
+    evite: "Rigidez e autocobrança cruel."
   },
   5: {
     number: 5,
-    title: "Dia de Liberdade e Aventura",
-    tip: "Hoje é dia de sair da rotina! A energia do 5 favorece mudanças, viagens e novas experiências. Permita-se explorar, experimentar e se adaptar ao inesperado com leveza e curiosidade.",
-    action: "Experimente algo novo, viaje (mesmo que seja um passeio curto) ou quebre a rotina de forma positiva.",
-    avoid: "Evite excessos, impulsividade irresponsável ou dispersão que impeça conclusões."
+    title: "Movimento e Mudança",
+    focus: "Flexibilidade, novidade, expansão.",
+    aproveitamento: [
+      "Teste uma nova abordagem (processo, oferta, hábito)",
+      "Dê um passo fora do automático"
+    ],
+    evite: "Ansiedade e decisões por fuga."
   },
   6: {
     number: 6,
-    title: "Dia de Amor e Responsabilidade",
-    tip: "A energia do dia pede cuidado e dedicação aos que você ama. É um momento ideal para nutrir relacionamentos, cuidar da família e do lar, e agir com compaixão e responsabilidade.",
-    action: "Cuide de quem você ama, embeleze seu espaço ou assuma responsabilidades com amor.",
-    avoid: "Evite sacrificar-se em excesso, cobranças exageradas ou interferir onde não foi chamado."
+    title: "Amor e Cuidado",
+    focus: "Família, casa, beleza, responsabilidade.",
+    aproveitamento: [
+      "Cuide do seu ambiente e das relações",
+      "Embeleze e harmonize (o externo afeta o interno)"
+    ],
+    evite: "Assumir responsabilidades que não são suas."
   },
   7: {
     number: 7,
-    title: "Dia de Reflexão e Espiritualidade",
-    tip: "Hoje é dia de olhar para dentro. A energia do 7 favorece introspecção, estudos profundos e conexão espiritual. Reserve um tempo para meditar, ler ou simplesmente estar em silêncio consigo mesmo.",
-    action: "Medite, estude algo que te interessa profundamente ou busque momentos de solidão produtiva.",
-    avoid: "Evite isolamento excessivo, desconfiança ou análises que paralisem suas ações."
+    title: "Profundidade e Espiritualidade",
+    focus: "Introspecção, estudo, verdade.",
+    aproveitamento: [
+      "Reserve silêncio para ouvir sua intuição",
+      "Estude, revise, investigue"
+    ],
+    evite: "Isolamento reativo e paralisia por análise."
   },
   8: {
     number: 8,
-    title: "Dia de Poder e Realização",
-    tip: "A energia do 8 traz força e poder de realização! Hoje é ideal para questões financeiras, negociações e conquistas materiais. Aja com confiança, autoridade e visão estratégica.",
-    action: "Negocie, invista em seus projetos ou tome decisões relacionadas a dinheiro e carreira.",
-    avoid: "Evite autoritarismo, ganância ou usar seu poder de forma manipuladora."
+    title: "Resultados e Prosperidade",
+    focus: "Dinheiro, metas, autoridade.",
+    aproveitamento: [
+      "Negocie, precifique, cobre, planeje",
+      "Tome decisões objetivas com visão de longo prazo"
+    ],
+    evite: "Controle excessivo e dureza emocional."
   },
   9: {
     number: 9,
-    title: "Dia de Compaixão e Finalização",
-    tip: "Hoje é dia de encerrar ciclos e praticar a generosidade. A energia do 9 favorece o desapego, a compaixão e o serviço ao próximo. Finalize o que precisa ser concluído e ajude quem precisa.",
-    action: "Finalize projetos pendentes, pratique atos de bondade ou doe o que não usa mais.",
-    avoid: "Evite apego excessivo ao passado, mártir ou dispersar sua energia em muitas causas."
+    title: "Encerramentos e Compaixão",
+    focus: "Finalizar, liberar, servir.",
+    aproveitamento: [
+      "Finalize pendências; doe/desapegue",
+      "Encerre conversas e ciclos com maturidade"
+    ],
+    evite: "Drama, nostalgia e reabrir feridas sem necessidade."
   }
 };
 
 /**
- * Retorna a dica do dia baseada no número calculado
+ * Ajuste Fino: Como o Trimestre muda o tom do Dia Pessoal
+ * Baseado na metodologia oficial
  */
-export const getDailyTip = (dailyNumber: number): DailyTip => {
-  return DAILY_TIPS[dailyNumber] || DAILY_TIPS[1];
+export const TRIMESTRE_ADJUSTMENT: Record<string, string> = {
+  "1,5": "o dia ganha tom de ousadia e movimento",
+  "4,8": "o dia pede execução, metas e estrutura",
+  "2,6": "o dia pede relacionamento, cuidado e diplomacia",
+  "7,9": "o dia pede silêncio, cura, revisão e encerramento",
+  "3": "o dia favorece expressão e comunicação criativa"
+};
+
+/**
+ * Ajuste Fino: Como o Ano Pessoal muda o tom do Dia Pessoal
+ * Baseado na metodologia oficial
+ */
+export const PERSONAL_YEAR_ADJUSTMENT: Record<number, string> = {
+  1: "qualquer dia vira convite de protagonismo (comece)",
+  2: "qualquer dia pede parceria e maturidade emocional (negocie)",
+  3: "qualquer dia pede expressão (comunique)",
+  4: "qualquer dia pede base e disciplina (organize)",
+  5: "qualquer dia pede flexibilidade (adapte)",
+  6: "qualquer dia pede cuidado e responsabilidade (harmonize)",
+  7: "qualquer dia pede profundidade (investigue)",
+  8: "qualquer dia pede resultado (estruture prosperidade)",
+  9: "qualquer dia pede liberação (finalize)"
+};
+
+/**
+ * Retorna ajuste de tom baseado no trimestre
+ */
+export const getTrimestreAdjustment = (trimestreVibration: number): string => {
+  // Verificar cada grupo
+  if ([1, 5].includes(trimestreVibration)) return TRIMESTRE_ADJUSTMENT["1,5"];
+  if ([4, 8].includes(trimestreVibration)) return TRIMESTRE_ADJUSTMENT["4,8"];
+  if ([2, 6].includes(trimestreVibration)) return TRIMESTRE_ADJUSTMENT["2,6"];
+  if ([7, 9].includes(trimestreVibration)) return TRIMESTRE_ADJUSTMENT["7,9"];
+  if (trimestreVibration === 3) return TRIMESTRE_ADJUSTMENT["3"];
+  
+  return "o dia mantém sua energia natural";
+};
+
+/**
+ * Retorna ajuste de tom baseado no Ano Pessoal
+ */
+export const getPersonalYearAdjustment = (personalYear: number): string => {
+  return PERSONAL_YEAR_ADJUSTMENT[personalYear] || "o dia mantém sua energia natural";
+};
+
+/**
+ * Retorna a dica do dia com contexto completo (3 camadas)
+ */
+export const getDailyTip = (
+  dailyNumber: number,
+  personalYear?: number,
+  trimestreVibration?: number
+): DailyTip & { 
+  trimestreContext?: string;
+  yearContext?: string;
+} => {
+  const baseTip = DAILY_TIPS[dailyNumber] || DAILY_TIPS[1];
+  
+  return {
+    ...baseTip,
+    trimestreContext: trimestreVibration ? getTrimestreAdjustment(trimestreVibration) : undefined,
+    yearContext: personalYear ? getPersonalYearAdjustment(personalYear) : undefined
+  };
 };

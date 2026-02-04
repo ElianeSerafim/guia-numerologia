@@ -197,10 +197,11 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const vigentR = getVigentRealization(age);
 
   // Ciclos Trimestrais para o Ano Pessoal Atual
-  const ct1 = reduceNumber(pyCurrentReduced + vigentC);
-  const ct2 = reduceNumber(pyCurrentReduced + vigentR);
-  const ct3 = reduceNumber(Math.abs(pyCurrentReduced - dm));
-  const ct4 = reduceNumber(ct1 + ct2 + ct3);
+  // METODOLOGIA OFICIAL: T1 e T2 usam a MESMA fórmula (AP + Realização Vigente)
+  const ct1 = reduceNumber(pyCurrentReduced + vigentR); // AP + RV
+  const ct2 = reduceNumber(pyCurrentReduced + vigentR); // AP + RV (igual ao T1)
+  const ct3 = reduceNumber(Math.abs(pyCurrentReduced - dm)); // |AP - DM|
+  const ct4 = reduceNumber(ct1 + ct2 + ct3); // T1 + T2 + T3
   
   // Para 2026, calcular idade em 2026
   const ageIn2026 = 2026 - year - (new Date(2026, month - 1, day) > new Date(2026, 0, 1) ? 1 : 0);
@@ -208,10 +209,11 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   const vigentR2026 = getVigentRealization(ageIn2026);
 
   // Ciclos Trimestrais para 2026
-  const ct1_2026 = reduceNumber(py2026 + vigentC2026);
-  const ct2_2026 = reduceNumber(py2026 + vigentR2026);
-  const ct3_2026 = reduceNumber(Math.abs(py2026 - dm));
-  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026);
+  // METODOLOGIA OFICIAL: T1 e T2 usam a MESMA fórmula (AP + Realização Vigente)
+  const ct1_2026 = reduceNumber(py2026 + vigentR2026); // AP + RV
+  const ct2_2026 = reduceNumber(py2026 + vigentR2026); // AP + RV (igual ao T1)
+  const ct3_2026 = reduceNumber(Math.abs(py2026 - dm)); // |AP - DM|
+  const ct4_2026 = reduceNumber(ct1_2026 + ct2_2026 + ct3_2026); // T1 + T2 + T3
 
   return {
     fullName,

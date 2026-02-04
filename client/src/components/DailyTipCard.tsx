@@ -1,9 +1,11 @@
-import { Sparkles, Lightbulb, CheckCircle, XCircle } from 'lucide-react';
+import { Sparkles, Lightbulb, CheckCircle, XCircle, Calendar } from 'lucide-react';
 import { DailyTip } from '@/lib/dailyTips';
 
 interface DailyTipCardProps {
-  tip: DailyTip;
+  tip: DailyTip & { trimestreContext?: string; yearContext?: string };
   currentDate: Date;
+  personalYear?: number;
+  trimestreVibration?: number;
 }
 
 /**
@@ -12,7 +14,7 @@ interface DailyTipCardProps {
  * Exibe a dica do dia com design místico e informações práticas
  * para aproveitar a energia numerológica do dia.
  */
-export default function DailyTipCard({ tip, currentDate }: DailyTipCardProps) {
+export default function DailyTipCard({ tip, currentDate, personalYear, trimestreVibration }: DailyTipCardProps) {
   const dateStr = currentDate.toLocaleDateString('pt-BR', {
     weekday: 'long',
     day: 'numeric',
@@ -49,7 +51,29 @@ export default function DailyTipCard({ tip, currentDate }: DailyTipCardProps) {
         {/* Título da energia do dia */}
         <div className="mb-6">
           <h4 className="text-2xl font-bold text-white mb-3">{tip.title}</h4>
-          <p className="text-slate-300 leading-relaxed">{tip.tip}</p>
+          <p className="text-slate-300 leading-relaxed mb-3">
+            <strong>Foco do dia:</strong> {tip.focus}
+          </p>
+          
+          {/* Contexto de 3 camadas */}
+          {(tip.yearContext || tip.trimestreContext) && (
+            <div className="mt-4 p-4 bg-[#00FFFF]/5 rounded-lg border border-[#00FFFF]/20">
+              <div className="flex items-start gap-2 mb-2">
+                <Calendar className="text-[#00FFFF] flex-shrink-0 mt-0.5" size={16} />
+                <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Contexto Integrado</p>
+              </div>
+              {tip.yearContext && personalYear && (
+                <p className="text-sm text-slate-300 mb-2">
+                  <span className="text-[#00FFFF] font-semibold">Ano Pessoal {personalYear}:</span> {tip.yearContext}
+                </p>
+              )}
+              {tip.trimestreContext && trimestreVibration && (
+                <p className="text-sm text-slate-300">
+                  <span className="text-[#00FFFF] font-semibold">Trimestre {trimestreVibration}:</span> {tip.trimestreContext}
+                </p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Ações práticas */}
@@ -62,7 +86,11 @@ export default function DailyTipCard({ tip, currentDate }: DailyTipCardProps) {
               </div>
               <div>
                 <h5 className="font-semibold text-[#00FFFF] mb-2 text-sm uppercase tracking-wider">✓ Faça Hoje</h5>
-                <p className="text-sm text-slate-300 leading-relaxed">{tip.action}</p>
+                <ul className="text-sm text-slate-300 leading-relaxed space-y-1">
+                  {tip.aproveitamento.map((item, idx) => (
+                    <li key={idx}>• {item}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
@@ -75,7 +103,7 @@ export default function DailyTipCard({ tip, currentDate }: DailyTipCardProps) {
               </div>
               <div>
                 <h5 className="font-semibold text-red-400 mb-2 text-sm uppercase tracking-wider">✗ Evite Hoje</h5>
-                <p className="text-sm text-slate-300 leading-relaxed">{tip.avoid}</p>
+                <p className="text-sm text-slate-300 leading-relaxed">{tip.evite}</p>
               </div>
             </div>
           </div>
