@@ -752,3 +752,25 @@ Executar `pnpm db:push` para sincronizar o schema com o banco de dados.
 - Variáveis de ambiente
 - Configuração Nginx
 - Comandos PM2
+
+
+## Criação da Seção "Meus Pedidos" (03/02/2026)
+
+### Objetivo
+- [x] Criar tRPC procedures para buscar pedidos do usuário logado - JÁ EXISTIA (orders.getByEmail)
+- [x] Criar componente MyOrders.tsx com lista de pedidos - CONCLUÍDO
+- [x] Exibir: data, plano, valor, status, método de pagamento - CONCLUÍDO
+- [x] Adicionar filtros por status (todos, pendente, aprovado, cancelado) - CONCLUÍDO
+- [x] Adicionar rota /meus-pedidos no App.tsx - CONCLUÍDO
+- [x] Adicionar link de navegação no menu/header - CONCLUÍDO
+- [ ] Testar com dados reais do banco - AGUARDANDO TESTE DO USUÁRIO
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+### Funcionalidades Implementadas
+- Lista completa de pedidos do usuário logado
+- Filtros por status: Todos, Pendentes, Aprovados, Cancelados
+- Exibição de: Data, Plano, Valor, Status, Método de Pagamento
+- Referência PagSeguro e data de confirmação (quando disponível)
+- Design consistente com o tema místico do projeto
+- Link no header com ícone de pacote (Package)
+- Mensagem amigável quando não há pedidos

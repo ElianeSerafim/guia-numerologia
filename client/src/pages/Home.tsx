@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { Compass, Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock, Check } from 'lucide-react';
+import { Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock, Compass, Package } from 'lucide-react';
 import { Link } from 'wouter';
 import { calculateChart } from '@/lib/numerologyUtils';
 import { NumerologyChart } from '@/types';
@@ -152,6 +152,11 @@ export default function Home() {
             <Link href="/faq">
               <a className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600" title="Aprenda">
                 <BookOpen size={18} />
+              </a>
+            </Link>
+            <Link href="/meus-pedidos">
+              <a className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-600" title="Meus Pedidos">
+                <Package size={18} />
               </a>
             </Link>
             <div className="text-right hidden sm:block">

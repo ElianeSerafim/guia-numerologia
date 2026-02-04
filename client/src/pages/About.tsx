@@ -43,7 +43,7 @@ export default function About() {
                 
                 {/* Foto */}
                 <img
-                  src="/eliane-serafim.jpg"
+                  src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663241638345/llHYCXEGFqZapfCc.jpg"
                   alt="Eliane Serafim - Numeróloga"
                   className="w-80 h-80 md:w-96 md:h-96 rounded-2xl object-cover shadow-2xl border-4 border-[#19E6FF] hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] transition-all duration-300"
                 />

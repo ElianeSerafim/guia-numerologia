@@ -20,6 +20,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import LandingPage from "./pages/LandingPage";
 import Profile from "./pages/Profile";
+import MyOrders from "./pages/MyOrders";
 
 /**
  * App Component - Portal Numerologia 2026
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/" component={LandingPage} />
       <Route path="/app" component={Home} />
       <Route path="/profile" component={Profile} />
+      <Route path="/meus-pedidos" component={MyOrders} />
       <Route path="/auth" component={Auth} />
       <Route path="/login" component={Login} />
       <Route path="/forgot-password" component={ForgotPassword} />
