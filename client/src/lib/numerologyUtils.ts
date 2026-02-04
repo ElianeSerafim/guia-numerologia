@@ -136,8 +136,8 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
   // Idades das Realizações
   const cdSimple = (cd === 11 || cd === 22 || cd === 33) ? reduceNumber(cd, false) : cd;
   const r1EndAge = 36 - cdSimple;
-  const r2EndAge = r1EndAge + 9;
-  const r3EndAge = r2EndAge + 9;
+  const r2EndAge = r1EndAge + 10; // R1_fim + 1 (início R2) + 9 (duração) = R1_fim + 10
+  const r3EndAge = r2EndAge + 10; // R2_fim + 1 (início R3) + 9 (duração) = R2_fim + 10
 
   // ========================================
   // 4. DESAFIOS
@@ -269,9 +269,9 @@ export const calculateChart = (fullName: string, birthDate: string): any => {
 export function calcularIdadesRealizacoes(cd: number) {
   const r1Fim = 36 - cd;
   const r2Inicio = r1Fim + 1;
-  const r2Fim = r2Inicio + 9;
+  const r2Fim = r2Inicio + 9; // 10 anos de duração (início + 9 = 10 anos completos)
   const r3Inicio = r2Fim + 1;
-  const r3Fim = r3Inicio + 9;
+  const r3Fim = r3Inicio + 9; // 10 anos de duração (início + 9 = 10 anos completos)
   const r4Inicio = r3Fim + 1;
 
   return {

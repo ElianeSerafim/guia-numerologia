@@ -1072,18 +1072,20 @@ Corrigir fórmulas de cálculo de Realizações (R1, R2, R3, R4) e suas idades d
 
 ### Problema Real Identificado
 **Exemplo de Eliane (04/01/1970, CD=4):**
-- App mostra: R1 (0-28), R2 (29-56), R3 (57-84), R4 (85+) ❌
-- Correto: R1 (0-32), R2 (33-42), R3 (43-52), R4 (53+) ✓
+- App mostra: R1 (0-32) ✓, R2 (33-41) ❌, R3 (42-50) ❌, R4 (51+) ❌
+- Correto: R1 (0-32) ✓, R2 (33-42) ✓, R3 (43-52) ✓, R4 (53+) ✓
 
-**Causa:** Componente Report.tsx usa idades fixas em vez de chart.realizationAges
+**Causa:** Cálculo usa +9 quando deveria ser +10 para duração de R2 e R3
+**Detalhes:** R2 e R3 devem ter 10 anos de duração cada (33+9=42, não 41)
 
 ### Tarefas
-- [x] Cálculos em numerologyUtils.ts estão corretos - VERIFICADO
-- [x] Corrigir TimelineInteractive.tsx para usar chart.realizationAges - CONCLUÍDO
-  * Função getRealizationItems() agora calcula idades dinamicamente
-  * Linhas 139, 148, 157, 166 agora usam valores corretos
-- [ ] Testar com exemplo de Eliane - EM ANDAMENTO
-- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+- [x] Corrigir duração de R2 e R3 em numerologyUtils.ts - CONCLUÍDO
+  * Linha 139: r2EndAge = r1EndAge + 10 (era +9) ✓
+  * Linha 140: r3EndAge = r2EndAge + 10 (era +9) ✓
+  * Função calcularIdadesRealizacoes() também corrigida ✓
+- [x] TimelineInteractive.tsx usa chart.realizationAges - CONCLUÍDO
+- [ ] Testar com exemplo de Eliane (deve mostrar 33-42, 43-52) - PRÓXIMO
+- [ ] Fazer checkpoint e entregar - AGUARDANDO TESTE
 
 ### Checklist de Validação
 - [x] R1 = Dia + Mês ✓ - IMPLEMENTADO (linha 131)
