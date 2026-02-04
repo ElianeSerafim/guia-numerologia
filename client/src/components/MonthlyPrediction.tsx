@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { X, Lightbulb, AlertCircle } from 'lucide-react';
 import { NumerologyChart } from '@/types';
-import { getMonthlyPredictionInterpretation } from '@/lib/monthlyPredictions';
-import { reduceNumber } from '@/lib/numerologyUtils';
+import { getMonthlyInterpretation, calculateMonthlyNumber } from '@/lib/monthlyInterpretations';
 
 interface MonthlyPredictionProps {
   chart: NumerologyChart;
@@ -19,10 +18,14 @@ export default function MonthlyPrediction({ chart, month, onClose }: MonthlyPred
   const monthName = MONTH_NAMES[month - 1];
   
   // Calcular Previsão Mensal (PM) = AP + Mês
-  const pm = reduceNumber(chart.personalYear + month);
+  const pm = calculateMonthlyNumber(chart.personalYear, month);
   
   // Obter interpretação da previsão mensal
-  const interpretation = getMonthlyPredictionInterpretation(pm, monthName);
+  const interpretation = getMonthlyInterpretation(pm);
+  
+  if (!interpretation) {
+    return null; // Fallback se não encontrar interpretação
+  }
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -54,26 +57,38 @@ export default function MonthlyPrediction({ chart, month, onClose }: MonthlyPred
             <p className="text-[#19E6FF]">Vibração energética para {monthName}</p>
           </div>
 
+          {/* Título da Previsão */}
+          <div className="bg-gradient-to-br from-[#19E6FF]/10 to-[#00FFFF]/5 border border-[#19E6FF]/30 rounded-lg p-6">
+            <h3 className="text-2xl font-bold text-[#00FFFF] mb-2 text-center">
+              {interpretation.title}
+            </h3>
+          </div>
+          
           {/* Previsão */}
           <div className="bg-gradient-to-br from-[#19E6FF]/10 to-[#00FFFF]/5 border border-[#19E6FF]/30 rounded-lg p-6">
             <h3 className="text-xl font-bold text-[#00FFFF] mb-4 flex items-center gap-2">
               <span className="w-1 h-1 rounded-full bg-[#00FFFF]"></span>
-              Previsão
+              Previsão do Mês
             </h3>
             <p className="text-[#E0E0E0] leading-relaxed">
               {interpretation.prediction}
             </p>
           </div>
 
-          {/* Dica para Aproveitar */}
+          {/* Como Aproveitar a Energia */}
           <div className="bg-gradient-to-br from-[#00FFFF]/10 to-[#19E6FF]/10 border border-[#00FFFF]/30 rounded-lg p-6">
             <h3 className="text-xl font-bold text-[#00FFFF] mb-4 flex items-center gap-2">
               <Lightbulb className="w-5 h-5 text-[#00FFFF]" />
-              Dica para Aproveitar a Energia
+              Como Aproveitar a Energia
             </h3>
-            <p className="text-[#E0E0E0] leading-relaxed">
-              {interpretation.tip}
-            </p>
+            <ul className="space-y-3">
+              {interpretation.howToLeverage.map((tip, idx) => (
+                <li key={idx} className="flex items-start gap-2 text-[#E0E0E0]">
+                  <span className="text-[#00FFFF] font-bold flex-shrink-0 mt-1">✓</span>
+                  <span className="leading-relaxed">{tip}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* O que Evitar */}
@@ -82,9 +97,14 @@ export default function MonthlyPrediction({ chart, month, onClose }: MonthlyPred
               <AlertCircle className="w-5 h-5 text-[#FF6B6B]" />
               O que Evitar
             </h3>
-            <p className="text-[#E0E0E0] leading-relaxed">
-              {interpretation.avoid}
-            </p>
+            <ul className="space-y-3">
+              {interpretation.whatToAvoid.map((warning, idx) => (
+                <li key={idx} className="flex items-start gap-2 text-[#E0E0E0]">
+                  <span className="text-[#FF6B6B] font-bold flex-shrink-0 mt-1">✗</span>
+                  <span className="leading-relaxed">{warning}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

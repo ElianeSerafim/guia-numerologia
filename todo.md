@@ -879,3 +879,54 @@ Integrar metodologia oficial fornecida em dois arquivos:
 - [x] Ajuste fino de Trimestre + AP implementado - CONCLUÍDO
 - [ ] Testar com exemplos práticos - EM ANDAMENTO
 - [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+
+## Página de Previsões Mensais (04/02/2026)
+
+### Objetivo
+Criar página completa de previsões mensais com navegação a partir do mês atual, seguindo metodologia oficial.
+
+### Tarefas
+- [x] Criar arquivo monthlyInterpretations.ts com interpretações para cada número (1-9) - CONCLUÍDO
+  * Estrutura: previsão + dicas de aproveitamento + o que evitar
+- [x] Atualizar componente MonthlyPrediction.tsx existente - CONCLUÍDO
+  * Cálculo: Ano Pessoal (AP) + Mês clicado
+  * Design consistente com tema místico
+  * Seções: Previsão, Dicas de Aproveitamento, O que Evitar
+- [x] Navegação já existente em AnnualPredictions.tsx - MANTIDA
+  * Mês atual já é clicável via modal
+  * Parâmetros passados corretamente
+- [x] Modal já integrado (sem necessidade de rota) - MANTIDO
+- [ ] Testar com diferentes meses e Anos Pessoais - EM ANDAMENTO
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+### Implementação Completa
+**Arquivo criado:** `client/src/lib/monthlyInterpretations.ts`
+- 9 interpretações completas (1-9) para previsões mensais
+- Estrutura: title, prediction, howToLeverage[], whatToAvoid[]
+- Função `calculateMonthlyNumber(personalYear, month)`: calcula PM = AP + Mês
+- Função `getMonthlyInterpretation(monthlyNumber)`: retorna interpretação detalhada
+
+**Componente atualizado:** `client/src/components/MonthlyPrediction.tsx`
+- Modal já existente atualizado com novas interpretações
+- Exibe título da previsão (ex: "Mês de Novos Começos")
+- Lista de dicas de aproveitamento (5 itens por mês)
+- Lista de o que evitar (5 itens por mês)
+- Design místico mantido com gradientes ciano neon
+
+**Navegação:**
+- Usuário clica no mês dentro da Previsão Anual
+- Modal abre com previsão mensal detalhada
+- Fórmula: PM = AP + Mês (exibida no header)
+
+### Metodologia Oficial
+**Fórmula:** Previsão Mensal = Ano Pessoal (AP) vigente + Mês clicado
+
+**Conteúdo Obrigatório:**
+1. Previsão do mês
+2. Dica para aproveitar a energia
+3. O que evitar
+
+**Navegação:**
+- Usuário clica no mês atual dentro da Previsão Anual
+- Sistema calcula AP + Mês e exibe previsão mensal detalhada
