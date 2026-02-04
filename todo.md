@@ -1114,3 +1114,24 @@ Corrigir fórmulas de cálculo de Realizações (R1, R2, R3, R4) e suas idades d
 - [ ] Verificar se há outros componentes com mesmo erro - PENDENTE
 - [ ] Testar com exemplo de Eliane (R4 deve mostrar "52+" não "53+") - PRÓXIMO
 - [ ] Fazer checkpoint e entregar - AGUARDANDO TESTE
+
+
+## Verificação de Fórmulas de Ciclos Trimestrais (04/02/2026)
+
+### Fórmulas Corretas (Metodologia Oficial)
+- **CT1** = Ano Pessoal + Ciclo de Vida vigente na data de cálculo
+- **CT2** = Ano Pessoal + Realização vigente na data de cálculo
+- **CT3** = Ano Pessoal - Desafio Maior
+- **CT4** = CT1 + CT2 + CT3
+
+### Tarefas
+- [x] Verificar fórmulas atuais em numerologyUtils.ts - CONCLUÍDO
+  * Erro encontrado: CT1 usava vigentR em vez de vigentC
+- [x] Corrigir fórmulas - CONCLUÍDO
+  * Linha 201: CT1 = AP + vigentC (Ciclo de Vida) ✓
+  * Linha 202: CT2 = AP + vigentR (Realização) ✓
+  * Linha 203: CT3 = |AP - DM| ✓
+  * Linha 204: CT4 = CT1 + CT2 + CT3 ✓
+  * Mesmas correções aplicadas para 2026 (linhas 213-216) ✓
+- [ ] Testar com exemplo de Eliane - PRÓXIMO
+- [ ] Fazer checkpoint - AGUARDANDO TESTE
