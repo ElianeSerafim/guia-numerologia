@@ -1039,3 +1039,58 @@ Incorporar interpretações de Renascimento, Realização de Legado e Grande Amo
 - [ ] Testes realizados
 - [ ] Checkpoint salvo
 - [ ] Entrega ao usuário
+
+
+## Correção de Cálculos de Realizações (04/02/2026)
+
+### Objetivo
+Corrigir fórmulas de cálculo de Realizações (R1, R2, R3, R4) e suas idades de vigência conforme metodologia oficial.
+
+### Erro Identificado
+**Fórmulas incorretas atualmente:**
+- R1, R2, R3, R4 calculadas incorretamente
+- Idades de término incorretas
+
+### Fórmulas Corretas
+**Cálculo dos valores:**
+- R1 = Dia + Mês
+- R2 = Dia + Ano
+- R3 = R1 + R2
+- R4 = Ano + Mês
+
+**Cálculo das idades:**
+- R1: Do nascimento aos (36 - CD) anos
+- R2: De (R1_fim + 1) aos (R1_fim + 1 + 9) anos
+- R3: De (R2_fim + 1) aos (R2_fim + 1 + 9) anos
+- R4: De (R3_fim + 1) até o fim da vida
+
+**Exemplo (CD = 3):**
+- R1: 0 aos 33 anos (36-3=33)
+- R2: 34 aos 43 anos (33+1=34, 34+9=43)
+- R3: 44 aos 53 anos (43+1=44, 44+9=53)
+- R4: 54+ anos
+
+### Problema Real Identificado
+**Exemplo de Eliane (04/01/1970, CD=4):**
+- App mostra: R1 (0-28), R2 (29-56), R3 (57-84), R4 (85+) ❌
+- Correto: R1 (0-32), R2 (33-42), R3 (43-52), R4 (53+) ✓
+
+**Causa:** Componente Report.tsx usa idades fixas em vez de chart.realizationAges
+
+### Tarefas
+- [x] Cálculos em numerologyUtils.ts estão corretos - VERIFICADO
+- [x] Corrigir TimelineInteractive.tsx para usar chart.realizationAges - CONCLUÍDO
+  * Função getRealizationItems() agora calcula idades dinamicamente
+  * Linhas 139, 148, 157, 166 agora usam valores corretos
+- [ ] Testar com exemplo de Eliane - EM ANDAMENTO
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+### Checklist de Validação
+- [x] R1 = Dia + Mês ✓ - IMPLEMENTADO (linha 131)
+- [x] R2 = Dia + Ano ✓ - IMPLEMENTADO (linha 132)
+- [x] R3 = R1 + R2 ✓ - IMPLEMENTADO (linha 133)
+- [x] R4 = Mês + Ano ✓ - IMPLEMENTADO (linha 134)
+- [x] R1_fim = 36 - CD ✓ - IMPLEMENTADO (linha 138)
+- [x] R2_fim = R1_fim + 9 ✓ - IMPLEMENTADO (linha 139)
+- [x] R3_fim = R2_fim + 9 ✓ - IMPLEMENTADO (linha 140)
+- [x] R4_inicio = R3_fim + 1 ✓ - IMPLÍCITO (R4 começa após R3)

@@ -82,47 +82,99 @@ const challengeItems: TimelineItem[] = [
   },
 ];
 
-const realizationItems: TimelineItem[] = [
-  { 
-    id: 'r1',
-    label: 'R1 - 1ª Realização', 
-    definition: 'Ciclo formativo (0-28 anos). Período de aprendizado, descoberta e construção de identidade. Você está conhecendo o mundo, desenvolvendo suas habilidades e formando suas primeiras experiências significativas. Este ciclo estabelece as fundações para toda a sua jornada.',
-    age: '0-28 anos', 
-    color: 'from-purple-600 to-purple-400', 
-    icon: '🎯',
-    type: 'realization'
-  },
-  { 
-    id: 'r2',
-    label: 'R2 - 2ª Realização', 
-    definition: 'Ciclo de maturidade (29-56 anos). Período de construção, consolidação e realização de potencial. Você está aplicando o aprendizado anterior, criando seu legado e deixando sua marca no mundo. Este é o ciclo de maior produtividade e impacto.',
-    age: '29-56 anos', 
-    color: 'from-cyan-400 to-indigo-400', 
-    icon: '🏆',
-    type: 'realization'
-  },
-  { 
-    id: 'r3',
-    label: 'R3 - 3ª Realização', 
-    definition: 'Ciclo de plenitude (57-84 anos). Período de colheita, sabedoria e integração. Você está colhendo os frutos de suas ações anteriores, compartilhando sua sabedoria e consolidando seu legado. Este ciclo traz compreensão profunda e paz interior.',
-    age: '57-84 anos', 
-    color: 'from-violet-600 to-violet-400', 
-    icon: '👑',
-    type: 'realization'
-  },
-  { 
-    id: 'r4',
-    label: 'R4 - 4ª Realização', 
-    definition: 'Ciclo final (85+ anos). Período de legado, transcendência e síntese. Você está refletindo sobre toda a jornada, sendo mentor e guia, e deixando um legado espiritual e material. Este ciclo representa a integração de toda a vida vivida.',
-    age: '85+ anos', 
-    color: 'from-fuchsia-600 to-fuchsia-400', 
-    icon: '✨',
-    type: 'realization'
-  },
-];
-
 export function TimelineInteractive({ birthDate, chart }: TimelineInteractiveProps) {
   const [expandedItem, setExpandedItem] = useState<ItemType | null>(null);
+
+  // Função para gerar realizationItems dinamicamente baseado no chart
+  const getRealizationItems = (): TimelineItem[] => {
+    if (!chart) {
+      // Fallback para idades fixas se chart não estiver disponível
+      return [
+        { 
+          id: 'r1',
+          label: 'R1 - 1ª Realização', 
+          definition: 'Ciclo formativo. Período de aprendizado, descoberta e construção de identidade.',
+          age: '0-28 anos', 
+          color: 'from-purple-600 to-purple-400', 
+          icon: '🎯',
+          type: 'realization'
+        },
+        { 
+          id: 'r2',
+          label: 'R2 - 2ª Realização', 
+          definition: 'Ciclo de maturidade. Período de construção, consolidação e realização de potencial.',
+          age: '29-56 anos', 
+          color: 'from-cyan-400 to-indigo-400', 
+          icon: '🏆',
+          type: 'realization'
+        },
+        { 
+          id: 'r3',
+          label: 'R3 - 3ª Realização', 
+          definition: 'Ciclo de plenitude. Período de colheita, sabedoria e integração.',
+          age: '57-84 anos', 
+          color: 'from-violet-600 to-violet-400', 
+          icon: '👑',
+          type: 'realization'
+        },
+        { 
+          id: 'r4',
+          label: 'R4 - 4ª Realização', 
+          definition: 'Ciclo final. Período de legado, transcendência e síntese.',
+          age: '85+ anos', 
+          color: 'from-fuchsia-600 to-fuchsia-400', 
+          icon: '✨',
+          type: 'realization'
+        },
+      ];
+    }
+
+    const { r1End, r2End, r3End } = chart.realizationAges;
+    const r2Start = r1End + 1;
+    const r3Start = r2End + 1;
+    const r4Start = r3End + 1;
+
+    return [
+      { 
+        id: 'r1',
+        label: 'R1 - 1ª Realização', 
+        definition: 'Ciclo formativo. Período de aprendizado, descoberta e construção de identidade. Você está conhecendo o mundo, desenvolvendo suas habilidades e formando suas primeiras experiências significativas. Este ciclo estabelece as fundações para toda a sua jornada.',
+        age: `0-${r1End} anos`, 
+        color: 'from-purple-600 to-purple-400', 
+        icon: '🎯',
+        type: 'realization'
+      },
+      { 
+        id: 'r2',
+        label: 'R2 - 2ª Realização', 
+        definition: 'Ciclo de maturidade. Período de construção, consolidação e realização de potencial. Você está aplicando o aprendizado anterior, criando seu legado e deixando sua marca no mundo. Este é o ciclo de maior produtividade e impacto.',
+        age: `${r2Start}-${r2End} anos`, 
+        color: 'from-cyan-400 to-indigo-400', 
+        icon: '🏆',
+        type: 'realization'
+      },
+      { 
+        id: 'r3',
+        label: 'R3 - 3ª Realização', 
+        definition: 'Ciclo de plenitude. Período de colheita, sabedoria e integração. Você está colhendo os frutos de suas ações anteriores, compartilhando sua sabedoria e consolidando seu legado. Este ciclo traz compreensão profunda e paz interior.',
+        age: `${r3Start}-${r3End} anos`, 
+        color: 'from-violet-600 to-violet-400', 
+        icon: '👑',
+        type: 'realization'
+      },
+      { 
+        id: 'r4',
+        label: 'R4 - 4ª Realização', 
+        definition: 'Ciclo final. Período de legado, transcendência e síntese. Você está refletindo sobre toda a jornada, sendo mentor e guia, e deixando um legado espiritual e material. Este ciclo representa a integração de toda a vida vivida.',
+        age: `${r4Start}+ anos`, 
+        color: 'from-fuchsia-600 to-fuchsia-400', 
+        icon: '✨',
+        type: 'realization'
+      },
+    ];
+  };
+
+  const realizationItems = getRealizationItems();
 
   // Calcular números dos ciclos e desafios
   const cycleNumbers: Record<'c1' | 'c2' | 'c3', number> = {
