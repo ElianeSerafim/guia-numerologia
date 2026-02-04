@@ -990,3 +990,52 @@ Incorporar interpretações terapêuticas de Ciclos de Vida (C1, C2, C3), Realiz
 - Potenciais: o que a vibração oferece
 - Feridas possíveis: o que pode ter sido machucado
 - Em consulta: perguntas reflexivas para aprofundamento
+
+
+## Incorporação de Interpretações Especiais - Renascimento, Legado e Grande Amor (04/02/2026)
+
+### Objetivo
+Incorporar interpretações de Renascimento, Realização de Legado e Grande Amor ao sistema, seguindo metodologia de Lili Numerologia.
+
+### Tarefas
+- [x] Criar arquivo specialInterpretations.ts com as 3 interpretações - CONCLUÍDO
+  * Renascimento: reorganização da alma após fato grave - IMPLEMENTADO
+  * Realização de Legado: quando R2/R3/R4 = MO/CD/ME - IMPLEMENTADO
+  * Grande Amor: vínculos transformadores em harmonia - IMPLEMENTADO
+- [x] Adicionar lógica de detecção automática no cálculo do mapa - CONCLUÍDO
+  * Detectar Renascimento em R2, R3 ou R4 - ESTRUTURA CRIADA (requer análise terapêutica)
+  * Detectar Realização de Legado (Rn = MO/CD/ME) - IMPLEMENTADO
+  * Detectar Grande Amor (critérios: MO ativa, harmonia EU-MO, sem bloqueio) - ESTRUTURA CRIADA
+- [ ] Criar componentes visuais para exibir interpretações especiais - PENDENTE
+  * Card destacado quando Renascimento detectado
+  * Badge "Legado" quando Realização de Legado detectada
+  * Card especial quando Grande Amor detectado
+- [ ] Testar com diferentes mapas - PENDENTE
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+### Regras de Negócio
+
+**Renascimento:**
+- Não existe em R1
+- Pode ocorrer em R2, R3 ou R4
+- Liberação de CD e MO em cada Renascimento
+- Mudança residencial apenas no último Renascimento
+- Nunca é punição, é chamado terapêutico
+
+**Realização de Legado:**
+- Ativa quando Rn = MO OU Rn = CD OU Rn = ME
+- Significa deixar marcas além de si
+- Impacto na vida de outras pessoas
+
+**Grande Amor:**
+- Critérios: MO ativa + Harmonia EU-MO + Sem bloqueio afetivo + Ciclo favorável
+- Não é dependência ou carência
+- Surge quando pessoa está alinhada consigo
+
+### Checklist de Entrega
+- [ ] Arquivo specialInterpretations.ts criado
+- [ ] Lógica de detecção implementada
+- [ ] Componentes visuais criados
+- [ ] Testes realizados
+- [ ] Checkpoint salvo
+- [ ] Entrega ao usuário
