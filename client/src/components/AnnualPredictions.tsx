@@ -219,10 +219,9 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
               {trimestres
                 .filter((t) => trimestreFilter === 'all' || trimestreFilter === t.toString())
                 .map((trimestre) => {
-                  const ct = getTrimestreInterpretation(yearNumber, trimestre);
+                  const ctNumber = chart.ciclosTrimestrais?.ano2026?.[`ct${trimestre}` as keyof typeof chart.ciclosTrimestrais.ano2026] || trimestre;
+                  const ct = getTrimestreInterpretation(yearNumber, ctNumber, trimestre);
                   if (!ct) return null;
-
-                  const ctNumber = chart.ciclosTrimestrais?.ano2026?.[`ct${trimestre}` as keyof typeof chart.ciclosTrimestrais.ano2026];
                   
                   const trimestreMeses = chart.ciclosTrimestrais?.meses;
                   let trimestreMonthsStr = '';
@@ -258,6 +257,14 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                       <div className="bg-[#3A1A5A]/50 rounded-lg p-4 border border-[#1A3A4A]">
                         <p className="text-sm text-slate-300 leading-relaxed">{ct.essence}</p>
                       </div>
+
+                      {/* Descrição Detalhada (se disponível) */}
+                      {ct.description && (
+                        <div className="bg-[#2A1A4A]/70 rounded-lg p-4 border border-[#3A2A5A]">
+                          <h5 className="font-semibold text-[#19E6FF] mb-2 text-sm uppercase tracking-wider">✨ Interpretação Detalhada</h5>
+                          <p className="text-sm text-slate-300 leading-relaxed">{ct.description}</p>
+                        </div>
+                      )}
 
                       {/* Atividades Recomendadas */}
                       <div>

@@ -774,3 +774,31 @@ Executar `pnpm db:push` para sincronizar o schema com o banco de dados.
 - Design consistente com o tema místico do projeto
 - Link no header com ícone de pacote (Package)
 - Mensagem amigável quando não há pedidos
+
+## Integração de Interpretações Detalhadas de Ciclos Trimestrais (04/02/2026)
+
+### Objetivo
+- [x] Analisar componente atual de previsões anuais (AnnualPredictions.tsx) - CONCLUÍDO
+- [x] Adicionar interpretações detalhadas para cada vibração (1-9, 11, 22, 33) - CONCLUÍDO (1-9)
+- [x] Integrar interpretações específicas por Ano Pessoal + Ciclo Trimestral - CONCLUÍDO
+- [x] Adicionar dicas práticas ("O que fazer" e "O que evitar") - CONCLUÍDO
+- [x] Manter cálculo correto: CT1 = AP + Ciclo Vida, CT2 = AP + Realização, CT3 = AP - Desafio Maior, CT4 = CT1+CT2+CT3 - MANTIDO
+- [ ] Testar com diferentes combinações de Ano Pessoal - EM ANDAMENTO
+- [ ] Fazer checkpoint e entregar - PRÓXIMO PASSO
+
+### Implementação Completa
+**Arquivo criado:** `server/lib/trimestreInterpretations.ts`
+- 9 vibrações completas (1-9) com interpretações para todos os 9 Anos Pessoais
+- Total: 81 combinações detalhadas (9 vibrações × 9 Anos Pessoais)
+- Estrutura: essence, description, whatToDo[], whatToAvoid[]
+
+**Função atualizada:** `getTrimestreInterpretation()` em `server/lib/numerology.ts`
+- Aceita 3 parâmetros: personalYear, trimestreVibration, trimestre
+- Busca interpretação detalhada via `getDetailedTrimestreInterpretation()`
+- Fallback para interpretação básica se detalhada não disponível
+
+**Componente atualizado:** `AnnualPredictions.tsx`
+- Passa personalYear para getTrimestreInterpretation()
+- Adicionada seção "Interpretação Detalhada" nos cards de trimestre
+- Seções "Atividades Recomendadas" e "Cautelas" agora usam dados detalhados
+- Interface `TrimestrePrediction` estendida com campo `description?`

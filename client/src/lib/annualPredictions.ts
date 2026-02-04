@@ -5,6 +5,8 @@
  * Ciclos Trimestrais (CTs) e Previsões para cada número (1-9)
  */
 
+import { getDetailedTrimestreInterpretation } from './trimestreInterpretations';
+
 export interface AnnualPrediction {
   number: number;
   title: string;
@@ -27,6 +29,7 @@ export interface TrimestrePrediction {
   trimestre: number;
   title: string;
   essence: string;
+  description?: string; // Descrição detalhada do trimestre
   focus: string;
   activities: string[];
   cautions: string[];
@@ -357,9 +360,12 @@ export const annualPredictions: Record<number, AnnualPrediction> = {
 // INTERPRETAÇÕES DE CICLOS TRIMESTRAIS
 // ========================================
 
-export const getTrimestreInterpretation = (number: number, trimestre: number): TrimestrePrediction | null => {
-  const baseInterpretation = annualPredictions[number];
+export const getTrimestreInterpretation = (personalYear: number, trimestreVibration: number, trimestre: number): TrimestrePrediction | null => {
+  const baseInterpretation = annualPredictions[trimestreVibration];
   if (!baseInterpretation) return null;
+
+  // Buscar interpretação detalhada
+  const detailedInterpretation = getDetailedTrimestreInterpretation(personalYear, trimestreVibration);
 
   const trimestreNames = ['1º Trimestre', '2º Trimestre', '3º Trimestre', '4º Trimestre'];
   const trimestresDescription = [
@@ -369,8 +375,23 @@ export const getTrimestreInterpretation = (number: number, trimestre: number): T
     'Conclusão - Colheita e Preparação'
   ];
 
+  if (detailedInterpretation) {
+    // Usar interpretação detalhada quando disponível
+    return {
+      number: trimestreVibration,
+      trimestre,
+      title: `${trimestreNames[trimestre - 1]} - ${baseInterpretation.title}`,
+      essence: detailedInterpretation.essence,
+      description: detailedInterpretation.description,
+      focus: baseInterpretation.focus,
+      activities: detailedInterpretation.whatToDo,
+      cautions: detailedInterpretation.whatToAvoid
+    };
+  }
+
+  // Fallback para interpretação básica
   return {
-    number,
+    number: trimestreVibration,
     trimestre,
     title: `${trimestreNames[trimestre - 1]} - ${baseInterpretation.title}`,
     essence: `${trimestresDescription[trimestre - 1]}: ${baseInterpretation.essence}`,
