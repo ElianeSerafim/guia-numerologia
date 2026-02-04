@@ -1096,3 +1096,21 @@ Corrigir fórmulas de cálculo de Realizações (R1, R2, R3, R4) e suas idades d
 - [x] R2_fim = R1_fim + 9 ✓ - IMPLEMENTADO (linha 139)
 - [x] R3_fim = R2_fim + 9 ✓ - IMPLEMENTADO (linha 140)
 - [x] R4_inicio = R3_fim + 1 ✓ - IMPLÍCITO (R4 começa após R3)
+
+
+## Correção de Início da R4 (04/02/2026)
+
+### Problema Identificado
+**Exemplo de Eliane (CD=4):**
+- R3 termina aos 52 anos
+- R4 deve começar aos **52 anos** (não 53!)
+- No aniversário de 52 anos, já está na R4
+
+**Causa:** TimelineInteractive.tsx usa R3_fim + 1 para R4_inicio
+
+### Tarefas
+- [x] Corrigir TimelineInteractive.tsx: R4_inicio = R3_fim (não +1) - CONCLUÍDO
+  * Linha 135: const r4Start = r3End (era r3End + 1) ✓
+- [ ] Verificar se há outros componentes com mesmo erro - PENDENTE
+- [ ] Testar com exemplo de Eliane (R4 deve mostrar "52+" não "53+") - PRÓXIMO
+- [ ] Fazer checkpoint e entregar - AGUARDANDO TESTE

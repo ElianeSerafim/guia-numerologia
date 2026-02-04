@@ -132,7 +132,7 @@ export function TimelineInteractive({ birthDate, chart }: TimelineInteractivePro
     const { r1End, r2End, r3End } = chart.realizationAges;
     const r2Start = r1End + 1;
     const r3Start = r2End + 1;
-    const r4Start = r3End + 1;
+    const r4Start = r3End; // R4 começa no mesmo ano que R3 termina (no aniversário)
 
     return [
       { 
