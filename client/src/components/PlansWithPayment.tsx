@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NumerologyChart } from '@/types';
 import { Check, Loader2, AlertCircle, Lock } from 'lucide-react';
 import { trpc } from '@/lib/trpc';
+import PaymentFormCPF from './PaymentFormCPF';
 
 interface PlansWithPaymentProps {
   chart: NumerologyChart;
@@ -74,6 +75,9 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [cpf, setCPF] = useState('');
+  const [phone, setPhone] = useState('');
+  const [showCPFForm, setShowCPFForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -85,10 +89,14 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
   };
 
   const handleInitiatePayment = async (planId: string) => {
-    setError('');
-    setIsLoading(true);
+    // Validar que CPF e telefone foram fornecidos
+    if (!cpf || !phone) {
+      setError('Por favor, adicione CPF e telefone para continuar');
+      return;
+    }
 
     try {
+      setIsLoading(true);
       // Validar campos
       if (!name.trim() || !email.trim()) {
         throw new Error('Por favor, preencha seu nome e e-mail');
@@ -126,9 +134,11 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
       const response = await initiatePagSeguro.mutateAsync({
         email: email.trim(),
         name: name.trim(),
+        cpf: cpf.replace(/\D/g, ''),
+        phone: phone.replace(/\D/g, ''),
         planId: mappedPlanId,
         planName: plan.name,
-        amount: Math.round(plan.price * 100), // Converter para centavos
+        amount: Math.round(plan.price * 100),
         paymentMethod: 'pix'
       });
 
@@ -140,7 +150,7 @@ export default function PlansWithPayment({ chart, onPaymentSuccess }: PlansWithP
       }
 
       onPaymentSuccess?.();
-    } catch (err) {
+    } catch (err: any) {
       const message = err instanceof Error ? err.message : 'Erro ao processar pagamento';
       setError(message);
       console.error('Erro ao iniciar pagamento:', err);

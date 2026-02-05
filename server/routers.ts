@@ -447,6 +447,8 @@ export const appRouter = router({
       .input(z.object({
         email: z.string().email(),
         name: z.string().min(1),
+        cpf: z.string().optional(),
+        phone: z.string().optional(),
         password: z.string().min(6).optional(),
         planId: z.enum(['navigator', 'visionary', 'illuminated']),
         planName: z.string(),
@@ -489,7 +491,9 @@ export const appRouter = router({
               if (database) {
                 await database.update(customers)
                   .set({ 
-                    password: hashedPassword
+                    password: hashedPassword,
+                    cpf: input.cpf,
+                    phone: input.phone
                   })
                   .where(eq(customers.id, existingCustomer.id));
               }
