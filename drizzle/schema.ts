@@ -59,6 +59,8 @@ export const customers = mysqlTable("customers", {
   id: serial("id").primaryKey(),
   email: varchar("email", { length: 320 }).notNull().unique(),
   name: varchar("name", { length: 255 }).notNull(),
+  cpf: varchar("cpf", { length: 14 }), // CPF com máscara (XXX.XXX.XXX-XX)
+  phone: varchar("phone", { length: 20 }), // Telefone com máscara
   password: varchar("password", { length: 255 }), // Hashed password (bcrypt)
   plan: varchar("plan", { length: 20 }).default("basic").notNull(),
   status: varchar("status", { length: 20 }).default("pending").notNull(),
@@ -331,6 +333,8 @@ export const pagSeguroOrders = mysqlTable("pagseguro_orders", {
   customerId: int("customerId"),
   email: varchar("email", { length: 320 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
+  cpf: varchar("cpf", { length: 14 }), // CPF com máscara (XXX.XXX.XXX-XX)
+  phone: varchar("phone", { length: 20 }), // Telefone com máscara
   plan: varchar("plan", { length: 50 }).notNull(),
   amount: decimal("amount", { precision: 10, scale: 2 }).notNull(),
   paymentMethod: varchar("paymentMethod", { length: 50 }).notNull(),

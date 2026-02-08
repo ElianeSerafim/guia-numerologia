@@ -280,15 +280,14 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                   const ct = getTrimestreInterpretation(yearNumber, ctNumber, trimestre);
                   if (!ct) return null;
                   
-                  const trimestreMeses = chart.ciclosTrimestrais?.meses;
-                  let trimestreMonthsStr = '';
-                  if (trimestreMeses) {
-                    const mesesKey = `ct${trimestre}` as keyof typeof trimestreMeses;
-                    const meses = trimestreMeses[mesesKey];
-                    if (meses && Array.isArray(meses)) {
-                      trimestreMonthsStr = meses.join(', ');
-                    }
-                  }
+                  // Meses por trimestre
+                  const monthsByTrimestre: Record<number, string[]> = {
+                    1: ['Janeiro', 'Fevereiro', 'Março'],
+                    2: ['Abril', 'Maio', 'Junho'],
+                    3: ['Julho', 'Agosto', 'Setembro'],
+                    4: ['Outubro', 'Novembro', 'Dezembro']
+                  };
+                  const trimestreMonthsStr = monthsByTrimestre[trimestre]?.join(', ') || ''
 
                   return (
                     <div
@@ -337,11 +336,10 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                       </div>
 
                       {/* Botão para Ver Previsões Mensais */}
-                      {trimestreMeses && (
-                        <div className="pt-4 border-t border-[#1A3A4A]">
-                          <p className="text-xs text-slate-400 mb-3">Clique em um mês para ver previsão mensal:</p>
-                          <div className="flex flex-wrap gap-2">
-                            {trimestreMeses[`ct${trimestre}` as keyof typeof trimestreMeses]?.map((month: string, idx: number) => {
+                      <div className="pt-4 border-t border-[#1A3A4A]">
+                        <p className="text-xs text-slate-400 mb-3">Clique em um mês para ver previsão mensal:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {monthsByTrimestre[trimestre]?.map((month: string, idx: number) => {
                               const monthNum = new Date(`${month} 1`).getMonth() + 1;
                               return (
                                 <button
@@ -353,9 +351,8 @@ export default function AnnualPredictions({ chart, year = 2026 }: AnnualPredicti
                                 </button>
                               );
                             })}
-                          </div>
                         </div>
-                      )}
+                      </div>
 
                       {/* Cautelas */}
                       <div className="bg-[#4A2A2A]/50 rounded-lg p-4 border border-[#6A3A3A]">

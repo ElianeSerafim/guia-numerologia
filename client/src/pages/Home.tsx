@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'wouter';
-import { Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock, Compass, Package } from 'lucide-react';
+import { Loader2, ArrowRight, LogOut, Zap, BookOpen, AlertCircle, Lock, Compass, Package, Check } from 'lucide-react';
 import { Link } from 'wouter';
 import { calculateChart } from '@/lib/numerologyUtils';
 import { NumerologyChart } from '@/types';

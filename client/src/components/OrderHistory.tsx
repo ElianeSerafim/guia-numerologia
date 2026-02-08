@@ -243,7 +243,7 @@ export default function OrderHistory() {
                       {' • '}
                       <span>R$ {parseFloat(order.amount).toFixed(2)}</span>
                       {' • '}
-                      <span>{order.mapsLimit} mapa(s)</span>
+                      <span>{planNames[order.plan] === 'Navegador' ? '1' : planNames[order.plan] === 'Visionário' ? '3' : '10'} mapa(s)</span>
                     </p>
 
                     {/* Date */}
